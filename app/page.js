@@ -20,6 +20,7 @@ export default function Home() {
       {/* <Hero /> 
       <About /> */}
       <Projects />
+      {/* <Hero /> */}
     </div>
   );
 }

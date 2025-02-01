@@ -4,7 +4,7 @@ import styles from "./LandingPage.module.css";
 import { gsap } from "gsap";
 import { Flip } from "gsap/dist/Flip";
 import { CustomEase } from "gsap/dist/CustomEase";
-import SplitType from 'split-type';
+import SplitType from "split-type";
 
 gsap.registerPlugin(Flip, CustomEase);
 
@@ -202,12 +202,10 @@ const Landing = () => {
       <div className={styles.heroContent}>
         <div className={styles.siteLogo}>
           <div className={styles.word}>
-            <h1>Arc</h1>
+            <h1 className="font-accent">Radiate</h1>
           </div>
           <div className={styles.word}>
-            <h1>
-              Worldwide<sup>&copy;</sup>
-            </h1>
+            <h1 className="font-accent">Happy ツ</h1>
           </div>
         </div>
 
@@ -227,20 +225,31 @@ const Landing = () => {
         </div>
 
         <div className={styles.coverImg}>
-          <img src="https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" alt="" />
+          <img
+            src="https://images.unsplash.com/photo-1506157786151-b8491531f063?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+            alt=""
+          />
         </div>
 
         <div className={styles.siteInfo}>
           <div className={styles.row}>
             <div className={styles.col}>
-              <div className={styles.line}>
-                {/* <p>Featured Works</p> */}
-              </div>
+              <div className={styles.line}>{/* <p>Featured Works</p> */}</div>
             </div>
             <div className={styles.col}>
-              <h2>
+              {/* <h2>
                 Arc is a contemporary fashion brand redefining elegance with
                 timeless designs and innovative aesthetics.
+              </h2> */}
+              <h2>
+                Driven by a passion for technology's transformative power, we
+                specialise in crafting delightful experiences that empower
+                individuals and create strong, connected communities.
+                <span className="block mb-6" />
+                <span />
+                We are particularly passionate about reimagining education,
+                connection, and wellness through innovative tech solutions that
+                inspire growth and well-being.
               </h2>
             </div>
           </div>
@@ -249,27 +258,27 @@ const Landing = () => {
             <div className={styles.col}>
               <div className={styles.address}>
                 <div className={styles.line}>
-                  <p>Arc Studio</p>
+                  <p>Auckland</p>
                 </div>
                 <div className={styles.line}>
-                  <p>R Building</p>
+                  <p>New Zealand</p>
                 </div>
-                <div className={styles.line}>
+                {/* <div className={styles.line}>
                   <p>Street Addy</p>
                 </div>
                 <div className={styles.line}>
                   <p>N1 4DX</p>
-                </div>
+                </div> */}
               </div>
               <div className={styles.socials}>
                 <div className={styles.line}>
-                  <p>arc@studio.com</p>
-                </div>
-                <div className={styles.line}>
-                  <p>Instagram</p>
+                  <p>Hello@Rd8.com</p>
                 </div>
                 <div className={styles.line}>
                   <p>LinkedIn</p>
+                </div>
+                <div className={styles.line}>
+                  <p>Email</p>
                 </div>
               </div>
             </div>

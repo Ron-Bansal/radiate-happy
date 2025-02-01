@@ -5,6 +5,8 @@
 :root {
   --background: #ffffff;
   --foreground: #171717;
+  --font-roboto: 'Roboto', sans-serif;
+  --font-syne: 'Syne', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {
@@ -17,7 +19,15 @@
 body {
   color: var(--foreground);
   background: var(--background);
-  font-family: Arial, Helvetica, sans-serif;
+  /* font-family: Arial, Helvetica, sans-serif; */
+}
+
+.font-plain {
+  font-family: var(--font-roboto);
+}
+
+.font-accent {
+  font-family: var(--font-syne);
 }
 
 @layer utilities {

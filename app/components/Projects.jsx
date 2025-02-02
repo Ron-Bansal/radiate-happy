@@ -22,9 +22,9 @@ const projects = [
     type: "WebApp",
     tags: "Design, Development, Marketing",
     thumbnail: "/assets/pulsifyplaceholder.png",
-    accentColor: "red", // Tailwind color class (e.g., indigo, blue, green, etc.)
-    caseStudyLink: "/case-study/moonstone",
-    liveSiteLink: "https://moonstone.com",
+    accentColor: "purple",
+    caseStudyLink: "/work/moonstone",
+    liveSiteLink: "https://moonstone-music.vercel.app/",
   },
   {
     title: "Napkin Notes",
@@ -33,22 +33,24 @@ const projects = [
       "Capture ideas and notes in seconds straight from the browser side panel!",
     type: "Chrome Extension",
     tags: "Design, Development, Marketing",
-    thumbnail: "/assets/pulsifyplaceholder.png",
-    accentColor: "green", // Tailwind color class (e.g., indigo, blue, green, etc.)
-    caseStudyLink: "/case-study/moonstone",
-    liveSiteLink: "https://moonstone.com",
+    thumbnail: "/assets/napkin-project-thumbnail.png",
+    accentColor: "green",
+    caseStudyLink: "/work/moonstone",
+    liveSiteLink:
+      "https://chromewebstore.google.com/detail/napkin-notes-%E2%80%A2-side-panel/dlhljjkacijknfelknklfcohibfdciki",
   },
   {
-    title: "  Ember",
+    title: "Ember",
     tagline: "rediscover forgotten bookmarks",
     description:
       "Ember searches the depths of your bookmarks folders to dig up forgotten sources of inspiration.",
     type: "Chrome Extension",
     tags: "Design, Development, Marketing",
-    thumbnail: "/assets/napkin-project-thumbnail.png",
-    accentColor: "green", // Tailwind color class (e.g., indigo, blue, green, etc.)
-    caseStudyLink: "/case-study/moonstone",
-    liveSiteLink: "https://moonstone.com",
+    thumbnail: "/assets/ember.webp",
+    accentColor: "orange",
+    caseStudyLink: "/work/moonstone",
+    liveSiteLink:
+      "https://chromewebstore.google.com/detail/ember-rediscover-forgotte/lkhcbflcchcopglokccfpbkofhkbplbh",
   },
 ];
 
@@ -72,21 +74,27 @@ export default function Projects() {
         {projects.map((project, index) => {
           // Define the accent color classes statically
           const accentColorClasses = {
-            indigo: {
-              glow: "radial-gradient(circle at 40% 50%, rgba(155, 111, 200, 0.3), transparent 150%)", // Indigo glow
+            purple: {
+              glow: "radial-gradient(circle at 50% 40%, rgba(155, 111, 200, 0.25), transparent 160%)", // Indigo glow
               button: "bg-[#CBB6DB]",
               border:
                 "border-indigo-500 text-indigo-500 hover:bg-indigo-500 hover:text-white",
             },
             blue: {
-              glow: "radial-gradient(circle at 40% 50%, rgba(59, 130, 246, 0.2), transparent 150%)", // Blue glow
+              glow: "radial-gradient(circle at 50% 40%, rgba(59, 130, 246, 0.2), transparent 160%)", // Blue glow
               button: "bg-blue-500",
               border:
                 "border-blue-500 text-blue-500 hover:bg-blue-500 hover:text-white",
             },
             green: {
-              glow: "radial-gradient(circle at 40% 50%, rgba(106, 215, 119, 0.2), transparent 150%)", // Green glow
+              glow: "radial-gradient(circle at 50% 40%, rgba(106, 215, 119, 0.1), transparent 160%)", // Green glow
               button: "bg-[#a2d2b6]",
+              border:
+                "border-green-500 text-green-500 hover:bg-green-500 hover:text-white",
+            },
+            orange: {
+              glow: "radial-gradient(circle at 50% 40%, rgba(195, 128, 2, 0.2), transparent 160%)", // Green glow
+              button: "bg-[#e3ac5e]",
               border:
                 "border-green-500 text-green-500 hover:bg-green-500 hover:text-white",
             },
@@ -106,48 +114,57 @@ export default function Projects() {
                 boxShadow: `0 4px 6px rgba(0, 0, 0, 0.1), 0 1px 3px rgba(0, 0, 0, 0.08)`,
               }}
             >
-              {/* Project Type */}
-              <p className="text-sm mb-2 opacity-85">
-                <span className="font-bold">{project.type}</span> -{" "}
-                {project.tags}
-              </p>
+              <div className="flex justify-between">
+                <div className="">
+                  {/* Project Type */}
+                  <p className="text-sm mt-1 mb-2 opacity-85">
+                    <span className="font-bold">{project.type}</span> -{" "}
+                    {project.tags}
+                  </p>
 
-              {/* Project Title */}
-              <div className="mb-6">
-                <h3 className="font-accent leading-none mb-1 text-2xl font-[725]">
-                  {project.title}
-                  <span className="font-accent leading-none text-xl font-semibold">
-                   {" "} • {project.tagline}
-                  </span>
-                </h3>
-              </div>
-
-              {/* Project Description */}
-              <p className="max-w-xl text-pretty leading-tight mb-12 opacity-90">
-                {project.description}
-              </p>
-
-              {/* Buttons */}
-              <div className="flex">
-                <a
-                  href={project.liveSiteLink}
-                  className={`text-sm text-center bg-transparent transition-colors duration-300`}
-                >
-                  <div
-                    className={`inline-flex items-center justify-center text-center h-8 md:h-14 aspect-square rounded-full text-3xl ${button} pb-2 mr-3 hover:scale-110 transition border-[0.3px] border-white/30`}
-                  >
-                    ↗
+                  {/* Project Title */}
+                  <div className="mb-6">
+                    <h3 className="font-accent leading-none mb-1 text-2xl font-[725]">
+                      {project.title}
+                      <span className="font-accent leading-none text-xl font-semibold">
+                        {" "}
+                        • {project.tagline}
+                      </span>
+                    </h3>
                   </div>
-                  View Project
-                </a>
+
+                  {/* Project Description */}
+                  <p className="max-w-xl text-pretty leading-tight mb-12 opacity-90">
+                    {project.description}
+                  </p>
+                </div>
+
+                {/* Buttons */}
+                <div className="flex">
+                  <a
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    href={project.liveSiteLink}
+                    className={`text text-center bg-transparent transition-colors duration-300`}
+                  >
+                    {/* View Project */}
+
+                    <div
+                      className={`inline-flex items-center justify-center text-center h-12 md:h-14 aspect-square rounded-full text-2xl md:text-3xl ${button} ml-3 pb-2 hover:scale-110 transition border-[0.3px] border-white/30`}
+                    >
+                      ↗
+                    </div>
+                  </a>
+                </div>
               </div>
 
               {/* Thumbnail Image */}
-              <div className="w-fit mx-auto mt-8 -mb-4 overflow-hidden rounded-lg">
+              <div className="w-fit mx-auto mt-6 -mb-4 overflow-hidden rounded-lg">
                 <img
                   src={project.thumbnail}
                   alt={project.title}
-                  className="w-full max-h-[600px] rounded object-contain transform -mb-6 hover:scale-95 transition-transform duration-300"
+                  // className="w-full max-h-[600px] rounded object-contain transform -mb-6 hover:scale-95 transition-transform duration-300"
+                  className="w-full max-h-[600px] rounded object-contain"
                 />
               </div>
 

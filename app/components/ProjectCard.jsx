@@ -23,6 +23,7 @@ const ProjectCard = ({ project }) => {
   const leftImageRef = useRef(null);
   const rightTopImageRef = useRef(null);
   const rightBottomImageRef = useRef(null);
+  const contentRef = useRef(null);
 
   useEffect(() => {
     gsap.registerPlugin(ScrollTrigger);
@@ -30,39 +31,87 @@ const ProjectCard = ({ project }) => {
     const leftImage = leftImageRef.current;
     const rightTopImage = rightTopImageRef.current;
     const rightBottomImage = rightBottomImageRef.current;
+    const content = contentRef.current;
+    const card = cardRef.current;
 
+    // Create a timeline for the fade in animation
+    const tl = gsap.timeline({
+      scrollTrigger: {
+        trigger: card,
+        start: "top center+=200",
+        end: "bottom center-=200",
+        toggleActions: "play reverse play reverse",
+      },
+    });
+
+    // Add animations to the timeline
+    tl.fromTo(
+      card,
+      {
+        opacity: 0.6,
+        y: 100,
+      },
+      {
+        opacity: 1,
+        y: 0,
+        duration: 0.5,
+        ease: "power2.out",
+      }
+    ).fromTo(
+      content,
+      {
+        opacity: 0,
+        x: -50,
+      },
+      {
+        opacity: 1,
+        x: 0,
+        duration: 0.6,
+        ease: "power2.out",
+      },
+      "-=0.4" // Start slightly before the previous animation ends
+    );
+
+    // Scroll-based parallax for images
     gsap.to(leftImage, {
-      y: -100,
+      y: -200,
       ease: "none",
       scrollTrigger: {
-        trigger: cardRef.current,
+        trigger: card,
         start: "top bottom",
         end: "bottom top",
-        scrub: 1.2,
+        scrub: 1.5,
       },
     });
 
     gsap.to(rightTopImage, {
-      y: -50,
+      y: -100,
+      // rotation: -2,
       ease: "none",
       scrollTrigger: {
-        trigger: cardRef.current,
+        trigger: card,
         start: "top bottom",
         end: "bottom top",
-        scrub: 1,
+        scrub: 2,
       },
     });
 
     gsap.to(rightBottomImage, {
-      y: -75,
+      y: -150,
+      // rotation: 2,
       ease: "none",
       scrollTrigger: {
-        trigger: cardRef.current,
+        trigger: card,
         start: "top bottom",
         end: "bottom top",
-        scrub: 1.1,
+        scrub: 1.7,
       },
     });
+
+    // Cleanup function
+    return () => {
+      ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
+    };
   }, []);
 
   return (
@@ -72,7 +121,10 @@ const ProjectCard = ({ project }) => {
       style={{ backgroundColor }}
     >
       <div className="relative w-full max-w-screen-2xl px-4 pt-4 md:px-8 md:mt-6">
-        <div className="absolute md:max-w-[45%] text-pretty top-8 md:top-2 left-8 mb-8 z-20">
+        <div
+          // ref={contentRef}
+          className="absolute md:max-w-[45%] text-pretty top-8 md:top-2 left-8 mb-8 z-20"
+        >
           <div className="text opacity-85 mb-1">
             <span className="font-bold">{type}</span> - {tags}
           </div>

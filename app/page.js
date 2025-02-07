@@ -2,6 +2,7 @@
 import Hero from "./components/Hero";
 import About from "./components/About";
 import Projects from "./components/Projects";
+import ProjectsSectionCols from "./components/ProjectsSectionCols";
 import LandingPage from "./components/LandingPage";
 
 export default function Home() {
@@ -20,6 +21,8 @@ export default function Home() {
       {/* <Hero /> 
       <About /> */}
       <Projects />
+      <ProjectsSectionCols />
+      <ProjectsSectionCols />
       {/* <Hero /> */}
     </div>
   );

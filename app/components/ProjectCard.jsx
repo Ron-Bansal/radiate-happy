@@ -123,10 +123,10 @@ const ProjectCard = ({ project }) => {
       <div className="relative w-full max-w-screen-2xl px-4 pt-4 md:px-8 md:mt-6">
         <div
           // ref={contentRef}
-          className="absolute md:max-w-[45%] text-pretty top-8 md:top-2 left-8 mb-8 z-20"
+          className="absolute max-w-[90%] md:max-w-[45%] text-pretty top-8 md:top-2 md:left-8 mb-8 z-20"
         >
           <div className="text opacity-85 mb-1">
-            <span className="font-bold">{type}</span> - {tags}
+            <span className="text-sm md:text-base font-bold">{type}</span> - {tags}
           </div>
 
           <h3 className="font-accent leading-none mb-4 text-2xl font-[725]">
@@ -149,7 +149,7 @@ const ProjectCard = ({ project }) => {
               className="text text-center bg-transparent transition-colors duration-300"
             >
               <div
-                className="cursor-pointer text-[#f9f9f9] inline-flex items-center justify-center text-center h-12 md:h-14 aspect-square rounded-full text-2xl md:text-3xl pb-2 hover:scale-110 transition border-[0.3px] border-white/30"
+                className="cursor-pointer text-[#f9f9f9] inline-flex items-center justify-center text-center h-12 md:h-14 aspect-square rounded-full text-2xl md:text-3xl pb-0 hover:scale-110 transition ease-linear border-[0.4px] border-white/30 shadow hover:shadow-lg"
                 style={{ backgroundColor: accentColor }}
               >
                 ↗
@@ -158,11 +158,11 @@ const ProjectCard = ({ project }) => {
           </div>
         </div>
 
-        <div className="flex flex-col mt-8 md:flex-row gap-2 md:gap-6 justify-end">
-          <div className="w-3/4 md:w-1/4 md:my-auto mt-[25vh] md:0">
+        <div className="flex flex-col mt-8 -mb-14 md:-mb-8 md:flex-row gap-2 md:gap-6 justify-end">
+          <div className="w-3/4 md:w-1/4 md:my-auto mt-[45vh] md:mt-[25vh]">
             <div
               ref={leftImageRef}
-              className="relative aspect-[3.25/4] overflow-hidden rounded"
+              className="relative aspect-[3.25/4] overflow-hidden rounded shadow"
             >
               <img
                 src={thumbnailTall}
@@ -175,7 +175,7 @@ const ProjectCard = ({ project }) => {
           <div className="w-full md:w-1/2 flex flex-col justify-end gap-6">
             <div
               ref={rightTopImageRef}
-              className="relative aspect-[989/612] overflow-hidden rounded"
+              className="relative aspect-[989/612] overflow-hidden rounded shadow"
             >
               <img
                 src={thumbnailGolden}
@@ -186,7 +186,7 @@ const ProjectCard = ({ project }) => {
 
             <div
               ref={rightBottomImageRef}
-              className="relative aspect-square w-3/5 ml-auto mt-3 overflow-hidden rounded"
+              className="relative aspect-square w-3/5 ml-auto mt-10 md:mt-4 overflow-hidden rounded shadow"
             >
               <img
                 src={thumbnailSquare}

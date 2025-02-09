@@ -21,13 +21,13 @@ const projects = [
     title: "Napkin Notes",
     tagline: "quickest canvas for thought",
     description:
-      "Capture ideas and notes in seconds straight from the browser side panel!",
+      "Capture fleeting ideas and notes in seconds with a single click right within your browser tab.",
     type: "Chrome Extension",
     tags: "Design, Development, Marketing",
-    thumbnailTall: "/assets/napkin-project-thumbnail.png",
-    thumbnailGolden: "/assets/napkin-project-thumbnail.png",
-    thumbnailSquare: "/assets/napkin-project-thumbnail.png",
-    accentColor: "#83C39D",
+    thumbnailTall: "/assets/napkin-notes-tall.webp",
+    thumbnailGolden: "/assets/napkin-notes-golden.webp",
+    thumbnailSquare: "/assets/napkin-notes-square.webp",
+    accentColor: "#6BC18F",
     backgroundColor: "#DFEEE5",
     caseStudyLink: "/work/napkin-notes",
     liveSiteLink:

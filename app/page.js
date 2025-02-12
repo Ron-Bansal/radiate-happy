@@ -21,7 +21,7 @@ export default function Home() {
       <LandingPage />
       {/* <Hero /> 
       <About /> */}
-      <Projects />
+      {/* <Projects /> */}
       <ProjectsSection/>
       {/* <ProjectsSectionCols />
       <ProjectsSectionCols /> */}

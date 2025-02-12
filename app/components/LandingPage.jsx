@@ -242,7 +242,7 @@ const Landing = () => {
                 timeless designs and innovative aesthetics.
               </h2> */}
               <h2>
-                Driven by a passion for technology's transformative power, we
+                Driven by a passion for technology&apos;s transformative power, we
                 specialise in crafting delightful experiences that empower
                 individuals and create strong, connected communities.
                 <span className="block mb-6" />

@@ -69,7 +69,7 @@ const projects = [
     title: "Freight Calculator tool",
     tagline: "compare shipping rates nationwide",
     description:
-      "E-commerce businesses face the challenge of calculating accurate shipping rates, with costs varying by courier, zone, and package type. This tool automates the process, offering real-time rate comparisons to simplify shipping decisions.",
+      "E-commerce businesses face the challenge of calculating fair and accurate shipping rates for their checkout page, with costs varying by courier, delivery zone, and package type. This tool automates the process by offering real-time rate comparisons across couriers and zones to simplify shipping decisions.",
     type: "Chrome Extension",
     tags: "User Research, Design, Development",
     thumbnailTall: "/assets/freight-calc-tall.png",

@@ -49,21 +49,37 @@ const projects = [
     liveSiteLink:
       "https://chromewebstore.google.com/detail/ember-rediscover-forgotte/lkhcbflcchcopglokccfpbkofhkbplbh",
   },
+  // {
+  //   title: "Ember",
+  //   tagline: "rediscover forgotten bookmarks",
+  //   description:
+  //     "Ember searches the depths of your bookmarks folders to dig up forgotten sources of inspiration.",
+  //   type: "Chrome Extension",
+  //   tags: "Design, Development, Marketing",
+  //   thumbnailTall: "/assets/ember.webp",
+  //   thumbnailGolden: "/assets/ember.webp",
+  //   thumbnailSquare: "/assets/ember.webp",
+  //   accentColor: "#A91012",
+  //   backgroundColor: "#F6E2E1",
+  //   caseStudyLink: "/work/moonstone",
+  //   liveSiteLink:
+  //     "https://chromewebstore.google.com/detail/ember-rediscover-forgotte/lkhcbflcchcopglokccfpbkofhkbplbh",
+  // },
   {
-    title: "Ember",
-    tagline: "rediscover forgotten bookmarks",
+    title: "Freight Calculator tool",
+    tagline: "compare shipping rates nationwide",
     description:
-      "Ember searches the depths of your bookmarks folders to dig up forgotten sources of inspiration.",
+      "E-commerce businesses face the challenge of calculating accurate shipping rates, with costs varying by courier, zone, and package type. This tool automates the process, offering real-time rate comparisons to simplify shipping decisions.",
     type: "Chrome Extension",
-    tags: "Design, Development, Marketing",
-    thumbnailTall: "/assets/ember.webp",
-    thumbnailGolden: "/assets/ember.webp",
-    thumbnailSquare: "/assets/ember.webp",
-    accentColor: "#A91012",
-    backgroundColor: "#F6E2E1",
+    tags: "User Research, Design, Development",
+    thumbnailTall: "/assets/freight-calc-tall.png",
+    thumbnailGolden: "/assets/freight-calc-golden.png",
+    thumbnailSquare: "/assets/freight-calc-square.png",
+    accentColor: "#7FA9C6",
+    backgroundColor: "#D8E6F0",
     caseStudyLink: "/work/moonstone",
     liveSiteLink:
-      "https://chromewebstore.google.com/detail/ember-rediscover-forgotte/lkhcbflcchcopglokccfpbkofhkbplbh",
+      "https://freight-calculator-v2.netlify.app/",
   },
 ];
 

@@ -137,7 +137,7 @@ const ProjectCard = ({ project }) => {
             </span>
           </h3>
 
-          <p className="text-pretty leading-snug mb-12 opacity-80">
+          <p className="text-pretty leading-snug mb-12 opacity-80 md:max-w-[75%]">
             {description}
           </p>
 

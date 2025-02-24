@@ -66,11 +66,11 @@ export default function FolioProfile() {
       <h1 className="font-accent leading-none mb-2 text-3xl font-semibold">
         Ron Bansal
       </h1>
-      <h3 className="text-pretty leading-tight mb-2 text-lg">
+      <h3 className="text-pretty leading-tight mb-1 text-lg">
         Product Designer and Creative Developer
       </h3>
       <p className="text-pretty leading-snug mb-5">📍 Auckland, New Zealand</p>
-      <div className="text-pretty leading-snug">
+      <div className="text-pretty leading-[1.3rem]">
         <p className="mb-2">Tech 🤝 Business 🤝 Design 🤝 People</p>
         <p>
           Fuelled by curiosity and a relentless drive to build products that

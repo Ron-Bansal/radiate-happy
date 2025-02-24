@@ -1,7 +1,7 @@
 import React from "react";
-import FolioProjectsSection from "../components/FolioProjectsSection";
-import FolioProfile from "../components/FolioProfile";
-import About from "../components/About";
+import FolioProjectsSection from "./components/FolioProjectsSection";
+import FolioProfile from "./components/FolioProfile";
+import About from "./components/About";
 
 const Folio = () => {
   return (

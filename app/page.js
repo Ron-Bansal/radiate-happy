@@ -18,14 +18,13 @@ export default function Home() {
       <Hero />
       <About />
       <Projects /> */}
-      <LandingPage />
-      {/* <Hero /> 
-      <About /> */}
-      {/* <Projects /> */}
+
+
+      {/* "LandingPage is the image page loader animation effect" */}
+      {/* <LandingPage /> */}
+
       <ProjectsSection/>
-      {/* <ProjectsSectionCols />
-      <ProjectsSectionCols /> */}
-      {/* <Hero /> */}
+
     </div>
   );
 }

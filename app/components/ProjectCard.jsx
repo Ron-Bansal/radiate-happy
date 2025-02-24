@@ -15,6 +15,7 @@ const ProjectCard = ({ project }) => {
     thumbnailSquare,
     accentColor,
     backgroundColor,
+    glassBg,
     caseStudyLink,
     liveSiteLink,
   } = project;
@@ -118,7 +119,12 @@ const ProjectCard = ({ project }) => {
     <div
       ref={cardRef}
       className="w-[95vw] max-w-screen-2xl mx-auto rounded text-[#3d3d3d]"
-      style={{ backgroundColor }}
+      className={`w-[95vw] max-w-screen-2xl mx-auto text-[#3d3d3d] overflow-hidden rounded-lg px-5 py-4 bg-white/20 backdrop-blur-md shadow-lg hover:shadow-xl transition-shadow duration-300 border border-white/10 group`}
+      style={{
+        boxShadow: `0 4px 6px rgba(206, 110, 110, 0.1), 0 1px 3px rgba(229, 75, 75, 0.08)`,
+        background: glassBg
+      }}
+      // style={{ backgroundColor }}
     >
       <div className="relative w-full max-w-screen-2xl px-4 pt-4 md:px-8 md:mt-6">
         <div
@@ -149,7 +155,7 @@ const ProjectCard = ({ project }) => {
               className="text text-center bg-transparent transition-colors duration-300"
             >
               <div
-                className="cursor-pointer text-[#f9f9f9] inline-flex items-center justify-center text-center h-12 md:h-14 aspect-square rounded-full text-2xl md:text-3xl pb-0 hover:scale-110 transition ease-linear border-[0.4px] border-white/30 shadow hover:shadow-lg"
+                className="cursor-pointer text-[#f9f9f9] inline-flex items-center justify-center text-center h-12 md:h-14 aspect-square rounded-full text-2xl md:text-3xl pb-0 hover:scale-110 transition ease-linear shadow hover:shadow-lg"
                 style={{ backgroundColor: accentColor }}
               >
                 ↗

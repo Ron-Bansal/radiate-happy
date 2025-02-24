@@ -1,3 +1,4 @@
+// OLD projects component (glass effect)
 const xprojects = [
   {
     title: "Pulsify",

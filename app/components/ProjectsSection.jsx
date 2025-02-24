@@ -14,6 +14,9 @@ const projects = [
     thumbnailSquare: "/assets/moonstone-square.png",
     accentColor: "#945BA5",
     backgroundColor: "#ECE6F1",
+    glassBg:
+      // "radial-gradient(circle at 50% 40%, rgba(162, 121, 203, 0.25), transparent 200%)",
+      "radial-gradient(circle at 50% 40%, rgba(148, 91, 165, 0.25), transparent 250%)",
     caseStudyLink: "/work/moonstone",
     liveSiteLink: "https://moonstone-music.vercel.app/",
   },
@@ -29,6 +32,8 @@ const projects = [
     thumbnailSquare: "/assets/napkin-notes-square.webp",
     accentColor: "#6BC18F",
     backgroundColor: "#DFEEE5",
+    glassBg:
+      "radial-gradient(circle at 50% 40%, rgba(107, 193, 143, 0.25), transparent 260%)",
     caseStudyLink: "/work/napkin-notes",
     liveSiteLink:
       "https://chromewebstore.google.com/detail/napkin-notes-%E2%80%A2-side-panel/dlhljjkacijknfelknklfcohibfdciki",
@@ -45,6 +50,8 @@ const projects = [
     thumbnailSquare: "/assets/ember.webp",
     accentColor: "#A91012",
     backgroundColor: "#F6E2E1",
+    glassBg:
+      "radial-gradient(circle at 50% 40%, rgba(225, 108, 102, 0.25), transparent 160%)",
     caseStudyLink: "/work/project-ascent",
     liveSiteLink:
       "https://chromewebstore.google.com/detail/ember-rediscover-forgotte/lkhcbflcchcopglokccfpbkofhkbplbh",
@@ -77,18 +84,30 @@ const projects = [
     thumbnailSquare: "/assets/freight-calc-square.png",
     accentColor: "#7FA9C6",
     backgroundColor: "#D8E6F0",
+    glassBg: "radial-gradient(circle at 50% 40%, rgba(53, 96, 127, 0.3), transparent 160%)",
     caseStudyLink: "/work/moonstone",
-    liveSiteLink:
-      "https://freight-calculator-v2.netlify.app/",
+    liveSiteLink: "https://freight-calculator-v2.netlify.app/",
   },
 ];
 
 export default function ProjectsSection() {
   return (
-    <div className="flex flex-col gap-12 pb-20">
-      {projects.map((project, index) => (
-        <ProjectCard key={project.title} project={project} />
-      ))}
-    </div>
+    <>
+      <div className="w-screen h-screen object-cover fixed top-0 left-0 -z-10">
+        <img
+          src="https://images.unsplash.com/photo-1542349314-e669385af82f?q=80&w=2969&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          // src="https://images.unsplash.com/photo-1619840875399-bf7fd46f0728?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          alt=""
+          className="w-full h-full object-cover"
+        />
+      </div>
+      <h1 className="pt-20 text-center text-[#3d3d3d] text-3xl tracking-tighter font-accent font-[725]">Selected Work</h1>
+      <h3 className="text-[#3d3d3d] text-center text-pretty leading-snug mb-12 opacity-80 mt-2">A collection of my latest projects and and experiments</h3>
+      <div className="flex flex-col gap-36 py-20">
+        {projects.map((project, index) => (
+          <ProjectCard key={project.title} project={project} />
+        ))}
+      </div>
+    </>
   );
 }

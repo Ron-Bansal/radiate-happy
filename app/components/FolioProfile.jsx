@@ -55,8 +55,8 @@ export default function FolioProfile() {
     //     ></iframe>
     //   </div>
     // </div>
-    <div className="p-3 md:pl-6 text-[#3d3d3d] tracking-tight">
-      <div className="h-32 w-32 mb-4">
+    <div className="text-center md:text-left p-3 md:pl-6 text-[#3d3d3d] tracking-tight">
+      <div className="h-32 w-32 mb-4 mt-4 md:mt-0 mx-auto md:mx-0">
         <img
           src="/assets/ron-profile.jpg"
           alt="Ron Bansal"
@@ -70,12 +70,15 @@ export default function FolioProfile() {
         Product Designer and Creative Developer
       </h3>
       <p className="text-pretty leading-snug mb-5">📍 Auckland, New Zealand</p>
-      <p className="text-pretty leading-snug">
-        <p className="mb-2">Tech shake 🤝 Business 🤝 Design</p>
-        Fuelled by curiosity and a relentless drive to build products that spark joy
-      </p>
+      <div className="text-pretty leading-snug">
+        <p className="mb-2">Tech 🤝 Business 🤝 Design 🤝 People</p>
+        <p>
+          Fuelled by curiosity and a relentless drive to build products that
+          spark joy
+        </p>
+      </div>
 
-      <div className="flex gap-6 mt-6  text-gray-600">
+      <div className="flex gap-6 mt-6 text-slate-600 mx-auto justify-center md:justify-start">
         <a
           href="https://www.linkedin.com/in/ron-bansal"
           target="_blank"
@@ -83,7 +86,11 @@ export default function FolioProfile() {
         >
           <Linkedin className="hover:text-indigo-500 transition-all duration-200" />
         </a>
-        <a href="https://github.com/ron-bansal" target="_blank" rel="noopener noreferrer">
+        <a
+          href="https://github.com/ron-bansal"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <Github className="hover:text-indigo-500 transition-all duration-200" />
         </a>
         <a
@@ -95,13 +102,18 @@ export default function FolioProfile() {
         </a>
       </div>
 
-      <div className="mt-4 mb-8 py-3 px-4 bg-indigo-600 text-white rounded-lg cursor-pointer hover:bg-indigo-700 transition-all duration-300">
+      <a
+        href="mailto:raunaqbansal@outlook.com"
+        target="_blank"
+        rel="noopener
+        noreferrer"
+        className="inline-block w-full mt-4 mb-8 py-2 px-4 bg-slate-600 text-white rounded-lg cursor-pointer hover:bg-indigo-700 transition-all duration-300"
+      >
         Get in touch
-      </div>
+      </a>
 
-      <div className="mt-6">
-        
-        <iframe
+      <div className="mt-10">
+        {/* <iframe
           src="https://open.spotify.com/embed/playlist/3oshIGQeFw3tg8C8g01J6Z?utm_source=generator"
           width="100%"
           height="352"
@@ -109,6 +121,16 @@ export default function FolioProfile() {
           allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
           loading="lazy"
           className="rounded-lg shadow-xl"
+        ></iframe> */}
+        <iframe
+          //   style={"border-radius:12px"}
+          src="https://open.spotify.com/embed/playlist/3oshIGQeFw3tg8C8g01J6Z?utm_source=generator"
+          width="100%"
+          height="152"
+          frameBorder="0"
+          allowfullscreen=""
+          allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
+          loading="lazy"
         ></iframe>
         <div className="flex items-center text-sm gap-2 mt-2 italic text-gray-600">
           <span>

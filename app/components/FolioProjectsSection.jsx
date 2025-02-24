@@ -40,25 +40,26 @@ const projects = [
     liveSiteLink:
       "https://chromewebstore.google.com/detail/napkin-notes-%E2%80%A2-side-panel/dlhljjkacijknfelknklfcohibfdciki",
   },
-  {
-    title: "Project Ascent",
-    tagline: "AI powered rep counter",
-    description:
-      "Ember searches the depths of your bookmarks folders to dig up forgotten sources of inspiration.",
-    type: "Web App",
-    tags: "Development",
-    thumbnailTall: "/assets/ember.webp",
-    thumbnailGolden: "/assets/ember.webp",
-    thumbnailSquare: "/assets/ember.webp",
-    accentColor: "#A91012",
-    backgroundColor: "#F6E2E1",
-    glassBg:
-      // "radial-gradient(circle at 50% 40%, rgba(225, 108, 102, 0.25), transparent 160%)",
-      "radial-gradient(circle at 50% 40%, rgba(246, 226, 225, 0.80), transparent 260%)",
-    caseStudyLink: "/work/project-ascent",
-    liveSiteLink:
-      "https://chromewebstore.google.com/detail/ember-rediscover-forgotte/lkhcbflcchcopglokccfpbkofhkbplbh",
-  },
+  // {
+  //   title: "Project Ascent",
+  //   tagline: "AI powered rep counter",
+  //   description:
+  //     "Ember searches the depths of your bookmarks folders to dig up forgotten sources of inspiration.",
+  //   type: "Web App",
+  //   tags: "Development",
+  //   thumbnailTall: "/assets/ember.webp",
+  //   thumbnailGolden: "/assets/ember.webp",
+  //   thumbnailSquare: "/assets/ember.webp",
+  //   accentColor: "#A91012",
+  //   backgroundColor: "#F6E2E1",
+  //   glassBg:
+  //     // "radial-gradient(circle at 50% 40%, rgba(225, 108, 102, 0.25), transparent 160%)",
+  //     "radial-gradient(circle at 50% 40%, rgba(246, 226, 225, 0.80), transparent 260%)",
+  //   caseStudyLink: "/work/project-ascent",
+  //   liveSiteLink:
+  //     "https://chromewebstore.google.com/detail/ember-rediscover-forgotte/lkhcbflcchcopglokccfpbkofhkbplbh",
+  // },
+  
   // {
   //   title: "Ember",
   //   tagline: "rediscover forgotten bookmarks",
@@ -99,7 +100,7 @@ const projects = [
 export default function ProjectsSection() {
   return (
     <>
-      <div className="flex flex-col gap-28 pt-10 pb-20">
+      <div className="flex flex-col gap-28 pt-6 pb-20">
         {projects.map((project, index) => (
           <FolioProjectCard key={project.title} project={project} />
         ))}

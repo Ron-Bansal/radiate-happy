@@ -13,7 +13,7 @@ const Folio = () => {
           className="w-full h-full object-cover"
         />
       </div>
-      <div className="grid grid-cols-12">
+      <div className="grid grid-cols-1 md:grid-cols-12">
         <div className="col-span-3">
           <div className="sticky top-2 max-w-full mx-auto">
             <FolioProfile />
@@ -25,7 +25,7 @@ const Folio = () => {
           <FolioProjectsSection />
         </div>
       </div>
-      <About />
+      {/* <About /> */}
     </>
   );
 };

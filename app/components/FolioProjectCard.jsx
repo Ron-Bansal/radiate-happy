@@ -118,14 +118,14 @@ const FolioProjectCard = ({ project }) => {
   return (
     <div
       ref={cardRef}
-      className={`w-full mx-auto mb-2 text-[#3d3d3d] overflow-hidden rounded-lg px-5 py-4 bg-white/20 backdrop-blur-md shadow-lg hover:shadow-xl transition-shadow duration-300 border border-white/10 group`}
+      className={`w-full mx-auto mb-2 text-[#3d3d3d] overflow-hidden rounded-lg px-2 py-1 md:px-5 md:py-4 bg-white/20 backdrop-blur-md shadow-lg hover:shadow-xl transition-shadow duration-300 border border-white/10 group`}
       style={{
         boxShadow: `0 4px 6px rgba(206, 110, 110, 0.1), 0 1px 3px rgba(229, 75, 75, 0.08)`,
         background: glassBg
       }}
       // style={{ backgroundColor }}
     >
-      <div className="relative w-full max-w-screen-2xl px-4 pt-4 md:px-8 md:mt-6">
+      <div className="relative w-full max-w-screen-2xl px-2 py-1 md:px-8 md:pt-4 md:mt-6">
         <div
           // ref={contentRef}
           className="absolute max-w-[90%] md:max-w-[45%] text-pretty top-8 md:top-2 md:left-8 mb-8 z-20"
@@ -164,7 +164,7 @@ const FolioProjectCard = ({ project }) => {
         </div>
 
         <div className="flex flex-col mt-8 -mb-14 md:-mb-8 md:flex-row gap-2 md:gap-6 justify-end">
-          <div className="w-3/4 md:w-1/4 md:my-auto mt-[45vh] md:mt-[35vh]">
+          <div className="w-3/4 md:w-1/4 md:my-auto mt-[50vh] md:mt-[35vh]">
             <div
               ref={leftImageRef}
               className="relative aspect-[3.25/4] overflow-hidden rounded shadow"

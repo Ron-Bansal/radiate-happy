@@ -8,7 +8,7 @@ import LandingPage from "./components/LandingPage";
 
 export default function Home() {
   return (
-    <div className="max-w-screen overflow-hidden">
+    <div className="max-w-screen overflow-hidden relative">
       {/* <div
         className="fixed inset-0 z-[100] pointer-events-none opacity-10 bg-cover"
         style={{
@@ -22,7 +22,8 @@ export default function Home() {
 
       {/* "LandingPage is the image page loader animation effect" */}
       {/* <LandingPage /> */}
-
+      <Hero />
+      <About />
       <ProjectsSection/>
 
     </div>

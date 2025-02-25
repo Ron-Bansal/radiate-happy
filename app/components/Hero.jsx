@@ -24,7 +24,7 @@ export default function Hero() {
       </div>
       <div className="z-10">
         <h1 className="text-4xl md:text-6xl font-accent font-[725] tracking-tight">
-          Hey! I'm Raunaq
+          Hey! I&apos;m Raunaq
         </h1>
         <h3 className="text md:text-2xl font-light tracking-tight mt-6">
           Product Designer and Creative Developer driven by curiosity

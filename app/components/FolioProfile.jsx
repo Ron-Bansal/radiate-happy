@@ -73,7 +73,7 @@ export default function FolioProfile() {
       <div className="text-pretty leading-[1.3rem]">
         <p className="mb-2">Tech 🤝 Business 🤝 Design 🤝 People</p>
         <p>
-          Fuelled by curiosity and a relentless drive to build products that
+          Fueled by curiosity and a relentless drive to build products that
           spark joy
         </p>
       </div>
@@ -136,7 +136,7 @@ export default function FolioProfile() {
           <span>
             <Music className="h-4 w-4 rotate-12 text-indigo-500" />
           </span>
-          <p className="">Here's some music while you look around :)</p>
+          <p className="">Here&apos;s some music while you look around :)</p>
         </div>
       </div>
     </div>

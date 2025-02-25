@@ -163,25 +163,25 @@ const Landing = () => {
             alt=""
           />
         </div>
-        <div className={styles.img}>
+        {/* <div className={styles.img}>
           <img
             // src="https://images.unsplash.com/photo-1519311965067-36d3e5f33d39?q=80&w=2671&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             src="/assets/napkin-notes-golden.png"
             alt=""
           />
-        </div>
-        <div className={styles.img}>
+        </div> */}
+        {/* <div className={styles.img}>
           <img
             src="https://plus.unsplash.com/premium_photo-1681486356838-03e4e7c5fd35?q=80&w=2074&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt=""
           />
-        </div>
-        <div className={styles.img}>
+        </div> */}
+        {/* <div className={styles.img}>
           <img
             src="https://images.unsplash.com/photo-1421217336522-861978fdf33a?q=80&w=2670&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
             alt=""
           />
-        </div>
+        </div> */}
         <div className={`${styles.img} ${styles.main}`}>
           <img
             // src="https://images.unsplash.com/photo-1486092642310-0c4e84309adb?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
@@ -252,8 +252,7 @@ const Landing = () => {
                 Driven by a passion for technology&apos;s transformative power, we
                 specialise in crafting delightful experiences that empower
                 individuals and create strong, connected communities.
-                <span className="block mb-6" />
-                <span />
+                <p className="h-4"></p>                
                 We are particularly passionate about reimagining education,
                 connection, and wellness through innovative tech solutions that
                 inspire growth and well-being.
@@ -279,7 +278,7 @@ const Landing = () => {
               </div>
               <div className={styles.socials}>
                 <div className={styles.line}>
-                  <p>Hello@Rd8.com</p>
+                  {/* <p>Hello@Rd8.com</p> */}
                 </div>
                 <div className={styles.line}>
                   <p>LinkedIn</p>

@@ -118,7 +118,7 @@ const ProjectCard = ({ project }) => {
   return (
     <div
       ref={cardRef}
-      className="w-[95vw] max-w-screen-2xl mx-auto rounded text-[#3d3d3d]"
+      // className="w-[95vw] max-w-screen-2xl mx-auto rounded text-[#3d3d3d]"
       className={`w-[95vw] max-w-screen-2xl mx-auto text-[#3d3d3d] overflow-hidden rounded-lg px-5 py-4 bg-white/20 backdrop-blur-md shadow-lg hover:shadow-xl transition-shadow duration-300 border border-white/10 group`}
       style={{
         boxShadow: `0 4px 6px rgba(206, 110, 110, 0.1), 0 1px 3px rgba(229, 75, 75, 0.08)`,

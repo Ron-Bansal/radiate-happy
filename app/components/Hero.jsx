@@ -33,7 +33,7 @@ export default function Hero() {
         Code + Design + Business + People
       </h3> */}
         <h3 className="text-lg md:text opacity-75 font-light mt-1">
-          I like solving human problems with delightful digital solutions
+          I like solving human problems with pretty solutions
         </h3>
       </div>
     </section>

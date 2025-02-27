@@ -6,9 +6,9 @@ import FolioProjectCard from "./FolioProjectCardNewLayout";
 const projects = [
   {
     title: "Moonstone",
-    tagline: "beautiful playlist insights",
+    tagline: "connecting music and people",
     description:
-      "Explore your favourite playlists through a new lens through beautiful playlist insights that uncover trends and stories behind the journey.",
+      "Explore your favourite playlists through a new lens through beautiful playlist insights that uncover trends and stories behind its journey.",
     type: "WebApp",
     tags: "Design, Development, Marketing",
     thumbnailTall: "/assets/moonstone-tall.png",
@@ -47,7 +47,7 @@ const projects = [
     description:
       "Ember searches the depths of your bookmarks folders to dig up forgotten sources of inspiration.",
     type: "Web App",
-    tags: "Development",
+    tags: "Design, Development",
     thumbnailTall: "/assets/ember.webp",
     thumbnailGolden: "/assets/ember.webp",
     thumbnailSquare: "/assets/ember.webp",
@@ -109,7 +109,7 @@ export default function ProjectsSection() {
       </div>
       <h1 className="pt-20 text-center text-[#3d3d3d] text-3xl tracking-tight font-accent font-[725]">Selected Work</h1>
       <h3 className="text-[#3d3d3d] text-center text-pretty leading-snug mb-12 opacity-80 mt-2">A collection of my latest projects and and experiments</h3>
-      <div className="flex flex-col gap-36 pt-10 pb-20 px-3">
+      <div className="flex flex-col gap-8 md:gap-24 pt-10 pb-20 px-3">
         {projects.map((project, index) => (
           <FolioProjectCard key={project.title} project={project} />
         ))}

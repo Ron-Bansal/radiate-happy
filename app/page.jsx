@@ -3,6 +3,7 @@ import FolioProjectsSection from "./components/FolioProjectsSection";
 import FolioProfile from "./components/FolioProfile";
 import LandingPage from "./components/LandingPage";
 import About from "./components/About";
+import ProjectsSection from "./components/ProjectsSection";
 
 const Folio = () => {
   return (
@@ -37,6 +38,7 @@ const Folio = () => {
           </div>
         </div>
         {/* <About /> */}
+        <ProjectsSection/>
       </>
     </>
   );

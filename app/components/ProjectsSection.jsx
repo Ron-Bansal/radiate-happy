@@ -1,4 +1,6 @@
-import ProjectCard from "./ProjectCard";
+// import ProjectCard from "./ProjectCard";
+import FolioProjectCard from "./FolioProjectCardNewLayout";
+
 
 // page.jsx or similar
 const projects = [
@@ -77,8 +79,7 @@ const projects = [
   {
     title: "Freight Calculator tool",
     tagline: "compare shipping rates nationwide",
-    description:
-      "E-commerce businesses face the challenge of calculating fair and accurate shipping rates for their checkout page, with costs varying by courier, delivery zone, and package type. This tool automates the process by offering real-time rate comparisons across couriers and zones to simplify shipping decisions.",
+    description:"E-commerce businesses struggle with calculating accurate shipping rates due to varying couriers, zones, and package types. This tool automates real-time rate comparisons to simplify shipping decisions.",
     type: "Chrome Extension",
     tags: "User Research, Design, Development",
     thumbnailTall: "/assets/freight-calc-tall.png",
@@ -99,18 +100,18 @@ export default function ProjectsSection() {
     <>
       <div className="w-screen h-screen object-cover fixed top-0 left-0 -z-20">
         <img
-          // src="https://images.unsplash.com/photo-1542349314-e669385af82f?q=80&w=2969&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          src="https://images.unsplash.com/photo-1542349314-e669385af82f?q=80&w=2969&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           // src="https://images.unsplash.com/photo-1619840875399-bf7fd46f0728?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
-          src="https://images.unsplash.com/photo-1677441087904-240d51642828?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
+          // src="https://images.unsplash.com/photo-1677441087904-240d51642828?q=80&w=1935&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"
           alt=""
           className="w-full h-full object-cover"
         />
       </div>
       <h1 className="pt-20 text-center text-[#3d3d3d] text-3xl tracking-tight font-accent font-[725]">Selected Work</h1>
       <h3 className="text-[#3d3d3d] text-center text-pretty leading-snug mb-12 opacity-80 mt-2">A collection of my latest projects and and experiments</h3>
-      <div className="flex flex-col gap-36 pt-10 pb-20">
+      <div className="flex flex-col gap-36 pt-10 pb-20 px-3">
         {projects.map((project, index) => (
-          <ProjectCard key={project.title} project={project} />
+          <FolioProjectCard key={project.title} project={project} />
         ))}
       </div>
     </>

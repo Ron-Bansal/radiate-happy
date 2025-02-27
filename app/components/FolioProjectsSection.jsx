@@ -1,3 +1,4 @@
+// import FolioProjectCard from "./FolioProjectCardNewLayout";
 import FolioProjectCard from "./FolioProjectCard";
 import ProjectCard from "./ProjectCard";
 
@@ -102,6 +103,7 @@ export default function ProjectsSection() {
     <>
       <div className="flex flex-col gap-28 pt-6 pb-20">
         {projects.map((project, index) => (
+          // <FolioProjectCard key={project.title} project={project} />
           <FolioProjectCard key={project.title} project={project} />
         ))}
       </div>

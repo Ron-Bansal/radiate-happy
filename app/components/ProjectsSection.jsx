@@ -109,7 +109,7 @@ export default function ProjectsSection() {
       </div>
       <h1 className="pt-20 text-center text-[#3d3d3d] text-3xl tracking-tight font-accent font-[725]">Selected Work</h1>
       <h3 className="text-[#3d3d3d] text-center text-pretty leading-snug mb-12 opacity-80 mt-2">A collection of my latest projects and and experiments</h3>
-      <div className="flex flex-col gap-8 md:gap-24 pt-10 pb-20 px-3">
+      <div className="flex flex-col gap-8 md:gap-20 pt-10 pb-20 px-3">
         {projects.map((project, index) => (
           <FolioProjectCard key={project.title} project={project} />
         ))}

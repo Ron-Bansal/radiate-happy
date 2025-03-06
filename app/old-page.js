@@ -1,6 +1,6 @@
 // import Hero from "@/components/Hero";
-import Hero from "./components/Hero";
-import About from "./components/About";
+import Hero from "./components/About";
+import About from "./components/Hero";
 import Projects from "./components/Projects";
 import ProjectsSectionCols from "./components/ProjectCard";
 import ProjectsSection from "./components/ProjectsSection";

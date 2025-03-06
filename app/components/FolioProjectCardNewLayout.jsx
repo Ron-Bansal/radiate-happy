@@ -10,6 +10,7 @@ const FolioProjectCard = ({ project }) => {
     description,
     type,
     tags,
+    metrics,
     thumbnailTall,
     thumbnailGolden,
     thumbnailSquare,
@@ -116,7 +117,7 @@ const FolioProjectCard = ({ project }) => {
   return (
     <div
       ref={cardRef}
-      className={`w-full max-w-screen-2xl mx-auto mb-12 text-[#3d3d3d] overflow-hidden rounded-lg px-2 py-1 md:px-2 md:py-4 bg-white/20 backdrop-blur-md shadow-lg hover:shadow-xl transition-shadow duration-300 border border-white/10 group`}
+      className={`w-full xmax-w-screen-2xl max-w-[1600px] mx-auto mb-1 text-[#3d3d3d] overflow-hidden rounded-lg px-2 py-1 md:px-2 md:py-4 bg-white/20 backdrop-blur-md shadow-lg hover:shadow-xl transition-shadow duration-300 border border-white/10 group`}
       style={{
         boxShadow: `0 4px 6px rgba(206, 110, 110, 0.1), 0 1px 3px rgba(229, 75, 75, 0.08)`,
         background: glassBg,
@@ -124,21 +125,21 @@ const FolioProjectCard = ({ project }) => {
     >
       <div className="w-full max-w-screen-2xl mx-auto px-2 py-5 md:px-4 md:py-4">
         {/* Header */}
-        <div className="mb-24 md:text-center">
+        <div className="mb-16 mt-4 md:text-center">
           <div className="text-sm opacity-85 mb-2">
             {/* <span className="font-bold">{type}</span> - {tags} */}
-            <span
+            {/* <span
               className="font py-1 px-3 text-white rounded-full mb-2 mr-2 shadow"
               style={{ backgroundColor: accentColor }}
             >
               {type}
-            </span>{" "}
+            </span>{" "} */}
             {"   "} {tags}
             {/* <p className="mt-1 mb-2">{tags}</p> */}
           </div>
-          <h3 className="font-accent leading-none mt-4 mb-4 text-2xl font-[725]">
+          <h3 className="font-accent leading-none mt-4 mb-4 text-3xl font-[725]">
             {title}
-            <span className="font-accent leading-none text-xl font-semibold">
+            <span className="font-accent leading-none text-3xl font-semibold">
               {" "}
               • {tagline}
             </span>
@@ -185,7 +186,7 @@ const FolioProjectCard = ({ project }) => {
                   className="flex items-end justify-between px-4"
                 >
                   <div className="max-w-[320px]">
-                    <p className="text-base text-pretty leading-5 tracking">
+                    <p className="text-base text-pretty leading-[115%] tracking-[0.33px] text-sky-950">
                       {description}
                     </p>
                   </div>
@@ -212,22 +213,30 @@ const FolioProjectCard = ({ project }) => {
             <div className="w-1/4 pl-4 flex flex-col justify-between">
               <div>
                 {/* Stats */}
-                <div className="flex gap-10 mt-10 mb-6 ml-2">
+                <div className="flex gap-10 mt-10 mb-4 ml-2">
                   <div className="mb-2">
                     <p className="font-accent leading-tight text-2xl font-semibold">
-                      1,420+
+                      {metrics.metric1_value}
                     </p>
-                    <p className="text-sm">Users</p>
+                    <p className="text-sm">{metrics.metric1_name}</p>
                   </div>
                   <div>
                     <p className="font-accent leading-tight text-2xl font-semibold">
-                      12,200+
+                      {metrics.metric2_value}
                     </p>
-                    <p className="text-sm">Playlists Analysed</p>
+                    <p className="text-sm">{metrics.metric2_name}</p>
                   </div>
                 </div>
+                <div className="pb-4 text-sm">
+                  <span
+                    className="font py-1 px-3 text-white rounded-full shadow"
+                    style={{ backgroundColor: accentColor }}
+                  >
+                    {type}
+                  </span>
+                </div>
 
-                {/* Heat Map Visualization */}
+                {/* Square thumbnail*/}
                 <div
                   className="rounded-lg overflow-hidden shadow-md"
                   ref={rightImageRef}
@@ -271,7 +280,8 @@ const FolioProjectCard = ({ project }) => {
                     className="flex items-end justify-between pl-1 pr-3"
                   >
                     <div className="max-w-[375px]">
-                      <p className="text-base text-pretty leading-5 tracking">
+                      <p className="text-base text-pretty leading-[115%] tracking-[0.33px] text-sky-950">
+
                         {description}
                       </p>
                     </div>
@@ -317,15 +327,15 @@ const FolioProjectCard = ({ project }) => {
                 <div className="mt-8 mb-10 mx-auto flex gap-6">
                   <div>
                     <p className="font-accent leading-tight text-2xl font-semibold">
-                      1,420+
+                      {metrics.metric1_value}
                     </p>
-                    <p className="text-sm">Users</p>
+                    <p className="text-sm">{metrics.metric1_name}</p>
                   </div>
                   <div>
                     <p className="font-accent leading-tight text-2xl font-semibold">
-                      12,200+
+                      {metrics.metric2_value}
                     </p>
-                    <p className="text-sm">Playlists Analysed</p>
+                    <p className="text-sm">{metrics.metric2_name}</p>
                   </div>
                 </div>
                 <div
@@ -360,7 +370,8 @@ const FolioProjectCard = ({ project }) => {
 
             {/* Content & CTA */}
             <div ref={contentRef} className="flex mt-4 gap-1 pl-1 pr-3">
-              <p className="text-base text-pretty leading-5 tracking mb-4">
+              <p className="text-base text-pretty leading-[115%] tracking-[0.33px] text-sky-950 mb-4">
+
                 {description}
               </p>
               <a
@@ -394,15 +405,15 @@ const FolioProjectCard = ({ project }) => {
             <div className="flex gap-10 mt-8 mb-2 ml-2">
               <div>
                 <p className="font-accent leading-tight text-2xl font-semibold">
-                  1,420+
+                  {metrics.metric1_value}
                 </p>
-                <p className="text-sm">Users</p>
+                <p className="text-sm">{metrics.metric1_name}</p>
               </div>
               <div>
                 <p className="font-accent leading-tight text-2xl font-semibold">
-                  12,200+
+                  {metrics.metric2_value}
                 </p>
-                <p className="text-sm">Playlists Analysed</p>
+                <p className="text-sm">{metrics.metric2_name}</p>
               </div>
             </div>
 

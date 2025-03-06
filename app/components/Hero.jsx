@@ -16,7 +16,7 @@ export default function Hero() {
             Hi! Welcome to my digital garden :)
           </h3>
           <h1 className="font-accent text-8xl leading-[101%] tracking-[0.29px] mt-2">
-            I'm Raunaq
+            I&apos;m Raunaq
           </h1>
           <p className="leading-[121%] tracking-[0.06px] mt-8">
             Product Designer and Creative Developer
@@ -46,10 +46,10 @@ export default function Hero() {
               <li className="mb-2">
                 In Hindi poetry,{" "}
                 <span className="font-accent text-xl text-sky-950">
-                  ‘Raunaq’
+                &apos;Raunaq&apos;
                 </span>{" "}
                 is often used to describe someone or something that{" "}
-                <span className="font-semibold inline-flex gap-2 items-baseline text-sky-900">
+                <span className="font-semibold inline-flex gap-1 items-baseline text-sky-900">
                   <img
                     // src="/assets/sky1.png"
                     src="https://images.unsplash.com/photo-1669780080341-4ed61f405142?q=80&w=2070&auto=format&fit=crop&ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D"

@@ -24,10 +24,10 @@ const Folio = () => {
       <section className="min-h-screen py-16 px-6 text-white">
         <h2 className="font-accent text-6xl leading-[110%] tracking-[0.62px] mt-6 text-center">
           Good things happen <br />
-          when you're having fun
+          when you&apos;re having fun
         </h2>
         <p className="text-center text-white font-normal text-xl mt-5 mb-16 tracking-[116%] leading-[-0.13px]">
-          Here are some projects I’ve had fun building :)
+          Here are some projects I&apos;ve had fun building :)
         </p>
         <FolioProjectsSection />
       </section>

@@ -1,6 +1,6 @@
 export default function Footer() {
     return (
-      <section className="py-20 pt-12 px-6 bg-[#F3F5F6] bg-opacity-50 backdrop-blur-md text-black">
+      <section className="py-10 pt-12 px-6 bg-[#F3F5F6] bg-opacity-50 backdrop-blur-md text-black">
         <div className="max-w-screen-2xl mx-auto">
   
           <div className="mt-1">
@@ -14,7 +14,7 @@ export default function Footer() {
             <div className="flex-col max-w-[230px]">
               <p className="font-semibold leading-snug">email ~</p>
               <p className="leading-[123%] text-sm">
-                i'll add this later!
+                i&apos;ll add this later!
               </p>
               <p className="leading-[123%] text-sm">
                 carrier pigeon

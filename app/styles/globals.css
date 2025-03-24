@@ -6,7 +6,8 @@
   --background: #ffffff;
   --foreground: #171717;
   --font-roboto: 'Roboto', sans-serif;
-  --font-syne: 'Syne', sans-serif;
+  /* --font-syne: 'Syne', sans-serif; */
+  --font-syne: 'Playfair Display', sans-serif;
 }
 
 @media (prefers-color-scheme: dark) {

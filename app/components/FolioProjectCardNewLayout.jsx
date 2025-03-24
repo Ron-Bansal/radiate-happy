@@ -137,9 +137,9 @@ const FolioProjectCard = ({ project }) => {
             {"   "} {tags}
             {/* <p className="mt-1 mb-2">{tags}</p> */}
           </div>
-          <h3 className="font-accent leading-none mt-4 mb-4 text-2xl md:text-3xl font-[725]">
+          <h3 className="font-accent leading-none mt-4 mb-4 text-2xl md:text-3xl font-[725] font-normal">
             {title}
-            <span className="font-accent leading-none text-2xl md:text-3xl font-semibold">
+            <span className="font-accent leading-none text-2xl md:text-3xl xfont-semibold font-normal">
               {" "}
               • {tagline}
             </span>

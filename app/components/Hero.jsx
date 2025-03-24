@@ -11,25 +11,26 @@ export default function Hero() {
     // </section>
     <section className="min-h-screen py-20 px-6">
       <div className="max-w-screen-2xl mx-auto">
-        <div className="">
-          <h3 className="font-accent text-3xl leading-[119%] tracking-[0.62px] mt-6">
+        <div className="text-white">
+          <h3 className="font-accent text-xl md:text-3xl leading-[119%] tracking-[0.62px] mt-0 md:mt-6">
             Hi! Welcome to my digital garden :)
           </h3>
-          <h1 className="font-accent text-8xl leading-[101%] tracking-[0.29px] mt-2">
+          <h1 className="font-accent text-6xl md:text-8xl leading-[101%] tracking-[0.29px] mt-2">
             I&apos;m Raunaq
           </h1>
-          <p className="leading-[121%] tracking-[0.06px] mt-8">
-            Product Designer and Creative Developer
+          <p className="leading-[121%] tracking-[0.09px] mt-8 font-medium">
+            {/* Product Designer and Creative Developer */}
+            Creative Technologist
           </p>
           <p className="text-sm leading-[110%] tracking-[-0.14px] mt-[2px]">
-            Auckland, New Zealand
+            Auckland, NZ
           </p>
         </div>
 
-        <div className="bg-[#F3F5F6] text-gray-950 w-2/4 py-4 px-5 rounded shadow-xl float-right relative">
-          <video className="absolute h-52 right-12 top-[-136px]" autoPlay muted>
+        <div className="bg-[#F3F5F6] text-gray-950 max-w-md md:max-w-xl mt-10 md:mt-4 py-4 px-5 rounded shadow-xl float-right relative border-l-8 border-sky-700">
+          <video className="absolute h-52 right-10 top-[-136px]" autoPlay muted>
             <source src="/assets/seline-wave.webm" type="video/webm" />
-            Your browser does not support the video tag.
+            Your browser does not support the video tag :(
           </video>
           <h4 className="text-sky-700 font-medium text-xl leading-snug">
             RAUNAQ
@@ -42,7 +43,7 @@ export default function Hero() {
             noun.
           </p>
           <div className="">
-            <ol className="list-decimal list-inside leading-[1.7]">
+            <ol className="list-decimal list-inside leading-[1.66]">
               <li className="mb-2">
                 In Hindi poetry,{" "}
                 <span className="font-accent text-xl text-sky-950">

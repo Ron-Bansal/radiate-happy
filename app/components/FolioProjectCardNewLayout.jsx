@@ -137,9 +137,9 @@ const FolioProjectCard = ({ project }) => {
             {"   "} {tags}
             {/* <p className="mt-1 mb-2">{tags}</p> */}
           </div>
-          <h3 className="font-accent leading-none mt-4 mb-4 text-3xl font-[725]">
+          <h3 className="font-accent leading-none mt-4 mb-4 text-2xl md:text-3xl font-[725]">
             {title}
-            <span className="font-accent leading-none text-3xl font-semibold">
+            <span className="font-accent leading-none text-2xl md:text-3xl font-semibold">
               {" "}
               • {tagline}
             </span>
@@ -186,7 +186,7 @@ const FolioProjectCard = ({ project }) => {
                   className="flex items-end justify-between px-4"
                 >
                   <div className="max-w-[320px]">
-                    <p className="text-base text-pretty leading-[115%] tracking-[0.33px] text-sky-950">
+                    <p className="text-base text-pretty leading-[105%] tracking-[0.33px] xtext-sky-950 xtext-[#3d3d3d]/90 opacity-85">
                       {description}
                     </p>
                   </div>
@@ -218,13 +218,13 @@ const FolioProjectCard = ({ project }) => {
                     <p className="font-accent leading-tight text-2xl font-semibold">
                       {metrics.metric1_value}
                     </p>
-                    <p className="text-sm">{metrics.metric1_name}</p>
+                    <p className="text-sm opacity-85">{metrics.metric1_name}</p>
                   </div>
                   <div>
                     <p className="font-accent leading-tight text-2xl font-semibold">
                       {metrics.metric2_value}
                     </p>
-                    <p className="text-sm">{metrics.metric2_name}</p>
+                    <p className="text-sm opacity-85">{metrics.metric2_name}</p>
                   </div>
                 </div>
                 <div className="pb-4 text-sm">
@@ -370,7 +370,7 @@ const FolioProjectCard = ({ project }) => {
 
             {/* Content & CTA */}
             <div ref={contentRef} className="flex mt-4 gap-1 pl-1 pr-3">
-              <p className="text-base text-pretty leading-[115%] tracking-[0.33px] text-sky-950 mb-4">
+              <p className="text-base text-pretty leading-[115%] tracking-[0.3px] xtext-sky-950 mb-4 opacity-85">
 
                 {description}
               </p>
@@ -407,13 +407,13 @@ const FolioProjectCard = ({ project }) => {
                 <p className="font-accent leading-tight text-2xl font-semibold">
                   {metrics.metric1_value}
                 </p>
-                <p className="text-sm">{metrics.metric1_name}</p>
+                <p className="text-sm opacity-85">{metrics.metric1_name}</p>
               </div>
               <div>
                 <p className="font-accent leading-tight text-2xl font-semibold">
                   {metrics.metric2_value}
                 </p>
-                <p className="text-sm">{metrics.metric2_name}</p>
+                <p className="text-sm opacity-85">{metrics.metric2_name}</p>
               </div>
             </div>
 

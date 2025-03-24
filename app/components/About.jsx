@@ -1,13 +1,14 @@
 export default function About() {
   return (
     <section className="min-h-screen py-20 px-6 bg-[#F3F5F6] text-black">
-      <div className="max-w-screen-2xl mx-auto">
-        <h2 className="font-accent text-6xl leading-[111%] tracking-[0.62px] mt-6">
-          I enjoy creating products <br /> that spark{" "}
+      <div className="max-w-screen-2xl mx-auto z-20">
+        <h2 className="font-accent text-4xl md:text-6xl leading-[111%] tracking-[0.62px] mt-6">
+          I enjoy creating products <br className="hidden md:block" /> that spark{" "}
           <span className="striked line-through  decoration-[3px]">joy</span>{" "}
-          <span className="underline decoration-red-500 underline-offset-[4px] decoration-wavy decoration-[3px]">
+          <span className="underline decoration-red-500 underline-offset-[4px] decoration-wavy decoration-[3px] mr-2">
             raunaq
           </span>
+          ☀️
         </h2>
         <p className="max-w-sm leading-[120%] tracking-[0.17px] mt-12">
           Here’s a few sentences about me and how I can deliver value to others,

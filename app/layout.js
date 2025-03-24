@@ -2,7 +2,8 @@ import localFont from "next/font/local";
 // import "./globals.css";
 import "../app/styles/globals.css";
 // import { Roboto, Syne } from "next/font/google";
-import { Figtree, Instrument_Serif } from "next/font/google";
+// import { Figtree, Instrument_Serif } from "next/font/google";
+import { Figtree, Playfair_Display } from "next/font/google";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -23,7 +24,14 @@ const roboto = Figtree({
 
 });
 
-const syne = Instrument_Serif({
+// const syne = Instrument_Serif({
+//   subsets: ["latin"],
+//   variable: "--font-syne",
+//   // weight: "variable"
+//   weight: "400"
+// });
+
+const syne = Playfair_Display({
   subsets: ["latin"],
   variable: "--font-syne",
   // weight: "variable"

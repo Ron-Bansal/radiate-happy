@@ -33,7 +33,7 @@ export default function About() {
             <span className="inline-block h-2 w-2 bg-black mr-2 mb-[2px]"></span>
             Particularly passionate about these spaces
           </h5>
-          <div className="flex gap-12 mt-6 px-4">
+          <div className="flex flex-col gap-4 md:flex-row md:gap-12 mt-6 px-4">
             <div className="flex-col max-w-[230px]">
               <p className="font-semibold leading-snug">education ~</p>
               <p className="leading-[123%] text-sm">

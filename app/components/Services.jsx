@@ -228,7 +228,7 @@ const ServicesSection = () => {
             />
           </div>
         </div>
-        <div className="-mt-12">
+        <div className="-mt-2 md:-mt-12">
           <div ref={(el) => (cardsRef.current[2] = el)}>
             <ServiceCard
               demographic="For individuals"

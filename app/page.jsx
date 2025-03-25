@@ -27,7 +27,7 @@ const Folio = () => {
           Good things happen <br />
           when you&apos;re having fun.
         </h2>
-        <p className="text-center text-white opacity-85 font-normal text-xl mt-5 mb-10 md:mb-16 tracking-[116%] leading-[-0.13px]">
+        <p className="text-center text-white opacity-85 font-normal text-xl mt-5 mb-10 md:mb-16 xtracking-[116%] leading-[-0.13px]">
           Here are some projects I&apos;ve had fun building :)
         </p>
         <FolioProjectsSection />

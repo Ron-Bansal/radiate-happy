@@ -127,21 +127,32 @@ const FolioProjectCard = ({ project }) => {
         {/* Header */}
         <div className="mb-16 mt-4 md:text-center">
           <div className="text-sm opacity-85 mb-2">
+            <span
+              className="font py-0.5 px-3 text-white rounded-full mb-2 mr-2 shadow"
+              style={{ backgroundColor: accentColor }}
+            >
+              {type}
+            </span>
+          </div>
+          <div className="text-sm opacity-85 mb-2">
             {/* <span className="font-bold">{type}</span> - {tags} */}
             {/* <span
               className="font py-1 px-3 text-white rounded-full mb-2 mr-2 shadow"
               style={{ backgroundColor: accentColor }}
             >
               {type}
-            </span>{" "} */}
-            {"   "} {tags}
+            </span>{" "}
+            {"   "}  */}
+            {tags}
             {/* <p className="mt-1 mb-2">{tags}</p> */}
           </div>
-          <h3 className="font-accent leading-none mt-4 mb-4 text-2xl md:text-3xl font-[725] font-normal">
+          <h3 className="font-accent leading-none mt-4 mb-4 text-2xl md:text-3xl font-[700] xfont-normal">
             {title}
             <span className="font-accent leading-none text-2xl md:text-3xl xfont-semibold font-normal">
-              {" "}
-              • {tagline}
+              {/* {" "} */}
+              {/* • */}
+              ・
+               {tagline}
             </span>
           </h3>
         </div>
@@ -186,7 +197,7 @@ const FolioProjectCard = ({ project }) => {
                   className="flex items-end justify-between px-4"
                 >
                   <div className="max-w-[320px]">
-                    <p className="text-base text-pretty leading-[105%] tracking-[0.33px] xtext-sky-950 xtext-[#3d3d3d]/90 opacity-85">
+                    <p className="text-base text-pretty leading-[115%] tracking-[0.33px] xtext-sky-950 xtext-[#3d3d3d]/90 opacity-85">
                       {description}
                     </p>
                   </div>
@@ -227,14 +238,14 @@ const FolioProjectCard = ({ project }) => {
                     <p className="text-sm opacity-85">{metrics.metric2_name}</p>
                   </div>
                 </div>
-                <div className="pb-4 text-sm">
+                {/* <div className="pb-4 text-sm">
                   <span
                     className="font py-1 px-3 text-white rounded-full shadow"
                     style={{ backgroundColor: accentColor }}
                   >
                     {type}
                   </span>
-                </div>
+                </div> */}
 
                 {/* Square thumbnail*/}
                 <div
@@ -281,7 +292,6 @@ const FolioProjectCard = ({ project }) => {
                   >
                     <div className="max-w-[375px]">
                       <p className="text-base text-pretty leading-[115%] tracking-[0.33px] text-sky-950">
-
                         {description}
                       </p>
                     </div>
@@ -371,7 +381,6 @@ const FolioProjectCard = ({ project }) => {
             {/* Content & CTA */}
             <div ref={contentRef} className="flex mt-4 gap-1 pl-1 pr-3">
               <p className="text-base text-pretty leading-[115%] tracking-[0.3px] xtext-sky-950 mb-4 opacity-85">
-
                 {description}
               </p>
               <a

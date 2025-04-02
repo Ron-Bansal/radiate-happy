@@ -36,7 +36,7 @@ const projects = [
     type: "Chrome Extension",
     tags: "Design, Development, Marketing",
     metrics: {
-      metric1_value: "125+",
+      metric1_value: "135+",
       metric1_name: "active users",
       metric2_value: "28",
       metric2_name: "countries",
@@ -48,7 +48,7 @@ const projects = [
     backgroundColor: "#DFEEE5",
     glassBg:
       // "radial-gradient(circle at 50% 40%, rgba(107, 193, 143, 0.25), transparent 260%)",
-      "radial-gradient(circle at 50% 40%, rgba(223, 238, 229, 0.80), transparent 260%)",
+      "radial-gradient(circle at 50% 40%, rgba(230, 255, 223, 0.8), transparent 260%)",
     caseStudyLink: "/work/napkin-notes",
     liveSiteLink:
       // "https://chromewebstore.google.com/detail/napkin-notes-%E2%80%A2-side-panel/dlhljjkacijknfelknklfcohibfdciki",
@@ -115,6 +115,29 @@ const projects = [
     caseStudyLink: "/work/moonstone",
     // liveSiteLink: "https://freight-calculator-v2.netlify.app/?utm_source=raunvq-portfolio",
     liveSiteLink: "https://starshipit-plan-calculator.netlify.app/?utm_source=raunvq-portfolio",
+  },
+  {
+    title: "Asterisk",
+    tagline: "Connect the dots behind design elements",
+    description:"Add meaningful annotations to Figma elements and navigate effortlessly with contextual search",
+    type: "Figma Plugin",
+    tags: "Design, Development",
+    metrics: {
+      // metric1_value: "30+",
+      // metric1_name: "mundane hours saved",
+      // metric2_value: "30+",
+      // metric2_name: "hours saved",
+    },
+    thumbnailTall: "/assets/2asterisk-tall.png",
+    thumbnailGolden: "/assets/2asterisk-golden.png",
+    thumbnailSquare: "/assets/2asterisk-square.png",
+    accentColor: "#718b7b",
+    backgroundColor: "#F3F6F2",
+    glassBg:
+      // "radial-gradient(circle at 50% 40%, rgba(225, 108, 102, 0.7), transparent 160%)",
+      "radial-gradient(circle at 50% 40%, rgba(203, 243, 222, 0.8), transparent 260%)",
+    caseStudyLink: "/work/asterisk",
+    liveSiteLink: "https://www.figma.com/community/design-tools?resource_type=plugins",
   },
 ];
 

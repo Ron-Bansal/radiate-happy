@@ -8,6 +8,7 @@ import PortfolioMockup from "./components/PortfolioMockup";
 import About from "./components/About";
 import Footer from "./components/Footer";
 import ServicesSection from "./components/Services";
+import DynamicProjectsSection from "./components/DynamicProjectsSection";
 
 const Folio = () => {
   return (
@@ -31,6 +32,7 @@ const Folio = () => {
           Here are some projects I&apos;ve had fun building :)
         </p>
         <FolioProjectsSection />
+        <DynamicProjectsSection/>
       </section>
       <div className="min-h-screen w-full bg-slate-950 bg-[#232323] py-10">
         <ServicesSection />

@@ -15,7 +15,7 @@ export default function Loader({ onComplete }) {
   useEffect(() => {
     const minDisplayTimer = setTimeout(() => {
       setIsReadyToExit(true);
-    }, 2500); // Reduced to 2.5 seconds
+    }, 1500); // Reduced to 2.5 seconds
 
     return () => clearTimeout(minDisplayTimer);
   }, []);
@@ -53,7 +53,7 @@ export default function Loader({ onComplete }) {
       // Complete the progress bar
       tl.to(progressBarRef.current, {
         width: "100%",
-        duration: 0.2,
+        duration: 0.15,
         ease: "power2.out"
       });
       
@@ -71,14 +71,14 @@ export default function Loader({ onComplete }) {
       // Slide up the entire overlay
       tl.to(overlayRef.current, {
         y: "-100%",
-        duration: 0.8,
+        duration: 0.7,
         ease: "power3.inOut",
       }, "-=0.3");
 
       // Finally hide the container
       tl.to(containerRef.current, {
         opacity: 0,
-        duration: 0.2,
+        duration: 0.15,
         onComplete: () => {
           if (containerRef.current) {
             containerRef.current.style.display = "none";
@@ -121,7 +121,7 @@ export default function Loader({ onComplete }) {
       />
 
       {/* Subtle grain texture */}
-      <div className="absolute inset-0 w-full h-full z-20 opacity-20 pointer-events-none bg-[url('/noise.png')] bg-repeat" />
+      <div className="absolute inset-0 w-full h-full z-20 opacity-20 pointer-events-none bg-[url('/noise.png')] bg-repeat hidden" />
 
       {/* Centered content */}
       <div className="relative z-30 w-full h-full flex flex-col items-center justify-center">
@@ -153,6 +153,9 @@ export default function Loader({ onComplete }) {
 }
 
 
+
+
+// was using the first loader on this page before btw
 // // components/Loader.jsx
 // "use client";
 // import { useEffect, useRef, useState } from "react";

@@ -151,7 +151,7 @@ export function MinimalistFooter() {
                 Medium
               </a> */}
               <a
-                href="github.com/ron-bansal"
+                href="https://github.com/Ron-Bansal?tab=overview&from=2025-04-01&to=2025-04-16"
                 className="text-sm hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"

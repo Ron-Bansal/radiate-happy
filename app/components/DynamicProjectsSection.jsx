@@ -83,7 +83,7 @@ const projects = [
     thumbnailSquare: "/assets/3asterisk-square.png",
     accentColor: "#c6ae8b",
     // backgroundColor: "#E1D4BF",
-    backgroundColor: "#ece2d2",
+    backgroundColor: "#f2eadc",
     caseStudyLink: "/work/asterisk",
     liveSiteLink: "https://www.figma.com/community/plugin/1488498485297162626/asterisk",
   },

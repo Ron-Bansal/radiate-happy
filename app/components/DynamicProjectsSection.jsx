@@ -82,9 +82,10 @@ const projects = [
     thumbnailGolden: "/assets/3asterisk-golden.png",
     thumbnailSquare: "/assets/3asterisk-square.png",
     accentColor: "#c6ae8b",
-    backgroundColor: "#E1D4BF",
+    // backgroundColor: "#E1D4BF",
+    backgroundColor: "#ece2d2",
     caseStudyLink: "/work/asterisk",
-    liveSiteLink: "https://www.figma.com/community/design-tools?resource_type=plugins",
+    liveSiteLink: "https://www.figma.com/community/plugin/1488498485297162626/asterisk",
   },
 ];
 

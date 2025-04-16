@@ -174,7 +174,7 @@ const ServicesSection = () => {
   return (
     <section
       ref={sectionRef}
-      className="mt-40 mx-auto grid grid-cols-1 lg:grid-cols-[4fr_5fr] gap-12 max-w-[1500px] p-4"
+      className="mt-40 mx-auto grid grid-cols-1 lg:grid-cols-[4fr_5fr] gap-12 max-w-[1500px] p-4 text-[#f9f9f9] z-50"
     >
       <div className="text-left">
         <h2 className="text-5xl font-extralight text-primary mb-4 font-accent">

@@ -2,14 +2,14 @@ import React from "react";
 import FolioProjectsSection from "./components/FolioProjectsSection";
 import FolioProfile from "./components/FolioProfile";
 import LandingPage from "./components/LandingPage";
-import Hero from "./components/Hero";
+// import Hero from "./components/Hero";
+import Hero from "./components/HeroSection";
 import ProjectsSection from "./components/ProjectsSection";
 import PortfolioMockup from "./components/PortfolioMockup";
 import About from "./components/About";
 import Footer from "./components/Footer";
 import ServicesSection from "./components/Services";
 import DynamicProjectsSection from "./components/DynamicProjectsSection";
-import MediaMunch from "./components/MediaRatingMatrix";
 
 const Folio = () => {
   return (
@@ -43,7 +43,6 @@ const Folio = () => {
       <div className="min-h-screen w-full bg-slate-950 bg-[#232323] py-10 z-50">
         <ServicesSection />
       </div>
-      {/* <MediaMunch /> */}
       <Footer />
     </div>
   );

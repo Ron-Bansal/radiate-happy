@@ -14,10 +14,10 @@ const projects = [
     type: "Web App",
     tags: "Design, Development, Marketing",
     metrics: {
-      metric1_value: "900+",
+      metric1_value: "200+",
       metric1_name: "playlists analysed",
-      metric2_value: "15k",
-      metric2_name: "unique songs",
+      metric2_value: "35k+",
+      metric2_name: "songs processed",
     },
     thumbnailTall: "/assets/moonstone-tall.png",
     thumbnailGolden: "/assets/moonstone-golden.png",
@@ -25,7 +25,8 @@ const projects = [
     accentColor: "#945BA5",
     backgroundColor: "#ECE6F1",
     caseStudyLink: "/work/moonstone",
-    liveSiteLink: "https://moonstone-music.vercel.app/?utm_source=raunvq-portfolio",
+    liveSiteLink:
+      "https://moonstone-music.vercel.app/?utm_source=raunvq-portfolio",
   },
   {
     title: "Napkin Notes",
@@ -66,17 +67,19 @@ const projects = [
     accentColor: "#7FA9C6",
     backgroundColor: "#D8E6F0",
     caseStudyLink: "/work/moonstone",
-    liveSiteLink: "https://starshipit-plan-calculator.netlify.app/?utm_source=raunvq-portfolio",
+    liveSiteLink:
+      "https://starshipit-plan-calculator.netlify.app/?utm_source=raunvq-portfolio",
   },
   {
     title: "Asterisk",
     tagline: "Connect the dots behind design elements",
-    description:"Add meaningful annotations to Figma elements and navigate effortlessly with contextual search",
+    description:
+      "Add meaningful annotations to Figma elements and navigate effortlessly with contextual search",
     type: "Figma Plugin",
     tags: "Design, Development",
     metrics: {
-      metric1_value: "100+",
-      metric1_name: "installations",
+      metric1_value: "",
+      metric1_name: "",
     },
     thumbnailTall: "/assets/3asterisk-tall.png",
     thumbnailGolden: "/assets/3asterisk-golden.png",
@@ -85,7 +88,8 @@ const projects = [
     // backgroundColor: "#E1D4BF",
     backgroundColor: "#f2eadc",
     caseStudyLink: "/work/asterisk",
-    liveSiteLink: "https://www.figma.com/community/plugin/1488498485297162626/asterisk",
+    liveSiteLink:
+      "https://www.figma.com/community/plugin/1488498485297162626/asterisk",
   },
 ];
 
@@ -94,7 +98,7 @@ export default function DynamicProjectsSection() {
     // Register ScrollTrigger with GSAP
     if (typeof window !== "undefined") {
       gsap.registerPlugin(ScrollTrigger);
-      
+
       // Set up a subtle progress indicator
       gsap.to(".scroll-progress", {
         width: "100%",
@@ -103,15 +107,15 @@ export default function DynamicProjectsSection() {
           trigger: "body",
           start: "top top",
           end: "bottom bottom",
-          scrub: 0.3
-        }
+          scrub: 0.3,
+        },
       });
-      
+
       // Add a small delay to ensure DOM is fully loaded
       const timer = setTimeout(() => {
         ScrollTrigger.refresh();
       }, 150);
-      
+
       return () => {
         clearTimeout(timer);
         ScrollTrigger.getAll().forEach((trigger) => trigger.kill());
@@ -123,7 +127,7 @@ export default function DynamicProjectsSection() {
     <section className="relative">
       {/* Subtle progress indicator */}
       <div className="scroll-progress fixed top-0 left-0 h-0.5 bg-white/30 z-50 w-0"></div>
-      
+
       {/* Projects with spacing between them */}
       <div className="flex flex-col">
         {projects.map((project) => (

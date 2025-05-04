@@ -1,7 +1,7 @@
 export default function About() {
   return (
     <section className="min-h-screen py-20 px-6 bg-[#F3F5F6] text-black">
-      <div className="max-w-screen-2xl mx-auto z-20 relative">
+      <div className="max-w-6xl xw-fit mx-auto z-20 relative">
         {/* <div className="absolute right-0 top-1/3 transform -translate-y-1/2">
           <img src="/assets/ven.png" alt="Venn Diagram" />
         </div> */}

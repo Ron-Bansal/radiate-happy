@@ -5,6 +5,7 @@ import "../app/styles/globals.css";
 // import { Figtree, Instrument_Serif } from "next/font/google";
 import { Figtree, Playfair_Display } from "next/font/google";
 import LoaderWrapper from "./components/LoaderWrapper";
+import { PostHogProvider } from "./providers";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -43,6 +44,9 @@ export const metadata = {
   title: "Radiate Happy • Creative Technologist",
   description:
     "Raunaq is a Creative Technologist passionate about empowering people with technology.",
+  icons: {
+    icon: "/logo-grey-rise.png", // or "/favicon.png"
+  },
 };
 
 export default function RootLayout({ children }) {
@@ -50,6 +54,25 @@ export default function RootLayout({ children }) {
 
   return (
     <html lang="en">
+      <head>
+        {/* Google Analytics */}
+        <Script
+          strategy="afterInteractive"
+          src="https://www.googletagmanager.com/gtag/js?id=G-91EFKKQGNJ"
+        />
+        <Script
+          id="gtag-init"
+          strategy="afterInteractive"
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+              gtag('config', 'G-91EFKKQGNJ');
+            `,
+          }}
+        />
+      </head>
       <body className={`${roboto.variable} ${syne.variable}`}>
         <LoaderWrapper forceShow={isTestingLoader} />
         {/* Fluid background animation */}
@@ -64,7 +87,7 @@ export default function RootLayout({ children }) {
             backgroundSize: "cover",
           }}
         />
-        {children}
+        <PostHogProvider>{children}</PostHogProvider>
       </body>
     </html>
   );

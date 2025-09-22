@@ -3,7 +3,6 @@
 //       <section className="py-10 pt-12 px-6 bg-[#F3F5F6] bg-opacity-50 backdrop-blur-md text-black">
 //         <div className="max-w-screen-2xl mx-auto">
 
-import { Mail } from "lucide-react";
 
 //           <div className="mt-1">
 //             {" "}
@@ -112,6 +111,9 @@ import { Mail } from "lucide-react";
 
 // DESIGN 1: Minimalist with Gradient Name
 // A clean, minimalist design with a subtle gradient effect on the name
+"use client"
+import { Mail } from "lucide-react";
+
 export function MinimalistFooter() {
   return (
     <footer className="relative min-h-[50vh] py-12 px-6 bg-white text-black overflow-hidden">
@@ -124,10 +126,18 @@ export function MinimalistFooter() {
             {/* <p className="text-sm text-gray-500">carrier pigeon</p> */}
             <a
               href="mailto:raunaqbansal11@gmail.com?subject=Let's%20Get%20In%20Touch&body=Hello%2C%20I'd%20like%20to%20connect."
+              onClick={() => {
+                if (typeof window !== "undefined" && window.gtag) {
+                  window.gtag("event", "click_footer_email", {
+                    event_category: "Footer",
+                    event_label: "Email Get in Touch",
+                  });
+                }
+              }}
               className="max-w-52 -ml-5 text-sm text-[#2a2a2a] bg-gray-200 bg-secondary py-1 px-5 rounded-full flex items-center gap-2 transition-all duration-300 ease-in-out hover:text-black hover:bg-white hover:gap-3"
             >
               Get in touch
-              <Mail className="h-4 w-4 text-[#2a2a2a]"/>
+              <Mail className="h-4 w-4 text-[#2a2a2a]" />
             </a>
           </div>
 
@@ -139,6 +149,14 @@ export function MinimalistFooter() {
                 className="text-sm hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  if (typeof window !== "undefined" && window.gtag) {
+                    window.gtag("event", "click_footer_email", {
+                      event_category: "Footer",
+                      event_label: "Email Get in Touch",
+                    });
+                  }
+                }}
               >
                 LinkedIn
               </a>
@@ -155,6 +173,14 @@ export function MinimalistFooter() {
                 className="text-sm hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  if (typeof window !== "undefined" && window.gtag) {
+                    window.gtag("event", "click_footer_social", {
+                      event_category: "Footer",
+                      event_label: "GitHub",
+                    });
+                  }
+                }}
               >
                 GitHub
               </a>
@@ -171,6 +197,14 @@ export function MinimalistFooter() {
                 className="text-sm hover:underline"
                 target="_blank"
                 rel="noopener noreferrer"
+                onClick={() => {
+                  if (typeof window !== "undefined" && window.gtag) {
+                    window.gtag("event", "click_footer_social", {
+                      event_category: "Footer",
+                      event_label: "Spotify",
+                    });
+                  }
+                }}
               >
                 Spotify
               </a>

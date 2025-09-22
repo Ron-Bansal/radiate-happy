@@ -14,9 +14,9 @@ const projects = [
     type: "Web App",
     tags: "Design, Development, Marketing",
     metrics: {
-      metric1_value: "200+",
+      metric1_value: "1.2k+",
       metric1_name: "playlists analysed",
-      metric2_value: "35k+",
+      metric2_value: "193k+",
       metric2_name: "songs processed",
     },
     thumbnailTall: "/assets/moonstone-tall.png",
@@ -36,9 +36,9 @@ const projects = [
     type: "Chrome Extension",
     tags: "Design, Development, Marketing",
     metrics: {
-      metric1_value: "135+",
+      metric1_value: "165+",
       metric1_name: "active users",
-      metric2_value: "28",
+      metric2_value: "41",
       metric2_name: "countries",
     },
     thumbnailTall: "/assets/napkin-notes-tall.webp",

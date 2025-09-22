@@ -5,7 +5,8 @@ import "../app/styles/globals.css";
 // import { Figtree, Instrument_Serif } from "next/font/google";
 import { Figtree, Playfair_Display } from "next/font/google";
 import LoaderWrapper from "./components/LoaderWrapper";
-import { PostHogProvider } from "./providers";
+import { Analytics } from "@vercel/analytics/next";
+import Script from "next/script";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -87,7 +88,8 @@ export default function RootLayout({ children }) {
             backgroundSize: "cover",
           }}
         />
-        <PostHogProvider>{children}</PostHogProvider>
+        {children}
+        <Analytics />
       </body>
     </html>
   );

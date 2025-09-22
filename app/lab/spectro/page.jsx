@@ -377,7 +377,7 @@ const UniversalRedBlueLens = () => {
         Works with any stereoscopic/anaglyph image. 
         Left click for red lens, Ctrl+Click or right click for blue lens.
         <br/>
-        You can also use keyboard: hold 'R' for red or 'B' for blue.
+        You can also use keyboard: hold &apos;R&apos; for red or &apos;B&apos; for blue.
       </p>
       
       <div 

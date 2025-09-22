@@ -36,7 +36,7 @@
 
 //       // Create the sticky effect for the left column
 //       const mm = gsap.matchMedia();
-      
+
 //       // Only apply sticky effect on desktop
 //       mm.add("(min-width: 1024px)", () => {
 //         // Pin the left section
@@ -77,7 +77,7 @@
 //             toggleActions: "play none none reverse",
 //           }
 //         });
-        
+
 //         rightSectionAnim
 //           .fromTo(
 //             descriptionRef.current,
@@ -136,15 +136,15 @@
 //   }, []);
 
 //   return (
-//     <div 
-//       ref={cardRef} 
+//     <div
+//       ref={cardRef}
 //       className="w-full min-h-screen mb-24"
 //       style={{ backgroundColor }}
 //     >
 //       <div className="max-w-6xl mx-auto text-[#3d3d3d]  grid grid-cols-1 lg:grid-cols-16 gap-6 lg:gap-10 py-16 lg:py-24 px-4 lg:px-0">
 //         {/* Left Column - 10/16 cols - Sticky on desktop */}
-//         <div 
-//           ref={leftSectionRef} 
+//         <div
+//           ref={leftSectionRef}
 //           className="lg:col-span-10 flex flex-col lg:xh-screen lg:max-h-[80vh]"
 //         >
 //           {/* Project title and metadata */}
@@ -163,18 +163,18 @@
 //             <h2 className="text-3xl lg:text-3xl font-thin mb-2 font-accent">{title} ⋅ {tagline}</h2>
 //             {/* <p className="text-xl lg:text-2xl opacity-85">{tagline}</p> */}
 //           </div>
-          
+
 //           {/* Golden image container - full width within 10 cols */}
-//           <div 
-//             ref={goldenImageRef} 
+//           <div
+//             ref={goldenImageRef}
 //             className="xflex-grow relative overflow-hidden rounded-sm shadow-lg"
 //           >
-//             <img 
-//               src={thumbnailGolden} 
-//               alt={`${title} main view`} 
+//             <img
+//               src={thumbnailGolden}
+//               alt={`${title} main view`}
 //               className="w-full h-full object-contain"
 //             />
-            
+
 //             {/* Live site link button */}
 //             <div className="absolute bottom-6 right-6">
 //               <a
@@ -189,10 +189,10 @@
 //             </div>
 //           </div>
 //         </div>
-        
+
 //         {/* Right Column - 6/16 cols - Scrollable */}
-//         <div 
-//           ref={rightSectionRef} 
+//         <div
+//           ref={rightSectionRef}
 //           className="lg:col-span-6 flex flex-col gap-12 lg:min-h-[120vh] lg:pt-16"
 //         >
 //           {/* Description at the top of right column */}
@@ -201,19 +201,19 @@
 //               {description}
 //             </p>
 //           </div>
-          
+
 //           {/* Tall image - 5 cols wide */}
-//           <div 
-//             ref={tallImageRef} 
+//           <div
+//             ref={tallImageRef}
 //             className="w-full lg:w-5/6 overflow-hidden rounded-xl shadow-lg"
 //           >
-//             <img 
-//               src={thumbnailTall} 
-//               alt={`${title} tall view`} 
+//             <img
+//               src={thumbnailTall}
+//               alt={`${title} tall view`}
 //               className="w-full h-full object-cover"
 //             />
 //           </div>
-          
+
 //           {/* Stats section before square image */}
 //           <div ref={statsRef} className="flex gap-10 mt-8">
 //             <div>
@@ -231,19 +231,19 @@
 //               </div>
 //             )}
 //           </div>
-          
+
 //           {/* Square image - 4 cols wide */}
-//           <div 
-//             ref={squareImageRef} 
+//           <div
+//             ref={squareImageRef}
 //             className="w-full lg:w-4/6 ml-auto overflow-hidden rounded-xl shadow-lg"
 //           >
-//             <img 
-//               src={thumbnailSquare} 
-//               alt={`${title} square view`} 
+//             <img
+//               src={thumbnailSquare}
+//               alt={`${title} square view`}
 //               className="w-full h-full object-cover"
 //             />
 //           </div>
-          
+
 //           {/* Space at bottom to ensure enough scrolling for animations */}
 //           <div className="h-32 lg:h-64"></div>
 //         </div>
@@ -253,7 +253,6 @@
 // };
 
 // export default DynamicProjectCard;
-
 
 // "use client";
 // import React, { useEffect, useRef } from "react";
@@ -290,7 +289,7 @@
 //   useEffect(() => {
 //     if (typeof window !== "undefined") {
 //       gsap.registerPlugin(ScrollTrigger);
-      
+
 //       // Only apply animations on desktop
 //       const mm = gsap.matchMedia();
 //       mm.add("(min-width: 1024px)", () => {
@@ -298,7 +297,7 @@
 //         const mainTimeline = gsap.timeline({
 //           scrollTrigger: {
 //             trigger: cardRef.current,
-//             start: "top top", 
+//             start: "top top",
 //             end: "bottom bottom",
 //             scrub: true, // Smooth scrubbing effect
 //           }
@@ -307,7 +306,7 @@
 //         // Pin the left column until the square image catches up
 //         ScrollTrigger.create({
 //           trigger: cardRef.current,
-//           start: "top top", 
+//           start: "top top",
 //           endTrigger: squareImageRef.current,
 //           end: "bottom bottom-=200",
 //           pin: leftSectionRef.current,
@@ -325,13 +324,13 @@
 //             onUpdate: (self) => {
 //               // Progressively slow down the left column scroll
 //               const slowFactor = gsap.utils.interpolate(1, 0.5, self.progress);
-//               gsap.set(leftSectionRef.current, { 
+//               gsap.set(leftSectionRef.current, {
 //                 attr: { "data-scroll-speed": slowFactor }
 //               });
 //             }
 //           }
 //         });
-        
+
 //         // Entrance animations for left column elements with staggered timing
 //         gsap.fromTo(
 //           [titleRef.current, descriptionRef.current, goldenImageRef.current],
@@ -352,7 +351,7 @@
 
 //         // Enhanced animation for right column elements
 //         const rightElements = [statsRef.current, tallImageRef.current, squareImageRef.current];
-        
+
 //         // Add delay to right column elements to ensure they enter after left column
 //         gsap.set(rightSectionRef.current, { opacity: 0 });
 //         gsap.to(rightSectionRef.current, {
@@ -364,20 +363,20 @@
 //             start: "top center-=100",
 //           }
 //         });
-        
+
 //         // Animate each right element as it enters the viewport with staggered timing
 //         rightElements.forEach((el, index) => {
 //           gsap.fromTo(
 //             el,
-//             { 
-//               y: 100, 
+//             {
+//               y: 100,
 //               opacity: 0,
 //               scale: 0.95,
 //               rotationZ: index % 2 === 0 ? 1.5 : -1.5 // Slightly more rotation
 //             },
-//             { 
-//               y: 0, 
-//               opacity: 1, 
+//             {
+//               y: 0,
+//               opacity: 1,
 //               scale: 1,
 //               rotationZ: 0,
 //               duration: 1.2, // Slightly longer duration
@@ -395,7 +394,7 @@
 //         // Parallax effects for both columns while scrolling
 //         // Subtle parallax for tall image
 //         gsap.to(tallImageRef.current, {
-//           y: "-70px", 
+//           y: "-70px",
 //           ease: "none",
 //           scrollTrigger: {
 //             trigger: tallImageRef.current,
@@ -404,10 +403,10 @@
 //             scrub: 0.8,
 //           }
 //         });
-        
+
 //         // More pronounced parallax for square image to help it catch up
 //         gsap.to(squareImageRef.current, {
-//           y: "-100px", 
+//           y: "-100px",
 //           ease: "none",
 //           scrollTrigger: {
 //             trigger: squareImageRef.current,
@@ -443,16 +442,16 @@
 //   }, []);
 
 //   return (
-//     <div 
-//       ref={cardRef} 
+//     <div
+//       ref={cardRef}
 //       className="w-full"
 //       style={{ backgroundColor }}
 //     >
 //       <div className="max-w-7xl mx-auto text-[#3d3d3d] grid grid-cols-1 lg:grid-cols-12 gap-6 lg:gap-16 py-16 lg:py-24 px-4 lg:px-0">
 //         {/* Left Column - Pinned until catch-up point */}
-//         <div 
-//           ref={leftSectionRef} 
-//           className="lg:col-span-7 lg:relative" 
+//         <div
+//           ref={leftSectionRef}
+//           className="lg:col-span-7 lg:relative"
 //         >
 //           {/* Project title and metadata */}
 //           <div ref={titleRef} className="mb-6">
@@ -470,25 +469,25 @@
 //             <h2 className="text-3xl lg:text-4xl font-thin mb-2 font-accent">{title}</h2>
 //             <p className="text-xl lg:text-2xl opacity-85">{tagline}</p>
 //           </div>
-          
+
 //           {/* Description section in the left column */}
 //           <div ref={descriptionRef} className="mb-8">
 //             <p className="text-base lg:text-lg opacity-85 leading-relaxed">
 //               {description}
 //             </p>
 //           </div>
-          
+
 //           {/* Golden image container */}
-//           <div 
-//             ref={goldenImageRef} 
+//           <div
+//             ref={goldenImageRef}
 //             className="relative overflow-hidden rounded-lg shadow-lg"
 //           >
-//             <img 
-//               src={thumbnailGolden} 
-//               alt={`${title} main view`} 
+//             <img
+//               src={thumbnailGolden}
+//               alt={`${title} main view`}
 //               className="w-full h-full object-cover"
 //             />
-            
+
 //             {/* Live site link button */}
 //             <div className="absolute bottom-6 right-6">
 //               <a
@@ -503,10 +502,10 @@
 //             </div>
 //           </div>
 //         </div>
-        
+
 //         {/* Right Column - Normal scroll to catch up with left */}
-//         <div 
-//           ref={rightSectionRef} 
+//         <div
+//           ref={rightSectionRef}
 //           className="lg:col-span-5 flex flex-col gap-24 lg:mt-48 lg:pl-6"
 //         >
 //           {/* Stats section */}
@@ -526,27 +525,27 @@
 //               </div>
 //             )}
 //           </div>
-          
+
 //           {/* Tall image - 5 cols wide */}
-//           <div 
-//             ref={tallImageRef} 
+//           <div
+//             ref={tallImageRef}
 //             className="w-full lg:w-5/6 overflow-hidden rounded-xl shadow-lg"
 //           >
-//             <img 
-//               src={thumbnailTall} 
-//               alt={`${title} tall view`} 
+//             <img
+//               src={thumbnailTall}
+//               alt={`${title} tall view`}
 //               className="w-full h-full object-cover"
 //             />
 //           </div>
-          
+
 //           {/* Square image - 4 cols wide */}
-//           <div 
-//             ref={squareImageRef} 
+//           <div
+//             ref={squareImageRef}
 //             className="w-full lg:w-4/6 ml-auto overflow-hidden rounded-xl shadow-lg"
 //           >
-//             <img 
-//               src={thumbnailSquare} 
-//               alt={`${title} square view`} 
+//             <img
+//               src={thumbnailSquare}
+//               alt={`${title} square view`}
 //               className="w-full h-full object-cover"
 //             />
 //           </div>
@@ -557,7 +556,6 @@
 // };
 
 // export default DynamicProjectCard;
-
 
 // gemini output - no anim but layout/text size looked nice
 // "use client";
@@ -593,7 +591,6 @@
 //   const visitButtonRef = useRef(null); // Added ref for button if needed
 //   const tallImageRef = useRef(null);
 //   const statsRef = useRef(null);
-
 
 //   useEffect(() => {
 //     // Ensure GSAP and ScrollTrigger are available
@@ -672,7 +669,6 @@
 //           // markers: true, // uncomment for debugging pin start/end
 //           invalidateOnRefresh: true // Recalculate end point on resize/refresh
 //         });
-
 
 //          // Optional: Subtle Parallax for Right Images (before alignment)
 //          // Be cautious if this interferes with the alignment calculation. Test thoroughly.
@@ -835,7 +831,6 @@
 
 // export default DynamicProjectCard;
 
-
 // I like this below one, no animation tho
 // "use client";
 // import React, { useEffect, useRef } from "react";
@@ -874,7 +869,7 @@
 //   useEffect(() => {
 //     if (typeof window !== "undefined") {
 //       gsap.registerPlugin(ScrollTrigger);
-      
+
 //       // Only apply animations on desktop
 //       const mm = gsap.matchMedia();
 //       mm.add("(min-width: 1024px)", () => {
@@ -898,20 +893,20 @@
 
 //         // --- Entrance Animation: Right Column ---
 //         const rightElements = [statsRef.current, tallImageRef.current, squareImageRef.current];
-        
+
 //         rightElements.forEach((el, index) => {
 //           gsap.fromTo(
 //             el,
-//             { 
-//               y: 80, 
+//             {
+//               y: 80,
 //               opacity: 0,
 //               scale: 0.98
 //             },
-//             { 
-//               y: 0, 
-//               opacity: 1, 
+//             {
+//               y: 0,
+//               opacity: 1,
 //               scale: 1,
-//               duration: 1.2, 
+//               duration: 1.2,
 //               ease: "power3.out",
 //               scrollTrigger: {
 //                 trigger: el,
@@ -921,7 +916,7 @@
 //             }
 //           );
 //         });
-        
+
 //         // Create the pin for left column - using simplified approach
 //         ScrollTrigger.create({
 //           trigger: cardRef.current,
@@ -933,14 +928,14 @@
 //             const leftHeight = leftSectionRef.current.offsetHeight;
 //             // Calculate how much extra scrolling is needed before unpinning
 //             const extraScroll = rightHeight - leftHeight + 200; // Add buffer
-            
+
 //             return `+=${extraScroll}px`; // End pin after scrolling the extra distance
 //           },
 //           pin: leftSectionRef.current,
 //           pinSpacing: false,
 //           anticipatePin: 1
 //         });
-        
+
 //         // Debug marker
 //         /*
 //         ScrollTrigger.create({
@@ -1096,8 +1091,6 @@
 
 // export default DynamicProjectCard;
 
-
-
 // Not quite what i was originally after but very clean card pin animation i like it!
 // "use client";
 // import React, { useEffect, useRef } from "react";
@@ -1136,7 +1129,7 @@
 //   useEffect(() => {
 //     if (typeof window !== "undefined") {
 //       gsap.registerPlugin(ScrollTrigger);
-      
+
 //       // Only apply animations on desktop
 //       const mm = gsap.matchMedia();
 //       mm.add("(min-width: 1024px)", () => {
@@ -1160,20 +1153,20 @@
 
 //         // --- Entrance Animation: Right Column with slight delay ---
 //         const rightElements = [statsRef.current, tallImageRef.current, squareImageRef.current];
-        
+
 //         rightElements.forEach((el, index) => {
 //           gsap.fromTo(
 //             el,
-//             { 
-//               y: 80, 
+//             {
+//               y: 80,
 //               opacity: 0,
 //               scale: 0.98
 //             },
-//             { 
-//               y: 0, 
-//               opacity: 1, 
+//             {
+//               y: 0,
+//               opacity: 1,
 //               scale: 1,
-//               duration: 1.2, 
+//               duration: 1.2,
 //               ease: "power3.out",
 //               delay: 0.2, // Small delay to let left column start first
 //               scrollTrigger: {
@@ -1184,7 +1177,7 @@
 //             }
 //           );
 //         });
-        
+
 //         // Create the smooth scrolling effect for the left column
 //         const leftColumnTimeline = gsap.timeline({
 //           scrollTrigger: {
@@ -1379,7 +1372,6 @@
 // };
 
 // export default DynamicProjectCard;
-
 
 // "use client";
 // import React, { useEffect, useRef } from "react";
@@ -1418,7 +1410,7 @@
 //   useEffect(() => {
 //     if (typeof window !== "undefined") {
 //       gsap.registerPlugin(ScrollTrigger);
-      
+
 //       // Only apply animations on desktop
 //       const mm = gsap.matchMedia();
 //       mm.add("(min-width: 1024px)", () => {
@@ -1442,20 +1434,20 @@
 
 //         // --- Entrance Animation: Right Column with slight delay ---
 //         const rightElements = [statsRef.current, tallImageRef.current, squareImageRef.current];
-        
+
 //         rightElements.forEach((el, index) => {
 //           gsap.fromTo(
 //             el,
-//             { 
-//               y: 80, 
+//             {
+//               y: 80,
 //               opacity: 0,
 //               scale: 0.98
 //             },
-//             { 
-//               y: 0, 
-//               opacity: 1, 
+//             {
+//               y: 0,
+//               opacity: 1,
 //               scale: 1,
-//               duration: 1.2, 
+//               duration: 1.2,
 //               ease: "power3.out",
 //               delay: 0.2, // Small delay to let left column start first
 //               scrollTrigger: {
@@ -1466,7 +1458,7 @@
 //             }
 //           );
 //         });
-        
+
 //         // Create the smooth scrolling effect for the left column
 //         const leftColumnTimeline = gsap.timeline({
 //           scrollTrigger: {
@@ -1661,8 +1653,6 @@
 // };
 
 // export default DynamicProjectCard;
-
-
 
 // honestly 95% perfect
 // "use client";
@@ -1704,7 +1694,7 @@
 //       gsap.registerPlugin(ScrollTrigger);
 
 //       const mm = gsap.matchMedia();
-      
+
 //       mm.add("(min-width: 1024px)", () => {
 //         // Left column animations
 //         const leftElements = [titleGroupRef.current, descriptionGroupRef.current, goldenImageGroupRef.current];
@@ -1751,13 +1741,13 @@
 //         gsap.to(leftSectionRef.current, {
 //           y: () => {
 //             if (!leftSectionRef.current || !rightSectionRef.current) return 0;
-            
+
 //             const leftHeight = leftSectionRef.current.offsetHeight;
 //             const rightHeight = rightSectionRef.current.offsetHeight;
-            
+
 //             // Only move if right column is taller
 //             if (rightHeight <= leftHeight) return 0;
-            
+
 //             // Return a value slightly less than the full difference to prevent overscrolling
 //             return -(rightHeight - leftHeight) * 0.95;
 //           },
@@ -1929,12 +1919,12 @@
 //   useEffect(() => {
 //     if (typeof window !== "undefined") {
 //       gsap.registerPlugin(ScrollTrigger);
-      
+
 //       // Create a GSAP context scoped to this component
 //       // This prevents conflicts with other card instances
 //       const ctx = gsap.context(() => {
 //         const mm = gsap.matchMedia();
-        
+
 //         mm.add("(min-width: 1024px)", () => {
 //           // Master timeline for sequencing
 //           const masterTl = gsap.timeline({
@@ -1945,7 +1935,7 @@
 //               scrub: 1
 //             }
 //           });
-          
+
 //           // Left column elements animation
 //           masterTl.from(titleGroupRef.current, {
 //             y: 40,
@@ -1962,7 +1952,7 @@
 //             opacity: 0,
 //             duration: 0.2
 //           }, "-=0.15")
-          
+
 //           // Right column animations (delayed in the timeline sequence)
 //           // This ensures left column animates before right column
 //           .from(statsGroupRef.current, {
@@ -1982,7 +1972,7 @@
 //             scale: 0.95,
 //             duration: 0.2
 //           }, "-=0.15");
-          
+
 //           // Custom scroll speed for right column (moves faster)
 //           gsap.to(rightSectionRef.current, {
 //             y: "-15%", // Move faster than natural scroll
@@ -1994,7 +1984,7 @@
 //               scrub: 0.5
 //             }
 //           });
-          
+
 //           // Custom scroll speed for left column (moves slightly slower)
 //           gsap.to(leftSectionRef.current, {
 //             y: "10%", // Move slower than natural scroll
@@ -2008,7 +1998,7 @@
 //           });
 //         });
 //       }, cardRef); // Scope the context to this card
-      
+
 //       // Return a cleanup function that only clears this component's animations
 //       return () => ctx.revert();
 //     }
@@ -2127,7 +2117,6 @@
 
 // export default DynamicProjectCard;
 
-
 "use client";
 import React, { useEffect, useRef } from "react";
 import gsap from "gsap";
@@ -2161,7 +2150,7 @@ const DynamicProjectCard = ({ project }) => {
   const statsGroupRef = useRef(null);
   const tallImageGroupRef = useRef(null);
   const squareImageGroupRef = useRef(null);
-  
+
   // Mobile specific refs
   const mobileStatsRef = useRef(null);
   const mobileTallImageRef = useRef(null);
@@ -2170,7 +2159,7 @@ const DynamicProjectCard = ({ project }) => {
   useEffect(() => {
     if (typeof window !== "undefined") {
       gsap.registerPlugin(ScrollTrigger);
-      
+
       // Create a GSAP context scoped to this component
       const ctx = gsap.context(() => {
         // Desktop animations (min-width: 1024px)
@@ -2182,46 +2171,67 @@ const DynamicProjectCard = ({ project }) => {
               trigger: cardRef.current,
               start: "top bottom-=100",
               end: "center center",
-              scrub: 1
-            }
+              scrub: 1,
+            },
           });
-          
+
           // Left column elements animation
-          masterTl.from(titleGroupRef.current, {
-            y: 40,
-            opacity: 0,
-            duration: 0.2
-          })
-          .from(descriptionGroupRef.current, {
-            y: 40,
-            opacity: 0,
-            duration: 0.2
-          }, "-=0.15")
-          .from(goldenImageGroupRef.current, {
-            y: 40,
-            opacity: 0,
-            duration: 0.2
-          }, "-=0.15")
-          
-          // Right column animations (delayed in the timeline sequence)
-          .from(statsGroupRef.current, {
-            y: 60,
-            opacity: 0,
-            duration: 0.2
-          }, "+=0.1") // Delay before starting right column
-          .from(tallImageGroupRef.current, {
-            y: 60,
-            opacity: 0,
-            scale: 0.95,
-            duration: 0.2
-          }, "-=0.15")
-          .from(squareImageGroupRef.current, {
-            y: 60,
-            opacity: 0,
-            scale: 0.95,
-            duration: 0.2
-          }, "-=0.15");
-          
+          masterTl
+            .from(titleGroupRef.current, {
+              y: 40,
+              opacity: 0,
+              duration: 0.2,
+            })
+            .from(
+              descriptionGroupRef.current,
+              {
+                y: 40,
+                opacity: 0,
+                duration: 0.2,
+              },
+              "-=0.15"
+            )
+            .from(
+              goldenImageGroupRef.current,
+              {
+                y: 40,
+                opacity: 0,
+                duration: 0.2,
+              },
+              "-=0.15"
+            )
+
+            // Right column animations (delayed in the timeline sequence)
+            .from(
+              statsGroupRef.current,
+              {
+                y: 60,
+                opacity: 0,
+                duration: 0.2,
+              },
+              "+=0.1"
+            ) // Delay before starting right column
+            .from(
+              tallImageGroupRef.current,
+              {
+                y: 60,
+                opacity: 0,
+                scale: 0.95,
+                duration: 0.2,
+              },
+              "-=0.15"
+            )
+            .from(
+              squareImageGroupRef.current,
+              {
+                y: 60,
+                opacity: 0,
+                scale: 0.95,
+                duration: 0.2,
+              },
+              "-=0.15"
+            );
+
           // Custom scroll speed for right column (moves faster)
           gsap.to(rightSectionRef.current, {
             y: "-15%", // Move faster than natural scroll
@@ -2230,10 +2240,10 @@ const DynamicProjectCard = ({ project }) => {
               trigger: rightSectionRef.current,
               start: "top bottom",
               end: "bottom top",
-              scrub: 0.5
-            }
+              scrub: 0.5,
+            },
           });
-          
+
           // Custom scroll speed for left column (moves slightly slower)
           gsap.to(leftSectionRef.current, {
             y: "10%", // Move slower than natural scroll
@@ -2242,11 +2252,11 @@ const DynamicProjectCard = ({ project }) => {
               trigger: leftSectionRef.current,
               start: "top bottom",
               end: "bottom top",
-              scrub: 0.7 // Smoother scrub for left column
-            }
+              scrub: 0.7, // Smoother scrub for left column
+            },
           });
         });
-        
+
         // Mobile animations (max-width: 1023px)
         const mobileMM = gsap.matchMedia();
         mobileMM.add("(max-width: 1023px)", () => {
@@ -2260,10 +2270,10 @@ const DynamicProjectCard = ({ project }) => {
               trigger: titleGroupRef.current,
               start: "top bottom-=50",
               end: "top center+=100",
-              scrub: 0.5
-            }
+              scrub: 0.5,
+            },
           });
-          
+
           gsap.from(descriptionGroupRef.current, {
             y: 20,
             opacity: 0,
@@ -2273,10 +2283,10 @@ const DynamicProjectCard = ({ project }) => {
               trigger: descriptionGroupRef.current,
               start: "top bottom-=50",
               end: "top center+=100",
-              scrub: 0.5
-            }
+              scrub: 0.5,
+            },
           });
-          
+
           gsap.from(goldenImageGroupRef.current, {
             y: 20,
             opacity: 0,
@@ -2286,10 +2296,10 @@ const DynamicProjectCard = ({ project }) => {
               trigger: goldenImageGroupRef.current,
               start: "top bottom-=50",
               end: "top center+=100",
-              scrub: 0.5
-            }
+              scrub: 0.5,
+            },
           });
-          
+
           // Mobile stats animations
           gsap.from(mobileStatsRef.current, {
             y: 20,
@@ -2300,10 +2310,10 @@ const DynamicProjectCard = ({ project }) => {
               trigger: mobileStatsRef.current,
               start: "top bottom-=50",
               end: "top center+=100",
-              scrub: 0.5
-            }
+              scrub: 0.5,
+            },
           });
-          
+
           // Mobile tall image animation
           gsap.from(mobileTallImageRef.current, {
             x: -15, // Slight horizontal movement
@@ -2314,10 +2324,10 @@ const DynamicProjectCard = ({ project }) => {
               trigger: mobileTallImageRef.current,
               start: "top bottom-=50",
               end: "top center+=100",
-              scrub: 0.5
-            }
+              scrub: 0.5,
+            },
           });
-          
+
           // Mobile square image animation
           gsap.from(mobileSquareImageRef.current, {
             x: 15, // Slight horizontal movement (opposite direction)
@@ -2328,12 +2338,12 @@ const DynamicProjectCard = ({ project }) => {
               trigger: mobileSquareImageRef.current,
               start: "top bottom-=50",
               end: "top center+=100",
-              scrub: 0.5
-            }
+              scrub: 0.5,
+            },
           });
         });
       }, cardRef); // Scope the context to this card
-      
+
       // Return a cleanup function that only clears this component's animations
       return () => ctx.revert();
     }
@@ -2347,12 +2357,8 @@ const DynamicProjectCard = ({ project }) => {
     >
       <div className="max-w-7xl mx-auto py-16 lg:py-20 px-4 sm:px-6 lg:px-8">
         <div className="grid grid-cols-1 lg:grid-cols-12 gap-x-6 lg:gap-x-12 gap-y-8 text-[#3d3d3d]">
-
           {/* Left Column */}
-          <div
-            ref={leftSectionRef}
-            className="lg:col-span-8"
-          >
+          <div ref={leftSectionRef} className="lg:col-span-8">
             <div className="flex flex-col space-y-8">
               <div ref={titleGroupRef}>
                 <div className="flex flex-wrap gap-0.5 mb-3">
@@ -2366,7 +2372,9 @@ const DynamicProjectCard = ({ project }) => {
                     {tags}
                   </span>
                 </div>
-                <h2 className="text-3xl lg:text-4xl font-thin mb-2 font-accent">{title}</h2>
+                <h2 className="text-3xl lg:text-4xl font-thin mb-2 font-accent">
+                  {title}
+                </h2>
                 <p className="text-xl lg:text-2xl opacity-85">{tagline}</p>
               </div>
 
@@ -2376,7 +2384,10 @@ const DynamicProjectCard = ({ project }) => {
                 </p>
               </div>
 
-              <div ref={goldenImageGroupRef} className="relative aspect-[16/10]">
+              <div
+                ref={goldenImageGroupRef}
+                className="relative aspect-[16/10]"
+              >
                 <div className="overflow-hidden rounded shadow-lg">
                   <img
                     src={thumbnailGolden}
@@ -2390,11 +2401,24 @@ const DynamicProjectCard = ({ project }) => {
                     href={liveSiteLink || caseStudyLink}
                     target="_blank"
                     rel="noopener noreferrer"
+                    onClick={() => {
+                      if (typeof window !== "undefined" && window.gtag) {
+                        window.gtag("event", "click_project_link", {
+                          event_category: "Project",
+                          event_label: title, // e.g. "Moonstone", "Napkin Notes"
+                          value: 1,
+                        });
+                      }
+                    }}
                     className="inline-flex items-center justify-center h-10 w-10 lg:h-12 lg:w-12 rounded-full text-white text-xl lg:text-2xl transform hover:scale-110 transition-transform duration-200 ease-in-out shadow-lg focus:outline-none focus:ring-2 focus:ring-offset-2"
-                    style={{ backgroundColor: accentColor, ringOffsetColor: backgroundColor, ringColor: accentColor }}
+                    style={{
+                      backgroundColor: accentColor,
+                      ringOffsetColor: backgroundColor,
+                      ringColor: accentColor,
+                    }}
                     aria-label={`Visit project ${title}`}
                   >
-                    {liveSiteLink ? '↗' : '📄'}
+                    {liveSiteLink ? "↗" : "📄"}
                   </a>
                 </div>
               </div>
@@ -2402,13 +2426,13 @@ const DynamicProjectCard = ({ project }) => {
           </div>
 
           {/* Right Column */}
-          <div
-            ref={rightSectionRef}
-            className="lg:col-span-4"
-          >
+          <div ref={rightSectionRef} className="lg:col-span-4">
             <div className="flex flex-col space-y-6 lg:space-y-8 lg:pt-16">
               {/* Stats section with different refs for desktop vs mobile */}
-              <div ref={statsGroupRef} className="hidden lg:flex gap-6 lg:gap-8">
+              <div
+                ref={statsGroupRef}
+                className="hidden lg:flex gap-6 lg:gap-8"
+              >
                 <div>
                   <p className="font-accent text-2xl lg:text-3xl font-thin">
                     {metrics.metric1_value}
@@ -2424,7 +2448,7 @@ const DynamicProjectCard = ({ project }) => {
                   </div>
                 )}
               </div>
-              
+
               {/* Mobile stats section */}
               <div ref={mobileStatsRef} className="flex lg:hidden gap-6">
                 <div>
@@ -2444,7 +2468,10 @@ const DynamicProjectCard = ({ project }) => {
               </div>
 
               {/* Desktop tall image */}
-              <div ref={tallImageGroupRef} className="hidden lg:block w-full lg:w-5/6 overflow-hidden rounded shadow-lg">
+              <div
+                ref={tallImageGroupRef}
+                className="hidden lg:block w-full lg:w-5/6 overflow-hidden rounded shadow-lg"
+              >
                 <img
                   src={thumbnailTall}
                   alt={`${title} tall view`}
@@ -2454,8 +2481,8 @@ const DynamicProjectCard = ({ project }) => {
               </div>
 
               {/* Mobile tall image - left aligned at 85% width */}
-              <div 
-                ref={mobileTallImageRef} 
+              <div
+                ref={mobileTallImageRef}
                 className="block lg:hidden w-[85%] mr-auto overflow-hidden rounded shadow-lg"
               >
                 <img
@@ -2467,7 +2494,10 @@ const DynamicProjectCard = ({ project }) => {
               </div>
 
               {/* Desktop square image */}
-              <div ref={squareImageGroupRef} className="hidden lg:block w-full lg:w-4/6 ml-auto overflow-hidden rounded shadow-lg">
+              <div
+                ref={squareImageGroupRef}
+                className="hidden lg:block w-full lg:w-4/6 ml-auto overflow-hidden rounded shadow-lg"
+              >
                 <img
                   src={thumbnailSquare}
                   alt={`${title} square view`}
@@ -2477,8 +2507,8 @@ const DynamicProjectCard = ({ project }) => {
               </div>
 
               {/* Mobile square image - right aligned at 65% width */}
-              <div 
-                ref={mobileSquareImageRef} 
+              <div
+                ref={mobileSquareImageRef}
                 className="block lg:hidden w-[65%] ml-auto overflow-hidden rounded shadow-lg"
               >
                 <img
@@ -2490,7 +2520,6 @@ const DynamicProjectCard = ({ project }) => {
               </div>
             </div>
           </div>
-
         </div>
       </div>
     </div>

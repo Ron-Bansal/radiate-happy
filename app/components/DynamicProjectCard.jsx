@@ -2379,7 +2379,7 @@ const DynamicProjectCard = ({ project }) => {
               </div>
 
               <div ref={descriptionGroupRef} className="max-w-[600px]">
-                <p className="xtext-sm lg:text-md opacity-85 leading-snug text-pretty">
+                <p className="text-sm lg:text-md opacity-85 leading-snug text-pretty">
                   {description}
                 </p>
               </div>

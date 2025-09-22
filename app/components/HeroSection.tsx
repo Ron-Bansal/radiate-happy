@@ -1,38 +1,41 @@
 "use client";
 import { MapPin, Volume2 } from "lucide-react";
-import { useEffect, useRef, useState } from "react";
+import { useEffect, useRef } from "react";
 import Image from "next/image";
 import gsap from "gsap";
 
 export default function Hero() {
-  const [isClient, setIsClient] = useState(false);
   const definitionRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    setIsClient(true);
-
-    if (definitionRef.current) {
-      const tl = gsap.timeline({
-        delay: 3.5,
-        defaults: { ease: "expo.out", duration: 1.4 },
-      });
-
-      tl.fromTo(
-        definitionRef.current,
-        {
-          clipPath: "inset(100% 0% 0% 0%)",
-          opacity: 0,
-          y: 30,
-          scale: 0.98,
-        },
-        {
-          clipPath: "inset(0% 0% 0% 0%)",
-          opacity: 1,
-          y: 0,
-          scale: 1,
-        }
-      );
+    if (!definitionRef.current) {
+      return;
     }
+
+    const animation = gsap.timeline({
+      delay: 3.5,
+      defaults: { ease: "expo.out", duration: 1.4 },
+    });
+
+    animation.fromTo(
+      definitionRef.current,
+      {
+        clipPath: "inset(100% 0% 0% 0%)",
+        opacity: 0,
+        y: 30,
+        scale: 0.98,
+      },
+      {
+        clipPath: "inset(0% 0% 0% 0%)",
+        opacity: 1,
+        y: 0,
+        scale: 1,
+      }
+    );
+
+    return () => {
+      animation.kill();
+    };
   }, []);
 
   return (
@@ -44,7 +47,7 @@ export default function Hero() {
       <div className="absolute top-6 right-6 z-20">
         <a
           href="mailto:raunaqbansal11@gmail.com?subject=Let's%20Get%20In%20Touch&body=Hello%2C%20I'd%20like%20to%20connect."
-          className="bg-[#355E3B] text-white px-4 py-2 text-xs rounded transition-all duration-300 ease-in-out xhover:text-black "
+          className="bg-[#355E3B] text-white px-4 py-2 text-xs rounded transition-all duration-300 ease-in-out hover:text-black"
         >
           Get in touch
         </a>

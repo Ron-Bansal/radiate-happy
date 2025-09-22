@@ -52,7 +52,7 @@ export const metadata = {
 };
 
 export default function RootLayout({ children }) {
-  const isTestingLoader = true; // Change to false for production
+  const isTestingLoader = false; // Set to true only when manually testing the loader
 
   return (
     <html lang="en">

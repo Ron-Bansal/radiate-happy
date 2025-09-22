@@ -36,7 +36,7 @@ const projects = [
     type: "Chrome Extension",
     tags: "Design, Development, Marketing",
     metrics: {
-      metric1_value: "165+",
+      metric1_value: "200+",
       metric1_name: "active users",
       metric2_value: "41",
       metric2_name: "countries",

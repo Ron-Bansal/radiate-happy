@@ -7,6 +7,7 @@ import { Figtree, Playfair_Display } from "next/font/google";
 import LoaderWrapper from "./components/LoaderWrapper";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
+import { PostHogProvider } from "./components/PostHogProvider";
 
 // const geistSans = localFont({
 //   src: "./fonts/GeistVF.woff",
@@ -74,22 +75,24 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={`${roboto.variable} ${syne.variable}`}>
-        <LoaderWrapper forceShow={isTestingLoader} />
-        {/* Fluid background animation */}
-        {/* <FluidBackground /> */}
+      <body className={`${roboto.variable} ${syne.variable}`}>        
+        <PostHogProvider>
+          <LoaderWrapper forceShow={isTestingLoader} />
+          {/* Fluid background animation */}
+          {/* <FluidBackground /> */}
 
-        {/* Grain overlay */}
-        <div
-          id="grain-overlay"
-          className="fixed inset-0 w-full h-full pointer-events-none z-50 opacity-30 animate-noise"
-          style={{
-            backgroundImage: `url('/noise.webp')`,
-            backgroundSize: "cover",
-          }}
-        />
-        {children}
-        <Analytics />
+          {/* Grain overlay */}
+          <div
+            id="grain-overlay"
+            className="fixed inset-0 w-full h-full pointer-events-none z-50 opacity-30 animate-noise"
+            style={{
+              backgroundImage: `url('/noise.webp')`,
+              backgroundSize: "cover",
+            }}
+          />
+          {children}
+          <Analytics />
+        </PostHogProvider>
       </body>
     </html>
   );

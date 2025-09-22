@@ -38,7 +38,7 @@ const projects = [
     metrics: {
       metric1_value: "200+",
       metric1_name: "active users",
-      metric2_value: "41",
+      metric2_value: "93",
       metric2_name: "countries",
     },
     thumbnailTall: "/assets/napkin-notes-tall.webp",

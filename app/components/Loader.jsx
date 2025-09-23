@@ -15,7 +15,7 @@ export default function Loader({ onComplete }) {
   useEffect(() => {
     const minDisplayTimer = setTimeout(() => {
       setIsReadyToExit(true);
-    }, 1500); // Reduced to 2.5 seconds
+    }, 900); // Reduced to 2.5 seconds
 
     return () => clearTimeout(minDisplayTimer);
   }, []);
@@ -24,7 +24,7 @@ export default function Loader({ onComplete }) {
   useEffect(() => {
     // Create a smoother progress animation using GSAP
     const progressTween = gsap.to({}, {
-      duration: 2, // Shorter duration
+      duration: 1.1, // Shorter duration
       onUpdate: function() {
         // Calculate progress based on timeline position
         const newProgress = Math.min(100, this.progress() * 100);
@@ -53,32 +53,32 @@ export default function Loader({ onComplete }) {
       // Complete the progress bar
       tl.to(progressBarRef.current, {
         width: "100%",
-        duration: 0.15,
+        duration: 0.1,
         ease: "power2.out"
       });
       
       // Brief pause
-      tl.to({}, { duration: 0.3 });
+      tl.to({}, { duration: 0.2 });
       
       // Scale and fade out the logo
       tl.to(logoRef.current, {
         y: -20,
         opacity: 0,
-        duration: 0.5,
+        duration: 0.35,
         ease: "power2.out"
       });
 
       // Slide up the entire overlay
       tl.to(overlayRef.current, {
         y: "-100%",
-        duration: 0.7,
+        duration: 0.5,
         ease: "power3.inOut",
       }, "-=0.3");
 
       // Finally hide the container
       tl.to(containerRef.current, {
         opacity: 0,
-        duration: 0.15,
+        duration: 0.1,
         onComplete: () => {
           if (containerRef.current) {
             containerRef.current.style.display = "none";
@@ -137,15 +137,18 @@ export default function Loader({ onComplete }) {
           
           {/* Minimal progress bar */}
           <div className="w-48 h-[2px] bg-gray-700 rounded-full overflow-hidden">
-            <div 
+            <div
               ref={progressBarRef}
               className="h-full transition-all duration-100 ease-out"
-              style={{ 
+              style={{
                 width: `${progress}%`,
                 backgroundColor: '#fcfcfc'
               }}
             />
           </div>
+                    <p className="mt-3 text-plain text-[12px] text-[#5a5a5a]">
+            pretending to load
+          </p>
         </div>
       </div>
     </div>

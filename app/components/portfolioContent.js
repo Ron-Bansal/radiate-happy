@@ -1,14 +1,19 @@
+import { title } from "process";
+
 export const portfolioContent = [
   // Header Section
   {
     id: 'header',
     section: 'header',
-    title: 'Garden 🌱',
-    subtitle: 'Informal collection of mini projects, thoughts, & explorations',
+    // title: 'Garden 🌱',
+    // subtitle: 'Informal collection of mini projects, thoughts, & explorations',
     colSpan: 4,
     rowSpan: 1,
     backgroundColor: 'bg-gradient-to-r from-blue-100 to-purple-100',
-    customClasses: 'border border-blue-200/50',
+    customClasses: 'rounded-t-3xl',
+    image: '../assets/garden/header-banner.png',
+    title: "garden 🪴",
+    subtitle: "an informal collection of my explorations, projects, & photos",
     sectionSpacing: 32,
   },
 
@@ -159,6 +164,29 @@ export const portfolioContent = [
     colSpan: 2,
     rowSpan: 1,
     backgroundColor: 'bg-green-700',
+    customClasses: 'shadow-xl',
+    title: 'Environmental Data',
+    subtitle: 'Climate tracking dashboard',
+  },
+
+  // Final Row 2
+  {
+    id: 'big-section-1',
+    section: 'row6',
+    colSpan: 2,
+    rowSpan: 2,
+    backgroundColor: 'bg-blue-600',
+    customClasses: 'shadow-xl',
+    caption: 'Nature photography',
+    link: '#nature-photos',
+    sectionSpacing: 32,
+  },
+  {
+    id: 'big-section-2',
+    section: 'row6',
+    colSpan: 2,
+    rowSpan: 2,
+    backgroundColor: 'bg-blue-700',
     customClasses: 'shadow-xl',
     title: 'Environmental Data',
     subtitle: 'Climate tracking dashboard',

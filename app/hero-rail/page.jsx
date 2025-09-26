@@ -17,14 +17,13 @@ const gallery = [
 export default function Page() {
   return (
     <>
-      <section className="min-h-screen grid md:grid-cols-[1fr_42%] gap-8 p-6 items-stretch bg-[url('/assets/garden/gradientbg.png')] bg-cover bg-center">
+      <section className="min-h-screen grid md:grid-cols-[1fr_42%] gap-8 p-6 items-stretch bg-[url('/assets/garden/gradientbg2.webp')] bg-cover bg-center">
         <div className="self-center">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
-            Random-drag rail
+            Hi I'm Raunaq :)
           </h1>
           <p className="text-white/70 mt-3 max-w-prose">
-            Drag to add subtle randomized tilt. Vertical on desktop, horizontal
-            on mobile.
+            Creative technologist based in Auckland
           </p>
         </div>
 
@@ -42,14 +41,20 @@ export default function Page() {
         {/* Image mode */}
         <RandomDragRail
           items={gallery}
-          baseFlow={0.47}
+        //   baseFlow={0.47}
+          baseFlow={0.69}
           velDecay={0.968}
           kick={0.3}
-          tiltRange={[4, 12]}
+          tiltRange={[2, 6]}
           neighborsOppose
           mobileSize={250}
           desktopMax={350}
-          className="-m-6"
+          tint="#7b8d5a"
+          tintOpacity={0.32}
+          ringOpacity={0.35}
+          shadowOpacity={0.5}
+          showGrain
+          tiltSeed={20250926}
         />
       </section>
       <section className="min-h-screen p-6">

@@ -6,33 +6,41 @@ import gsap from "gsap";
 import Draggable from "gsap/Draggable";
 
 const DEFAULT_COLORS = [
-  "#e63946", "#457b9d", "#f4a261", "#2a9d8f", "#e9c46a",
-  "#8d99ae", "#ff6b6b", "#6a4c93", "#3a86ff", "#8338ec",
+  "#e63946",
+  "#457b9d",
+  "#f4a261",
+  "#2a9d8f",
+  "#e9c46a",
+  "#8d99ae",
+  "#ff6b6b",
+  "#6a4c93",
+  "#3a86ff",
+  "#8338ec",
 ];
 
 export default function RandomDragRail({
-  items,                 // [{ src, alt }, ...] optional; otherwise color cards
-  count = 10,            // used in color mode only
+  items, // [{ src, alt }, ...] optional; otherwise color cards
+  count = 10, // used in color mode only
   desktopAxis = "vertical",
   mobileAxis = "horizontal",
-  mobileSize = 150,      // px
-  desktopMax = 400,      // px
-  tiltRange = [2, 6],    // degrees [min, max]
+  mobileSize = 150, // px
+  desktopMax = 400, // px
+  tiltRange = [2, 6], // degrees [min, max]
   neighborsOppose = true,
-  baseFlow = 0.45,       // px/tick
-  velDecay = 0.965,      // 0..1 (higher = more glide)
-  kick = 0.32,           // drag impulse multiplier
+  baseFlow = 0.45, // px/tick
+  velDecay = 0.965, // 0..1 (higher = more glide)
+  kick = 0.32, // drag impulse multiplier
   colors = DEFAULT_COLORS,
 
   // Cohesion styling for your grainy green background
-  tint = "#7b8d5a",      // olive tint
-  tintOpacity = 0.30,    // 0..1
-  ringOpacity = 0.35,    // 0..1
-  shadowOpacity = 0.5,   // 0..1
-  showGrain = true,      // inline SVG noise overlay
+  tint = "#7b8d5a", // olive tint
+  tintOpacity = 0.3, // 0..1
+  ringOpacity = 0.35, // 0..1
+  shadowOpacity = 0.5, // 0..1
+  showGrain = true, // inline SVG noise overlay
 
   // Seed for stable tilt across reloads
-  tiltSeed = 20250926,   // number; same seed => same angles
+  tiltSeed = 20250926, // number; same seed => same angles
   className = "",
 }) {
   const outlineRef = useRef(null);
@@ -45,7 +53,7 @@ export default function RandomDragRail({
 
   // --- deterministic per-index random helpers (hashed) ---
   const hash32 = (x) => {
-    x = (x ^ 61) ^ (x >>> 16);
+    x = x ^ 61 ^ (x >>> 16);
     x = (x + (x << 3)) >>> 0;
     x = x ^ (x >>> 4);
     x = Math.imul(x, 0x27d4eb2d) >>> 0;
@@ -53,7 +61,7 @@ export default function RandomDragRail({
     return x >>> 0;
   };
   const rand01FromSeed = (seed, i) => {
-    const m = hash32((seed ^ 0x9e3779b9) + Math.imul(i, 0x85ebca6b) >>> 0);
+    const m = hash32(((seed ^ 0x9e3779b9) + Math.imul(i, 0x85ebca6b)) >>> 0);
     let t = (m + 0x6d2b79f5) >>> 0;
     t = Math.imul(t ^ (t >>> 15), t | 1);
     t ^= t + Math.imul(t ^ (t >>> 7), t | 61);
@@ -66,7 +74,7 @@ export default function RandomDragRail({
     gsap.registerPlugin(Draggable);
 
     // sync seed if prop changes
-    tiltSeedRef.current = (tiltSeed >>> 0);
+    tiltSeedRef.current = tiltSeed >>> 0;
 
     const track = trackRef.current;
     const mq = window.matchMedia("(max-width: 768px)");
@@ -76,10 +84,15 @@ export default function RandomDragRail({
     const makeTiltTable = () => {
       const [minTilt, maxTilt] = tiltRange;
       tiltTableRef.current = Array.from({ length: UNIQUE }, (_, i) => {
-        const r = rand01FromSeed(tiltSeedRef.current, i);     // 0..1 per index
-        const mag = minTilt + r * (maxTilt - minTilt);        // map to range
-        const sign = neighborsOppose ? (i % 2 === 0 ? 1 : -1) // alternate
-                                     : (r < 0.5 ? 1 : -1);
+        const r = rand01FromSeed(tiltSeedRef.current, i); // 0..1 per index
+        const mag = minTilt + r * (maxTilt - minTilt); // map to range
+        const sign = neighborsOppose
+          ? i % 2 === 0
+            ? 1
+            : -1 // alternate
+          : r < 0.5
+          ? 1
+          : -1;
         return mag * sign;
       });
     };
@@ -93,7 +106,7 @@ export default function RandomDragRail({
         el.className =
           "rd-card relative shrink-0 aspect-square w-[var(--card-mobile)] md:w-full md:max-w-[var(--card-desktop-max)] " +
           "rounded-lg overflow-hidden bg-[#111614] " +
-        //   "ring-1 " +
+          //   "ring-1 " +
           `ring-[rgba(86,99,71,${ringOpacity})] ` +
           `shadow-[0_14px_36px_rgba(32,38,27,${shadowOpacity})] ` +
           "flex items-center justify-center select-none text-white font-bold";
@@ -101,7 +114,8 @@ export default function RandomDragRail({
         el.style.filter = "saturate(0.9) contrast(0.98) brightness(0.98)";
 
         const tintLayer = document.createElement("div");
-        tintLayer.className = "pointer-events-none absolute inset-0 mix-blend-multiply";
+        tintLayer.className =
+          "pointer-events-none absolute inset-0 mix-blend-multiply";
         tintLayer.style.background = "var(--card-tint)";
         tintLayer.style.opacity = String(tintOpacity);
 
@@ -122,8 +136,8 @@ export default function RandomDragRail({
         wrap.className =
           "rd-card relative shrink-0 aspect-square w-[var(--card-mobile)] md:w-full md:max-w-[var(--card-desktop-max)] " +
           "rounded-lg overflow-hidden bg-[#111614] " +
-        //   "ring-1 " +
-        //   `ring-[rgba(86,99,71,${ringOpacity})] ` +
+          //   "ring-1 " +
+          //   `ring-[rgba(86,99,71,${ringOpacity})] ` +
           `shadow-[0_14px_36px_rgba(32,38,27,${shadowOpacity})] ` +
           "flex items-center justify-center select-none";
 
@@ -134,7 +148,8 @@ export default function RandomDragRail({
         img.style.filter = "saturate(0.9) contrast(0.98) brightness(0.98)";
 
         const tintLayer = document.createElement("div");
-        tintLayer.className = "pointer-events-none absolute inset-0 mix-blend-multiply";
+        tintLayer.className =
+          "pointer-events-none absolute inset-0 mix-blend-multiply";
         tintLayer.style.background = "var(--card-tint)";
         tintLayer.style.opacity = String(tintOpacity);
 
@@ -175,13 +190,19 @@ export default function RandomDragRail({
       svg.setAttribute("viewBox", "0 0 100 100");
       const filter = document.createElementNS(svg.namespaceURI, "filter");
       filter.setAttribute("id", "grain");
-      const feTurbulence = document.createElementNS(svg.namespaceURI, "feTurbulence");
+      const feTurbulence = document.createElementNS(
+        svg.namespaceURI,
+        "feTurbulence"
+      );
       feTurbulence.setAttribute("type", "fractalNoise");
       feTurbulence.setAttribute("baseFrequency", "0.9");
       feTurbulence.setAttribute("numOctaves", "2");
       feTurbulence.setAttribute("stitchTiles", "stitch");
       filter.appendChild(feTurbulence);
-      const feColorMatrix = document.createElementNS(svg.namespaceURI, "feColorMatrix");
+      const feColorMatrix = document.createElementNS(
+        svg.namespaceURI,
+        "feColorMatrix"
+      );
       feColorMatrix.setAttribute("type", "saturate");
       feColorMatrix.setAttribute("values", "0");
       filter.appendChild(feColorMatrix);
@@ -222,7 +243,8 @@ export default function RandomDragRail({
       const unit = unitSize(mode);
       const loopLen = unit * UNIQUE;
       pos = ((pos % loopLen) + loopLen) % loopLen;
-      if (mode === "vertical") gsap.set(track, { x: 0, y: -pos, force3D: true });
+      if (mode === "vertical")
+        gsap.set(track, { x: 0, y: -pos, force3D: true });
       else gsap.set(track, { x: -pos, y: 0, force3D: true });
     };
 
@@ -230,8 +252,10 @@ export default function RandomDragRail({
       if (!isDown) {
         vel *= velDecay;
         if (Math.abs(vel) < 0.005) vel = 0;
+        pos += baseFlow + vel; // drift + momentum only when not dragging
+      } else {
+        pos += vel; // apply just drag velocity, no drift
       }
-      pos += baseFlow + vel;
       apply();
     });
 
@@ -246,7 +270,11 @@ export default function RandomDragRail({
     };
 
     const resetTilt = () => {
-      gsap.to(track.children, { rotateZ: 0, duration: 0.35, ease: "power2.out" });
+      gsap.to(track.children, {
+        rotateZ: 0,
+        duration: 0.35,
+        ease: "power2.out",
+      });
     };
 
     const setupDrag = () => {
@@ -279,7 +307,7 @@ export default function RandomDragRail({
 
     const setMode = () => {
       mode = getAxis();
-      makeTiltTable();   // build table BEFORE cards so we can use UNIQUE
+      makeTiltTable(); // build table BEFORE cards so we can use UNIQUE
       build();
       pos = 0;
       vel = 0;
@@ -346,11 +374,11 @@ export default function RandomDragRail({
         // Deeper desktop side gutters to protect rotated corners
         className={[
           "relative h-full rounded-xl box-border",
-          "px-3 py-5",        // mobile gutters
+          "px-3 py-5", // mobile gutters
           "md:py-3 md:px-12", // generous desktop gutters
           // Axis-specific clipping
           "md:overflow-y-hidden md:overflow-x-visible", // desktop (vertical)
-          "overflow-x-hidden overflow-y-visible",       // mobile (horizontal)
+          "overflow-x-hidden overflow-y-visible", // mobile (horizontal)
         ].join(" ")}
         ref={railRef}
       >

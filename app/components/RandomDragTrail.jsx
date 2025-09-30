@@ -97,6 +97,51 @@ export default function RandomDragRail({
       });
     };
 
+    // Add this right above build()
+    const makeMediaCard = (i) => {
+      const { src, alt, type } = items[i % items.length];
+      const wrap = document.createElement("figure");
+      wrap.className =
+        "rd-card relative shrink-0 aspect-square w-[var(--card-mobile)] md:w-full md:max-w-[var(--card-desktop-max)] " +
+        "rounded-lg overflow-hidden bg-[#111614] " +
+        `shadow-[0_14px_36px_rgba(32,38,27,${shadowOpacity})] ` +
+        "flex items-center justify-center select-none";
+
+      let media;
+      if (type === "video" || src?.endsWith(".mp4")) {
+        media = document.createElement("video");
+        media.src = src;
+        media.muted = true;
+        media.autoplay = true;
+        media.loop = true;
+        media.playsInline = true;
+        media.className = "block w-full h-full object-cover";
+      } else {
+        media = document.createElement("img");
+        media.src = src;
+        media.alt = alt || "card image";
+        media.className = "block w-full h-full object-cover";
+        media.style.filter = "saturate(0.9) contrast(0.98) brightness(0.98)";
+      }
+
+      const tintLayer = document.createElement("div");
+      tintLayer.className =
+        "pointer-events-none absolute inset-0 mix-blend-multiply";
+      tintLayer.style.background = "var(--card-tint)";
+      tintLayer.style.opacity = String(tintOpacity);
+
+      const vignette = document.createElement("div");
+      vignette.className = "pointer-events-none absolute inset-0";
+      vignette.style.background =
+        "radial-gradient(120% 100% at 50% 0%, rgba(0,0,0,0.18), transparent 55%)";
+
+      wrap.appendChild(media);
+      wrap.appendChild(tintLayer);
+      wrap.appendChild(vignette);
+      if (showGrain) wrap.appendChild(makeNoiseSVG());
+      return wrap;
+    };
+
     // Build unique set, then duplicate for seamless loop
     const build = () => {
       track.innerHTML = "";
@@ -165,8 +210,12 @@ export default function RandomDragRail({
         return wrap;
       };
 
+      //   const single = Array.from({ length: UNIQUE }, (_, i) =>
+      //     items?.length ? makeImageCard(i) : makeColorCard(i)
+      //   );
+
       const single = Array.from({ length: UNIQUE }, (_, i) =>
-        items?.length ? makeImageCard(i) : makeColorCard(i)
+        items?.length ? makeMediaCard(i) : makeColorCard(i)
       );
 
       const dup = [

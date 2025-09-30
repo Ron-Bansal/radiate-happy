@@ -737,7 +737,16 @@ const Section = ({
       title: "",
       width: defaultCardWidth || 320,
     };
-    onAddCard(section.id, newCard);
+
+    if (duplicate && sourceId) {
+      const sourceIndex = section.cards.findIndex((c) => c.id === sourceId);
+      const insertIndex =
+        sourceIndex === -1 ? section.cards.length : sourceIndex + 1;
+      onAddCard(section.id, newCard, insertIndex);
+    } else {
+      // normal "Add card" button still appends to end
+      onAddCard(section.id, newCard, section.cards.length);
+    }
   };
 
   const handleDragOver = (e, index) => {
@@ -1061,15 +1070,32 @@ export default function Qwinkling() {
     setShowDeleteSectionConfirm(null);
   };
 
-  const handleAddCard = (sectionId, newCard) => {
+  // const handleAddCard = (sectionId, newCard) => {
+  //   setSections((prev) =>
+  //     prev.map((s) => {
+  //       if (s.id === sectionId) {
+  //         return { ...s, cards: [...s.cards, newCard] };
+  //       }
+  //       return s;
+  //     })
+  //   );
+  // };
+
+  const handleAddCard = (sectionId, newCard, insertIndex) => {
     setSections((prev) =>
       prev.map((s) => {
-        if (s.id === sectionId) {
-          return { ...s, cards: [...s.cards, newCard] };
-        }
-        return s;
+        if (s.id !== sectionId) return s;
+        const cards = [...s.cards];
+        const idx =
+          typeof insertIndex === "number"
+            ? Math.max(0, Math.min(insertIndex, cards.length))
+            : cards.length; // default to append
+        cards.splice(idx, 0, newCard);
+        return { ...s, cards };
       })
     );
+    // optional: focus the new card immediately
+    setActiveCardId(newCard.id);
   };
 
   const handleCardDrop = (

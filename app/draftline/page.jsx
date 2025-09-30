@@ -645,7 +645,7 @@ const Card = React.memo(CardBase, (prev, next) => {
   );
 });
 
-export { Card };
+// export { Card };
 
 const Section = ({
   section,

@@ -101,9 +101,27 @@ const defaultData = {
 };
 
 const stripHtml = (html) => {
-  const tmp = document.createElement("div");
-  tmp.innerHTML = html;
-  return tmp.textContent || tmp.innerText || "";
+  if (!html) return "";
+  const str = typeof html === "string" ? html : String(html);
+
+  // If we're in the browser, use DOM (more accurate)
+  if (typeof window !== "undefined" && typeof document !== "undefined") {
+    const tmp = document.createElement("div");
+    tmp.innerHTML = str;
+    return tmp.textContent || tmp.innerText || "";
+  }
+
+  // SSR fallback: lightweight tag/entity strip
+  return str
+    .replace(/<style[\s\S]*?<\/style>/gi, "")
+    .replace(/<script[\s\S]*?<\/script>/gi, "")
+    .replace(/<[^>]+>/g, "")
+    .replace(/&nbsp;/gi, " ")
+    .replace(/&amp;/gi, "&")
+    .replace(/&lt;/gi, "<")
+    .replace(/&gt;/gi, ">")
+    .replace(/&quot;/gi, '"')
+    .replace(/&#39;/g, "'");
 };
 
 const diffWords = (oldText, newText) => {
@@ -931,33 +949,71 @@ const Section = ({
 };
 
 export default function Qwinkling() {
-  const [sections, setSections] = useState(() => {
-    const saved = localStorage.getItem(STORAGE_KEY);
-    return saved ? JSON.parse(saved).sections : defaultData.sections;
-  });
+  const [sections, setSections] = useState(defaultData.sections);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const saved = window.localStorage.getItem(STORAGE_KEY);
+      if (saved) {
+        const parsed = JSON.parse(saved);
+        if (parsed.sections) setSections(parsed.sections);
+      }
+    } catch (e) {
+      console.error("Failed to read sections from localStorage", e);
+    }
+  }, []);
 
   const [collapsedCards, setCollapsedCards] = useState(new Set());
   const [activeCardId, setActiveCardId] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
 
-  const loadSettings = () => {
-    const saved = localStorage.getItem(SETTINGS_KEY);
-    return saved
-      ? JSON.parse(saved)
-      : {
-          autoSave: true,
-          showWordCount: true,
-          compactMode: false,
-          copyMarkdown: false,
-          theme: "light",
-          autoFitHeight: false,
-          centerCards: false,
-          defaultCardWidth: 320,
-          zenMode: false,
-        };
-  };
+  const loadSettings = () => ({
+    autoSave: true,
+    showWordCount: true,
+    compactMode: false,
+    copyMarkdown: false,
+    theme: "light",
+    autoFitHeight: false,
+    centerCards: false,
+    defaultCardWidth: 320,
+    zenMode: false,
+  });
 
   const [settings, setSettings] = useState(loadSettings());
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const saved = window.localStorage.getItem(SETTINGS_KEY);
+      if (saved) setSettings(JSON.parse(saved));
+    } catch (e) {
+      console.error("Failed to read settings from localStorage", e);
+    }
+  }, []);
+  
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    try {
+      const saved = window.localStorage.getItem(SETTINGS_KEY);
+      if (saved) setSettings(JSON.parse(saved));
+    } catch (e) {
+      console.error("Failed to read settings from localStorage", e);
+    }
+  }, []);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    if (settings.autoSave) {
+      window.localStorage.setItem(STORAGE_KEY, JSON.stringify({ sections }));
+    }
+  }, [sections, settings.autoSave]);
+
+  useEffect(() => {
+    if (typeof window === "undefined") return;
+    window.localStorage.setItem(SETTINGS_KEY, JSON.stringify(settings));
+  }, [settings]);
+
   const [showDeleteConfirm, setShowDeleteConfirm] = useState(null);
   const [showDeleteSectionConfirm, setShowDeleteSectionConfirm] =
     useState(null);

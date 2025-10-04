@@ -37,7 +37,7 @@ const gallery = [
 export default function Page() {
   return (
     <div className="flex flex-col">
-      <section className="min-h-screen grid md:grid-cols-[1fr_42%] gap-8 xp-6 items-stretch bg-[url('/assets/garden/plaingradientbg.png')] bg-cover bg-center">
+      <section className="min-h-screen grid md:grid-cols-[1fr_42%] gap-8 xp-6 items-stretch bg-[url('/assets/garden/gradientbg3.png')] bg-cover bg-center">
         <div className="self-center p-6">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
             Hi Im Raunaq :)

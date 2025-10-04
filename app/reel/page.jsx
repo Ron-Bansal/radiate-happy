@@ -12,10 +12,31 @@ export default function ScrollFedReel() {
     let mode = "reel";
     let isAnimating = false;
 
+    let watched = [
+      { title: "Oppenheimer", year: 2023, type: "movie" },
+      { title: "Barbie", year: 2023, type: "movie" },
+      {
+        title: "Spider-Man: Across the Spider-Verse",
+        year: 2023,
+        type: "movie",
+      },
+      { title: "The Holdovers", year: 2023, type: "movie" },
+      { title: "Dune: Part Two", year: 2024, type: "movie" },
+      { title: "Poor Things", year: 2023, type: "movie" },
+      { title: "Everything Everywhere All at Once", year: 2022, type: "movie" },
+      { title: "Top Gun: Maverick", year: 2022, type: "movie" },
+      { title: "The Batman", year: 2022, type: "movie" },
+      { title: "The Bear", year: 2022, type: "tv" },
+      { title: "Succession", year: 2018, type: "tv" },
+      { title: "Severance", year: 2022, type: "tv" },
+      { title: "The Last of Us", year: 2023, type: "tv" },
+      { title: "Andor", year: 2022, type: "tv" },
+    ];
+
     const SEGMENTS = 600;
     const SLIDE_W = 0.84;
     const SLIDE_H = 0.52;
-    const slideCount = 14;
+    const slideCount = Math.max(1, watched.length);
 
     // ===== Background
     const body = document.body;
@@ -406,9 +427,14 @@ export default function ScrollFedReel() {
       const fov = THREE.MathUtils.degToRad(camera.fov);
       const h = 2 * d * Math.tan(fov / 2);
       const w = h * camera.aspect;
-      const cellW = (w / cols) * 0.75;
-      const cellH = cellW * 1.2;
       const rows = Math.ceil(slides.length / cols);
+
+      const baseCellW = (w / cols) * 0.75;
+      const baseCellH = baseCellW * 1.2;
+      const maxGridHeight = h * 0.85;
+      const maxCellH = rows > 0 ? maxGridHeight / rows : baseCellH;
+      const cellH = Math.min(baseCellH, maxCellH);
+      const cellW = cellH / 1.2;
       const startX = -w / 2 + cellW / 2;
       const startY = ((rows - 1) * cellH) / 2;
 
@@ -711,7 +737,17 @@ export default function ScrollFedReel() {
     })();
 
     // =============== SLIDE POPULATION (TMDB → REEL) ===============
+    function updateScrollspaceHeight(count) {
+      const sp = document.querySelector(".scrollspace");
+      if (!sp) return;
+      const baseHeight = 600;
+      const perItem = 44;
+      const target = Math.max(baseHeight, Math.round(count * perItem));
+      sp.style.height = `${target}vh`;
+    }
+
     async function loadPostersToReel(items) {
+      updateScrollspaceHeight(items.length);
       const posters = [];
       const metas = [];
 
@@ -788,6 +824,7 @@ export default function ScrollFedReel() {
     }
 
     function loadDemoPosters() {
+      updateScrollspaceHeight(slides.length);
       const meshes = window.__bindSlideMeta ? window.__bindSlideMeta() : [];
       for (let i = 0; i < meshes.length; i++) {
         window.setSlideFromCanvas(i, (g, c) => {
@@ -941,27 +978,6 @@ export default function ScrollFedReel() {
     addEventListener("click", onClick);
 
     // Seed some movies
-    let watched = [
-      { title: "Oppenheimer", year: 2023, type: "movie" },
-      { title: "Barbie", year: 2023, type: "movie" },
-      {
-        title: "Spider-Man: Across the Spider-Verse",
-        year: 2023,
-        type: "movie",
-      },
-      { title: "The Holdovers", year: 2023, type: "movie" },
-      { title: "Dune: Part Two", year: 2024, type: "movie" },
-      { title: "Poor Things", year: 2023, type: "movie" },
-      { title: "Everything Everywhere All at Once", year: 2022, type: "movie" },
-      { title: "Top Gun: Maverick", year: 2022, type: "movie" },
-      { title: "The Batman", year: 2022, type: "movie" },
-      { title: "The Bear", year: 2022, type: "tv" },
-      { title: "Succession", year: 2018, type: "tv" },
-      { title: "Severance", year: 2022, type: "tv" },
-      { title: "The Last of Us", year: 2023, type: "tv" },
-      { title: "Andor", year: 2022, type: "tv" },
-    ];
-
     function getOrderedWatched() {
       const reverseOrder = document.getElementById("reverseOrder");
       return reverseOrder && reverseOrder.checked
@@ -972,6 +988,7 @@ export default function ScrollFedReel() {
     if (TMDB.TMDB_ENABLED) {
       loadPostersToReel(getOrderedWatched());
     } else {
+      updateScrollspaceHeight(watched.length);
       loadDemoPosters();
     }
 
@@ -981,6 +998,7 @@ export default function ScrollFedReel() {
         if (TMDB.TMDB_ENABLED) {
           loadPostersToReel(getOrderedWatched());
         } else {
+          updateScrollspaceHeight(watched.length);
           loadDemoPosters();
         }
       });
@@ -993,7 +1011,11 @@ export default function ScrollFedReel() {
       debugFab.onclick = () => hudDebug.classList.toggle("open");
     }
     const btnDemo = document.getElementById("btnDemoPosters");
-    if (btnDemo) btnDemo.onclick = () => loadDemoPosters();
+    if (btnDemo)
+      btnDemo.onclick = () => {
+        updateScrollspaceHeight(watched.length);
+        loadDemoPosters();
+      };
 
     const btnRunTests = document.getElementById("btnRunTests");
     if (btnRunTests) {

@@ -3,19 +3,82 @@
 import React, { useEffect, useRef, useState } from "react";
 import * as THREE from "three";
 
+const WATCHED_ITEMS = [
+  { title: "Superman", year: 2025, type: "movie" },
+  { title: "Thunderbolts", year: 2025, type: "movie" },
+  { title: "Spirited Away", year: 2001, type: "movie" },
+  { title: "The Ba***ds of Bollywood", year: null, type: "tv" },
+  { title: "Nobody", year: 2021, type: "movie" },
+  { title: "Nobody 2", year: 2025, type: "movie" },
+  { title: "A Nice Indian Boy", year: null, type: "movie" },
+  { title: "The Paper", year: null, type: "movie" },
+  { title: "Virgin Island", year: null, type: "movie" },
+  { title: "Ocean’s Twelve", year: 2004, type: "movie" },
+  { title: "Friendship", year: null, type: "movie" },
+  { title: "Dept Q", year: null, type: "tv" },
+  { title: "Adults", year: null, type: "tv" },
+  { title: "Mountainhead", year: null, type: "movie" },
+  { title: "Common Side Effects", year: null, type: "tv" },
+  { title: "Avatar: The Way of Water", year: 2022, type: "movie" },
+  { title: "Death of a Unicorn", year: null, type: "movie" },
+  { title: "The Iron Claw", year: 2023, type: "movie" },
+  { title: "Novocaine", year: null, type: "movie" },
+  { title: "Mickey 17", year: 2025, type: "movie" },
+  { title: "Adolescence", year: null, type: "movie" },
+  { title: "DanDaDan", year: 2024, type: "tv" },
+  { title: "Derry Girls", year: 2018, type: "tv" },
+  { title: "I Don't Understand You", year: null, type: "movie" },
+  { title: "The Rookie", year: 2018, type: "tv" },
+  { title: "The Studio", year: null, type: "tv" },
+  { title: "Bob’s Burgers", year: 2011, type: "tv" },
+  { title: "It's Always Sunny in Philadelphia", year: 2005, type: "tv" },
+  { title: "Conan O'Brien Must Go", year: 2024, type: "tv" },
+  { title: "In the Know", year: 2024, type: "tv" },
+  { title: "Late Bloomer", year: 2024, type: "tv" },
+  { title: "Normal People", year: 2020, type: "tv" },
+  { title: "Scavengers Reign", year: 2023, type: "tv" },
+  { title: "BoJack Horseman", year: 2014, type: "tv" },
+  { title: "Heavenly Delusion (Tengoku Daimakyo)", year: 2023, type: "tv" },
+  { title: "The Midnight Gospel", year: 2020, type: "tv" },
+  { title: "Kim’s Convenience", year: 2016, type: "tv" },
+  { title: "Vinland Saga", year: 2019, type: "tv" },
+  { title: "Baki", year: 2018, type: "tv" },
+  { title: "Alice in Borderland", year: 2020, type: "tv" },
+  { title: "Ghosts", year: 2019, type: "tv" },
+  { title: "Dark", year: 2017, type: "tv" },
+  { title: "Malcolm in the Middle", year: 2000, type: "tv" },
+  { title: "Fleabag", year: 2016, type: "tv" },
+  { title: "Interview with the Vampire", year: 2022, type: "tv" },
+  { title: "Peacemaker", year: 2022, type: "tv" },
+  { title: "Gen V", year: 2023, type: "tv" },
+  { title: "Dexter", year: 2006, type: "tv" },
+  { title: "Platonic", year: 2023, type: "tv" },
+  { title: "Bolt", year: 2008, type: "movie" },
+];
+
 export default function ScrollFedReel() {
   const sceneRef = useRef(null);
   const [isHudOpen, setIsHudOpen] = useState(false);
+  const slideCount = WATCHED_ITEMS.length;
+  const defaultStripLength = Math.max(14, 10 + slideCount * 0.28);
+  const stripLengthMin = 12;
+  const stripLengthMax = Math.max(20, Math.ceil(defaultStripLength + 6));
+  const stripLengthDefault = Math.min(stripLengthMax, defaultStripLength);
 
   useEffect(() => {
     // ===== Globals & constants
     let mode = "reel";
     let isAnimating = false;
+    let gridScroll = 0;
+    let gridScrollTarget = 0;
+    let gridDragActive = false;
+    let gridDragLastY = 0;
+    let lastGridMetrics = null;
+    const gridScrollBounds = { min: -1, max: 1 };
 
     const SEGMENTS = 600;
     const SLIDE_W = 0.84;
     const SLIDE_H = 0.52;
-    const slideCount = 14;
 
     // ===== Background
     const body = document.body;
@@ -249,6 +312,20 @@ export default function ScrollFedReel() {
     const feedRatioEl = document.getElementById("feedRatio");
     const reverseDirectionEl = document.getElementById("reverseDirection");
     const reverseOrderEl = document.getElementById("reverseOrder");
+    const scrollspaceEl = document.querySelector(".scrollspace");
+
+    function updateScrollspaceHeight() {
+      if (!scrollspaceEl) return;
+      const sections = Math.max(6, Math.ceil(slideCount / 4) + 4);
+      const height = window.innerHeight * sections;
+      scrollspaceEl.style.height = `${Math.round(height)}px`;
+    }
+    updateScrollspaceHeight();
+
+    function clampGridScroll(value) {
+      const v = Number.isFinite(value) ? value : 0;
+      return Math.min(gridScrollBounds.max, Math.max(gridScrollBounds.min, v));
+    }
 
     if (reverseDirectionEl) {
       reverseDirectionEl.addEventListener("change", function () {
@@ -265,7 +342,8 @@ export default function ScrollFedReel() {
     function updateGeometry(scroll) {
       const reverse = !!(reverseDirectionEl && reverseDirectionEl.checked);
       const STRIP_LEN = parseFloat(stripLengthEl.value);
-      const offsetAmount = 0.15;
+      const naturalOffset = Math.max(0.12, Math.min(0.32, slideCount * 0.012));
+      const offsetAmount = Math.max(0.18, Math.min(0.48, naturalOffset * 2.1));
       const effectiveScroll = reverse
         ? scroll - offsetAmount
         : 1 - scroll + offsetAmount;
@@ -341,11 +419,25 @@ export default function ScrollFedReel() {
       const windowH = stripW * (1 - 2 * railFrac);
       const frameH = windowH * 1.32;
       const maxW = stripW * 0.96;
-      const base = 1 / slideCount;
       const factor = parseFloat(frameSpacingEl.value);
-      const step = Math.min(base * factor, 0.98 / (slideCount - 1));
-      const totalSpan = step * (slideCount - 1);
-      const start = 0.5 * (1 - totalSpan);
+      const baseStep =
+        slideCount > 1
+          ? Math.min(1 / slideCount, 1 / Math.max(1, slideCount - 1)) * factor
+          : 0;
+      const tightStep =
+        slideCount > 1
+          ? Math.min(baseStep, 0.98 / Math.max(1, slideCount - 1))
+          : 0;
+      const padBase = Math.max(0.04, Math.min(0.28, tightStep * 3.2));
+      const padding = Math.min(0.32, padBase);
+      const usable = Math.max(0.001, 1 - padding * 2);
+      const step =
+        slideCount > 1
+          ? Math.min(tightStep, usable / Math.max(1, slideCount - 1))
+          : 0;
+      const totalSpan = step * Math.max(0, slideCount - 1);
+      const slack = Math.max(0, usable - totalSpan);
+      const start = padding + slack / 2;
 
       for (let i = 0; i < slides.length; i++) {
         const tt = start + i * step;
@@ -372,6 +464,7 @@ export default function ScrollFedReel() {
       renderer.setSize(window.innerWidth, window.innerHeight);
       camera.aspect = window.innerWidth / window.innerHeight;
       camera.updateProjectionMatrix();
+      updateScrollspaceHeight();
     }
     window.addEventListener("resize", onResize);
 
@@ -394,13 +487,22 @@ export default function ScrollFedReel() {
       );
       reelGroup.rotation.x = THREE.MathUtils.degToRad(parseFloat(tiltEl.value));
       updateGeometry(s);
+      if (mode === "grid" && !isAnimating) {
+        gridScrollTarget = clampGridScroll(gridScrollTarget);
+        const diff = gridScrollTarget - gridScroll;
+        gridScroll += diff * 0.12;
+        if (Math.abs(diff) < 1e-3) gridScroll = gridScrollTarget;
+        const layout = gridLayoutFor(gridScroll);
+        gridScroll = layout.scroll;
+        applyGridLayout(layout.targets);
+      }
       renderer.render(scene, camera);
       requestAnimationFrame(tick);
     }
     tick();
 
     // ===== Reel/Grid animation helpers
-    function gridTargets() {
+    function computeGridMetrics() {
       const cols = Math.max(2, Math.floor(window.innerWidth / 260));
       const d = 3.2;
       const fov = THREE.MathUtils.degToRad(camera.fov);
@@ -408,9 +510,18 @@ export default function ScrollFedReel() {
       const w = h * camera.aspect;
       const cellW = (w / cols) * 0.75;
       const cellH = cellW * 1.2;
-      const rows = Math.ceil(slides.length / cols);
+      const rows = Math.max(1, Math.ceil(slides.length / cols));
       const startX = -w / 2 + cellW / 2;
       const startY = ((rows - 1) * cellH) / 2;
+      const halfView = h / 2;
+      const buffer = Math.min(cellH * 0.9, halfView * 0.6);
+      const overshoot = Math.min(cellH * 0.6, halfView * 0.35);
+      const upper = startY - (halfView - buffer - overshoot);
+      const lower = halfView - buffer - overshoot - startY;
+      gridScrollBounds.min = Math.min(lower, upper);
+      gridScrollBounds.max = Math.max(lower, upper);
+      gridScrollTarget = clampGridScroll(gridScrollTarget);
+      gridScroll = clampGridScroll(gridScroll);
 
       const forward = new THREE.Vector3();
       camera.getWorldDirection(forward).normalize();
@@ -423,14 +534,40 @@ export default function ScrollFedReel() {
       reelGroup.updateMatrixWorld(true);
       const parentQuat = reelGroup.getWorldQuaternion(new THREE.Quaternion());
       const invParent = parentQuat.clone().invert();
+      const basis = new THREE.Matrix4().makeBasis(
+        right,
+        up,
+        forward.clone().negate()
+      );
+      const worldQuat = new THREE.Quaternion().setFromRotationMatrix(basis);
+      const localQuat = worldQuat.clone().premultiply(invParent);
 
+      lastGridMetrics = {
+        cols,
+        rows,
+        cellW,
+        cellH,
+        startX,
+        startY,
+        d,
+        h,
+        w,
+        localQuat,
+      };
+      return lastGridMetrics;
+    }
+
+    function buildGridTargets(scrollValue, metrics) {
+      const scroll = clampGridScroll(scrollValue);
       const targets = [];
+      const { cols, cellW, cellH, startX, startY, d, localQuat } = metrics;
+
       for (let i = 0; i < slides.length; i++) {
-        const r = Math.floor(i / cols),
-          c = i % cols;
-        const x = startX + c * cellW,
-          y = startY - r * cellH,
-          z = -d;
+        const r = Math.floor(i / cols);
+        const c = i % cols;
+        const x = startX + c * cellW;
+        const y = startY - r * cellH - scroll;
+        const z = -d;
         const camSpace = new THREE.Vector3(x, y, z);
         const world = camSpace.clone().applyMatrix4(camera.matrixWorld);
         const localPos = world.clone();
@@ -447,21 +584,57 @@ export default function ScrollFedReel() {
         fw *= fit;
         fh *= fit;
 
-        const basis = new THREE.Matrix4().makeBasis(
-          right,
-          up,
-          forward.clone().negate()
-        );
-        const worldQuat = new THREE.Quaternion().setFromRotationMatrix(basis);
-        const localQuat = worldQuat.clone().premultiply(invParent);
-
         targets.push({
           pos: localPos,
-          quat: localQuat,
+          quat: localQuat.clone(),
           scale: new THREE.Vector3(fw / SLIDE_W, fh / SLIDE_H, 1),
         });
       }
-      return targets;
+
+      return { targets, scroll };
+    }
+
+    function gridLayoutFor(scrollOverride) {
+      const metrics = computeGridMetrics();
+      const desired =
+        typeof scrollOverride === "number" ? scrollOverride : gridScroll;
+      const layout = buildGridTargets(desired, metrics);
+      return { ...layout, metrics };
+    }
+
+    function applyGridLayout(targets) {
+      for (let i = 0; i < slides.length; i++) {
+        const target = targets[i];
+        if (!target) continue;
+        slides[i].position.copy(target.pos);
+        slides[i].quaternion.copy(target.quat);
+        slides[i].scale.copy(target.scale);
+      }
+    }
+
+    function normalizeWheelDelta(e) {
+      if (e.deltaMode === 1) return e.deltaY * 16;
+      if (e.deltaMode === 2) return e.deltaY * window.innerHeight;
+      return e.deltaY;
+    }
+
+    function onGridWheel(e) {
+      if (mode !== "grid") return;
+      if (!e.ctrlKey) e.preventDefault();
+      const metrics = lastGridMetrics || computeGridMetrics();
+      const step = (metrics?.cellH || 1) * 0.6;
+      const delta = normalizeWheelDelta(e);
+      gridScrollTarget = clampGridScroll(gridScrollTarget + delta * (step / 800));
+    }
+
+    function onGridPointerDown(e) {
+      if (mode !== "grid") return;
+      gridDragActive = true;
+      gridDragLastY = e.clientY;
+    }
+
+    function onGridPointerUp() {
+      gridDragActive = false;
     }
 
     function stripTargets() {
@@ -470,11 +643,25 @@ export default function ScrollFedReel() {
       const windowH = stripW * (1 - 2 * railFrac);
       const frameH = windowH * 1.32;
       const maxW = stripW * 0.96;
-      const base = 1 / slideCount;
       const factor = parseFloat(frameSpacingEl.value);
-      const step = Math.min(base * factor, 0.98 / (slideCount - 1));
-      const totalSpan = step * (slideCount - 1);
-      const start = 0.5 * (1 - totalSpan);
+      const baseStep =
+        slideCount > 1
+          ? Math.min(1 / slideCount, 1 / Math.max(1, slideCount - 1)) * factor
+          : 0;
+      const tightStep =
+        slideCount > 1
+          ? Math.min(baseStep, 0.98 / Math.max(1, slideCount - 1))
+          : 0;
+      const padBase = Math.max(0.04, Math.min(0.28, tightStep * 3.2));
+      const padding = Math.min(0.32, padBase);
+      const usable = Math.max(0.001, 1 - padding * 2);
+      const step =
+        slideCount > 1
+          ? Math.min(tightStep, usable / Math.max(1, slideCount - 1))
+          : 0;
+      const totalSpan = step * Math.max(0, slideCount - 1);
+      const slack = Math.max(0, usable - totalSpan);
+      const start = padding + slack / 2;
       const targs = [];
       for (let i = 0; i < slides.length; i++) {
         const tt = start + i * step;
@@ -538,17 +725,20 @@ export default function ScrollFedReel() {
       if (mode === "grid") return;
       setModeButtons("grid");
       mode = "grid";
-      const sp = document.querySelector(".scrollspace");
-      if (sp) sp.style.display = "none";
+      if (scrollspaceEl) scrollspaceEl.style.display = "none";
       filmMesh.visible = false;
-      tweenSlides(gridTargets(), 750);
+      gridDragActive = false;
+      const layout = gridLayoutFor(gridScroll);
+      gridScroll = layout.scroll;
+      gridScrollTarget = layout.scroll;
+      tweenSlides(layout.targets, 750);
     }
     function switchToReel() {
       if (mode === "reel") return;
       setModeButtons("reel");
       mode = "reel";
-      const sp = document.querySelector(".scrollspace");
-      if (sp) sp.style.display = "";
+      if (scrollspaceEl) scrollspaceEl.style.display = "";
+      gridDragActive = false;
       filmMesh.visible = true;
       tweenSlides(stripTargets(), 750);
     }
@@ -856,6 +1046,13 @@ export default function ScrollFedReel() {
     }
 
     function onPointerMove(e) {
+      if (gridDragActive && mode === "grid") {
+        const metrics = lastGridMetrics || computeGridMetrics();
+        const dragScale = (metrics?.cellH || 1) / 140;
+        const deltaY = e.clientY - gridDragLastY;
+        gridDragLastY = e.clientY;
+        gridScrollTarget = clampGridScroll(gridScrollTarget + deltaY * dragScale);
+      }
       const rect = getCanvasRect();
       if (!rect || !rect.width) return;
       mouse.x = ((e.clientX - rect.left) / rect.width) * 2 - 1;
@@ -937,8 +1134,12 @@ export default function ScrollFedReel() {
     }
     hoverLoop();
 
-    addEventListener("mousemove", onPointerMove);
-    addEventListener("click", onClick);
+    window.addEventListener("pointermove", onPointerMove);
+    window.addEventListener("click", onClick);
+    window.addEventListener("wheel", onGridWheel, { passive: false });
+    window.addEventListener("pointerdown", onGridPointerDown);
+    window.addEventListener("pointerup", onGridPointerUp);
+    window.addEventListener("pointercancel", onGridPointerUp);
 
     // Seed some movies
     // let watched = [
@@ -962,62 +1163,7 @@ export default function ScrollFedReel() {
     //   { title: "Andor", year: 2022, type: "tv" },
     // ];
 
-    let watched = [
-        { title: "Superman", year: 2025, type: "movie" },
-        { title: "Thunderbolts", year: 2025, type: "movie" },
-        { title: "Spirited Away", year: 2001, type: "movie" },
-        { title: "The Ba***ds of Bollywood", year: null, type: "tv" },
-        { title: "Nobody", year: 2021, type: "movie" },
-        { title: "Nobody 2", year: 2025, type: "movie" },
-        { title: "A Nice Indian Boy", year: null, type: "movie" },
-        { title: "The Paper", year: null, type: "movie" },
-        { title: "Virgin Island", year: null, type: "movie" },
-        { title: "Ocean’s Twelve", year: 2004, type: "movie" },
-        { title: "Friendship", year: null, type: "movie" },
-        { title: "Dept Q", year: null, type: "tv" },
-        { title: "Adults", year: null, type: "tv" },
-        { title: "Mountainhead", year: null, type: "movie" },
-        { title: "Common Side Effects", year: null, type: "tv" },
-        { title: "Avatar: The Way of Water", year: 2022, type: "movie" },
-        { title: "Death of a Unicorn", year: null, type: "movie" },
-        { title: "The Iron Claw", year: 2023, type: "movie" },
-        { title: "Novocaine", year: null, type: "movie" },
-        { title: "Mickey 17", year: 2025, type: "movie" },
-        { title: "Adolescence", year: null, type: "movie" },
-        { title: "DanDaDan", year: 2024, type: "tv" },
-        { title: "Derry Girls", year: 2018, type: "tv" },
-        { title: "I Don't Understand You", year: null, type: "movie" },
-        { title: "The Rookie", year: 2018, type: "tv" },
-        { title: "The Studio", year: null, type: "tv" },
-        { title: "Bob’s Burgers", year: 2011, type: "tv" },
-        { title: "It's Always Sunny in Philadelphia", year: 2005, type: "tv" },
-        { title: "Conan O'Brien Must Go", year: 2024, type: "tv" },
-        { title: "In the Know", year: 2024, type: "tv" },
-        { title: "Late Bloomer", year: 2024, type: "tv" },
-        { title: "Normal People", year: 2020, type: "tv" },
-        { title: "Scavengers Reign", year: 2023, type: "tv" },
-        { title: "BoJack Horseman", year: 2014, type: "tv" },
-        {
-          title: "Heavenly Delusion (Tengoku Daimakyo)",
-          year: 2023,
-          type: "tv",
-        },
-        { title: "The Midnight Gospel", year: 2020, type: "tv" },
-        { title: "Kim’s Convenience", year: 2016, type: "tv" },
-        { title: "Vinland Saga", year: 2019, type: "tv" },
-        { title: "Baki", year: 2018, type: "tv" },
-        { title: "Alice in Borderland", year: 2020, type: "tv" },
-        { title: "Ghosts", year: 2019, type: "tv" },
-        { title: "Dark", year: 2017, type: "tv" },
-        { title: "Malcolm in the Middle", year: 2000, type: "tv" },
-        { title: "Fleabag", year: 2016, type: "tv" },
-        { title: "Interview with the Vampire", year: 2022, type: "tv" },
-        { title: "Peacemaker", year: 2022, type: "tv" },
-        { title: "Gen V", year: 2023, type: "tv" },
-        { title: "Dexter", year: 2006, type: "tv" },
-        { title: "Platonic", year: 2023, type: "tv" },
-        { title: "Bolt", year: 2008, type: "movie" },
-      ];
+    const watched = WATCHED_ITEMS;
 
     function getOrderedWatched() {
       const reverseOrder = document.getElementById("reverseOrder");
@@ -1108,14 +1254,18 @@ export default function ScrollFedReel() {
     return () => {
       // Cleanup listeners and renderer on unmount
       window.removeEventListener("resize", onResize);
-      removeEventListener("mousemove", onPointerMove);
-      removeEventListener("click", onClick);
+      window.removeEventListener("pointermove", onPointerMove);
+      window.removeEventListener("click", onClick);
+      window.removeEventListener("wheel", onGridWheel);
+      window.removeEventListener("pointerdown", onGridPointerDown);
+      window.removeEventListener("pointerup", onGridPointerUp);
+      window.removeEventListener("pointercancel", onGridPointerUp);
       renderer.dispose();
       if (mount && renderer.domElement && mount.contains(renderer.domElement)) {
         mount.removeChild(renderer.domElement);
       }
     };
-  }, []);
+  }, [slideCount]);
 
   return (
     <>
@@ -1267,10 +1417,10 @@ export default function ScrollFedReel() {
           <input
             id="stripLength"
             type="range"
-            min="12"
-            max="20"
+            min={stripLengthMin}
+            max={stripLengthMax}
             step="0.5"
-            defaultValue="14"
+            defaultValue={stripLengthDefault}
           />
         </label>
         <label>

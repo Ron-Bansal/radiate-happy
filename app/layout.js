@@ -47,7 +47,7 @@ export const metadata = {
   description:
     "Raunaq is a Creative Technologist passionate about empowering people with technology.",
   icons: {
-    icon: "/logo-grey-rise.png", // or "/favicon.png"
+    icon: "/greensquare-logo-grey-rise.png", // or "/favicon.png"
   },
 };
 

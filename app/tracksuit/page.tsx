@@ -139,11 +139,11 @@ export default function TracksuitPage() {
             I’d love to join the Tracksuit team
           </h1>
           <p className="hero-seq max-w-xl text-pretty text-base text-[#3D3D3D]">
-            Hi! I’m Ron – and I'm deeply inspired by Tracksuit’s mission,
+            Hi! I&apos;m Ron – and I&apos;m deeply inspired by Tracksuit’s mission,
             culture, and approach to product.
           </p>
           <p className="hero-seq max-w-xl text-pretty text-base text-[#3D3D3D]">
-            I've built this site as an expression of interest to share what
+            I&apos;ve built this site as an expression of interest to share what
             excites me, how I think, and where I hope to contribute.
           </p>
         </div>
@@ -157,7 +157,7 @@ export default function TracksuitPage() {
       </section>
 
       {/* WHY TRACKSUIT */}
-      <section className="reveal mx-auto max-w-7xl rounded-3xl bg-[#e0d8f0]/60 bg-[#8E81CC] text-[#FBF7F0] p-10 shadow-lg md:grid md:grid-cols-[360px_1fr] md:gap-10">
+      <section className="reveal mx-auto max-w-7xl rounded-3xl bg-[#8E81CC] text-[#FBF7F0] p-10 shadow-lg md:grid md:grid-cols-[360px_1fr] md:gap-10">
         <div>
           <img
             src="assets/tracksuit/screenshot.png"
@@ -204,7 +204,7 @@ export default function TracksuitPage() {
                 className="flex items-start gap-2.5 rounded-2xl p-4"
               >
                 {/* <span className="text-2xl">{icon}</span> */}
-                <img className="h-12" src={icon} />
+                <img className="h-12" src={icon} alt="icon"/>
                 <div>
                   <h3 className="text-lg font-semibold pb-0.5">{title}</h3>
                   <p className="xtext-sm leading-relaxed">{desc}</p>
@@ -421,7 +421,7 @@ export default function TracksuitPage() {
               </p>
 
               <p className="leading-relaxed mb-4">
-                <strong>Learning loops:</strong> Lenny's podcast, PM frameworks,
+                <strong>Learning loops:</strong> Lenny&apos;s podcast, PM frameworks,
                 cohort-based learning, webinars, and books on systems thinking
                 and creativity.
               </p>
@@ -515,13 +515,13 @@ export default function TracksuitPage() {
           <div className="leading-relaxed max-w-prose text-[#3d3d3d]">
             <p className="mb-4">
               I love digging into how products feel, function, and grow. Whether
-              it’s uncovering friction points, designing small experiments, or
+              it&apos;s uncovering friction points, designing small experiments, or
               reframing insights into opportunities. I naturally gravitate
               toward connecting data and design with human behaviour.
             </p>
 
             <p className="mb-4">
-              I’m{" "}
+              I&apos;m{" "}
               <strong className="font-semibold text-[#473B64]">
                 particularly drawn to Product
               </strong>{" "}

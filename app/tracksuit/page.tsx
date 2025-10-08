@@ -1,9 +1,9 @@
 "use client";
 
-import React, { useEffect, useRef } from "react";
+import React, { useEffect, useRef, useState } from "react";
 import { Quicksand } from "next/font/google";
 import { gsap } from "gsap";
-import { Mail, FileText, Linkedin } from "lucide-react";
+import { Mail, FileText, Linkedin, Github } from "lucide-react";
 import posthog from "posthog-js";
 
 // Page-only font
@@ -46,6 +46,9 @@ function useRevealAnimation(selector = ".reveal", opts = {}) {
 
 export default function TracksuitPage() {
   const track = (event, props) => () => posthog.capture(event, props);
+
+  const [mounted, setMounted] = useState(false);
+  useEffect(() => setMounted(true), []);
 
   const heroRef = useRef(null);
 
@@ -120,8 +123,8 @@ export default function TracksuitPage() {
 
       {/* Floating CTA */}
       <a
-        href="#contact"
-        className="fixed right-6 top-6 z-50 inline-flex items-center gap-1 rounded-full bg-[#8BAA52] px-5 py-2.5 text-white shadow-lg transition-transform hover:-translate-y-0.5"
+        href="mailto:raunaqbansal@outlook.com"
+        className="fixed right-6 top-6 z-50 inline-flex items-center gap-1 rounded-full bg-[#8980C8] px-5 py-2.5 text-white shadow-lg transition-transform hover:-translate-y-0.5"
       >
         Say hello! <span>😊</span>
       </a>
@@ -136,11 +139,11 @@ export default function TracksuitPage() {
             I’d love to join the Tracksuit team
           </h1>
           <p className="hero-seq max-w-xl text-pretty text-base text-[#3D3D3D]">
-            Hi! I’m Ron – deeply inspired by Tracksuit’s mission, culture, and
-            approach to product.
+            Hi! I’m Ron – and I'm deeply inspired by Tracksuit’s mission,
+            culture, and approach to product.
           </p>
           <p className="hero-seq max-w-xl text-pretty text-base text-[#3D3D3D]">
-            I’ve built this site as an expression of interest to share what
+            I've built this site as an expression of interest to share what
             excites me, how I think, and where I hope to contribute.
           </p>
         </div>
@@ -166,11 +169,11 @@ export default function TracksuitPage() {
           <h2 className="mb-8 text-3xl">Why Tracksuit?</h2>
           <div className="space-y-4 leading-normal text-pretty xmax-w-prose">
             <p>
-              Lasting first impression. I first came across Tracksuit at an
-              Icehouse Ventures panel event in 2024. The event itself was jam
-              packed with valuable insights but what stood out to me was how the
-              first row was full of Tracksuiters at an after-hours event
-              attending to support and cheer on Laura.
+              <strong className="">A lasting first impression.</strong> I first
+              came across Tracksuit at an Icehouse Ventures panel event in 2024.
+              The talks were packed with valuable insights but what stood out to
+              me was how the first row was full of Tracksuiters attending at an
+              after-hours event to cheer on Laura like game day.
             </p>
             <p>
               Since then, every Tracksuiter I’ve met or followed has been the
@@ -183,17 +186,17 @@ export default function TracksuitPage() {
               {
                 icon: "/assets/tracksuit/fire.png",
                 title: "Ambitious team",
-                desc: "Sharp, passionate, generous with ideas—and exactly the environment I want to grow in.",
+                desc: "The energy of the team is contagious. It’s so clear when speaking to someone from Tracksuit that they’re extremely passionate about their work and drive towards excellence - exactly the kind of environment I’d love to be a part of!",
               },
               {
                 icon: "/assets/tracksuit/heart.png",
                 title: "Unmatched culture",
-                desc: "From awards to LinkedIn posts, culture here looks carefully shaped in a meaningful way.",
+                desc: "From collecting awards in tracksuits to breaking LinkedIn with celebration posts, you can feel the pride, care, and fun in how people show up for each other.",
               },
               {
                 icon: "/assets/tracksuit/rocketship.png",
                 title: "Human-Centered Product",
-                desc: "As someone obsessed with crafting delightful user experiences, I love how Tracksuit’s visual, intuitive, almost playful design stands out.",
+                desc: "As someone obsessed with crafting delightful user experiences, I love how Tracksuit’s playful, intuitive design stands out from other analytics platforms.",
               },
             ].map(({ icon, title, desc }) => (
               <li
@@ -213,22 +216,46 @@ export default function TracksuitPage() {
       </section>
 
       {/* WHAT I’VE BEEN WORKING ON */}
-      <div className="bg-[#E5DCF8] my-16">
-        <section className="mx-auto max-w-7xl space-y-14 px-6 py-16">
+      <div className="bg-[#E5DCF8] my-20">
+        <section className="mx-auto max-w-7xl space-y-16 px-6 py-20">
           <h2 className="text-center text-4xl">What I’ve Been Working On</h2>
-          <p className="mx-auto mt-2 max-w-2xl text-center text-lg leading-relaxed text-[#63636b]">
-            My favourite way to learn is to see a problem worth solving—or to
-            understand how something works—so I build it. Here are a few things
-            I’ve made.
-          </p>
+          <div className="space-y-4 text-pretty">
+            {/* <p className="mx-auto max-w-2xl text-center leading-relaxed text-[#63636b]">
+              I genuinely enjoy designing and building things.
+            </p> */}
+            <p className="mx-auto max-w-2xl text-center leading-relaxed text-[#63636b]">
+              <strong className="font-semibold">
+                I genuinely enjoy designing and building things.
+              </strong>{" "}
+              So I’m constantly working on projects to improve my understanding,
+              solve problems, or scratch a creative itch.
+            </p>
+            <p className="mx-auto max-w-2xl text-center leading-relaxed text-[#63636b]">
+              Here are a few projects I’ve particularly loved creating:
+            </p>
+          </div>
 
           {/* Moonstone */}
-          <article className="reveal grid items-center gap-8 rounded-2xl bg-[#8E81CC] text-[#FBF7F0] p-12 shadow-md md:grid-cols-[1fr_520px]">
+          <article className="reveal grid items-start gap-8 rounded-2xl bg-[#8E81CC] text-[#FBF7F0] p-12 shadow-md md:grid-cols-[1fr_520px]">
             <div>
               <h3 className="mb-3 text-2xl font">
-                Moonstone - Revealing the stories behind playlists
+                <a
+                  href="https://moonstone.raunaqbansal.com"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  onClick={() =>
+                    track("clicked_project", {
+                      badge: "moonstone",
+                      href: "https://moonstone.raunaqbansal.com",
+                    })
+                  }
+                  className="underline decoration-wavy underline-offset-4 decoration-[2px] hover:text-[#3d3d3d] transition-all"
+                >
+                  Moonstone
+                </a>{" "}
+                - Revealing the stories behind playlists
               </h3>
-              <p className="mb-10 text-base leading-relaxed ">
+              <p className="mb-8 text-base leading-relaxed ">
                 Built and launched a full-stack app that analyses Spotify
                 playlists. Surfacing insights like artist repetition, release
                 decades, and patterns of activity overs time.
@@ -261,73 +288,197 @@ export default function TracksuitPage() {
 
           {/* Rapid prototyping */}
           <article className="reveal grid rounded-2xl bg-[#54AF64] text-[#FBF7F0] p-12 shadow-md md:grid-cols-[1fr_440px]">
-            <div>
+            <div className="max-w-prose">
               <h3 className="mb-3 text-2xl font">
-                Rapid-prototyping at work — Building with AI to solve problems
+                Rapid-prototyping at work - Building with AI to solve problems
               </h3>
-              <ul className="list-disc space-y-2 pl-5">
+              <p className="mb-6 text-base leading-relaxed">
+                At work, I’ve developed a habit of spotting friction points and
+                rapidly building fixes. This mindset has helped unblock teams,
+                create leverage for customers, and turn ideas into working tools
+                in days, not weeks.
+              </p>
+              {/* <p className="mb-3 font-semibold">Some examples:</p> */}
+              <ul className="list-disc space-y-6 pl-5">
                 <li>
-                  A cross-functional internal dashboard collating KPIs across
-                  tools.
+                  <strong>Custom Device integration.</strong> For one of our
+                  largest customers, I independently built a bespoke desktop app
+                  that connects their dimensioner machine into our shipping
+                  platform before peak sales.
+                  <ul className="list-disc pl-5 mt-2 space-y-1">
+                    <li>
+                      <strong>Why it mattered:</strong> Their team was manually
+                      entering package dimensions for thousands of orders,
+                      incurring hefty penalties for incorrect entries.
+                    </li>
+                    <li>
+                      <strong>Impact:</strong> Automated a key process, saved
+                      hours daily, and strengthened partnership with a
+                      high-value customer.
+                    </li>
+                  </ul>
                 </li>
-                <li>A nationwide freight quote comparison tool.</li>
                 <li>
-                  A pricing calculator to help Sales & Onboarding practice new
-                  pricing.
+                  <strong>3D Order Builder.</strong> An interactive 3D tool to
+                  visualise how packaging dimensions affect shipping cost and
+                  checkout rates.
+                  <ul className="list-disc pl-5 mt-2 space-y-1">
+                    <li>
+                      <strong>Learning:</strong> Visual tools can drive faster
+                      understanding across teams and customers than
+                      documentation alone.
+                    </li>
+                    <li>
+                      <strong>Impact:</strong> Helped sales and product teams
+                      communicate value propositions more clearly to prospects.
+                    </li>
+                  </ul>
                 </li>
-                <li>Auto-manifest tool for customers to avoid courier fees.</li>
+                <li>
+                  <strong>Unified KPI Dashboard.</strong> Built an internal
+                  dashboard aggregating data from Linear, Canny, and Zendesk.
+                  <ul className="list-disc pl-5 mt-2 space-y-1">
+                    <li>
+                      <strong>Why it mattered:</strong> Teams were lacking
+                      visibility of key metrics and had to constantly switch
+                      between systems to gauge progress.
+                    </li>
+                    <li>
+                      <strong>Impact:</strong> Created a single source of truth
+                      for tracking goals and aligning priorities.
+                    </li>
+                  </ul>
+                </li>
               </ul>
-              <p className="mt-3 text-sm ">
-                Not perfect, but they solved real problems and gave me space to
-                learn by doing.
+              <p className="mt-6 text">
+                Across all of these, AI acts as my co-pilot, helping me explore
+                unfamiliar technologies and rapidly prototype new ideas.
               </p>
             </div>
-            <img
+            {/* <img
               src="/assets/tracksuit/cropped-rapid-proto.png"
               alt="Rapid prototyping visual"
               className="w-full rounded-xl shadow-lg"
-            />
+            /> */}
+            <div className="vid">
+              {mounted ? (
+                <video
+                  src="/assets/garden/order-builder.mp4"
+                  autoPlay
+                  loop
+                  muted
+                  playsInline
+                  preload="none"
+                  className="w-full rounded-xl shadow-lg"
+                ></video>
+              ) : null}
+            </div>
           </article>
 
           {/* C3 */}
-          <article className="reveal grid items-center gap-8 rounded-2xl bg-[#F8F6EE] p-12 shadow-md md:grid-cols-[1fr_440px]">
+          <article className="reveal grid items-start gap-8 rounded-2xl bg-[#F8F6EE] p-12 shadow-md md:grid-cols-[1fr_440px]">
             <div>
               <h3 className="mb-3 text-2xl font">
-                Curious & Creative Club — weekly class for young students
+                Curious & Creative Club - Education Rooted in Play
               </h3>
-              <p className="mb-4 text-base leading-relaxed ">
-                I run a small online class teaching science and coding to kids
-                with a Montessori-style approach.
+              <p className="mb-4 text-base leading-relaxed">
+                I run weekly classes where young students learn science and
+                coding. But instead of following a rigid curriculum or
+                memorising theories, we focus on the skills that will always
+                matter: curiosity, creativity, and confidence.
               </p>
               <ul className="list-disc space-y-2 pl-5">
                 <li>
-                  <strong>Learning:</strong> Teaching curiosity is harder (and
-                  more rewarding) than teaching facts.
+                  <strong>Approach:</strong> We build games, run weird
+                  experiments, and lean into whatever each student finds fun.
+                  It’s part project-based learning, part Montessori, and
+                  entirely about nurturing the habit of creative
+                  problem-solving.
                 </li>
                 <li>
-                  <strong>Impact:</strong> Kids ask “what else can I build?”
-                  instead of “what’s on the test?”.
+                  <strong>Impact:</strong> Students learn to ask better
+                  questions, flex their creativity muscles, and see learning as
+                  something enjoyable.
                 </li>
               </ul>
             </div>
             <img
               src="/assets/garden/c3-blue.png"
-              alt="C3 illustration"
+              alt="Curious & Creative Club illustration"
               className="w-full rounded-xl shadow-lg"
             />
           </article>
 
           {/* Learning (single tall image on right) */}
-          <article className="reveal grid items-center gap-8 rounded-2xl bg-[#E1477F] text-[#FBF7F0] p-12 pb-0 md:py-0 shadow-md md:grid-cols-[1fr_500px]">
-            <div>
+          <article className="reveal grid items-start gap-8 rounded-2xl bg-[#E1477F] text-[#FBF7F0] p-12 pb-0 md:py-0 shadow-md md:grid-cols-[1fr_500px]">
+            <div className="py-4">
               <h3 className="mb-3 text-2xl font">
                 Continuously learning + building
               </h3>
-              <p className="leading-relaxed">
-                Every Tuesday I host a creative coding session for kids. It
-                reminds me how powerful curiosity is—and I bring that to product
-                work too.
+              <p className="leading-relaxed mb-4">
+                I’m love exploring new things to learn, connect dots, and am
+                always building something.
               </p>
+
+              <p className="leading-relaxed mb-4">
+                <strong>Learning loops:</strong> Lenny's podcast, PM frameworks,
+                cohort-based learning, webinars, and books on systems thinking
+                and creativity.
+              </p>
+
+              <div className="mb-4">
+                <strong>More mini-projects:</strong>
+                <ul className="list-disc space-y-2 pl-5 mt-2">
+                  <li>
+                    <a
+                      href="https://chromewebstore.google.com/detail/napkin-notes-%E2%80%A2-side-panel/dlhljjkacijknfelknklfcohibfdciki"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={track("clicked_project", {
+                        badge: "napkin-notes",
+                        href: "https://chromewebstore.google.com/detail/napkin-notes-%E2%80%A2-side-panel/dlhljjkacijknfelknklfcohibfdciki",
+                      })}
+                      className="underline decoration-wavy underline-offset-4 decoration-[2px] hover:text-[#3d3d3d] transition-all"
+                    >
+                      Napkin Notes
+                    </a>{" "}
+                    (230 users) - a side panel Chrome extension solving a real
+                    team pain point of capturing notes without friction.
+                  </li>
+                  <li>
+                    <a
+                      href="https://www.figma.com/community/plugin/1488498485297162626/asterisk"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      onClick={track("clicked_project", {
+                        badge: "asterisk",
+                        href: "https://www.figma.com/community/plugin/1488498485297162626/asterisk",
+                      })}
+                      className="underline decoration-wavy underline-offset-4 decoration-[2px] hover:text-[#3d3d3d] transition-all"
+                    >
+                      Asterisk
+                    </a>{" "}
+                    (30 users) - a Figma plugin for anotating and organising
+                    design inspiration.
+                  </li>
+                  <li>
+                    Draftline - a personal tool built with the intention of
+                    improving my writing skills by reviewing each round of
+                    iterations
+                  </li>
+                  <li>
+                    Others include Trademe filter lock, NFC automations, movie
+                    showcase reel.
+                  </li>
+                </ul>
+              </div>
+
+              {/* <p className="leading-relaxed">
+                <strong>Impact:</strong> Each experiment compounds my
+                understanding of product intuition — how ideas evolve through
+                iteration, and how small improvements create meaningful user
+                value.
+              </p> */}
             </div>
             <img
               src="/assets/tracksuit/cropped-learning-grid.png"
@@ -339,58 +490,105 @@ export default function TracksuitPage() {
       </div>
 
       {/* WHERE I HOPE TO FIT */}
-      <section className="reveal mx-auto max-w-7xl space-y-10 px-6 pb-28">
-        <h2 className="text-center text-4xl font pb-4 text-[#473B64]">
+      <section
+        id="where-i-hope-to-fit"
+        className="mx-auto max-w-7xl px-6 pb-28 pt-0"
+        aria-labelledby="where-i-hope-to-fit-heading"
+      >
+        <h2
+          id="where-i-hope-to-fit-heading"
+          className="text-center text-4xl tracking-tight text-[#473B64]"
+        >
           Where I Hope to Fit
         </h2>
-        <div className="grid items-start gap-10 md:grid-cols-[1.1fr_.9fr]">
-          <img
-            src="/assets/garden/studio.png"
-            alt="Many hats"
-            className="w-[80%] mx-auto rounded-xl shadow-lg"
-          />
-          <div className="space-y-4 text pt-4 leading-relaxed text-[#3d3d3d]">
-            <p>
+
+        <div className="mt-10 grid items-start gap-10 md:mt-12 md:grid-cols-[1.1fr_.9fr]">
+          <div className="flex">
+            <img
+              src="/assets/garden/studio.png"
+              alt="Ron in studio"
+              className="mx-auto w-[80%] rounded-xl shadow-lg"
+              loading="lazy"
+            />
+          </div>
+
+          <div className="leading-relaxed max-w-prose text-[#3d3d3d]">
+            <p className="mb-4">
+              I love digging into how products feel, function, and grow. Whether
+              it’s uncovering friction points, designing small experiments, or
+              reframing insights into opportunities. I naturally gravitate
+              toward connecting data and design with human behaviour.
+            </p>
+
+            <p className="mb-4">
               I’m{" "}
               <strong className="font-semibold text-[#473B64]">
-                particularly interested in Product
-              </strong>
-              , but my background spans computer science, data, design,
-              consulting, and customer success.
-            </p>
-            <p>
-              I feel most fulfilled at the intersection,
-              <strong className="font-semibold text-[#473B64]">
-                {" "}
-                creatively solving challenging problems
+                particularly drawn to Product
               </strong>{" "}
-              and exploring curiosities around new opportunities.
+              as it builds on everything I’ve learned so far - computer science,
+              finance, data, design, consulting, and customer success.
             </p>
-            <p className="pb-8">
-              I learn fast, prototype often, and bring energy to the details. If
-              that sounds useful, I’d love to be in the mix.
+
+            <p className="mb-3">
+              Though as the roles in the tech industry rapidly evolve, this is
+              the work I find most fulfilling:
             </p>
+
+            <ul className="mb-6 list-disc space-y-2 pl-5">
+              <li>Identifying problems and new opportunities</li>
+              <li>Collaboratively brainstorming solutions with empathy</li>
+              <li>Navigating trade-offs to maximise real business value</li>
+              <li>
+                Leveraging AI tools to bring ideas and concepts to life quickly
+              </li>
+            </ul>
+
+            <p className="mb-4">
+              If you’re after someone who is{" "}
+              <strong className="font-semibold text-[#473B64]">
+                always eager to learn and loves to build
+              </strong>
+              , I’d love to be part of the team!
+            </p>
+
+            <p className="mb-8 text-sm text-[#63636b]">
+              And if there isn’t a fit right now, I’d genuinely appreciate any
+              feedback on how I could become a stronger candidate for sometime
+              down the *track*
+            </p>
+
             <a
-              id="contact"
               href="mailto:raunaqbansal@outlook.com"
-              className="inline-block rounded-full bg-[#8880C8] px-7 py-3 font-semibold text-white shadow-md transition-transform hover:-translate-y-0.5"
+              //   className="inline-block rounded-full bg-[#8880C8] px-8 py-3 font-semibold text-white shadow-md transition-transform duration-150 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#8880C8]/40"
+              className="inline-block rounded-full bg-[#C9C0F0] px-8 py-3 text-[#403861] border-[0.7px] border-[#403861] text-xl font-normal tracking-wide transition-transform duration-150 hover:-translate-y-0.5 focus:outline-none focus:ring-2 focus:ring-[#C9C0F0]/50"
             >
               Let’s Chat!
             </a>
           </div>
         </div>
-        <div className="text-center text-[#63636b] mt-24">
-          <p className="text-sm">Two questions I’m curious about:</p>
-          <ol className="mx-auto text-left mt-3 max-w-3xl list-decimal space-y-2 pl-5 text-base">
-            <li>
-              Do brands see substantial differences after looking at results—how
-              actionable are the metrics?
-            </li>
-            <li>
-              How do first-time customers understand what “healthy” looks like
-              for brand metrics?
-            </li>
-          </ol>
+
+        {/* Curiosity questions */}
+        <div className="mt-24 text-left max-w-prose text-[#3d3d3d]">
+          <p className="text-sm font-medium tracking-wide text-[#8880C8]">
+            Two questions I’m curious about:
+          </p>
+
+          <div className="mx-auto mt-6 max-w-3xl space-y-5 text-left">
+            <div className="border-l-2 border-[#8880C8]/30 pl-4">
+              <p className="text-base leading-relaxed">
+                What helps first-time customers understand what “healthy” looks
+                like when it comes to their brand metrics?
+              </p>
+            </div>
+
+            <div className="border-l-2 border-[#8880C8]/30 pl-4">
+              <p className="text-base leading-relaxed">
+                Do most teams review their metrics at quarterly or annual
+                check-ins, or are insights integrated more naturally into their
+                daily tools?
+              </p>
+            </div>
+          </div>
         </div>
       </section>
 
@@ -445,8 +643,7 @@ export default function TracksuitPage() {
               </a>
             </div>
             <p className="max-w-xs text-sm leading-relaxed text-[#d6d3f7]">
-              Built with care, curiosity, and a sprinkle of chaos. Let’s make
-              cool things together.
+              The grass is greener where you water it 🌱
             </p>
           </div>
 
@@ -472,7 +669,7 @@ export default function TracksuitPage() {
           </div> */}
 
           {/* Right */}
-          <div className="flex flex-col items-start gap-3 md:items-end">
+          <div className="flex flex-col items-start gap-2 md:items-end">
             {/* <h4 className="text-sm uppercase tracking-widest text-[#cfcbee]">
               Connect
             </h4> */}
@@ -485,14 +682,27 @@ export default function TracksuitPage() {
                   badge: "linkedin",
                   href: "https://www.linkedin.com/in/ron-bansal/",
                 })}
-                className="flex items-center gap-2 rounded-full bg-[#8880c8] px-4 py-2 text-white transition hover:bg-[#a8a0d0]"
+                className="flex items-center gap-2 rounded-full bg-[#8880c8] px-4 py-2  text-sm text-white transition hover:bg-[#a8a0d0]"
               >
                 <Linkedin size={18} />
                 LinkedIn
               </a>
               <a
+                href="https://github.com/Ron-Bansal"
+                target="_blank"
+                rel="noopener noreferrer"
+                onClick={track("clicked_badge", {
+                  badge: "github",
+                  href: "https://github.com/Ron-Bansal",
+                })}
+                className="flex items-center gap-2 rounded-full bg-[#8880c8] px-4 py-2  text-sm text-white transition hover:bg-[#a8a0d0]"
+              >
+                <Github size={18} />
+                GitHub
+              </a>
+              <a
                 href="mailto:raunaqbansal@outlook.com"
-                className="flex items-center gap-2 rounded-full bg-[#8880c8] px-4 py-2 text-white transition hover:bg-[#a8a0d0]"
+                className="flex items-center gap-2 rounded-full bg-[#8880c8] px-4 py-2 text-sm text-white transition hover:bg-[#a8a0d0]"
               >
                 <Mail size={18} />
                 Email
@@ -501,7 +711,21 @@ export default function TracksuitPage() {
           </div>
         </div>
         <div className="border-t border-white/10 py-6 text-center text-xs tracking-wide text-[#cfcbee]">
-          © {new Date().getFullYear()} Ron Bansal. Made in New Zealand.
+          {/* © {new Date().getFullYear()} Ron Bansal. Made in New Zealand. */}
+          Designed and built with admiration by{" "}
+          <a
+            href="https://raunaqbansal.com"
+            target="_blank"
+            rel="noopener noreferrer"
+            className="underline leading-loose decoration-wavy underline-offset-4 decoration-[1px] hover:text-[#a8a0d0] transition-all"
+            onClick={track("clicked_badge", {
+              badge: "footer_name",
+              href: "https://raunaqbansal.com",
+            })}
+          >
+            Raunaq
+          </a>{" "}
+          (Ron) Bansal, from Auckland, New Zealand.
         </div>
       </footer>
     </main>

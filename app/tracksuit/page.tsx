@@ -240,7 +240,7 @@ export default function TracksuitPage() {
             <div>
               <h3 className="mb-3 text-2xl font">
                 <a
-                  href="https://moonstone.raunaqbansal.com"
+                  href="https://moonstone-music.vercel.app/playlist/5BYeEBnlFqlPjjYAxQGJC8"
                   target="_blank"
                   rel="noopener noreferrer"
                   onClick={() =>

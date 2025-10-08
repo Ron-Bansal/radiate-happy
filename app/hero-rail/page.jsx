@@ -120,10 +120,12 @@ export default function Page() {
       /> */}
             <StretchBurnTransition
         beforeColor="#FFFFF6"
-        afterColor="#002207"
-        imageSrc="/assets/garden/diapixel3.png"
+        // afterColor="#002207"
+        afterColor="#687A29"
+        // imageSrc="/assets/garden/diapixel3.png"
+        imageSrc="/assets/garden/greengradientbg.png"
         imageAlt="Cigarette-burn strip"
-        objectFit="cover"
+        objectFit="contain"
         objectPosition="bottom"
         minVh={6}
         maxVh={130}

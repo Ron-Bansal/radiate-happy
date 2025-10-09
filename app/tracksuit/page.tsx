@@ -81,8 +81,8 @@ export default function TracksuitPage() {
       cards.forEach((card) => {
         // Start more noticeably clipped and scaled down, grow to full width and scale as you scroll
         gsap.set(card, {
-          clipPath: "inset(0 12% 0 0 round 16px)",
-          scale: 0.96,
+          clipPath: "inset(0 10% 0 0 round 16px)",
+          scale: 0.90,
           transformOrigin: "center center",
         });
         gsap.to(card, {
@@ -443,8 +443,8 @@ export default function TracksuitPage() {
 
           {/* Learning (single tall image on right) */}
           <article className="reveal grid items-start gap-8 rounded-2xl bg-[#E1477F] text-[#FBF7F0] p-12 pb-0 md:py-0 shadow-md md:grid-cols-[1fr_500px]">
-            <div className="py-4">
-              <h3 className="mb-3 text-2xl font mt-4">
+            <div className="py-4 pt-12">
+              <h3 className="mb-3 text-2xl font xmt-4">
                 Continuously learning + building
               </h3>
               {/* <p className="leading-relaxed mb-4">

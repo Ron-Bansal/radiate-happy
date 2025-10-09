@@ -52,6 +52,12 @@ export default function TracksuitPage() {
   const workRef = useRef<HTMLDivElement | null>(null);
 
   const [mounted, setMounted] = useState(false);
+  // --- Rapid-prototyping interactive refs/state ---
+  const rapidRef = useRef<HTMLDivElement | null>(null);
+  const [activeProto, setActiveProto] = useState<number | null>(null);
+  const protoTimer = useRef<number | null>(null);
+  const activeProtoRef = useRef<number | null>(null);
+  // ---
   useEffect(() => setMounted(true), []);
 
   const heroRef = useRef(null);
@@ -82,7 +88,7 @@ export default function TracksuitPage() {
         // Start more noticeably clipped and scaled down, grow to full width and scale as you scroll
         gsap.set(card, {
           clipPath: "inset(0 10% 0 0 round 16px)",
-          scale: 0.90,
+          scale: 0.9,
           transformOrigin: "center center",
         });
         gsap.to(card, {
@@ -92,7 +98,7 @@ export default function TracksuitPage() {
           scrollTrigger: {
             trigger: card,
             start: "top 90%", // when card enters viewport
-            end: "top 45%",   // just before half the viewport
+            end: "top 45%", // just before half the viewport
             scrub: true,
           },
         });
@@ -100,6 +106,183 @@ export default function TracksuitPage() {
     }, workRef);
 
     return () => ctx.revert();
+  }, []);
+
+  // Rapid-prototyping: single-click reveal with side banner, auto-advance + progress
+  useEffect(() => {
+    if (!rapidRef.current) return;
+
+    const DWELL_MS = 6500; // how long each item stays open before advancing
+    const root = rapidRef.current;
+    const items = Array.from(
+      root.querySelectorAll<HTMLLIElement>(".proto-item")
+    );
+
+    const makeProgress = (banner: HTMLElement) => {
+      // ensure full height even if classes differ
+      gsap.set(banner, { top: 0, bottom: 0, position: "absolute" });
+
+      // create (or reuse) the inner progress element
+      let progress = banner.querySelector<HTMLElement>(".proto-progress");
+      if (!progress) {
+        progress = document.createElement("div");
+        progress.className = "proto-progress";
+        Object.assign(progress.style, {
+          position: "absolute",
+          left: "0",
+          top: "0",
+          width: "100%",
+          height: "0%",
+          pointerEvents: "none",
+          // subtle fill that matches the card palette
+          background:
+            "linear-gradient(to bottom, rgba(255,255,255,0.95), rgba(255,255,255,0.65))",
+        } as CSSStyleDeclaration);
+        banner.appendChild(progress);
+      }
+      return progress;
+    };
+
+    const resetProgress = (banner: HTMLElement) => {
+      const progress = banner.querySelector<HTMLElement>(".proto-progress");
+      if (progress) {
+        gsap.killTweensOf(progress);
+        progress.remove();
+      }
+    };
+
+    const collapse = (idx: number) => {
+      const li = items[idx];
+      if (!li) return;
+      const details = li.querySelector<HTMLElement>(".proto-details");
+      const banner = li.querySelector<HTMLElement>(".proto-banner");
+      if (!details || !banner) return;
+
+      const bullets = Array.from(details.querySelectorAll<HTMLElement>("li"));
+
+      // hide sub-bullets
+      gsap.to(bullets, { opacity: 0, y: 8, duration: 0.2, stagger: 0.08 });
+
+      // collapse details
+      gsap.to(details, {
+        height: 0,
+        duration: 0.35,
+        ease: "power2.inOut",
+      });
+
+      // reset banner visuals + progress
+      resetProgress(banner);
+      gsap.to(banner, {
+        width: 4,
+        duration: 0.3,
+        ease: "power2.out",
+        backgroundColor: "rgba(251,247,240,0.30)", // #FBF7F0/30
+      });
+    };
+
+    const expand = (idx: number) => {
+      const li = items[idx];
+      if (!li) return;
+      const details = li.querySelector<HTMLElement>(".proto-details");
+      const banner = li.querySelector<HTMLElement>(".proto-banner");
+      if (!details || !banner) return;
+
+      const bullets = Array.from(details.querySelectorAll<HTMLElement>("li"));
+
+      // prep state
+      gsap.set(bullets, { opacity: 0, y: 8 });
+      gsap.set(details, { height: 0 });
+
+      // banner: ensure full height + accent emphasis
+      gsap.set(banner, { top: 0, bottom: 0, position: "absolute" });
+      gsap.to(banner, {
+        width: 6,
+        duration: 0.3,
+        ease: "power2.out",
+        backgroundColor: "rgba(251,247,240,0.60)", // #FBF7F0/60
+      });
+
+      // progress fill (top -> bottom over dwell)
+      const progress = makeProgress(banner);
+      gsap.fromTo(
+        progress,
+        { height: "0%" },
+        {
+          height: "100%",
+          duration: DWELL_MS / 1000,
+          ease: "none",
+        }
+      );
+
+      // smoothly open details to auto-height
+      const targetHeight = details.scrollHeight;
+      gsap.fromTo(
+        details,
+        { height: 0 },
+        {
+          height: targetHeight,
+          duration: 0.45,
+          ease: "power2.inOut",
+          onComplete: () => gsap.set(details, { height: "auto" }),
+        }
+      );
+
+      // reveal sub-bullets one by one
+      gsap.to(bullets, {
+        opacity: 1,
+        y: 0,
+        duration: 0.3,
+        stagger: 0.25,
+        delay: 0.12,
+        ease: "power2.out",
+      });
+    };
+
+    const start = (idx: number) => {
+      // collapse previous if any
+      if (activeProtoRef.current !== null) {
+        collapse(activeProtoRef.current);
+      }
+      activeProtoRef.current = idx;
+      setActiveProto(idx);
+      expand(idx);
+
+      // auto-advance to next after DWELL_MS
+      if (protoTimer.current) window.clearTimeout(protoTimer.current);
+      protoTimer.current = window.setTimeout(() => {
+        const next = (idx + 1) % items.length;
+        start(next);
+      }, DWELL_MS);
+    };
+
+    // Click handler (single click → reveal both sub-bullets + start/continue cycle)
+    const onClicks: Array<[(e: Event) => void, HTMLLIElement]> = [];
+    items.forEach((li, i) => {
+      const handler = () => start(i);
+      li.addEventListener("click", handler);
+      onClicks.push([handler, li]);
+    });
+
+    // Start sequence when the card scrolls into view
+    const st = ScrollTrigger.create({
+      trigger: root,
+      start: "top 75%",
+      once: true,
+      onEnter: () => start(0),
+    });
+
+    return () => {
+      onClicks.forEach(([handler, li]) =>
+        li.removeEventListener("click", handler)
+      );
+      if (protoTimer.current) window.clearTimeout(protoTimer.current);
+      st.kill();
+      // clean any lingering progress bars/tweens
+      items.forEach((li) => {
+        const banner = li.querySelector<HTMLElement>(".proto-banner");
+        if (banner) resetProgress(banner);
+      });
+    };
   }, []);
 
   return (
@@ -171,8 +354,8 @@ export default function TracksuitPage() {
             I’d love to join the Tracksuit team
           </h1>
           <p className="hero-seq max-w-xl text-pretty text-base text-[#3D3D3D]">
-            Hi! I&apos;m Ron – and I&apos;m deeply inspired by Tracksuit’s mission,
-            culture, and approach to product.
+            Hi! I&apos;m Ron – and I&apos;m deeply inspired by Tracksuit’s
+            mission, culture, and approach to product.
           </p>
           <p className="hero-seq max-w-xl text-pretty text-base text-[#3D3D3D]">
             I&apos;ve built this site as an expression of interest to share what
@@ -236,7 +419,7 @@ export default function TracksuitPage() {
                 className="flex items-start gap-2.5 rounded-2xl p-4"
               >
                 {/* <span className="text-2xl">{icon}</span> */}
-                <img className="h-12" src={icon} alt="icon"/>
+                <img className="h-12" src={icon} alt="icon" />
                 <div>
                   <h3 className="text-lg font-semibold pb-0.5">{title}</h3>
                   <p className="xtext-sm leading-relaxed">{desc}</p>
@@ -319,7 +502,10 @@ export default function TracksuitPage() {
           </article>
 
           {/* Rapid prototyping */}
-          <article className="reveal grid rounded-2xl bg-[#54AF64] text-[#FBF7F0] p-12 shadow-md md:grid-cols-[1fr_440px]">
+          <article
+            ref={rapidRef}
+            className="reveal grid rounded-2xl bg-[#54AF64] text-[#FBF7F0] p-12 shadow-md md:grid-cols-[1fr_440px]"
+          >
             <div className="max-w-prose">
               <h3 className="mb-3 text-2xl font">
                 Rapid-prototyping at work - Building with AI to solve problems
@@ -331,51 +517,68 @@ export default function TracksuitPage() {
                 in days, not weeks.
               </p>
               {/* <p className="mb-3 font-semibold">Some examples:</p> */}
-              <ul className="list-disc space-y-6 pl-5">
-                <li>
+              <ul className="space-y-6 pl-5 relative">
+                {/* Custom Device integration */}
+                <li className="proto-item relative cursor-pointer">
+                  <span className="proto-banner absolute left-[-18px] top-2 bottom-2 w-1 rounded-full bg-[#FBF7F0]/20 overflow-hidden" />
                   <strong>Custom Device integration.</strong> For one of our
                   largest customers, I independently built a bespoke desktop app
                   that connects their dimensioner machine into our shipping
                   platform before peak sales.
-                  <ul className="list-disc pl-5 mt-2 space-y-1">
-                    <li>
+                  <ul
+                    className="proto-details list-disc pl-5 mt-2 space-y-1 overflow-hidden"
+                    style={{ height: 0 }}
+                  >
+                    <li className="opacity-0 translate-y-2">
                       <strong>Why it mattered:</strong> Their team was manually
                       entering package dimensions for thousands of orders,
                       incurring hefty penalties for incorrect entries.
                     </li>
-                    <li>
+                    <li className="opacity-0 translate-y-2">
                       <strong>Impact:</strong> Automated a key process, saved
                       hours daily, and strengthened partnership with a
                       high-value customer.
                     </li>
                   </ul>
                 </li>
-                <li>
+
+                {/* 3D Order Builder */}
+                <li className="proto-item relative cursor-pointer">
+                  <span className="proto-banner absolute left-[-18px] top-2 bottom-2 w-1 rounded-full bg-[#FBF7F0]/20 overflow-hidden" />
                   <strong>3D Order Builder.</strong> An interactive 3D tool to
                   visualise how packaging dimensions affect shipping cost and
                   checkout rates.
-                  <ul className="list-disc pl-5 mt-2 space-y-1">
-                    <li>
+                  <ul
+                    className="proto-details list-disc pl-5 mt-2 space-y-1 overflow-hidden"
+                    style={{ height: 0 }}
+                  >
+                    <li className="opacity-0 translate-y-2">
                       <strong>Learning:</strong> Visual tools can drive faster
                       understanding across teams and customers than
                       documentation alone.
                     </li>
-                    <li>
+                    <li className="opacity-0 translate-y-2">
                       <strong>Impact:</strong> Helped sales and product teams
                       communicate value propositions more clearly to prospects.
                     </li>
                   </ul>
                 </li>
-                <li>
+
+                {/* Unified KPI Dashboard */}
+                <li className="proto-item relative cursor-pointer">
+                  <span className="proto-banner absolute left-[-18px] top-2 bottom-2 w-1 rounded-full bg-[#FBF7F0]/20 overflow-hidden" />
                   <strong>Unified KPI Dashboard.</strong> Built an internal
                   dashboard aggregating data from Linear, Canny, and Zendesk.
-                  <ul className="list-disc pl-5 mt-2 space-y-1">
-                    <li>
+                  <ul
+                    className="proto-details list-disc pl-5 mt-2 space-y-1 overflow-hidden"
+                    style={{ height: 0 }}
+                  >
+                    <li className="opacity-0 translate-y-2">
                       <strong>Why it mattered:</strong> Teams were lacking
                       visibility of key metrics and had to constantly switch
                       between systems to gauge progress.
                     </li>
-                    <li>
+                    <li className="opacity-0 translate-y-2">
                       <strong>Impact:</strong> Created a single source of truth
                       for tracking goals and aligning priorities.
                     </li>
@@ -411,7 +614,7 @@ export default function TracksuitPage() {
           <article className="reveal grid items-start gap-8 rounded-2xl bg-[#F8F6EE] p-12 shadow-md md:grid-cols-[1fr_440px]">
             <div>
               <h3 className="mb-3 text-2xl font">
-                Curious & Creative Club - Education Rooted in Play
+                Curious & Creative Club - Tutoring classes rooted in play
               </h3>
               <p className="mb-4 text-base leading-relaxed">
                 I run weekly classes where young students learn science and
@@ -444,7 +647,7 @@ export default function TracksuitPage() {
           {/* Learning (single tall image on right) */}
           <article className="reveal grid items-start gap-8 rounded-2xl bg-[#E1477F] text-[#FBF7F0] p-12 pb-0 md:py-0 shadow-md md:grid-cols-[1fr_500px]">
             <div className="py-4 pt-12">
-              <h3 className="mb-3 text-2xl font xmt-4">
+              <h3 className="mb-4 text-2xl font">
                 Continuously learning + building
               </h3>
               {/* <p className="leading-relaxed mb-4">
@@ -453,9 +656,9 @@ export default function TracksuitPage() {
               </p> */}
 
               <p className="leading-relaxed mb-4">
-                <strong>Learning loops:</strong> Lenny&apos;s podcast, PM frameworks,
-                cohort-based learning, webinars, and books on systems thinking
-                and creativity.
+                <strong>Learning sources:</strong> Lenny&apos;s podcast, PM
+                frameworks, cohort-based learning, webinars, and books on
+                systems thinking and creativity.
               </p>
 
               <div className="mb-4">
@@ -547,8 +750,8 @@ export default function TracksuitPage() {
           <div className="leading-relaxed max-w-prose text-[#3d3d3d]">
             <p className="mb-4">
               I love digging into how products feel, function, and grow. Whether
-              it&apos;s uncovering friction points, designing small experiments, or
-              reframing insights into opportunities. I naturally gravitate
+              it&apos;s uncovering friction points, designing small experiments,
+              or reframing insights into opportunities. I naturally gravitate
               toward connecting data and design with human behaviour.
             </p>
 

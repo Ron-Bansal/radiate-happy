@@ -3,8 +3,11 @@
 import React, { useEffect, useRef, useState } from "react";
 import { Quicksand } from "next/font/google";
 import { gsap } from "gsap";
+import { ScrollTrigger } from "gsap/ScrollTrigger";
 import { Mail, FileText, Linkedin, Github } from "lucide-react";
 import posthog from "posthog-js";
+
+gsap.registerPlugin(ScrollTrigger);
 
 // Page-only font
 const quicksand = Quicksand({
@@ -46,6 +49,7 @@ function useRevealAnimation(selector = ".reveal", opts = {}) {
 
 export default function TracksuitPage() {
   const track = (event, props) => () => posthog.capture(event, props);
+  const workRef = useRef<HTMLDivElement | null>(null);
 
   const [mounted, setMounted] = useState(false);
   useEffect(() => setMounted(true), []);
@@ -69,6 +73,34 @@ export default function TracksuitPage() {
   }, []);
 
   useRevealAnimation(".reveal");
+
+  useEffect(() => {
+    if (!workRef.current) return;
+    const ctx = gsap.context(() => {
+      const cards = gsap.utils.toArray<HTMLElement>("article");
+      cards.forEach((card) => {
+        // Start more noticeably clipped and scaled down, grow to full width and scale as you scroll
+        gsap.set(card, {
+          clipPath: "inset(0 12% 0 0 round 16px)",
+          scale: 0.96,
+          transformOrigin: "center center",
+        });
+        gsap.to(card, {
+          clipPath: "inset(0 0% 0 0 round 16px)",
+          scale: 1,
+          ease: "none",
+          scrollTrigger: {
+            trigger: card,
+            start: "top 90%", // when card enters viewport
+            end: "top 45%",   // just before half the viewport
+            scrub: true,
+          },
+        });
+      });
+    }, workRef);
+
+    return () => ctx.revert();
+  }, []);
 
   return (
     <main
@@ -216,7 +248,7 @@ export default function TracksuitPage() {
       </section>
 
       {/* WHAT I’VE BEEN WORKING ON */}
-      <div className="bg-[#E5DCF8] my-20">
+      <div ref={workRef} className="bg-[#E5DCF8] my-20">
         <section className="mx-auto max-w-7xl space-y-16 px-6 py-20">
           <h2 className="text-center text-4xl">What I’ve Been Working On</h2>
           <div className="space-y-4 text-pretty">
@@ -412,13 +444,13 @@ export default function TracksuitPage() {
           {/* Learning (single tall image on right) */}
           <article className="reveal grid items-start gap-8 rounded-2xl bg-[#E1477F] text-[#FBF7F0] p-12 pb-0 md:py-0 shadow-md md:grid-cols-[1fr_500px]">
             <div className="py-4">
-              <h3 className="mb-3 text-2xl font">
+              <h3 className="mb-3 text-2xl font mt-4">
                 Continuously learning + building
               </h3>
-              <p className="leading-relaxed mb-4">
+              {/* <p className="leading-relaxed mb-4">
                 I’m love exploring new things to learn, connect dots, and am
                 always building something.
-              </p>
+              </p> */}
 
               <p className="leading-relaxed mb-4">
                 <strong>Learning loops:</strong> Lenny&apos;s podcast, PM frameworks,
@@ -466,10 +498,10 @@ export default function TracksuitPage() {
                     improving my writing skills by reviewing each round of
                     iterations
                   </li>
-                  <li>
+                  {/* <li>
                     Others include Trademe filter lock, NFC automations, movie
                     showcase reel.
-                  </li>
+                  </li> */}
                 </ul>
               </div>
 

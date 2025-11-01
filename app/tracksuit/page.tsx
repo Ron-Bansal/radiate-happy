@@ -372,7 +372,7 @@ export default function TracksuitPage() {
       </section>
 
       {/* WHY TRACKSUIT */}
-      <section className="reveal mx-auto max-w-7xl rounded-3xl bg-[#8E81CC] text-[#FBF7F0] p-10 shadow-lg md:grid md:grid-cols-[360px_1fr] md:gap-10">
+      <section className="reveal mx-auto max-w-7xl rounded-3xl bg-[#8E81CC] text-[#FBF7F0] p-6 md:p-10 shadow-lg md:grid md:grid-cols-[360px_1fr] md:gap-10">
         <div>
           <img
             src="assets/tracksuit/screenshot.png"
@@ -451,7 +451,7 @@ export default function TracksuitPage() {
           </div>
 
           {/* Moonstone */}
-          <article className="reveal grid items-start gap-8 rounded-2xl bg-[#8E81CC] text-[#FBF7F0] p-12 shadow-md md:grid-cols-[1fr_520px]">
+          <article className="reveal grid items-start gap-8 rounded-2xl bg-[#8E81CC] text-[#FBF7F0] p-6 md:p-12 shadow-md md:grid-cols-[1fr_520px]">
             <div>
               <h3 className="mb-3 text-2xl font">
                 <a
@@ -504,7 +504,7 @@ export default function TracksuitPage() {
           {/* Rapid prototyping */}
           <article
             ref={rapidRef}
-            className="reveal grid rounded-2xl bg-[#54AF64] text-[#FBF7F0] p-12 shadow-md md:grid-cols-[1fr_440px]"
+            className="reveal grid rounded-2xl bg-[#54AF64] text-[#FBF7F0] p-6 md:p-12 shadow-md md:grid-cols-[1fr_440px]"
           >
             <div className="max-w-prose">
               <h3 className="mb-3 text-2xl font">
@@ -611,7 +611,7 @@ export default function TracksuitPage() {
           </article>
 
           {/* C3 */}
-          <article className="reveal grid items-start gap-8 rounded-2xl bg-[#F8F6EE] p-12 shadow-md md:grid-cols-[1fr_440px]">
+          <article className="reveal grid items-start gap-8 rounded-2xl bg-[#F8F6EE] p-6 md:p-12 shadow-md md:grid-cols-[1fr_440px]">
             <div>
               <h3 className="mb-3 text-2xl font">
                 Curious & Creative Club - Tutoring classes rooted in play
@@ -645,8 +645,8 @@ export default function TracksuitPage() {
           </article>
 
           {/* Learning (single tall image on right) */}
-          <article className="reveal grid items-start gap-8 rounded-2xl bg-[#E1477F] text-[#FBF7F0] p-12 pb-0 md:py-0 shadow-md md:grid-cols-[1fr_500px]">
-            <div className="py-4 pt-12">
+          <article className="reveal grid items-start gap-8 rounded-2xl bg-[#E1477F] text-[#FBF7F0] p-6 md:p-12 pb-0 md:py-0 shadow-md md:grid-cols-[1fr_500px]">
+            <div className="py-4 md:pt-12">
               <h3 className="mb-4 text-2xl font">
                 Continuously learning + building
               </h3>

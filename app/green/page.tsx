@@ -19,7 +19,7 @@ const projects: Project[] = [
     tagline: "Insightful way to connect with music.",
     role: "Product · Design · Code",
     images: [
-        "https://images.unsplash.com/photo-1600411833196-7c1f6b1a8b90?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
+      "https://images.unsplash.com/photo-1600411833196-7c1f6b1a8b90?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1600&q=80",
       "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80",
     ],
@@ -116,16 +116,16 @@ export default function PortfolioPage() {
         }
       `}</style>
 
-      <main className="min-h-screen xbg-[#FBEDC6] text-[#1C180C] bg-cover bg-center bg-no-repeat bg-[url('/assets/garden/hilly-gradient2.png')]"> 
-        <div className="mx-auto flex max-w-[2100px] flex-col gap-10 px-6 py-8 lg:flex-row lg:px-10 lg:py-2">
+      <main className="min-h-screen xbg-[#FBEDC6] text-[#1C180C] bg-cover bg-center bg-no-repeat bg-[url('/assets/garden/hilly-gradient2.png')]">
+        <div className="mx-auto min-h-screen flex max-w-[2100px] flex-col gap-10 px-2 xpy-8 lg:flex-row lg:px-0 lg:pl-10 lg:py-4">
           {/* LEFT COLUMN */}
           <aside className="flex w-full flex-col gap-10 lg:w-[33%] lg:justify-between">
-            <div className="space-y-6">
+            <div className="space-y-6 px-4 lg:px-0">
               <div>
-                <h1 className="mt-2 text-4xl xfont-medium leading-tight text-[#424D08] mt-8">
+                <h1 className="mt-8 text-4xl xfont-medium leading-tight text-[#424D08]">
                   Hi, I&apos;m Raunaq :)
                 </h1>
-                <p className="mt-4 max-w-sm text-[14px] xleading-tight text-[#3d3d3d]">
+                <p className="mt-4 max-w-sm text-sm xleading-tight text-[#3d3d3d]">
                   Deeply inspired by mission, culture, and approach to product.
                   This site is an expression of what excites me, how I think,
                   and where I hope to contribute.
@@ -134,7 +134,7 @@ export default function PortfolioPage() {
 
               {/* NAV – sticky on mobile only */}
               <nav className="sticky top-0 z-20 -mx-6 border-b border-black/5 bg-[#FBEDC6]/95 px-6 py-3 lg:static lg:mx-0 lg:border-none lg:bg-transparent lg:px-0 lg:py-0">
-                <div className="flex gap-6 text-[12px] font-medium">
+                <div className="flex gap-6 text-xs">
                   <TabLink
                     label="Projects"
                     isActive={activeTab === "projects"}
@@ -154,20 +154,18 @@ export default function PortfolioPage() {
               </nav>
             </div>
 
-            <div className="space-y-2 text-[12px] text-neutral-800">
-              <p>
-                {timeNZ && (
-                  <>
-                    Local time: <span className="font-medium">{timeNZ}</span>
-                    {" · "}
-                  </>
-                )}
-                Auckland, New Zealand
-              </p>
-              <div className="flex flex-wrap items-center gap-4 pt-1">
+            <div className="flex flex-col xspace-y-2 text-sm text-[#FCEDC9] tracking-tight mb-4 px-4 lg:px-0">
+              <div className="hidden flex flex-row gap-3 text-[#424D08] pb-2 lg:block lg:pb-8 lg:text-[#FCEDC9] text-xs">
+                <p className="pb-1">
+                  {timeNZ && <span className="xfont-medium">{timeNZ}</span>}
+                </p>
+                <p className=""> Auckland, New Zealand</p>
+              </div>
+
+              <div className="flex flex-wrap items-center gap-4 pt-1 text-[#424D08] lg:text-[#FBEDC6]">
                 <a
                   href="mailto:hello@raunaqbansal.com"
-                  className="border border-[#424D08] bg-[#FBEDC6] px-4 py-2 text-[12px] font-semibold uppercase tracking-[0.18em] text-[#424D08] transition-transform duration-150 hover:-translate-y-[1px]"
+                  className="border border-[#424D08] bg-[#FBEDC6] px-4 py-1.5 text-sm text-[#424D08] transition-transform duration-150 hover:-translate-y-[1px]"
                 >
                   Get in touch
                 </a>
@@ -190,7 +188,7 @@ export default function PortfolioPage() {
           {/* RIGHT SHEET */}
           <section className="w-full lg:w-[67%]">
             <div
-              className={`border border-white/45 bg-white/40 shadow-[0_28px_90px_rgba(0,0,0,0.35)] backdrop-blur-2xl transform-gpu transition-all duration-500 ease-[cubic-bezier(0.19,0.9,0.22,1)] ${sheetTransformClass}`}
+              className={`border border-white/45 bg-white/40 xshadow-[0_28px_90px_rgba(0,0,0,0.35)] backdrop-blur-2xl transform-gpu transition-all duration-500 ease-[cubic-bezier(0.19,0.9,0.22,1)] ${sheetTransformClass}`}
             >
               {/* sheet header */}
               <header className="flex items-center justify-between border-b border-white/55 px-8 py-2 text-[12px] text-neutral-700">
@@ -247,7 +245,7 @@ function TabLink({
   return (
     <button
       onClick={onClick}
-      className={`border-b-2 pb-1 uppercase tracking-[0.18em] transition-colors ${
+      className={`border-b-2 pb-0.5 transition-colors ${
         isActive
           ? "border-[#424D08] text-[#424D08]"
           : "border-transparent text-neutral-700 hover:border-neutral-500"

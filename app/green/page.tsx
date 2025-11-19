@@ -634,7 +634,6 @@ function WritingBlock({ entry }: { entry: WritingEntry }) {
   const inner = (
     <article className="space-y-2 border-b border-black/5 pb-5 last:border-none last:pb-0">
       {/* date above title */}
-      <p className="text-[11px] font-mono text-neutral-500">{entry.date}</p>
 
       <h2 className="mt-[2px] text-[16px] font-medium tracking-tight text-[#3d3d3d]">
         {entry.title}
@@ -643,6 +642,7 @@ function WritingBlock({ entry }: { entry: WritingEntry }) {
       <p className="text-[13px] leading-snug text-neutral-800">
         {entry.description}
       </p>
+      <p className="text-[11px] font-mono text-neutral-500">{entry.date}</p>
 
       {entry.link && (
         <span className="inline-flex items-center gap-1 text-[12px] text-neutral-700 underline-offset-4 hover:underline">

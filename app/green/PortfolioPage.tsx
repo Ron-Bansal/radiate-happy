@@ -15,6 +15,8 @@ import {
   WritingBlock,
 } from "./portfolio-components";
 
+const tabOrder: Tab[] = ["projects", "experiments", "writing"];
+
 export default function PortfolioPage() {
   const [activeTab, setActiveTab] = useState<Tab>("projects");
   const [phase, setPhase] = useState<"entering" | "leaving">("entering");
@@ -68,13 +70,13 @@ export default function PortfolioPage() {
     setTimeout(() => {
       setActiveTab(next);
       setPhase("entering");
-    }, 340);
+    }, 420);
   };
 
   const sheetTransformClass =
     phase === "leaving"
-      ? "translate-x-full opacity-0"
-      : "translate-x-0 opacity-100";
+      ? "translate-x-full opacity-0 scale-90"
+      : "translate-x-0 opacity-100 scale-100";
 
   // build 2 masonry columns while preserving left→right order
   const columns = 2;
@@ -82,6 +84,16 @@ export default function PortfolioPage() {
   projects.forEach((project, index) => {
     columnProjects[index % columns].push(project);
   });
+
+  const goToPrevTab = () => {
+    const index = tabOrder.indexOf(activeTab);
+    if (index > 0) handleTabClick(tabOrder[index - 1]);
+  };
+
+  const goToNextTab = () => {
+    const index = tabOrder.indexOf(activeTab);
+    if (index < tabOrder.length - 1) handleTabClick(tabOrder[index + 1]);
+  };
 
   return (
     <>
@@ -176,16 +188,51 @@ export default function PortfolioPage() {
           {/* RIGHT SHEET */}
           <section className="w-full lg:w-[67%] lg:h-full">
             <div
-              className={`flex flex-col pb-4 lg:pb-0 lg:min-h-[calc(100vh-32px)] border border-white/45 bg-white/40 bg-[#fdedc91a] hover:bg-[#fdedc960] xshadow-[0_28px_90px_rgba(0,0,0,0.35)] backdrop-blur-sm hover:backdrop-blur-2xl transform-gpu transition-all duration-500 ease-[cubic-bezier(0.19,0.9,0.22,1)] ${sheetTransformClass}`}
+              className={`flex flex-col pb-4 lg:pb-0 lg:min-h-[calc(100vh-32px)] border border-white/45 bg-white/40 bg-[#fdedc91a] hover:bg-[#fdedc960] xshadow-[0_28px_90px_rgba(0,0,0,0.35)] backdrop-blur-sm hover:backdrop-blur-2xl transform-gpu transition-all duration-700 ease-[cubic-bezier(0.19,0.9,0.22,1)] ${sheetTransformClass}`}
             >
               <header className="flex items-center justify-between border-b border-white/55 px-8 py-1 text-[12px] text-neutral-700">
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 bg-[#424D08]" />
-                  <div className="flex items-baseline gap-2 pt-1">
-                    <span className="text-[13px] uppercase tracking-[0.08em]">
-                      {activeTab}
-                    </span>
-                  </div>
+                  <span className="pt-1 text-[13px] uppercase tracking-[0.08em]">
+                    {activeTab}
+                  </span>
+                </div>
+
+                {/* subtle left/right arrows */}
+                <div className="flex items-center gap-1">
+                  <button
+                    onClick={goToPrevTab}
+                    disabled={activeTab === tabOrder[0]}
+                    aria-label="Previous section"
+                    className={`
+        h-6 w-6 flex items-center justify-center
+        transition-colors duration-150
+        ${
+          activeTab === tabOrder[0]
+            ? "text-neutral-400 cursor-default"
+            : "text-neutral-700 hover:text-[#424D08]"
+        }
+      `}
+                  >
+                    ←
+                  </button>
+
+                  <button
+                    onClick={goToNextTab}
+                    disabled={activeTab === tabOrder[tabOrder.length - 1]}
+                    aria-label="Next section"
+                    className={`
+        h-6 w-6 flex items-center justify-center
+        transition-colors duration-150
+        ${
+          activeTab === tabOrder[tabOrder.length - 1]
+            ? "text-neutral-400 cursor-default"
+            : "text-neutral-700 hover:text-[#424D08]"
+        }
+      `}
+                  >
+                    →
+                  </button>
                 </div>
               </header>
 
@@ -210,9 +257,9 @@ export default function PortfolioPage() {
                       let sizeClass = "basis-full";
 
                       if (item.size === 25) {
-                        sizeClass = "basis-full sm:basis-1/2 lg:basis-1/4";
+                        sizeClass = "basis-3/4 sm:basis-1/2 lg:basis-1/3";
                       } else if (item.size === 50) {
-                        sizeClass = "basis-full sm:basis-2/3 lg:basis-1/2";
+                        sizeClass = "basis-3/4 sm:basis-2/3 lg:basis-1/2";
                       } else if (item.size === 75) {
                         sizeClass = "basis-full sm:basis-4/5 lg:basis-3/4";
                       } else if (item.size === 100) {

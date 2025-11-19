@@ -8,6 +8,38 @@ import type {
   WritingEntry,
 } from "./portfolio-content";
 
+/* ---------- helpers ---------- */
+
+function isVideoSource(src: string): boolean {
+  const clean = src.split("?")[0]; // strip query params
+  return /\.(mp4|webm|ogg|mov|m4v)$/i.test(clean);
+}
+
+function MediaContent({
+  src,
+  alt,
+  className,
+}: {
+  src: string;
+  alt: string;
+  className?: string;
+}) {
+  if (isVideoSource(src)) {
+    return (
+      <video
+        src={src}
+        className={className}
+        autoPlay
+        loop
+        muted
+        playsInline
+      />
+    );
+  }
+
+  return <img src={src} alt={alt} className={className} />;
+}
+
 /* ---------- small components ---------- */
 
 export function TabLink({
@@ -40,13 +72,15 @@ export function ProjectBlock({ project }: { project: Project }) {
   const next = () => setIndex((prev) => (prev + 1) % total);
   const prev = () => setIndex((prev) => (prev - 1 + total) % total);
 
+  const currentSrc = project.images[index];
+
   return (
     <article className="space-y-4">
-      {/* image frame + carousel */}
+      {/* media frame + carousel */}
       <div className="relative w-full bg-black/5 group">
         <div className="flex h-full w-full items-center justify-center">
-          <img
-            src={project.images[index]}
+          <MediaContent
+            src={currentSrc}
             alt={project.name}
             className="block h-auto w-full object-contain"
           />
@@ -60,7 +94,7 @@ export function ProjectBlock({ project }: { project: Project }) {
                 e.preventDefault();
                 prev();
               }}
-              aria-label="Previous image"
+              aria-label="Previous media"
               className="flex h-7 w-7 items-center justify-center bg-black/65 text-[11px] opacity-40 transition-opacity duration-200 md:group-hover:opacity-100"
             >
               ←
@@ -83,7 +117,7 @@ export function ProjectBlock({ project }: { project: Project }) {
                 e.preventDefault();
                 next();
               }}
-              aria-label="Next image"
+              aria-label="Next media"
               className="flex h-7 w-7 items-center justify-center bg-black/65 text-[11px] opacity-40 transition-opacity duration-200 md:group-hover:opacity-100"
             >
               →
@@ -132,25 +166,27 @@ export function ExperimentVisualBlock({ item }: { item: ExperimentVisual }) {
 
   const inner = (
     <article className="space-y-2">
-      {/* image box – height controlled by min/max, image is contain */}
+      {/* media box – height controlled by min/max, media is contain */}
       <div
         className="flex w-full items-center justify-center overflow-hidden bg-black/5"
         style={containerStyle}
       >
-        <img
+        <MediaContent
           src={item.image}
-          alt={item.title}
+          alt={item.title ?? "Experiment visual"}
           className="h-auto w-auto max-h-full max-w-full object-contain"
         />
       </div>
 
       {/* caption */}
       <div className="space-y-1">
-        <h2 className="text-[13px] font-medium tracking-tight text-[#3d3d3d]">
-          {item.title}
-        </h2>
+        {item.title && (
+          <h2 className="text-base font-medium tracking-tight text-[#3d3d3d]">
+            {item.title}
+          </h2>
+        )}
         {item.caption && (
-          <p className="text-[12px] leading-snug text-neutral-700">
+          <p className="text-sm leading-snug text-neutral-700">
             {item.caption}
           </p>
         )}

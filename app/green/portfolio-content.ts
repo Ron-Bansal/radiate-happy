@@ -21,7 +21,7 @@ export type WritingEntry = {
 
 export type ExperimentVisual = {
   id: string;
-  title: string;
+  title?: string;
   caption?: string;
   image: string;
   link?: string;
@@ -58,51 +58,69 @@ export const writingEntries: WritingEntry[] = [
 
 export const experimentVisuals: ExperimentVisual[] = [
   {
-    id: "receipt-ui",
-    title: "Receipt-style UI for finance queries",
-    caption:
-      "Abundantly experiment – turning SQL queries into printed-style receipts.",
-    image:
-      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1600&q=80",
+    id: "order-builder",
+    image: "/assets/garden/order-builder.mp4",
     link: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80m",
-    size: 100,
+    size: 50,
   },
   {
-    id: "paper-plane",
-    title: "Paper airplane physics toy",
-    caption:
-      "Tiny browser game to play with gravity, easing, and micro-interactions.",
-    image: "/assets/moonstone-tall.png",
+    id: "ember",
+    image: "/assets/garden/ember.png",
+    link: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80m",
     size: 25,
   },
   {
-    id: "nfc-card-right",
-    title: "NFC review card layouts",
-    caption:
-      "Exploring tap-to-review cards for Little Tap with playful layouts and microcopy.",
-    image:
-      "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80",
+    id: "reel",
+    image: "/assets/garden/3dreel.mp4",
+    size: 25,
+    align: "right"
+  },
+  {
+    id: "ascent-speedround",
+    image: "/assets/garden/ascent-speedround-wip.png",
+    caption: "You always have 17 minutes for a workout",
     size: 50,
-    align: "right",
+    align: "right"
   },
-  {
-    id: "nfc-card-full",
-    title: "NFC review card layouts",
-    caption:
-      "Exploring tap-to-review cards for Little Tap with playful layouts and microcopy.",
-    image:
-      "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80",
+    {
+    id: "receipts",
+    image: "/assets/garden/receipts-wip.png",
+    caption: "Query your transactions in natural language",
     size: 100,
+    align: "right"
   },
   {
-    id: "scrapbook-big",
-    title: "Generative grid test",
-    caption: "A weird UI tile that didn’t fit anywhere else.",
-    image: "/assets/moonstone-golden.png",
+    id: "headcount",
+    image: "/assets/garden/headcount-wip.png",
+    caption: "Visualise the people in your metrics",
     size: 75,
-    align: "right",
-    maxHeight: 320,
   },
+  {
+    id: "12wy-1",
+    image: "/assets/garden/12wy-wip1.png",
+    size: 50,
+  },
+  {
+    id: "dashboard",
+    image: "/assets/garden/dashboard.png",
+    size: 25,
+  },
+  {
+    id: "12-wy-2",
+    image: "/assets/garden/12wy-wip2.png",
+    size: 75,
+    align: "right"
+  },
+  {
+    id: "c3",
+    image: "/assets/garden/c3-blue.png",
+    size: 50
+  },
+  {
+    id: "chai-mates",
+    image: "/assets/garden/chai-mates.png",
+    size: 25
+  }
 ];
 
 export const projects: Project[] = [
@@ -148,16 +166,16 @@ export const projects: Project[] = [
     details: "Figma plugin ⋅ 35 users",
     images: ["/assets/garden/asterisk.png", "/assets/3asterisk-golden.png"],
   },
-  {
-    id: "headcount",
-    name: "How many human beings have I impacted?",
-    tagline: "Headcount - Visualise human cohorts behind your metrics",
-    details: "Web app",
-    images: [
-      "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=80",
-      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1600&q=80",
-    ],
-  },
+  // {
+  //   id: "headcount",
+  //   name: "How many human beings have I impacted?",
+  //   tagline: "Headcount - Visualise human cohorts behind your metrics",
+  //   details: "Web app",
+  //   images: [
+  //     "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=80",
+  //     "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1600&q=80",
+  //   ],
+  // },
   {
     id: "c3",
     name: "How can kids build the skills that shape their future?",

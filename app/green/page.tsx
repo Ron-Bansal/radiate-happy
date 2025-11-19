@@ -1,6 +1,6 @@
 "use client";
 
-import { useEffect, useState } from "react";
+import { useEffect, useState, type CSSProperties } from "react";
 
 type Tab = "projects" | "experiments" | "writing";
 
@@ -10,35 +10,134 @@ type Project = {
   tagline: string;
   details?: string;
   images: string[];
+  link?: string;
 };
+
+type WritingEntry = {
+  id: string;
+  title: string;
+  date: string; // e.g. "12 Nov, 2025"
+  description: string;
+  link?: string; // Substack/Medium/etc
+};
+
+type ExperimentVisual = {
+  id: string;
+  title: string;
+  caption?: string;
+  image: string;
+  link?: string;
+  size?: 25 | 50 | 75 | 100;
+  align?: "left" | "center" | "right";
+  minHeight?: number;
+  maxHeight?: number;
+};
+
+const writingEntries: WritingEntry[] = [
+  {
+    id: "failing-loudly-1",
+    title: "You either make mistakes or you don’t make anything",
+    date: "12 Nov, 2025",
+    description:
+      "Kicking off a public experiment in imperfect practice – sharing work before it feels finished and treating the internet like a sketchbook.",
+    link: "https://substack.com/your-link-here",
+  },
+  {
+    id: "curious-kids",
+    title: "Learning should feel like play",
+    date: "04 Nov, 2025",
+    description:
+      "Notes from building Curious & Creative Club – how following kids’ obsessions beats a rigid curriculum every time.",
+  },
+  {
+    id: "playlist-identity",
+    title: "What do my playlists say about me?",
+    date: "28 Oct, 2025",
+    description:
+      "Reflections from building Moonstone and what listening data reveals about seasons of life and identity.",
+  },
+];
+
+const experimentVisuals: ExperimentVisual[] = [
+  {
+    id: "receipt-ui",
+    title: "Receipt-style UI for finance queries",
+    caption:
+      "Abundantly experiment – turning SQL queries into printed-style receipts.",
+    image:
+      "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1600&q=80",
+    link: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80m",
+    size: 100,
+  },
+  {
+    id: "paper-plane",
+    title: "Paper airplane physics toy",
+    caption:
+      "Tiny browser game to play with gravity, easing, and micro-interactions.",
+    image: "/assets/moonstone-tall.png",
+    size: 25,
+    // align: "right",
+  },
+
+  {
+    id: "nfc-card",
+    title: "NFC review card layouts",
+    caption:
+      "Exploring tap-to-review cards for Little Tap with playful layouts and microcopy.",
+    image:
+      "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80",
+    size: 50,
+    align: "right",
+  },
+  {
+    id: "nfc-card",
+    title: "NFC review card layouts",
+    caption:
+      "Exploring tap-to-review cards for Little Tap with playful layouts and microcopy.",
+    image:
+      "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80",
+    size: 100,
+  },
+  {
+    id: "scrapbook-big",
+    title: "Generative grid test",
+    caption: "A weird UI tile that didn’t fit anywhere else.",
+    image: "/assets/moonstone-golden.png",
+    size: 75,
+    align: "right",
+    maxHeight: 320,
+  },
+];
 
 const projects: Project[] = [
   {
     id: "moonstone",
-    name: "Moonstone",
-    tagline: "Insightful way to connect with music.",
+    name: "What do my playlists say about me?",
+    tagline: "Moonstone - Insightful way to connect with music",
     details: "Web app ⋅ Over 42,000 playlists analysed",
     images: [
+      "/assets/moonstone-golden.png",
       "/assets/moonstone-tall.png",
       "https://images.unsplash.com/photo-1600411833196-7c1f6b1a8b90?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1600&q=80",
       "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80",
     ],
+    link: "https://moonstone.raunaqbansal.com",
   },
   {
     id: "glowstick",
-    name: "Glowstick",
-    tagline: "Tap-to-share playlists & reviews with NFC.",
+    name: "How can I turn happy customers into brand champions?",
+    tagline: "Glowstick - Tap-to-share playlists & reviews with NFC.",
     details: "SaaS business idea",
     images: [
-      "https://images.unsplash.com/photo-1526481280695-3c687fd543c0?auto=format&fit=crop&w=1600&q=80",
+      "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1600&q=80",
       "https://images.unsplash.com/photo-1516031190212-da133013de50?auto=format&fit=crop&w=1600&q=80",
     ],
   },
   {
     id: "napkin-notes",
-    name: "Napkin Notes",
-    tagline: "Side-panel canvas for quick thinking.",
+    name: "What's the easiest way to jot down fleeting ideas?",
+    tagline: "Napkin Notes - Quickest canvas for thought",
     details: "Chrome extension · 300+ active users",
     images: [
       "/assets/napkin-notes-golden.png",
@@ -48,10 +147,11 @@ const projects: Project[] = [
   },
   {
     id: "asterisk",
-    name: "Asterisk",
-    tagline: "Tiny experiments that explore music & taste.",
+    name: "Where did I get this inspo image from?",
+    tagline: "Asterisk - Connect the dots behind design elements",
     details: "Figma plugin ⋅ 35 users",
     images: [
+      "/assets/garden/asterisk.png",
       "/assets/3asterisk-golden.png",
       //   "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=80",
       //   "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1600&q=80",
@@ -59,8 +159,8 @@ const projects: Project[] = [
   },
   {
     id: "headcount",
-    name: "Headcount",
-    tagline: "Visualise human impact",
+    name: "How many human beings have I impacted?",
+    tagline: "Headcount - Visualise human cohorts behind your metrics",
     details: "Web app",
     images: [
       "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=80",
@@ -69,8 +169,8 @@ const projects: Project[] = [
   },
   {
     id: "c3",
-    name: "Curious & Creative Club",
-    tagline: "Learn by building",
+    name: "How can kids build the skills that shape their future?",
+    tagline: "Curious & Creative Club - Learn by building",
     details: "Weekly classes",
     images: [
       "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=80",
@@ -159,17 +259,17 @@ export default function PortfolioPage() {
         }
       `}</style>
 
-      <main className="min-h-screen xbg-[#FBEDC6] text-[#1C180C] bg-cover xbg-[position:50%_65%] lg:bg-center bg-no-repeat bg-[url('/assets/garden/hilly-gradient2.png')]">
+      <main className="min-h-screen bg-fixed xbg-[#FBEDC6] text-[#1C180C] bg-[length:auto_120%] lg:bg-cover bg-[position:50%_65%] lg:bg-center bg-no-repeat bg-[url('/assets/garden/hilly-gradient2.png')]">
         <div className="mx-auto min-h-screen flex max-w-[2100px] flex-col gap-10 px-2 xpy-8 lg:flex-row lg:px-0 lg:pl-10 lg:py-4">
           {/* LEFT COLUMN */}
           <aside className="flex w-full flex-col gap-10 lg:w-[33%] lg:justify-between">
             <div className="space-y-6 px-4 lg:px-0">
               <div>
                 <p className="mt-8 text-xs tracking-wide text-[#424D08]/80">
-                  Product Designer & Developer
+                  Product Designer & Creative Developer
                   {/* Creative Technologist */}
                 </p>
-                <h1 className="mt-1.5 text-4xl xfont-medium leading-tight text-[#424D08]">
+                <h1 className="mt-1.5 text-5xl xfont-medium leading-tight text-[#424D08]">
                   Hi, I&apos;m Raunaq :)
                 </h1>
 
@@ -215,19 +315,23 @@ export default function PortfolioPage() {
 
               <div className="flex flex-wrap items-center gap-4 pt-1 text-[#424D08] lg:text-[#FBEDC6]">
                 <a
-                  href="mailto:hello@raunaqbansal.com"
+                  href="mailto:raunvq@gmail.com"
                   className="border border-[#424D08] bg-[#FBEDC6] px-4 py-1.5 text-sm text-[#424D08] transition-transform duration-150 hover:-translate-y-[1px]"
                 >
                   Get in touch
                 </a>
                 <a
-                  href="https://www.linkedin.com"
+                  href="https://www.linkedin.com/in/ron-bansal/"
+                  target="_blank"
+                  rel="noreferrer noopener"
                   className="text-[12px] underline-offset-4 hover:underline"
                 >
                   LinkedIn
                 </a>
                 <a
-                  href="https://x.com"
+                  href="https://x.com/raunvq"
+                  target="_blank"
+                  rel="noreferrer noopener"
                   className="text-[12px] underline-offset-4 hover:underline"
                 >
                   X
@@ -239,7 +343,7 @@ export default function PortfolioPage() {
           {/* RIGHT SHEET */}
           <section className="w-full lg:w-[67%] lg:h-full">
             <div
-              className={`flex flex-col lg:min-h-[calc(100vh-32px)] border border-white/45 bg-white/40 bg-[#fdedc91a] hover:bg-[#fdedc922] xshadow-[0_28px_90px_rgba(0,0,0,0.35)] backdrop-blur-sm hover:backdrop-blur-2xl transform-gpu transition-all duration-500 ease-[cubic-bezier(0.19,0.9,0.22,1)] ${sheetTransformClass}`}
+              className={`flex flex-col pb-4 lg:pb-0 lg:min-h-[calc(100vh-32px)] border border-white/45 bg-white/40 bg-[#fdedc91a] hover:bg-[#fdedc960] xshadow-[0_28px_90px_rgba(0,0,0,0.35)] backdrop-blur-sm hover:backdrop-blur-2xl transform-gpu transition-all duration-500 ease-[cubic-bezier(0.19,0.9,0.22,1)] ${sheetTransformClass}`}
             >
               {/* sheet header */}
               <header className="flex items-center justify-between border-b border-white/55 px-8 py-1 text-[12px] text-neutral-700">
@@ -268,10 +372,52 @@ export default function PortfolioPage() {
                 )}
 
                 {activeTab === "experiments" && (
-                  <PlaceholderPanel label="Experiments" />
+                  <div className="flex flex-wrap gap-6">
+                    {experimentVisuals.map((item) => {
+                      // width control
+                      let sizeClass = "basis-full";
+
+                      if (item.size === 25) {
+                        // quarter-width at lg
+                        sizeClass = "basis-full sm:basis-1/2 lg:basis-1/4";
+                      } else if (item.size === 50) {
+                        // half-width at lg
+                        sizeClass = "basis-full sm:basis-2/3 lg:basis-1/2";
+                      } else if (item.size === 75) {
+                        // three-quarter width at lg
+                        sizeClass = "basis-full sm:basis-4/5 lg:basis-3/4";
+                      } else if (item.size === 100) {
+                        // full-width
+                        sizeClass = "basis-full";
+                      }
+
+                      // alignment control
+                      let alignClass = "";
+                      if (item.align === "center") {
+                        alignClass = "mx-auto";
+                      } else if (item.align === "right") {
+                        alignClass = "ml-auto";
+                      }
+                      // default is left → no extra class
+
+                      return (
+                        <div
+                          key={item.id}
+                          className={`${sizeClass} ${alignClass}`}
+                        >
+                          <ExperimentVisualBlock item={item} />
+                        </div>
+                      );
+                    })}
+                  </div>
                 )}
+
                 {activeTab === "writing" && (
-                  <PlaceholderPanel label="Writing" />
+                  <div className="space-y-6">
+                    {writingEntries.map((entry) => (
+                      <WritingBlock key={entry.id} entry={entry} />
+                    ))}
+                  </div>
                 )}
               </div>
             </div>
@@ -317,7 +463,7 @@ function ProjectBlock({ project }: { project: Project }) {
   return (
     <article className="space-y-4">
       {/* image frame + carousel */}
-      <div className="relative w-full bg-black/5 xshadow-[0_18px_60px_rgba(0,0,0,0.32)]">
+      <div className="relative w-full bg-black/5 group">
         <div className="flex h-full w-full items-center justify-center">
           <img
             src={project.images[index]}
@@ -334,11 +480,26 @@ function ProjectBlock({ project }: { project: Project }) {
                 e.preventDefault();
                 prev();
               }}
-              className="flex h-7 w-7 items-center justify-center bg-black/65 text-[11px]"
+              aria-label="Previous image"
+              className="
+                flex h-7 w-7 items-center justify-center 
+                bg-black/65 text-[11px]
+                opacity-40
+                transition-opacity duration-200
+                md:group-hover:opacity-100
+              "
             >
               ←
             </button>
-            <div className="flex items-center gap-[3px] bg-black/55 px-2 py-[3px]">
+
+            <div
+              className="
+                flex items-center gap-[3px] bg-black/55 px-2 py-[3px]
+                opacity-40
+                transition-opacity duration-200
+                md:group-hover:opacity-100
+              "
+            >
               {Array.from({ length: total }).map((_, i) => (
                 <span
                   key={i}
@@ -348,13 +509,21 @@ function ProjectBlock({ project }: { project: Project }) {
                 />
               ))}
             </div>
+
             <button
               onClick={(e) => {
                 e.stopPropagation();
                 e.preventDefault();
                 next();
               }}
-              className="flex h-7 w-7 items-center justify-center bg-black/65 text-[11px]"
+              aria-label="Next image"
+              className="
+                flex h-7 w-7 items-center justify-center 
+                bg-black/65 text-[11px]
+                opacity-40
+                transition-opacity duration-200
+                md:group-hover:opacity-100
+              "
             >
               →
             </button>
@@ -363,17 +532,28 @@ function ProjectBlock({ project }: { project: Project }) {
       </div>
 
       {/* text stack – 4pt scale */}
-      <div className="space-y-1 text-[#3d3d3d]">
+      <div className="flex flex-col space-y-1 text-[#3d3d3d]">
+        {" "}
         <h2 className="text-[18px] font-medium tracking-tight">
           {project.name}
         </h2>
-        <p className="text-[14px] leading-snug text-[#3d3d3d]">
+        <p className="text-[14px] leading-snug text-neutral-800">
           {project.tagline}
         </p>
         {project.details && (
-          <p className="mt-[1px] text-[12px] text-neutral-500">
+          <p className="mt-[1px] text-[12px] text-neutral-600">
             {project.details}
           </p>
+        )}
+        {project.link && (
+          <a
+            href={project.link}
+            target="_blank"
+            rel="noreferrer noopener"
+            className="mt-1 inline-flex items-center gap-1 text-xs text-neutral-700 underline-offset-4 hover:underline ml-auto"
+          >
+            View project <span aria-hidden>↗</span>
+          </a>
         )}
       </div>
     </article>
@@ -393,5 +573,95 @@ function PlaceholderPanel({ label }: { label: string }) {
         </p>
       </div>
     </div>
+  );
+}
+
+function ExperimentVisualBlock({ item }: { item: ExperimentVisual }) {
+  const containerStyle: CSSProperties = {};
+
+  if (item.minHeight !== undefined) {
+    containerStyle.minHeight = item.minHeight;
+  }
+  if (item.maxHeight !== undefined) {
+    containerStyle.maxHeight = item.maxHeight;
+  }
+
+  const inner = (
+    <article className="space-y-2">
+      {/* image box – height controlled by min/max, image is contain */}
+      <div
+        className="flex w-full items-center justify-center overflow-hidden bg-black/5"
+        style={containerStyle}
+      >
+        <img
+          src={item.image}
+          alt={item.title}
+          className="h-auto w-auto max-h-full max-w-full object-contain"
+        />
+      </div>
+
+      {/* caption */}
+      <div className="space-y-1">
+        <h2 className="text-[13px] font-medium tracking-tight text-[#3d3d3d]">
+          {item.title}
+        </h2>
+        {item.caption && (
+          <p className="text-[12px] leading-snug text-neutral-700">
+            {item.caption}
+          </p>
+        )}
+      </div>
+    </article>
+  );
+
+  if (item.link) {
+    return (
+      <a
+        href={item.link}
+        target="_blank"
+        rel="noreferrer noopener"
+        className="block transition-transform duration-150 hover:-translate-y-[1px]"
+      >
+        {inner}
+      </a>
+    );
+  }
+
+  return inner;
+}
+
+function WritingBlock({ entry }: { entry: WritingEntry }) {
+  const inner = (
+    <article className="space-y-2 border-b border-black/5 pb-5 last:border-none last:pb-0">
+      {/* date above title */}
+      <p className="text-[11px] font-mono text-neutral-500">{entry.date}</p>
+
+      <h2 className="mt-[2px] text-[16px] font-medium tracking-tight text-[#3d3d3d]">
+        {entry.title}
+      </h2>
+
+      <p className="text-[13px] leading-snug text-neutral-800">
+        {entry.description}
+      </p>
+
+      {entry.link && (
+        <span className="inline-flex items-center gap-1 text-[12px] text-neutral-700 underline-offset-4 hover:underline">
+          Read the full piece ↗
+        </span>
+      )}
+    </article>
+  );
+
+  return entry.link ? (
+    <a
+      href={entry.link}
+      target="_blank"
+      rel="noreferrer noopener"
+      className="block transition-transform duration-150 hover:-translate-y-[1px]"
+    >
+      {inner}
+    </a>
+  ) : (
+    inner
   );
 }

@@ -280,99 +280,100 @@ export default function AscentWorkout() {
             <div className="flex items-center gap-2" />
           </div>
 
-          {/* Seconds bar with labels & ticks overlayed above fill */}
-          <div className="relative">
-            <div className="relative h-6 rounded-full bg-white/10 overflow-hidden border border-white/10">
-              {/* progress fill (use transform scaleX for GPU-friendly, linear updates) */}
+          {/* Workout (whole session) slim progress + Seconds bar */}
+          <div className="space-y-2">
+            {/* Slim whole-workout progress bar */}
+            <div className="h-1 rounded-full bg-white/10 overflow-hidden">
               <div
-                className="absolute inset-y-0 left-0 z-10 bg-gradient-to-r from-[#B74B65] via-[#D06180] to-[#EA7894] shadow-[0_0_18px_rgba(183,75,101,0.55)] will-change-transform"
-                style={{
-                  width: "100%",
-                  transformOrigin: "left",
-                  transform: `scaleX(${secondProgressFraction})`,
-                }}
+                className="h-full bg-gradient-to-r from-[#B74B65] via-[#D06180] to-[#EA7894]"
+                style={{ width: `${sessionProgress}%` }}
               />
-
-              {/* markers (labels + subtle ticks) above the fill for contrast */}
-              {[15, 30, 45].map((n, i) => (
-                <div
-                  key={i}
-                  className="absolute inset-y-0 z-20 pointer-events-none"
-                  style={{ left: `${(n / 60) * 100}%` }}
-                >
-                  {/* label */}
-                  <div className="absolute -top-5 -translate-x-1/2 text-[11px] md:text-xs text-white drop-shadow-[0_1px_0_rgba(0,0,0,0.45)]">
-                    {n}
-                  </div>
-                  {/* subtle tick below label */}
-                  <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2">
-                    <div className="absolute top-0 h-full w-[1.5px] bg-white/80 mix-blend-normal" />
-                  </div>
-                </div>
-              ))}
-
-              {/* moving dot: hide at extremes to avoid left-edge circle */}
-              {/* <div
-                className="absolute -top-2 z-30 w-7 h-7 rounded-full bg-white/20 border border-white/30 backdrop-blur-sm"
-                style={{
-                  opacity: secondProgressFraction > 0.01 && secondProgressFraction < 0.99 ? 1 : 0,
-                  transform: `translateX(calc(${secondProgressFraction * 100}% - 50%))`,
-                  transition: 'opacity 100ms linear'
-                }}
-              /> */}
             </div>
 
-            {/* Actions row: left timer + icon, right session% + confirm reset */}
-            <div className="mt-3 flex items-center justify-between">
-              <div className="flex items-center gap-3">
-                <div className="font-mono tabular-nums text-2xl md:text-3xl tracking-tight">
-                  {formatTime(remain)}
-                </div>
-                <button
-                  onClick={() => setRunning((v) => !v)}
-                  className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-[#B74B65] to-[#D96686] hover:shadow-[0_0_22px_rgba(183,75,101,0.45)] active:scale-95"
-                  aria-label={running ? "Pause session" : "Start session"}
-                  title={running ? "Pause session" : "Start session"}
-                >
-                  {running ? (
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <rect x="6" y="5" width="4" height="14" rx="1.2" />
-                      <rect x="14" y="5" width="4" height="14" rx="1.2" />
-                    </svg>
-                  ) : (
-                    <svg
-                      width="18"
-                      height="18"
-                      viewBox="0 0 24 24"
-                      fill="currentColor"
-                    >
-                      <path d="M8 5v14l11-7-11-7z" />
-                    </svg>
-                  )}
-                </button>
-              </div>
-              <div className="flex items-center gap-3">
-                <div className="text-xs md:text-sm text-white/70 font-mono">
-                  Session: {Math.round(sessionProgress)}%
-                </div>
-                <button
-                  onClick={() => {
-                    if (
-                      confirm(
-                        "Reset session? All current reps will be cleared."
-                      )
-                    )
-                      reset();
+            {/* Seconds bar with labels & ticks overlayed above fill */}
+            <div className="relative">
+              <div className="relative h-6 rounded-full bg-white/10 overflow-hidden border border-white/10">
+                {/* progress fill (use transform scaleX for GPU-friendly, linear updates) */}
+                <div
+                  className="absolute inset-y-0 left-0 z-10 bg-gradient-to-r from-[#B74B65] via-[#D06180] to-[#EA7894] shadow-[0_0_18px_rgba(183,75,101,0.55)] will-change-transform"
+                  style={{
+                    width: "100%",
+                    transformOrigin: "left",
+                    transform: `scaleX(${secondProgressFraction})`,
                   }}
-                  className="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[12px] font-semibold"
-                >
-                  Reset
-                </button>
+                />
+
+                {/* markers (labels + subtle ticks) above the fill for contrast */}
+                {[15, 30, 45].map((n, i) => (
+                  <div
+                    key={i}
+                    className="absolute inset-y-0 z-20 pointer-events-none"
+                    style={{ left: `${(n / 60) * 100}%` }}
+                  >
+                    {/* label */}
+                    <div className="absolute -top-5 -translate-x-1/2 text-[11px] md:text-xs text-white drop-shadow-[0_1px_0_rgba(0,0,0,0.45)]">
+                      {n}
+                    </div>
+                    {/* subtle tick below label */}
+                    <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2">
+                      <div className="absolute top-0 h-full w-[1.5px] bg-white/80 mix-blend-normal" />
+                    </div>
+                  </div>
+                ))}
+              </div>
+
+              {/* Actions row: left timer + icon, right session% + confirm reset */}
+              <div className="mt-3 flex items-center justify-between">
+                <div className="flex items-center gap-3">
+                  <div className="font-mono tabular-nums text-2xl md:text-3xl tracking-tight">
+                    {formatTime(remain)}
+                  </div>
+                  <button
+                    onClick={() => setRunning((v) => !v)}
+                    className="inline-flex items-center justify-center h-10 w-10 rounded-full bg-gradient-to-r from-[#B74B65] to-[#D96686] hover:shadow-[0_0_22px_rgba(183,75,101,0.45)] active:scale-95"
+                    aria-label={running ? "Pause session" : "Start session"}
+                    title={running ? "Pause session" : "Start session"}
+                  >
+                    {running ? (
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <rect x="6" y="5" width="4" height="14" rx="1.2" />
+                        <rect x="14" y="5" width="4" height="14" rx="1.2" />
+                      </svg>
+                    ) : (
+                      <svg
+                        width="18"
+                        height="18"
+                        viewBox="0 0 24 24"
+                        fill="currentColor"
+                      >
+                        <path d="M8 5v14l11-7-11-7z" />
+                      </svg>
+                    )}
+                  </button>
+                </div>
+                <div className="flex items-center gap-3">
+                  <div className="text-xs md:text-sm text-white/70 font-mono">
+                    Session: {Math.round(sessionProgress)}%
+                  </div>
+                  <button
+                    onClick={() => {
+                      if (
+                        confirm(
+                          "Reset session? All current reps will be cleared."
+                        )
+                      )
+                        reset();
+                    }}
+                    className="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[12px] font-semibold"
+                  >
+                    Reset
+                  </button>
+                </div>
               </div>
             </div>
           </div>
@@ -389,31 +390,56 @@ export default function AscentWorkout() {
           />
         </div>
 
-        {/* Stats row */}
-        <div className="grid md:grid-cols-3 gap-4 mb-6">
-          <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
-            <div className="text-4xl md:text-5xl font-black text-[#B74B65] leading-none">
-              {totalReps}
-            </div>
-            <div className="text-white/40 text-[11px] md:text-xs font-mono uppercase mt-1">
-              Total Reps
-            </div>
+{/* Stats row – single full-width card */}
+<div className="mb-6">
+  <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-5 md:p-6 flex flex-col md:flex-row md:items-center md:justify-between gap-4">
+    
+    {/* Left: exercise names + per-exercise totals */}
+    <div className="xflex-1">
+      {/* Names row */}
+      <div className="grid grid-cols-5 text-center mb-2">
+        {EXERCISES.map((ex) => (
+          <div
+            key={ex.name}
+            className="text-[11px] md:text-xs text-white/50 font-mono truncate"
+          >
+            {ex.name}
           </div>
-          <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-5">
-            <div className="text-4xl md:text-5xl font-black text-white/30 leading-none">
-              {lastTimeTotal}
+        ))}
+      </div>
+
+      {/* Totals row */}
+      <div className="grid grid-cols-5 text-center">
+        {EXERCISES.map((ex) => {
+          const count = reps[ex.name] ?? 0;
+          return (
+            <div
+              key={ex.name + '-count'}
+              className="text-xl md:text-2xl font-black tabular-nums text-[#B74B65]"
+            >
+              {count}
             </div>
-            <div className="text-white/40 text-[11px] md:text-xs font-mono uppercase mt-1">
-              Last Session
-            </div>
-          </div>
-          <div className="rounded-2xl bg-white/[0.04] border border-white/10 p-5 flex items-center justify-between">
-            <div className="text-white/70 text-sm font-mono">Exercises</div>
-            <div className="text-3xl md:text-4xl font-black">
-              {EXERCISES.length}
-            </div>
-          </div>
-        </div>
+          );
+        })}
+      </div>
+    </div>
+
+    {/* Right: Total reps summary */}
+    <div className="md:text-right">
+      <div className="text-xs md:text-[11px] text-white/40 font-mono uppercase tracking-[0.18em] mb-1">
+        Total Reps
+      </div>
+      <div className="text-3xl md:text-4xl font-black text-[#B74B65] leading-none">
+        {totalReps}
+      </div>
+
+      {/* Hidden last session info for future use */}
+      <div className="hidden mt-2 text-[11px] md:text-xs text-white/30 font-mono">
+        Last Session: {lastTimeTotal}
+      </div>
+    </div>
+  </div>
+</div>
 
         {/* Exercise list */}
         <div className="grid gap-4">

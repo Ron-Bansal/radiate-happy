@@ -107,7 +107,7 @@ export default function PortfolioPage() {
         }
       `}</style>
 
-      <main className="min-h-screen bg-fixed xbg-[#FBEDC6] text-[#1C180C] bg-[length:auto_120%] lg:bg-cover bg-[position:50%_65%] lg:bg-center bg-no-repeat bg-[url('/assets/garden/hilly-gradient2.png')]">
+      <main className="min-h-screen bg-fixed xbg-[#FBEDC6] text-[#1C180C] bg-[length:auto_120%] lg:bg-cover bg-[position:50%_65%] lg:bg-center bg-no-repeat xbg-[url('')] bg-[url('/assets/garden/hilly-gradient2.png')]">
         <div className="mx-auto min-h-screen flex max-w-[2100px] flex-col gap-10 px-2 xpy-8 lg:flex-row lg:px-0 lg:pl-10 lg:py-4">
           {/* LEFT COLUMN */}
           <aside className="flex w-full flex-col gap-10 lg:w-[33%] lg:justify-between">

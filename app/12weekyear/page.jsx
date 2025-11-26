@@ -1,26 +1,26 @@
-'use client';
+"use client";
 
-import { useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from "react";
 
 const BG_STYLE =
-  'radial-gradient(circle at 0% 0%, rgba(214,235,59,0.03), transparent 45%), #050505';
+  "radial-gradient(circle at 0% 0%, rgba(214,235,59,0.03), transparent 45%), #050505";
 
 const COLORS = {
-  bg: '#050505',
-  surface: '#101111',
-  surfaceMuted: 'rgba(10,11,11,0.45)',
-  ink: '#f1f3e8',
-  muted: 'rgba(241,243,232,0.55)',
-  accent: '#d6eb3b',
-  cardRadius: '26px',
-  scrollTrack: 'rgba(241,243,232,0.03)',
-  scrollThumb: 'rgba(214,235,59,0.35)',
+  bg: "#050505",
+  surface: "#101111",
+  surfaceMuted: "rgba(10,11,11,0.45)",
+  ink: "#f1f3e8",
+  muted: "rgba(241,243,232,0.55)",
+  accent: "#d6eb3b",
+  cardRadius: "26px",
+  scrollTrack: "rgba(241,243,232,0.03)",
+  scrollThumb: "rgba(214,235,59,0.35)",
 };
 
 const MS_DAY = 86400000;
 
 function safeLoad(key, fallback) {
-  if (typeof window === 'undefined') return fallback;
+  if (typeof window === "undefined") return fallback;
   try {
     const v = window.localStorage.getItem(key);
     return v ? JSON.parse(v) : fallback;
@@ -30,7 +30,7 @@ function safeLoad(key, fallback) {
 }
 
 function safeSave(key, value) {
-  if (typeof window === 'undefined') return;
+  if (typeof window === "undefined") return;
   window.localStorage.setItem(key, JSON.stringify(value));
 }
 
@@ -41,10 +41,10 @@ function calcCycleFromOffset(today, offset) {
   const startMonth = baseQStart + offset * 3;
   const start = new Date(year, startMonth, 1);
   const end = new Date(year, startMonth + 3, 0);
-  const title = `${start.toLocaleString('en-US', {
-    month: 'short',
-  })} - ${end.toLocaleString('en-US', {
-    month: 'short',
+  const title = `${start.toLocaleString("en-US", {
+    month: "short",
+  })} - ${end.toLocaleString("en-US", {
+    month: "short",
   })} ${end.getFullYear()}`;
   return { start, end, title, qIndex, year };
 }
@@ -69,18 +69,13 @@ function saveList(type, id, arr) {
 /* =========================
    FEED CARD (single cycle)
    ========================= */
-function FeedCycleCard({
-  cycle,
-  today,
-  currentShow,
-  bump,
-}) {
-  const [mode, setMode] = useState('win'); // 'win' | 'goal'
-  const [input, setInput] = useState('');
+function FeedCycleCard({ cycle, today, currentShow, bump }) {
+  const [mode, setMode] = useState("win"); // 'win' | 'goal'
+  const [input, setInput] = useState("");
 
   // re-load from localStorage each render (since we bump version on write)
-  const wins = loadList('brag', cycle.id);
-  const goals = loadList('goals', cycle.id);
+  const wins = loadList("brag", cycle.id);
+  const goals = loadList("goals", cycle.id);
   const pct = progressForRange(today, cycle.start, cycle.end);
   const isFuture = cycle.start && today < cycle.start;
 
@@ -89,66 +84,65 @@ function FeedCycleCard({
     if (!val) return;
     const payload = {
       title: val,
-      date: new Date().toLocaleString('en-US', {
-        month: 'short',
-        day: 'numeric',
+      date: new Date().toLocaleString("en-US", {
+        month: "short",
+        day: "numeric",
       }),
     };
-    if (mode === 'goal') {
-      const arr = loadList('goals', cycle.id);
+    if (mode === "goal") {
+      const arr = loadList("goals", cycle.id);
       arr.unshift(payload);
-      saveList('goals', cycle.id, arr);
+      saveList("goals", cycle.id, arr);
     } else {
-      const arr = loadList('brag', cycle.id);
+      const arr = loadList("brag", cycle.id);
       arr.unshift(payload);
-      saveList('brag', cycle.id, arr);
+      saveList("brag", cycle.id, arr);
     }
-    setInput('');
+    setInput("");
     bump();
   };
 
   const handleEdit = (type, idx) => {
-    const arr = loadList(type === 'brag' ? 'brag' : 'goals', cycle.id);
+    const arr = loadList(type === "brag" ? "brag" : "goals", cycle.id);
     const current = arr[idx];
     const next = window.prompt(
-      `Edit ${type === 'brag' ? 'win' : 'goal'}`,
-      current?.title || ''
+      `Edit ${type === "brag" ? "win" : "goal"}`,
+      current?.title || ""
     );
     if (next !== null && next.trim()) {
       arr[idx].title = next.trim();
-      saveList(type === 'brag' ? 'brag' : 'goals', cycle.id, arr);
+      saveList(type === "brag" ? "brag" : "goals", cycle.id, arr);
       bump();
     }
   };
 
   const handleDelete = (type, idx) => {
-    const arr = loadList(type === 'brag' ? 'brag' : 'goals', cycle.id);
+    const arr = loadList(type === "brag" ? "brag" : "goals", cycle.id);
     arr.splice(idx, 1);
-    saveList(type === 'brag' ? 'brag' : 'goals', cycle.id, arr);
+    saveList(type === "brag" ? "brag" : "goals", cycle.id, arr);
     bump();
   };
 
   return (
     <article
       className={[
-        'relative flex min-w-[300px] max-w-[360px] flex-col gap-2.5 rounded-[26px] bg-[#101111] p-4 shadow-[0_22px_50px_rgba(0,0,0,0.25)] scroll-mr-4 scroll-snap-align-start',
-        cycle.current && 'shadow-[0_26px_58px_rgba(214,235,59,0.08)]',
-        isFuture && 'bg-[rgba(10,11,11,0.28)] border border-[rgba(214,235,59,0.01)]',
+        "relative flex min-w-[300px] max-w-[360px] flex-col gap-2.5 rounded-[26px] bg-[#101111] p-4 shadow-[0_22px_50px_rgba(0,0,0,0.25)] scroll-mr-4 scroll-snap-align-start",
+        cycle.current && "shadow-[0_26px_58px_rgba(214,235,59,0.08)]",
+        isFuture &&
+          "bg-[rgba(10,11,11,0.28)] border border-[rgba(214,235,59,0.01)]",
       ]
         .filter(Boolean)
-        .join(' ')}
+        .join(" ")}
       style={{
         background: `radial-gradient(circle at 0% 0%, rgba(214,235,59,0.045), rgba(16,17,17,0)), ${
-          isFuture ? 'rgba(10,11,11,0.28)' : '#101111'
+          isFuture ? "rgba(10,11,11,0.28)" : "#101111"
         }`,
-        border: '1px solid rgba(214,235,59,0.035)',
+        border: "1px solid rgba(214,235,59,0.035)",
       }}
       data-cycle-id={cycle.id}
     >
       {cycle.current ? (
-        <div
-          className="absolute right-2 top-2 rounded-full border border-[rgba(214,235,59,0.45)] bg-[rgba(214,235,59,0.16)] px-2 py-0.5 text-[0.55rem] text-white"
-        >
+        <div className="absolute right-2 top-2 rounded-full border border-[rgba(214,235,59,0.45)] bg-[rgba(214,235,59,0.16)] px-2 py-0.5 text-[0.55rem] text-white">
           current cycle
         </div>
       ) : null}
@@ -169,28 +163,24 @@ function FeedCycleCard({
       </div>
 
       {/* add row */}
-      <div
-        className="flex min-h-[30px] items-center gap-1 rounded-[10px] bg-black/5 px-1.5 py-1"
-      >
-        <div
-          className="flex overflow-hidden rounded-full border border-[rgba(214,235,59,0.04)] bg-black/25"
-        >
+      <div className="flex min-h-[30px] items-center gap-1 rounded-[10px] bg-black/5 px-1.5 py-1">
+        <div className="flex overflow-hidden rounded-full border border-[rgba(214,235,59,0.04)] bg-black/25">
           <button
-            onClick={() => setMode('win')}
+            onClick={() => setMode("win")}
             className={`px-2 py-0.5 text-[0.56rem] ${
-              mode === 'win'
-                ? 'bg-[rgba(214,235,59,0.65)] text-black'
-                : 'text-white/50'
+              mode === "win"
+                ? "bg-[rgba(214,235,59,0.65)] text-black"
+                : "text-white/50"
             }`}
           >
             Win
           </button>
           <button
-            onClick={() => setMode('goal')}
+            onClick={() => setMode("goal")}
             className={`px-2 py-0.5 text-[0.56rem] ${
-              mode === 'goal'
-                ? 'bg-[rgba(214,235,59,0.65)] text-black'
-                : 'text-white/50'
+              mode === "goal"
+                ? "bg-[rgba(214,235,59,0.65)] text-black"
+                : "text-white/50"
             }`}
           >
             Goal
@@ -200,7 +190,7 @@ function FeedCycleCard({
           value={input}
           onChange={(e) => setInput(e.target.value)}
           onKeyDown={(e) => {
-            if (e.key === 'Enter') handleAdd();
+            if (e.key === "Enter") handleAdd();
           }}
           placeholder="Capture something for this cycle…"
           className="flex-1 bg-transparent text-[0.58rem] text-white outline-none placeholder:text-white/25"
@@ -213,7 +203,7 @@ function FeedCycleCard({
         </button>
       </div>
 
-      {(currentShow === 'both' || currentShow === 'wins') && (
+      {(currentShow === "both" || currentShow === "wins") && (
         <>
           <div className="flex items-center justify-between gap-2 text-[0.6rem] font-semibold text-white/90">
             <span>Wins</span>
@@ -231,13 +221,13 @@ function FeedCycleCard({
                   <div className="flex-1">{w.title}</div>
                   <div className="hidden gap-1 group-hover:flex">
                     <button
-                      onClick={() => handleEdit('brag', idx)}
+                      onClick={() => handleEdit("brag", idx)}
                       className="rounded border border-white/10 px-1 text-[0.5rem] text-white/80 hover:bg-[rgba(214,235,59,0.12)] hover:text-black"
                     >
                       edit
                     </button>
                     <button
-                      onClick={() => handleDelete('brag', idx)}
+                      onClick={() => handleDelete("brag", idx)}
                       className="rounded border border-white/10 px-1 text-[0.5rem] text-white/80 hover:bg-[rgba(214,235,59,0.12)] hover:text-black"
                     >
                       x
@@ -246,13 +236,15 @@ function FeedCycleCard({
                 </div>
               ))
             ) : (
-              <div className="text-[0.55rem] text-white/35">No wins captured.</div>
+              <div className="text-[0.55rem] text-white/35">
+                No wins captured.
+              </div>
             )}
           </div>
         </>
       )}
 
-      {(currentShow === 'both' || currentShow === 'goals') && (
+      {(currentShow === "both" || currentShow === "goals") && (
         <>
           <div className="mt-1 flex items-center justify-between gap-2 text-[0.6rem] font-semibold text-white/90">
             <span>Goals</span>
@@ -270,13 +262,13 @@ function FeedCycleCard({
                   <div className="flex-1">{g.title}</div>
                   <div className="hidden gap-1 group-hover:flex">
                     <button
-                      onClick={() => handleEdit('goals', idx)}
+                      onClick={() => handleEdit("goals", idx)}
                       className="rounded border border-white/10 px-1 text-[0.5rem] text-white/80 hover:bg-[rgba(214,235,59,0.12)] hover:text-black"
                     >
                       edit
                     </button>
                     <button
-                      onClick={() => handleDelete('goals', idx)}
+                      onClick={() => handleDelete("goals", idx)}
                       className="rounded border border-white/10 px-1 text-[0.5rem] text-white/80 hover:bg-[rgba(214,235,59,0.12)] hover:text-black"
                     >
                       x
@@ -299,9 +291,9 @@ function FeedCycleCard({
    ========================= */
 function FeedShell({ bumpVersion }) {
   const [today] = useState(() => new Date());
-  const [currentSort, setCurrentSort] = useState('asc'); // 'asc' | 'desc'
-  const [currentGroup, setCurrentGroup] = useState('cycle'); // 'cycle' | 'year'
-  const [currentShow, setCurrentShow] = useState('both'); // 'both' | 'wins' | 'goals'
+  const [currentSort, setCurrentSort] = useState("asc"); // 'asc' | 'desc'
+  const [currentGroup, setCurrentGroup] = useState("cycle"); // 'cycle' | 'year'
+  const [currentShow, setCurrentShow] = useState("both"); // 'both' | 'wins' | 'goals'
   const [lsVersion, setLsVersion] = useState(0);
 
   // helper to trigger re-render when localStorage changes in this section
@@ -322,15 +314,15 @@ function FeedShell({ bumpVersion }) {
       return {
         id:
           off === -2
-            ? 'p2'
+            ? "p2"
             : off === -1
-            ? 'prev'
+            ? "prev"
             : off === 0
-            ? 'current'
+            ? "current"
             : off === 1
-            ? 'next'
+            ? "next"
             : `f${off}`,
-        label: 'Cycle ' + (qIndex + 1 + off),
+        label: "Cycle " + (qIndex + 1 + off),
         range: title,
         start,
         end,
@@ -339,13 +331,13 @@ function FeedShell({ bumpVersion }) {
     });
 
     // bring in any localStorage-only cycles
-    if (typeof window !== 'undefined') {
+    if (typeof window !== "undefined") {
       const ids = new Set();
       for (const key in window.localStorage) {
         if (!Object.prototype.hasOwnProperty.call(window.localStorage, key))
           continue;
-        if (key.startsWith('12w_goals_') || key.startsWith('12w_brag_')) {
-          const id = key.split('_')[2];
+        if (key.startsWith("12w_goals_") || key.startsWith("12w_brag_")) {
+          const id = key.split("_")[2];
           if (id) ids.add(id);
         }
       }
@@ -355,7 +347,7 @@ function FeedShell({ bumpVersion }) {
           const fakeEnd = new Date(year, 2, 31);
           baseCycles.push({
             id,
-            label: 'Cycle ' + id,
+            label: "Cycle " + id,
             range: `Jan - Mar ${year}`,
             start: fakeStart,
             end: fakeEnd,
@@ -368,14 +360,14 @@ function FeedShell({ bumpVersion }) {
   }, [today, lsVersion]);
 
   const feedContent = useMemo(() => {
-    if (currentGroup === 'year') {
+    if (currentGroup === "year") {
       // group by year
       const map = {};
       dataset.forEach((c) => {
         const y = c.start ? c.start.getFullYear() : today.getFullYear();
         if (!map[y]) map[y] = { year: y, wins: [], goals: [], cards: [] };
-        const wins = loadList('brag', c.id);
-        const goals = loadList('goals', c.id);
+        const wins = loadList("brag", c.id);
+        const goals = loadList("goals", c.id);
         map[y].wins = map[y].wins.concat(
           wins.map((w) => ({ ...w, _cycle: c.id }))
         );
@@ -385,52 +377,52 @@ function FeedShell({ bumpVersion }) {
         map[y].cards.push(c);
       });
       const arr = Object.values(map).sort((a, b) =>
-        currentSort === 'desc' ? b.year - a.year : a.year - b.year
+        currentSort === "desc" ? b.year - a.year : a.year - b.year
       );
-      return { mode: 'year', data: arr };
+      return { mode: "year", data: arr };
     }
     // cycle view
     const arr = dataset
       .map((c) => ({
         ...c,
-        wins: loadList('brag', c.id),
-        goals: loadList('goals', c.id),
+        wins: loadList("brag", c.id),
+        goals: loadList("goals", c.id),
       }))
       .sort((a, b) => {
-        if (currentSort === 'desc') {
+        if (currentSort === "desc") {
           return b.start ? b.start - a.start : 0;
         }
         return a.start ? a.start - b.start : 0;
       });
-    return { mode: 'cycle', data: arr };
+    return { mode: "cycle", data: arr };
   }, [dataset, currentGroup, currentSort, lsVersion, today]);
 
   return (
     <div className="feed-shell pb-3">
       <header className="flex flex-wrap items-center justify-between gap-3 px-5 pt-4 text-[0.66rem] tracking-[0.04em] text-[rgba(241,243,232,0.55)]">
-        <div className="text-[0.7rem] font-medium text-[#d6eb3b]">DESA12 .FEED</div>
-        <div
-          className="flex flex-wrap items-center gap-3 rounded-full border border-[rgba(214,235,59,0.01)] bg-black/25 px-3 py-1"
-        >
+        <div className="text-[0.7rem] font-medium text-[#d6eb3b]">
+          DESA12 .FEED
+        </div>
+        <div className="flex flex-wrap items-center gap-3 rounded-full border border-[rgba(214,235,59,0.01)] bg-black/25 px-3 py-1">
           {/* Sort */}
           <div className="flex items-center gap-1">
             <small className="text-[0.58rem] opacity-65">Sort</small>
             <button
-              onClick={() => setCurrentSort('desc')}
+              onClick={() => setCurrentSort("desc")}
               className={`rounded-full border px-1.5 py-0.5 text-[0.58rem] ${
-                currentSort === 'desc'
-                  ? 'border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white'
-                  : 'border-[rgba(214,235,59,0.05)] text-white/60'
+                currentSort === "desc"
+                  ? "border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white"
+                  : "border-[rgba(214,235,59,0.05)] text-white/60"
               }`}
             >
               ↑
             </button>
             <button
-              onClick={() => setCurrentSort('asc')}
+              onClick={() => setCurrentSort("asc")}
               className={`rounded-full border px-1.5 py-0.5 text-[0.58rem] ${
-                currentSort === 'asc'
-                  ? 'border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white'
-                  : 'border-[rgba(214,235,59,0.05)] text-white/60'
+                currentSort === "asc"
+                  ? "border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white"
+                  : "border-[rgba(214,235,59,0.05)] text-white/60"
               }`}
             >
               ↓
@@ -441,21 +433,21 @@ function FeedShell({ bumpVersion }) {
           <div className="flex items-center gap-1">
             <small className="text-[0.58rem] opacity-65">Group</small>
             <button
-              onClick={() => setCurrentGroup('cycle')}
+              onClick={() => setCurrentGroup("cycle")}
               className={`rounded-full border px-2 py-0.5 text-[0.58rem] ${
-                currentGroup === 'cycle'
-                  ? 'border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white'
-                  : 'border-[rgba(214,235,59,0.05)] text-white/60'
+                currentGroup === "cycle"
+                  ? "border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white"
+                  : "border-[rgba(214,235,59,0.05)] text-white/60"
               }`}
             >
               Cycle
             </button>
             <button
-              onClick={() => setCurrentGroup('year')}
+              onClick={() => setCurrentGroup("year")}
               className={`rounded-full border px-2 py-0.5 text-[0.58rem] ${
-                currentGroup === 'year'
-                  ? 'border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white'
-                  : 'border-[rgba(214,235,59,0.05)] text-white/60'
+                currentGroup === "year"
+                  ? "border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white"
+                  : "border-[rgba(214,235,59,0.05)] text-white/60"
               }`}
             >
               Year
@@ -466,31 +458,31 @@ function FeedShell({ bumpVersion }) {
           <div className="flex items-center gap-1">
             <small className="text-[0.58rem] opacity-65">Show</small>
             <button
-              onClick={() => setCurrentShow('both')}
+              onClick={() => setCurrentShow("both")}
               className={`rounded-full border px-2 py-0.5 text-[0.58rem] ${
-                currentShow === 'both'
-                  ? 'border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white'
-                  : 'border-[rgba(214,235,59,0.05)] text-white/60'
+                currentShow === "both"
+                  ? "border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white"
+                  : "border-[rgba(214,235,59,0.05)] text-white/60"
               }`}
             >
               Both
             </button>
             <button
-              onClick={() => setCurrentShow('wins')}
+              onClick={() => setCurrentShow("wins")}
               className={`rounded-full border px-2 py-0.5 text-[0.58rem] ${
-                currentShow === 'wins'
-                  ? 'border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white'
-                  : 'border-[rgba(214,235,59,0.05)] text-white/60'
+                currentShow === "wins"
+                  ? "border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white"
+                  : "border-[rgba(214,235,59,0.05)] text-white/60"
               }`}
             >
               Wins
             </button>
             <button
-              onClick={() => setCurrentShow('goals')}
+              onClick={() => setCurrentShow("goals")}
               className={`rounded-full border px-2 py-0.5 text-[0.58rem] ${
-                currentShow === 'goals'
-                  ? 'border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white'
-                  : 'border-[rgba(214,235,59,0.05)] text-white/60'
+                currentShow === "goals"
+                  ? "border-[rgba(214,235,59,0.3)] bg-[rgba(214,235,59,0.18)] text-white"
+                  : "border-[rgba(214,235,59,0.05)] text-white/60"
               }`}
             >
               Goals
@@ -501,10 +493,11 @@ function FeedShell({ bumpVersion }) {
       <section className="feed-main px-5 pt-3">
         <div className="mb-1 flex items-center justify-between text-[0.57rem] text-white/30">
           <span>
-            Add above, stays same height. Edit/delete are inline. Year view aggregates.
+            Add above, stays same height. Edit/delete are inline. Year view
+            aggregates.
           </span>
           <span className="text-white/50">
-            {feedContent.mode === 'year'
+            {feedContent.mode === "year"
               ? `${feedContent.data.length} year blocks`
               : `${feedContent.data.length} cycles shown`}
           </span>
@@ -512,10 +505,10 @@ function FeedShell({ bumpVersion }) {
         <div
           className="cycle-rail flex gap-4 overflow-x-auto pb-4"
           style={{
-            scrollSnapType: 'x mandatory',
+            scrollSnapType: "x mandatory",
           }}
         >
-          {feedContent.mode === 'year'
+          {feedContent.mode === "year"
             ? feedContent.data.map((blk) => {
                 const yStart = new Date(blk.year, 0, 1);
                 const yEnd = new Date(blk.year, 11, 31);
@@ -525,15 +518,16 @@ function FeedShell({ bumpVersion }) {
                   <article
                     key={blk.year}
                     className={[
-                      'flex min-w-[300px] max-w-[360px] flex-col gap-2.5 rounded-[26px] p-4 shadow-[0_22px_50px_rgba(0,0,0,0.25)]',
-                      isFuture && 'bg-[rgba(10,11,11,0.28)] border border-[rgba(214,235,59,0.01)]',
+                      "flex min-w-[300px] max-w-[360px] flex-col gap-2.5 rounded-[26px] p-4 shadow-[0_22px_50px_rgba(0,0,0,0.25)]",
+                      isFuture &&
+                        "bg-[rgba(10,11,11,0.28)] border border-[rgba(214,235,59,0.01)]",
                     ]
                       .filter(Boolean)
-                      .join(' ')}
+                      .join(" ")}
                     style={{
                       background:
-                        'radial-gradient(circle at 0% 0%, rgba(214,235,59,0.045), rgba(16,17,17,0)), #101111',
-                      border: '1px solid rgba(214,235,59,0.035)',
+                        "radial-gradient(circle at 0% 0%, rgba(214,235,59,0.045), rgba(16,17,17,0)), #101111",
+                      border: "1px solid rgba(214,235,59,0.035)",
                     }}
                     data-year={blk.year}
                   >
@@ -551,7 +545,7 @@ function FeedShell({ bumpVersion }) {
                         style={{ width: `${pct}%` }}
                       />
                     </div>
-                    {(currentShow === 'both' || currentShow === 'wins') && (
+                    {(currentShow === "both" || currentShow === "wins") && (
                       <>
                         <div className="flex items-center justify-between text-[0.6rem] text-white/80">
                           <span>Wins</span>
@@ -577,7 +571,7 @@ function FeedShell({ bumpVersion }) {
                         </div>
                       </>
                     )}
-                    {(currentShow === 'both' || currentShow === 'goals') && (
+                    {(currentShow === "both" || currentShow === "goals") && (
                       <>
                         <div className="flex items-center justify-between text-[0.6rem] text-white/80">
                           <span>Goals</span>
@@ -626,14 +620,14 @@ function FeedShell({ bumpVersion }) {
    ========================= */
 function CyclesOverview({ globalBump }) {
   const [today] = useState(() => new Date());
-  const [activeCycleId, setActiveCycleId] = useState('current');
+  const [activeCycleId, setActiveCycleId] = useState("current");
   const [tooltip, setTooltip] = useState({
     visible: false,
     x: 0,
     y: 0,
-    title: '',
-    range: '',
-    extra: '',
+    title: "",
+    range: "",
+    extra: "",
   });
   const [lsVersion, setLsVersion] = useState(0);
 
@@ -648,57 +642,58 @@ function CyclesOverview({ globalBump }) {
       const start = new Date(year, startMonth, 1);
       const end = new Date(year, startMonth + 3, 0);
       return {
-        id: offset === -1 ? 'prev' : offset === 0 ? 'current' : 'next',
+        id: offset === -1 ? "prev" : offset === 0 ? "current" : "next",
         start,
         end,
         label: `Cycle ${quarterIndex + 1 + offset} • ${start.getFullYear()}`,
-        range: `${start.toLocaleString('en-US', {
-          month: 'short',
-        })} ${start.getFullYear()} – ${end.toLocaleString('en-US', {
-          month: 'short',
+        range: `${start.toLocaleString("en-US", {
+          month: "short",
+        })} ${start.getFullYear()} – ${end.toLocaleString("en-US", {
+          month: "short",
         })} ${end.getFullYear()}`,
       };
     }
     return [buildCycle(-1), buildCycle(0), buildCycle(1)];
   }, [today]);
 
-  const activeCycle = baseCycles.find((c) => c.id === activeCycleId) || baseCycles[1];
+  const activeCycle =
+    baseCycles.find((c) => c.id === activeCycleId) || baseCycles[1];
 
   const TOTAL_WEEKS = 12;
   const DAYS_PER_WEEK = 7;
 
   const handleGoalEnter = (val) => {
     if (!val.trim()) return;
-    const arr = loadList('goals', activeCycleId);
+    const arr = loadList("goals", activeCycleId);
     arr.unshift({
       title: val.trim(),
-      date: new Date().toLocaleString('en-US', {
-        month: 'short',
-        day: 'numeric',
+      date: new Date().toLocaleString("en-US", {
+        month: "short",
+        day: "numeric",
       }),
     });
-    saveList('goals', activeCycleId, arr);
+    saveList("goals", activeCycleId, arr);
     setLsVersion((v) => v + 1);
     globalBump();
   };
 
   const handleBragEnter = (val) => {
     if (!val.trim()) return;
-    const arr = loadList('brag', activeCycleId);
+    const arr = loadList("brag", activeCycleId);
     arr.unshift({
       title: val.trim(),
-      date: new Date().toLocaleString('en-US', {
-        month: 'short',
-        day: 'numeric',
+      date: new Date().toLocaleString("en-US", {
+        month: "short",
+        day: "numeric",
       }),
     });
-    saveList('brag', activeCycleId, arr);
+    saveList("brag", activeCycleId, arr);
     setLsVersion((v) => v + 1);
     globalBump();
   };
 
-  const goals = loadList('goals', activeCycleId);
-  const brags = loadList('brag', activeCycleId);
+  const goals = loadList("goals", activeCycleId);
+  const brags = loadList("brag", activeCycleId);
 
   const totalDaysCal =
     Math.floor((activeCycle.end - activeCycle.start) / MS_DAY) + 1;
@@ -719,11 +714,10 @@ function CyclesOverview({ globalBump }) {
   const pctExec =
     today > activeCycle.end
       ? 100
-      : Math.round((completedDots / (TOTAL_WEEKS * DAYS_PER_WEEK)) * 1000) /
-        10;
+      : Math.round((completedDots / (TOTAL_WEEKS * DAYS_PER_WEEK)) * 1000) / 10;
 
   const historyList = baseCycles.map((c) => {
-    const br = loadList('brag', c.id);
+    const br = loadList("brag", c.id);
     return {
       ...c,
       winCount: br.length,
@@ -757,23 +751,23 @@ function CyclesOverview({ globalBump }) {
       <header className="flex items-center justify-between gap-3 pb-1 text-[0.72rem] tracking-[0.04em] text-white/50">
         <div className="font-medium text-[#d6eb3b]">12 WEEK YEAR</div>
         <div>
-          Cycle:{' '}
+          Cycle:{" "}
           {activeCycle
-            ? `${activeCycle.start.toLocaleString('en-US', {
-                month: 'short',
+            ? `${activeCycle.start.toLocaleString("en-US", {
+                month: "short",
               })} ${activeCycle.start.getFullYear()} – ${activeCycle.end.toLocaleString(
-                'en-US',
-                { month: 'short' }
+                "en-US",
+                { month: "short" }
               )} ${activeCycle.end.getFullYear()}`
-            : '—'}
+            : "—"}
         </div>
       </header>
       <div className="intro-band grid grid-cols-1 gap-4 pt-1 pb-3 text-[0.62rem] text-white/45 md:grid-cols-[1.2fr_1fr_0.9fr]">
         <div>
           <h2 className="mb-1 text-[0.7rem] text-white">12-week year pace</h2>
           <p>
-            The cycle compresses annual goals into 12 weeks. Each column below = 1
-            execution week.
+            The cycle compresses annual goals into 12 weeks. Each column below =
+            1 execution week.
           </p>
         </div>
         <div>
@@ -798,17 +792,17 @@ function CyclesOverview({ globalBump }) {
           aria-label="12 week progress"
           style={{
             background:
-              'radial-gradient(circle at 0% 0%, rgba(214,235,59,0.05), rgba(17,18,18,0)), #101111',
+              "radial-gradient(circle at 0% 0%, rgba(214,235,59,0.05), rgba(17,18,18,0)), #101111",
           }}
         >
           <div className="flex items-center justify-end gap-2 text-[0.6rem] text-white/50">
             <div className="flex gap-1">
               <button
-                onClick={() => openCycle('current')}
+                onClick={() => openCycle("current")}
                 className={`hidden rounded-full border px-3 py-1 text-[0.58rem] md:inline-flex ${
-                  activeCycleId === 'current'
-                    ? 'border-[rgba(214,235,59,0.45)] bg-[rgba(214,235,59,0.16)] text-white'
-                    : 'border-white/10 bg-white/5 text-white/80'
+                  activeCycleId === "current"
+                    ? "border-[rgba(214,235,59,0.45)] bg-[rgba(214,235,59,0.16)] text-white"
+                    : "border-white/10 bg-white/5 text-white/80"
                 }`}
               >
                 Go to current cycle
@@ -833,31 +827,31 @@ function CyclesOverview({ globalBump }) {
             className="chart-shell flex min-h-[260px] flex-col gap-4 rounded-[18px] border border-[rgba(214,235,59,0.06)] bg-black/10 p-4"
             style={{
               background:
-                'radial-gradient(circle at 50% 0%, rgba(214,235,59,0.02), rgba(12,13,13,0)), rgba(0,0,0,0.1)',
+                "radial-gradient(circle at 50% 0%, rgba(214,235,59,0.02), rgba(12,13,13,0)), rgba(0,0,0,0.1)",
             }}
           >
             <div className="flex items-center justify-between gap-4">
               <div>
                 <small className="text-[0.6rem] text-white/50">
                   {activeCycle
-                    ? `${activeCycle.start.toLocaleString('en-US', {
-                        month: 'short',
+                    ? `${activeCycle.start.toLocaleString("en-US", {
+                        month: "short",
                       })} ${activeCycle.start.getFullYear()} → ${activeCycle.end.toLocaleString(
-                        'en-US',
+                        "en-US",
                         {
-                          month: 'short',
+                          month: "short",
                         }
                       )} ${activeCycle.end.getFullYear()}`
-                    : '—'}
+                    : "—"}
                 </small>
                 <h3 className="mt-1 text-[0.78rem] font-medium tracking-[0.03em]">
-                  {activeCycle ? activeCycle.label : 'Q cycle'}
+                  {activeCycle ? activeCycle.label : "Q cycle"}
                 </h3>
               </div>
               <div className="flex items-center gap-2 rounded-full bg-white/5 px-3 py-1 text-[0.56rem]">
                 <strong className="text-[0.7rem] text-[#d6eb3b]">
                   {daysLeftCal}d
-                </strong>{' '}
+                </strong>{" "}
                 left in cycle
               </div>
             </div>
@@ -909,23 +903,22 @@ function CyclesOverview({ globalBump }) {
                         key={dayIdx}
                         onMouseMove={(e) => {
                           const cycleRange = `${activeCycle.start.toLocaleString(
-                            'en-US',
+                            "en-US",
                             {
-                              month: 'long',
+                              month: "long",
                             }
                           )} ${activeCycle.start.getFullYear()} → ${activeCycle.end.toLocaleString(
-                            'en-US',
-                            { month: 'long' }
+                            "en-US",
+                            { month: "long" }
                           )} ${activeCycle.end.getFullYear()}`;
-                          const percent =
-                            ((globalIndex + 1) / (12 * 7)) * 100;
+                          const percent = ((globalIndex + 1) / (12 * 7)) * 100;
                           setTooltip({
                             visible: true,
                             x: e.pageX + 12,
                             y: e.pageY - 6,
-                            title: dayDate.toLocaleString('en-US', {
-                              month: 'long',
-                              day: 'numeric',
+                            title: dayDate.toLocaleString("en-US", {
+                              month: "long",
+                              day: "numeric",
                             }),
                             range: cycleRange,
                             extra: `Week ${weekIdx + 1} ⋅ ${percent.toFixed(
@@ -938,8 +931,8 @@ function CyclesOverview({ globalBump }) {
                         }
                         className={`h-[12px] w-[12px] rounded-full transition ${
                           isActive
-                            ? 'bg-[#d6eb3b] shadow-[0_0_7px_rgba(214,235,59,0.35)]'
-                            : 'bg-[rgba(241,243,232,0.08)]'
+                            ? "bg-[#d6eb3b] shadow-[0_0_7px_rgba(214,235,59,0.35)]"
+                            : "bg-[rgba(241,243,232,0.08)]"
                         }`}
                       />
                     );
@@ -988,9 +981,9 @@ function CyclesOverview({ globalBump }) {
                 placeholder="Launch X, 30 workouts, revenue target..."
                 className="mb-2 w-full rounded-[7px] border border-[rgba(214,235,59,0.03)] bg-[rgba(2,2,2,0.25)] px-2 py-1 text-[0.6rem] text-white outline-none"
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
+                  if (e.key === "Enter") {
                     handleGoalEnter(e.target.value);
-                    e.target.value = '';
+                    e.target.value = "";
                   }
                 }}
               />
@@ -1012,22 +1005,22 @@ function CyclesOverview({ globalBump }) {
                       <div className="entry-actions hidden gap-1 group-hover:flex">
                         <button
                           onClick={() => {
-                            const arr = loadList('goals', activeCycleId);
+                            const arr = loadList("goals", activeCycleId);
                             const current = arr[i];
                             const nextTitle = window.prompt(
-                              'Edit goal',
-                              current?.title || ''
+                              "Edit goal",
+                              current?.title || ""
                             );
                             const nextDate = window.prompt(
-                              'Edit date (e.g. Nov 11)',
-                              current?.date || ''
+                              "Edit date (e.g. Nov 11)",
+                              current?.date || ""
                             );
                             if (nextTitle !== null && nextTitle.trim()) {
                               arr[i].title = nextTitle.trim();
                               if (nextDate && nextDate.trim()) {
                                 arr[i].date = nextDate.trim();
                               }
-                              saveList('goals', activeCycleId, arr);
+                              saveList("goals", activeCycleId, arr);
                               setLsVersion((v) => v + 1);
                               globalBump();
                             }
@@ -1038,9 +1031,9 @@ function CyclesOverview({ globalBump }) {
                         </button>
                         <button
                           onClick={() => {
-                            const arr = loadList('goals', activeCycleId);
+                            const arr = loadList("goals", activeCycleId);
                             arr.splice(i, 1);
-                            saveList('goals', activeCycleId, arr);
+                            saveList("goals", activeCycleId, arr);
                             setLsVersion((v) => v + 1);
                             globalBump();
                           }}
@@ -1070,9 +1063,9 @@ function CyclesOverview({ globalBump }) {
                 placeholder="Shipped onboarding v2, got 1k views..."
                 className="mb-2 w-full rounded-[7px] border border-[rgba(214,235,59,0.03)] bg-[rgba(2,2,2,0.25)] px-2 py-1 text-[0.6rem] text-white outline-none"
                 onKeyDown={(e) => {
-                  if (e.key === 'Enter') {
+                  if (e.key === "Enter") {
                     handleBragEnter(e.target.value);
-                    e.target.value = '';
+                    e.target.value = "";
                   }
                 }}
               />
@@ -1094,22 +1087,22 @@ function CyclesOverview({ globalBump }) {
                       <div className="entry-actions hidden gap-1 group-hover:flex">
                         <button
                           onClick={() => {
-                            const arr = loadList('brag', activeCycleId);
+                            const arr = loadList("brag", activeCycleId);
                             const current = arr[i];
                             const nextTitle = window.prompt(
-                              'Edit win',
-                              current?.title || ''
+                              "Edit win",
+                              current?.title || ""
                             );
                             const nextDate = window.prompt(
-                              'Edit date (e.g. Nov 11)',
-                              current?.date || ''
+                              "Edit date (e.g. Nov 11)",
+                              current?.date || ""
                             );
                             if (nextTitle !== null && nextTitle.trim()) {
                               arr[i].title = nextTitle.trim();
                               if (nextDate && nextDate.trim()) {
                                 arr[i].date = nextDate.trim();
                               }
-                              saveList('brag', activeCycleId, arr);
+                              saveList("brag", activeCycleId, arr);
                               setLsVersion((v) => v + 1);
                               globalBump();
                             }
@@ -1120,9 +1113,9 @@ function CyclesOverview({ globalBump }) {
                         </button>
                         <button
                           onClick={() => {
-                            const arr = loadList('brag', activeCycleId);
+                            const arr = loadList("brag", activeCycleId);
                             arr.splice(i, 1);
-                            saveList('brag', activeCycleId, arr);
+                            saveList("brag", activeCycleId, arr);
                             setLsVersion((v) => v + 1);
                             globalBump();
                           }}
@@ -1149,7 +1142,7 @@ function CyclesOverview({ globalBump }) {
           aria-label="cycle history"
           style={{
             background:
-              'radial-gradient(circle at 20% 0%, rgba(214,235,59,0.045), rgba(17,18,18,0)), rgba(3,3,3,0.25)',
+              "radial-gradient(circle at 20% 0%, rgba(214,235,59,0.045), rgba(17,18,18,0)), rgba(3,3,3,0.25)",
           }}
         >
           <div className="flex items-center justify-between gap-2">
@@ -1162,21 +1155,24 @@ function CyclesOverview({ globalBump }) {
                 key={h.id}
                 onClick={() => openCycle(h.id)}
                 className={[
-                  'flex cursor-pointer items-center justify-between gap-2 rounded-[10px] bg-black/10 px-2 py-1.5 transition',
+                  "flex cursor-pointer items-center justify-between gap-2 rounded-[10px] bg-black/10 px-2 py-1.5 transition",
                   activeCycleId === h.id
-                    ? 'bg-[rgba(214,235,59,0.17)] border-l-2 border-l-[rgba(214,235,59,0.8)]'
-                    : 'hover:bg-[rgba(214,235,59,0.06)] hover:border-l-[rgba(214,235,59,0.25)]',
-                  h.id === 'current' && 'shadow-inner shadow-[rgba(214,235,59,0.25)]',
+                    ? "bg-[rgba(214,235,59,0.17)] border-l-2 border-l-[rgba(214,235,59,0.8)]"
+                    : "hover:bg-[rgba(214,235,59,0.06)] hover:border-l-[rgba(214,235,59,0.25)]",
+                  h.id === "current" &&
+                    "shadow-inner shadow-[rgba(214,235,59,0.25)]",
                 ]
                   .filter(Boolean)
-                  .join(' ')}
+                  .join(" ")}
               >
                 <div className="cycle-meta text-[0.58rem] leading-[1.25]">
                   <strong className="block text-[0.67rem]">{h.label}</strong>
-                  <span className="text-[0.55rem] text-white/30">{h.range}</span>
+                  <span className="text-[0.55rem] text-white/30">
+                    {h.range}
+                  </span>
                 </div>
                 <div className="cycle-pill-sm min-w-[58px] rounded-[12px] border border-[rgba(214,235,59,0.25)] bg-[rgba(214,235,59,0.1)] px-2 py-0.5 text-center text-[0.55rem]">
-                  {h.winCount} {h.winCount === 1 ? 'win' : 'wins'}
+                  {h.winCount} {h.winCount === 1 ? "win" : "wins"}
                 </div>
               </div>
             ))}
@@ -1189,13 +1185,13 @@ function CyclesOverview({ globalBump }) {
               </span>
             </div>
             <div className="mb-1">
-              Wins logged:{' '}
-              <strong>{loadList('brag', activeCycleId).length}</strong>
+              Wins logged:{" "}
+              <strong>{loadList("brag", activeCycleId).length}</strong>
             </div>
             <div className="text-white/75">
-              {loadList('brag', activeCycleId).length
-                ? `Recent: ${loadList('brag', activeCycleId)[0].title}`
-                : 'No wins logged for this cycle yet.'}
+              {loadList("brag", activeCycleId).length
+                ? `Recent: ${loadList("brag", activeCycleId)[0].title}`
+                : "No wins logged for this cycle yet."}
             </div>
           </div>
         </aside>
@@ -1207,7 +1203,9 @@ function CyclesOverview({ globalBump }) {
           className="pointer-events-none fixed z-[999] rounded-[12px] border border-[rgba(214,235,59,0.35)] bg-[rgba(6,6,6,0.92)] px-3 py-2 text-[0.6rem] shadow-[0_18px_50px_rgba(0,0,0,0.35)]"
           style={{ left: tooltip.x, top: tooltip.y }}
         >
-          <h4 className="mb-1 text-[0.65rem] text-[#d6eb3b]">{tooltip.title}</h4>
+          <h4 className="mb-1 text-[0.65rem] text-[#d6eb3b]">
+            {tooltip.title}
+          </h4>
           <p className="text-white/70">{tooltip.range}</p>
           <p className="mt-1 text-white/60">{tooltip.extra}</p>
         </div>

@@ -19,6 +19,9 @@ import {
   Upload,
   RotateCcw,
   Maximize2,
+  Timer,
+  Pause,
+  Play,
 } from "lucide-react";
 
 const STAGES = ["Notes", "Draft", "Edit", "Polish", "Final"];
@@ -68,7 +71,7 @@ const defaultData = {
     {
       id: "1",
       title: "Getting Started",
-      subtitle: "Explore how Qwinkling helps you iterate",
+      subtitle: "Explore how Draftline helps you iterate",
       height: 500,
       cards: [
         {
@@ -82,7 +85,7 @@ const defaultData = {
         {
           id: "1-2",
           content:
-            "<h2>Qwinkling Overview</h2><p>Qwinkling is a visual writing studio that helps you <mark>sculpt text</mark> through visible iterations. Perfect for:</p><ul><li>Social posts</li><li>Essays</li><li>Scripts</li></ul><p>Instead of overwriting drafts, you <em>evolve ideas side by side</em> with real-time diffs and flexible stages.</p>",
+            "<h2>Draftline Overview</h2><p>Draftline is a visual writing studio that helps you <mark>sculpt text</mark> through visible iterations. Perfect for:</p><ul><li>Social posts</li><li>Essays</li><li>Scripts</li></ul><p>Instead of overwriting drafts, you <em>evolve ideas side by side</em> with real-time diffs and flexible stages.</p>",
           stage: "Draft",
           title: "First Draft",
           width: 320,
@@ -90,10 +93,50 @@ const defaultData = {
         {
           id: "1-3",
           content:
-            "<h1>Qwinkling</h1><p><strong>A visual writing studio</strong> that transforms how you craft text.</p><p>Evolve your ideas side-by-side through <u>visible iterations</u>—perfect for social posts, essays, and scripts.</p><p><em>No more overwriting drafts.</em> Compare versions instantly with real-time diffs and track your creative journey from rough notes to <mark>polished prose</mark>.</p>",
+            "<h1>Draftline</h1><p><strong>A visual writing studio</strong> that transforms how you craft text.</p><p>Evolve your ideas side-by-side through <u>visible iterations</u>—perfect for social posts, essays, and scripts.</p><p><em>No more overwriting drafts.</em> Compare versions instantly with real-time diffs and track your creative journey from rough notes to <mark>polished prose</mark>.</p>",
           stage: "Polish",
           title: "Polished Copy",
           width: 320,
+        },
+      ],
+    },
+    {
+      id: "2",
+      title: "Accordion rounds demo",
+      subtitle: "Practice shrinking and expanding the same idea across rounds",
+      height: 500,
+      cards: [
+        {
+          id: "2-1",
+          content:
+            "<h2>Round 1 — 2 minutes</h2><p>Big idea: Draftline helps you rehearse a talk by looping through different round lengths.</p><p>In this longer pass you can set the scene, explain the core idea, and hint at the story arc you&apos;ll tighten later.</p>",
+          stage: "Draft",
+          title: "2 min version",
+          width: 360,
+        },
+        {
+          id: "2-2",
+          content:
+            "<h2>Round 2 — 1 minute</h2><p>Same idea, tighter pass. Focus on the hook, the one core message, and a single clear benefit.</p>",
+          stage: "Edit",
+          title: "1 min version",
+          width: 360,
+        },
+        {
+          id: "2-3",
+          content:
+            "<h2>Round 3 — 30 seconds</h2><p>This is your elevator pitch. One sentence to frame the problem, one to show how Draftline helps.</p>",
+          stage: "Polish",
+          title: "30 sec version",
+          width: 360,
+        },
+        {
+          id: "2-4",
+          content:
+            "<h2>Round 4 — 1 minute</h2><p>Expand back out after the 30s pass. Keep the tight structure, but add one concrete example or story beat.</p>",
+          stage: "Final",
+          title: "Return to 1 min",
+          width: 360,
         },
       ],
     },
@@ -122,6 +165,13 @@ const stripHtml = (html) => {
     .replace(/&gt;/gi, ">")
     .replace(/&quot;/gi, '"')
     .replace(/&#39;/g, "'");
+};
+
+const formatTime = (totalSeconds) => {
+  const seconds = Math.max(0, Math.floor(totalSeconds || 0));
+  const m = Math.floor(seconds / 60);
+  const s = seconds % 60;
+  return `${m.toString().padStart(2, "0")}:${s.toString().padStart(2, "0")}`;
 };
 
 const diffWords = (oldText, newText) => {
@@ -249,6 +299,8 @@ const CardBase = ({
   onFocus,
   copyMarkdown,
   theme,
+  showCompare,
+  autoPlayTimer,
 }) => {
   const [isResizing, setIsResizing] = useState(false);
   const [width, setWidth] = useState(card.width || 320);
@@ -260,6 +312,15 @@ const CardBase = ({
   const cardRef = useRef(null);
   const startX = useRef(0);
   const startWidth = useRef(0);
+
+  const [showTimerMenu, setShowTimerMenu] = useState(false);
+  const [timerMode, setTimerMode] = useState(null); // "countdown" | "stopwatch" | null
+  const [timerDuration, setTimerDuration] = useState(0); // preset duration in seconds
+  const [timeValue, setTimeValue] = useState(0); // remaining / elapsed seconds
+  const [timerRunning, setTimerRunning] = useState(false);
+  const [customMinutes, setCustomMinutes] = useState("");
+  const timerIntervalRef = useRef(null);
+  const timerMenuRef = useRef(null);
 
   const handleMouseDown = (e) => {
     e.preventDefault();
@@ -294,6 +355,102 @@ const CardBase = ({
       document.removeEventListener("mouseup", handleMouseUp);
     };
   }, [isResizing, width]);
+
+  useEffect(() => {
+    if (!timerRunning || !timerMode) {
+      if (timerIntervalRef.current) {
+        clearInterval(timerIntervalRef.current);
+        timerIntervalRef.current = null;
+      }
+      return;
+    }
+
+    timerIntervalRef.current = setInterval(() => {
+      setTimeValue((prev) => {
+        if (timerMode === "countdown") {
+          if (prev <= 1) {
+            setTimerRunning(false);
+            return 0;
+          }
+          return prev - 1;
+        } else {
+          return prev + 1;
+        }
+      });
+    }, 1000);
+
+    return () => {
+      if (timerIntervalRef.current) {
+        clearInterval(timerIntervalRef.current);
+        timerIntervalRef.current = null;
+      }
+    };
+  }, [timerRunning, timerMode]);
+
+  useEffect(() => {
+    if (!showTimerMenu) return;
+
+    const handleClick = (e) => {
+      if (!timerMenuRef.current) return;
+      if (!timerMenuRef.current.contains(e.target)) {
+        setShowTimerMenu(false);
+      }
+    };
+
+    document.addEventListener("mousedown", handleClick);
+    return () => document.removeEventListener("mousedown", handleClick);
+  }, [showTimerMenu]);
+
+  const handleSelectPreset = (seconds) => {
+    setTimerMode("countdown");
+    setTimerDuration(seconds);
+    setTimeValue(seconds);
+    setTimerRunning(autoPlayTimer);
+    setShowTimerMenu(false);
+  };
+
+  const handleSelectStopwatch = () => {
+    setTimerMode("stopwatch");
+    setTimerDuration(0);
+    setTimeValue(0);
+    setTimerRunning(autoPlayTimer);
+    setShowTimerMenu(false);
+  };
+
+  const handleSetCustom = () => {
+    const mins = parseFloat(customMinutes);
+    if (Number.isNaN(mins) || mins <= 0) return;
+    const secs = Math.round(mins * 60);
+    setTimerMode("countdown");
+    setTimerDuration(secs);
+    setTimeValue(secs);
+    setTimerRunning(autoPlayTimer);
+    setShowTimerMenu(false);
+  };
+
+  const handleToggleTimerRunning = () => {
+    if (!timerMode) return;
+    setTimerRunning((prev) => !prev);
+  };
+
+  const handleResetTimer = () => {
+    if (!timerMode) return;
+    if (timerMode === "countdown") {
+      setTimeValue(timerDuration || 0);
+    } else {
+      setTimeValue(0);
+    }
+    setTimerRunning(false);
+  };
+
+  const handleClearTimer = () => {
+    setTimerMode(null);
+    setTimerDuration(0);
+    setTimeValue(0);
+    setTimerRunning(false);
+    setCustomMinutes("");
+    setShowTimerMenu(false);
+  };
 
   const wordCount = stripHtml(card.content)
     .trim()
@@ -527,7 +684,7 @@ const CardBase = ({
             </div>
 
             <div
-              className={`flex-1 flex flex-col overflow-hidden min-h-0 ${themeClasses.text}`}
+              className={`flex-1 flex flex-col min-h-0 ${themeClasses.text}`}
             >
               {diff ? (
                 <div className="flex-1 p-4 overflow-y-auto text-sm leading-relaxed">
@@ -567,49 +724,203 @@ const CardBase = ({
               <div
                 className={`flex items-center justify-between px-4 py-2 border-t ${themeClasses.border} ${themeClasses.cardHeader} text-xs flex-shrink-0`}
               >
-                <div className="flex items-center gap-2">
-                  <select
-                    value={compareWithId || ""}
-                    onChange={(e) => setCompareWithId(e.target.value || null)}
-                    className={`text-xs ${themeClasses.textMuted} ${themeClasses.card} border ${themeClasses.border} rounded px-2 py-1 outline-none cursor-pointer`}
-                  >
-                    <option value="">Compare vs...</option>
-                    {allCards.map((c, idx) => {
-                      if (c.id === card.id) return null;
-                      return (
-                        <option key={c.id} value={c.id}>
-                          Card {idx + 1}
-                        </option>
-                      );
-                    })}
-                  </select>
-                  {compareWithId && (
-                    <button
-                      onClick={() => setShowDiff(!showDiff)}
-                      className={`p-1 rounded transition-colors ${
-                        showDiff
-                          ? "bg-blue-100 text-blue-600"
-                          : `${themeClasses.cardHeader} ${themeClasses.textMuted}`
-                      }`}
-                      title={showDiff ? "Hide diff" : "Show diff"}
-                    >
-                      {showDiff ? (
-                        <Eye className="w-3.5 h-3.5" />
-                      ) : (
-                        <EyeOff className="w-3.5 h-3.5" />
+                <div className="flex items-center gap-3">
+                  {showCompare && (
+                    <>
+                      <select
+                        value={compareWithId || ""}
+                        onChange={(e) =>
+                          setCompareWithId(e.target.value || null)
+                        }
+                        className={`text-xs ${themeClasses.textMuted} ${themeClasses.card} border ${themeClasses.border} rounded px-2 py-1 outline-none cursor-pointer`}
+                      >
+                        <option value="">Compare drafts…</option>
+                        {allCards.map((c, idx) => {
+                          if (c.id === card.id) return null;
+                          return (
+                            <option key={c.id} value={c.id}>
+                              Card {idx + 1}
+                            </option>
+                          );
+                        })}
+                      </select>
+
+                      {compareWithId && (
+                        <button
+                          onClick={() => setShowDiff(!showDiff)}
+                          className={`p-1 rounded transition-colors ${
+                            showDiff
+                              ? "bg-blue-100 text-blue-600"
+                              : `${themeClasses.cardHeader} ${themeClasses.textMuted}`
+                          }`}
+                          title={showDiff ? "Hide diff" : "Show diff"}
+                        >
+                          {showDiff ? (
+                            <Eye className="w-3.5 h-3.5" />
+                          ) : (
+                            <EyeOff className="w-3.5 h-3.5" />
+                          )}
+                        </button>
                       )}
-                    </button>
+                      {delta !== null && delta !== 0 && showDiff && (
+                        <span
+                          className={`font-medium ${
+                            delta > 0 ? "text-emerald-600" : "text-red-600"
+                          }`}
+                        >
+                          {delta > 0 ? "+" : ""}
+                          {delta}w
+                        </span>
+                      )}
+                    </>
                   )}
-                  {delta !== null && delta !== 0 && showDiff && (
-                    <span
-                      className={`font-medium ${
-                        delta > 0 ? "text-emerald-600" : "text-red-600"
+
+                  <div
+                    className="relative flex items-center gap-1"
+                    ref={timerMenuRef}
+                  >
+                    <button
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        setShowTimerMenu((prev) => !prev);
+                      }}
+                      className={`p-1 rounded transition-colors ${
+                        timerMode === "countdown" && timerRunning && timeValue < 10
+                          ? "bg-red-500 text-white shadow-sm"
+                          : timerMode && timerRunning
+                          ? "bg-emerald-500 text-white shadow-sm"
+                          : `${themeClasses.cardHeader} ${themeClasses.textMuted} hover:bg-slate-100/70`
                       }`}
+                      title="Accordion timer"
                     >
-                      {delta > 0 ? "+" : ""}
-                      {delta}w
-                    </span>
-                  )}
+                      <Timer className="w-3.5 h-3.5" />
+                    </button>
+
+                    {timerMode && (
+                      <div className="flex items-center gap-1 text-xs font-mono">
+                        <span className={`px-2 py-0.5 rounded-full xbg-slate-900 xtext-slate-50 ${themeClasses.text} tracking-tight`}>
+                          {formatTime(timeValue)}
+                        </span>
+                        <button
+                          onClick={(e) => {
+                            e.stopPropagation();
+                            handleToggleTimerRunning();
+                          }}
+                          className="p-0.5 rounded hover:bg-slate-200/60"
+                          title={timerRunning ? "Pause" : "Start"}
+                        >
+                          {timerRunning ? (
+                            <Pause className="w-3 h-3" />
+                          ) : (
+                            <Play className="w-3 h-3" />
+                          )}
+                        </button>
+                        {((timerMode === "countdown" && timeValue < timerDuration) ||
+                          (timerMode === "stopwatch" && timeValue > 0)) && (
+                          <button
+                            onClick={(e) => {
+                              e.stopPropagation();
+                              handleResetTimer();
+                            }}
+                            className="p-0.5 rounded hover:bg-slate-200/60"
+                            title="Reset"
+                          >
+                            <RotateCcw className="w-3 h-3" />
+                          </button>
+                        )}
+                      </div>
+                    )}
+
+                    {showTimerMenu && (
+                      <div
+                        className={`absolute left-0 bottom-full mb-2 z-20 min-w-[240px] max-w-xs ${themeClasses.card} border ${themeClasses.border} rounded-xl shadow-xl p-3 text-xs`}
+                      >
+                        <div className="flex items-start justify-between mb-3">
+                          <div>
+                            <div className="text-[11px] font-semibold">
+                              Set a round timer
+                            </div>
+                            <div className="text-[10px] text-slate-400">
+                              Timebox this pass to sharpen what matters.
+                            </div>
+                          </div>
+                          {timerMode && (
+                            <button
+                              onClick={handleClearTimer}
+                              className="text-[10px] text-slate-400 hover:text-red-500"
+                            >
+                              Clear
+                            </button>
+                          )}
+                        </div>
+
+                        <div className="space-y-3">
+                          <div>
+                            <p className="text-[10px] text-slate-400 mb-1">
+                              Round length
+                            </p>
+                            <div className="flex flex-wrap items-center gap-2">
+                              <button
+                                onClick={() => handleSelectPreset(30)}
+                                className="px-2 py-1 rounded-full border border-slate-200 hover:bg-slate-100"
+                              >
+                                0:30
+                              </button>
+                              <button
+                                onClick={() => handleSelectPreset(60)}
+                                className="px-2 py-1 rounded-full border border-slate-200 hover:bg-slate-100"
+                              >
+                                1:00
+                              </button>
+                              <button
+                                onClick={() => handleSelectPreset(120)}
+                                className="px-2 py-1 rounded-full border border-slate-200 hover:bg-slate-100"
+                              >
+                                2:00
+                              </button>
+                              <button
+                                onClick={() => handleSelectPreset(180)}
+                                className="px-2 py-1 rounded-full border border-slate-200 hover:bg-slate-100"
+                              >
+                                3:00
+                              </button>
+                              <div className="flex items-center gap-1 mt-2">
+                                <input
+                                  type="number"
+                                  min="0"
+                                  step="0.5"
+                                  value={customMinutes}
+                                  onChange={(e) =>
+                                    setCustomMinutes(e.target.value)
+                                  }
+                                  placeholder="Custom (min)"
+                                  className={`w-32 px-2 py-1 rounded border ${themeClasses.border} bg-transparent text-[11px]`}
+                                />
+                                <button
+                                  onClick={handleSetCustom}
+                                  className="px-2 py-1 rounded-full border border-slate-200 bg-slate-50 hover:bg-slate-100 text-[11px]"
+                                >
+                                  Start
+                                </button>
+                              </div>
+                            </div>
+                          </div>
+
+                          <div className="border-t border-slate-200 mt-3 pt-3 pb-1">
+                            <button
+                              onClick={handleSelectStopwatch}
+                              className="w-full px-2 py-1.5 rounded-lg border border-slate-200 hover:bg-slate-100 text-[11px] flex items-center justify-between"
+                            >
+                              <span>Stopwatch</span>
+                              <span className="text-[10px] text-slate-400">
+                                Counts up
+                              </span>
+                            </button>
+                          </div>
+                        </div>
+                      </div>
+                    )}
+                  </div>
                 </div>
                 <div className="flex items-center gap-3">
                   <span className={themeClasses.textMuted}>
@@ -659,7 +970,9 @@ const Card = React.memo(CardBase, (prev, next) => {
     prev.theme === next.theme &&
     prev.copyMarkdown === next.copyMarkdown &&
     prev.sectionHeight === next.sectionHeight &&
-    prev.allCards === next.allCards // if parent recreates this array, this will flip to false (that’s OK)
+    prev.allCards === next.allCards &&
+    prev.showCompare === next.showCompare &&
+    prev.autoPlayTimer === next.autoPlayTimer
   );
 });
 
@@ -685,11 +998,15 @@ const Section = ({
   autoFitHeight,
   centerCards,
   defaultCardWidth,
+  isCollapsed,
+  onSectionToggleCollapse,
+  showCompare,
+  autoPlayTimer,
 }) => {
   const [isResizing, setIsResizing] = useState(false);
   const [height, setHeight] = useState(section.height || 500);
-  const [isCollapsed, setIsCollapsed] = useState(false);
   const [dragOverIndex, setDragOverIndex] = useState(null);
+  const [copied, setCopied] = useState(false);
   const scrollRef = useRef(null);
   const startY = useRef(0);
   const startHeight = useRef(0);
@@ -753,7 +1070,7 @@ const Section = ({
           ? section.cards.find((c) => c.id === sourceId)?.stage || "Notes"
           : "Notes",
       title: "",
-      width: defaultCardWidth || 320,
+      width: defaultCardWidth || 420,
     };
 
     if (duplicate && sourceId) {
@@ -801,27 +1118,80 @@ const Section = ({
     return count;
   };
 
+  const handleCopySection = () => {
+    const lines = [];
+    if (section.title) {
+      lines.push(`Section: ${section.title}`);
+    }
+    if (section.subtitle) {
+      lines.push(section.subtitle);
+    }
+
+    if (section.cards && section.cards.length > 0) {
+      lines.push("");
+      section.cards.forEach((card, idx) => {
+        const num = idx + 1;
+        const cardTitle = card.title || `Card ${num}`;
+        lines.push(`Card ${num} — ${cardTitle}`);
+        const text = stripHtml(card.content || "")
+          .trim()
+          .replace(/\r\n/g, "\n")
+          .replace(/\n{3,}/g, "\n\n");
+        if (text) {
+          lines.push(text);
+        }
+        if (idx < section.cards.length - 1) {
+          lines.push("");
+        }
+      });
+    }
+
+    const toCopy = lines.join("\n");
+    if (!toCopy) return;
+
+    navigator.clipboard
+      .writeText(toCopy)
+      .then(() => {
+        setCopied(true);
+        setTimeout(() => setCopied(false), 1800);
+      })
+      .catch(() => {});
+  };
+
   return (
     <div className="mb-6 relative">
-      <div className="mb-3 flex items-center justify-between">
-        <div className="flex-1">
-          <div className="flex items-center gap-2 mb-1">
-            <input
-              type="text"
-              value={section.title}
-              onChange={(e) =>
-                onUpdateSection(section.id, { title: e.target.value })
-              }
-              className={`text-lg font-semibold ${themeClasses.text} bg-transparent border-none outline-none`}
-              placeholder="Section title"
-            />
-            {section.cards.length > 1 && (
+      <div
+        className={`mb-3 flex flex-col sm:flex-row sm:items-center justify-between gap-2 sm:gap-4 px-3 py-2 rounded-lg transition-colors ${themeClasses.cardHeader} hover:${themeClasses.card} cursor-pointer`}
+        onClick={() => onSectionToggleCollapse(section.id)}
+      >
+        <div className="flex-1 min-w-0">
+          <div className="mb-1 max-w-full">
+            <div className="flex flex-wrap items-baseline gap-1.5 sm:gap-2">
+              <input
+                type="text"
+                value={section.title}
+                onChange={(e) =>
+                  onUpdateSection(section.id, { title: e.target.value })
+                }
+                onClick={(e) => e.stopPropagation()}
+                onMouseDown={(e) => e.stopPropagation()}
+                className={`text-lg font-semibold leading-snug ${themeClasses.text} bg-transparent border-none outline-none overflow-ellipsis`}
+                placeholder="Section title"
+                style={{
+                  width: `${Math.min(
+                    Math.max((section.title || "Section title").length, 6),
+                    40
+                  )}ch`,
+                  maxWidth: "100%",
+                }}
+              />
               <span
-                className={`text-xs font-bold ${themeClasses.textMuted} align-super`}
+                className={`text-xs font-medium ${themeClasses.textMuted} whitespace-nowrap`}
               >
-                {section.cards.length}
+                {section.cards.length}{" "}
+                {section.cards.length === 1 ? "card" : "cards"}
               </span>
-            )}
+            </div>
           </div>
           <input
             type="text"
@@ -829,21 +1199,44 @@ const Section = ({
             onChange={(e) =>
               onUpdateSection(section.id, { subtitle: e.target.value })
             }
-            className={`text-sm ${themeClasses.textMuted} bg-transparent border-none outline-none w-full`}
+            onClick={(e) => e.stopPropagation()}
+            onMouseDown={(e) => e.stopPropagation()}
+            className={`text-sm ${themeClasses.textMuted} bg-transparent border-none outline-none w-full overflow-ellipsis`}
             placeholder="Add description..."
           />
         </div>
         <div className="flex items-center gap-2">
           <button
-            onClick={() => onDeleteSection(section.id)}
+            onClick={(e) => {
+              e.stopPropagation();
+              handleCopySection();
+            }}
+            className={`p-2 rounded-lg transition-colors hover:${themeClasses.cardHeader} ${themeClasses.textMuted}`}
+            title="Copy section"
+          >
+            {copied ? (
+              <Check className="w-4 h-4" />
+            ) : (
+              <Copy className="w-4 h-4" />
+            )}
+          </button>
+          <button
+            onClick={(e) => {
+              e.stopPropagation();
+              onDeleteSection(section.id);
+            }}
             className={`p-2 hover:bg-red-50 ${themeClasses.textMuted} hover:text-red-500 rounded-lg transition-colors`}
             title="Delete section"
           >
             <Trash2 className="w-4 h-4" />
           </button>
           <button
-            onClick={() => setIsCollapsed(!isCollapsed)}
+            onClick={(e) => {
+              e.stopPropagation();
+              onSectionToggleCollapse(section.id);
+            }}
             className={`p-2 hover:${themeClasses.cardHeader} rounded-lg transition-colors ml-2`}
+            title={isCollapsed ? "Expand section" : "Collapse section"}
           >
             {isCollapsed ? (
               <ChevronDown className={`w-5 h-5 ${themeClasses.textMuted}`} />
@@ -904,6 +1297,8 @@ const Section = ({
                   onFocus={onCardFocus}
                   copyMarkdown={copyMarkdown}
                   theme={theme}
+                  showCompare={showCompare}
+                  autoPlayTimer={autoPlayTimer}
                 />
               </React.Fragment>
             ))}
@@ -965,6 +1360,18 @@ export default function Qwinkling() {
   }, []);
 
   const [collapsedCards, setCollapsedCards] = useState(new Set());
+  const [collapsedSections, setCollapsedSections] = useState(new Set());
+  const toggleSectionCollapse = (sectionId) => {
+    setCollapsedSections((prev) => {
+      const next = new Set(prev);
+      if (next.has(sectionId)) {
+        next.delete(sectionId);
+      } else {
+        next.add(sectionId);
+      }
+      return next;
+    });
+  };
   const [activeCardId, setActiveCardId] = useState(null);
   const [showSettings, setShowSettings] = useState(false);
 
@@ -976,8 +1383,10 @@ export default function Qwinkling() {
     theme: "light",
     autoFitHeight: false,
     centerCards: false,
-    defaultCardWidth: 320,
+    defaultCardWidth: 400,
     zenMode: false,
+    showCompare: false,
+    autoPlayTimer: false,
   });
 
   const [settings, setSettings] = useState(loadSettings());
@@ -991,7 +1400,7 @@ export default function Qwinkling() {
       console.error("Failed to read settings from localStorage", e);
     }
   }, []);
-  
+
   useEffect(() => {
     if (typeof window === "undefined") return;
     try {
@@ -1231,11 +1640,14 @@ export default function Qwinkling() {
 
   const collapseAll = () => {
     const allCardIds = sections.flatMap((s) => s.cards.map((c) => c.id));
+    const allSectionIds = sections.map((s) => s.id);
     setCollapsedCards(new Set(allCardIds));
+    setCollapsedSections(new Set(allSectionIds));
   };
 
   const expandAll = () => {
     setCollapsedCards(new Set());
+    setCollapsedSections(new Set());
   };
 
   const themeClasses = THEMES[settings.theme];
@@ -1509,6 +1921,30 @@ export default function Qwinkling() {
                                     className="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500"
                                   />
                                 </label>
+                                <label className="flex items-center justify-between">
+                                  <span
+                                    className={`text-sm ${themeClasses.textMuted}`}
+                                  >
+                                    Show compare controls
+                                  </span>
+                                  <input
+                                    type="checkbox"
+                                    checked={settings.showCompare}
+                                    onChange={(e) =>
+                                      updateSetting(
+                                        "showCompare",
+                                        e.target.checked
+                                      )
+                                    }
+                                    className="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500"
+                                  />
+                                </label>
+                                <p
+                                  className={`text-xs ${themeClasses.textMuted} mt-1`}
+                                >
+                                  Enable draft comparison dropdowns in each card
+                                  footer.
+                                </p>
                               </div>
                             </div>
 
@@ -1539,6 +1975,30 @@ export default function Qwinkling() {
                                     className="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500"
                                   />
                                 </label>
+                                <label className="flex items-center justify-between mt-2">
+                                  <span
+                                    className={`text-sm ${themeClasses.textMuted}`}
+                                  >
+                                    Autoplay timers
+                                  </span>
+                                  <input
+                                    type="checkbox"
+                                    checked={settings.autoPlayTimer}
+                                    onChange={(e) =>
+                                      updateSetting(
+                                        "autoPlayTimer",
+                                        e.target.checked
+                                      )
+                                    }
+                                    className="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500"
+                                  />
+                                </label>
+                                <p
+                                  className={`text-xs ${themeClasses.textMuted} mt-1`}
+                                >
+                                  When on, countdowns &amp; stopwatches start as
+                                  soon as you select them.
+                                </p>
                               </div>
                             </div>
 
@@ -1668,6 +2128,10 @@ export default function Qwinkling() {
             autoFitHeight={settings.autoFitHeight}
             centerCards={settings.centerCards}
             defaultCardWidth={settings.defaultCardWidth}
+            isCollapsed={collapsedSections.has(section.id)}
+            onSectionToggleCollapse={toggleSectionCollapse}
+            showCompare={settings.showCompare}
+            autoPlayTimer={settings.autoPlayTimer}
           />
         ))}
 

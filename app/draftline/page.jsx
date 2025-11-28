@@ -34,16 +34,48 @@ const STAGE_COLORS = {
 };
 
 const THEMES = {
-  light: {
-    bg: "bg-gradient-to-br from-slate-50 to-slate-100",
-    card: "bg-white border-slate-200",
-    text: "text-slate-800",
+  Daylight: {
+    // Clean white page, high contrast
+    bg: "bg-gradient-to-br from-stone-50 to-stone-100",
+    card: "bg-white border-stone-200",
+    text: "text-stone-900",
+    textMuted: "text-stone-500",
+    border: "border-stone-200",
+    header: "bg-white/85",
+    cardHeader: "bg-stone-50",
+  },
+Mocha: {
+  // Creamy base with mocha depth
+  bg: "bg-[#F7F1EB]",            // light cream with a warm coffee tint
+  card: "bg-[#EFE6DF] border-[#CBB8A6]", 
+  text: "text-[#3A2A20]",        // rich mocha brown (chocolatey)
+  textMuted: "text-[#7C6554]",   // muted latte/cappuccino tone
+  border: "border-[#CBB8A6]",    // warm beige-brown border
+  header: "bg-[#E6D8CC]/90",     // warm latte foam color
+  cardHeader: "bg-[#E6D8CC]",
+},
+  CoolSlate: {
+    // Soft cool gray/blue variant, low-saturation
+    bg: "bg-gradient-to-br from-slate-100 to-slate-200",
+    card: "bg-slate-50 border-slate-200",
+    text: "text-slate-900",
     textMuted: "text-slate-500",
     border: "border-slate-200",
-    header: "bg-white/80",
+    header: "bg-slate-50/90",
     cardHeader: "bg-slate-50",
   },
-  dark: {
+  Midnight: {
+    // Deep neutral night reading mode
+    bg: "bg-gradient-to-br from-neutral-950 to-neutral-900",
+    card: "bg-neutral-900 border-neutral-700",
+    text: "text-neutral-50",
+    textMuted: "text-neutral-400",
+    border: "border-neutral-700",
+    header: "bg-neutral-950/85",
+    cardHeader: "bg-neutral-900",
+  },
+  DeepOcean: {
+    // Original navy-toned dark theme
     bg: "bg-gradient-to-br from-slate-900 to-slate-800",
     card: "bg-slate-800 border-slate-700",
     text: "text-slate-100",
@@ -51,15 +83,6 @@ const THEMES = {
     border: "border-slate-700",
     header: "bg-slate-900/80",
     cardHeader: "bg-slate-900",
-  },
-  warm: {
-    bg: "bg-gradient-to-br from-amber-50 to-orange-50",
-    card: "bg-white border-amber-200",
-    text: "text-amber-950",
-    textMuted: "text-amber-700",
-    border: "border-amber-200",
-    header: "bg-white/80",
-    cardHeader: "bg-amber-50",
   },
 };
 
@@ -113,6 +136,10 @@ const defaultData = {
           stage: "Draft",
           title: "2 min version",
           width: 360,
+          timerPreset: {
+            mode: "countdown",
+            seconds: 120,
+          },
         },
         {
           id: "2-2",
@@ -121,6 +148,10 @@ const defaultData = {
           stage: "Edit",
           title: "1 min version",
           width: 360,
+          timerPreset: {
+            mode: "countdown",
+            seconds: 60,
+          },
         },
         {
           id: "2-3",
@@ -129,6 +160,10 @@ const defaultData = {
           stage: "Polish",
           title: "30 sec version",
           width: 360,
+          timerPreset: {
+            mode: "countdown",
+            seconds: 30,
+          },
         },
         {
           id: "2-4",
@@ -137,6 +172,10 @@ const defaultData = {
           stage: "Final",
           title: "Return to 1 min",
           width: 360,
+          timerPreset: {
+            mode: "countdown",
+            seconds: 60,
+          },
         },
       ],
     },
@@ -301,6 +340,7 @@ const CardBase = ({
   theme,
   showCompare,
   autoPlayTimer,
+  muteSounds,
 }) => {
   const [isResizing, setIsResizing] = useState(false);
   const [width, setWidth] = useState(card.width || 320);
@@ -321,6 +361,93 @@ const CardBase = ({
   const [customMinutes, setCustomMinutes] = useState("");
   const timerIntervalRef = useRef(null);
   const timerMenuRef = useRef(null);
+  const audioCtxRef = useRef(null);
+  const prevTimeRef = useRef(0);
+  // --- Timer Sound Effects ---
+  const playBeep = (durationMs = 160, frequency = 620, volume = 0.08) => {
+    if (muteSounds) return;
+    if (typeof window === "undefined") return;
+
+    try {
+      if (!audioCtxRef.current) {
+        const AudioCtx =
+          window.AudioContext || window.webkitAudioContext || null;
+        if (!AudioCtx) return;
+        audioCtxRef.current = new AudioCtx();
+      }
+
+      const ctx = audioCtxRef.current;
+      const oscillator = ctx.createOscillator();
+      const gain = ctx.createGain();
+
+      oscillator.type = "sine";
+      oscillator.frequency.value = frequency;
+
+      const now = ctx.currentTime;
+      gain.gain.setValueAtTime(volume, now);
+      gain.gain.linearRampToValueAtTime(0, now + durationMs / 1000);
+
+      oscillator.connect(gain);
+      gain.connect(ctx.destination);
+
+      oscillator.start(now);
+      oscillator.stop(now + durationMs / 1000);
+    } catch {
+      // fail silently if audio can't play
+    }
+  };
+
+  useEffect(() => {
+    return () => {
+      if (audioCtxRef.current) {
+        try {
+          audioCtxRef.current.close();
+        } catch {
+          // ignore
+        }
+        audioCtxRef.current = null;
+      }
+    };
+  }, []);
+  useEffect(() => {
+    const prev = prevTimeRef.current;
+
+    if (
+      timerMode === "countdown" &&
+      !muteSounds &&
+      typeof timeValue === "number"
+    ) {
+      // Beep on each of the last 5 seconds: 5,4,3,2,1
+      if (
+        timerRunning &&
+        timeValue > 0 &&
+        timeValue <= 5 &&
+        timeValue !== prev
+      ) {
+        playBeep(140, 700, 0.07);
+      }
+
+      // Gentle chime when the timer hits 0
+      if (prev > 0 && timeValue === 0) {
+        playBeep(260, 520, 0.11);
+      }
+    }
+
+    prevTimeRef.current = timeValue;
+  }, [timeValue, timerMode, timerRunning, muteSounds]);
+  useEffect(() => {
+    if (!timerMode && card.timerPreset) {
+      const presetSeconds = card.timerPreset.seconds || 0;
+      const presetMode = card.timerPreset.mode || "countdown";
+
+      if (presetSeconds > 0) {
+        setTimerMode(presetMode);
+        setTimerDuration(presetSeconds);
+        setTimeValue(presetSeconds);
+        setTimerRunning(false);
+      }
+    }
+  }, [card.timerPreset, timerMode]);
 
   const handleMouseDown = (e) => {
     e.preventDefault();
@@ -972,7 +1099,8 @@ const Card = React.memo(CardBase, (prev, next) => {
     prev.sectionHeight === next.sectionHeight &&
     prev.allCards === next.allCards &&
     prev.showCompare === next.showCompare &&
-    prev.autoPlayTimer === next.autoPlayTimer
+    prev.autoPlayTimer === next.autoPlayTimer &&
+    prev.muteSounds === next.muteSounds
   );
 });
 
@@ -1002,6 +1130,7 @@ const Section = ({
   onSectionToggleCollapse,
   showCompare,
   autoPlayTimer,
+  muteSounds,
 }) => {
   const [isResizing, setIsResizing] = useState(false);
   const [height, setHeight] = useState(section.height || 500);
@@ -1299,6 +1428,7 @@ const Section = ({
                   theme={theme}
                   showCompare={showCompare}
                   autoPlayTimer={autoPlayTimer}
+                  muteSounds={muteSounds}
                 />
               </React.Fragment>
             ))}
@@ -1380,13 +1510,14 @@ export default function Qwinkling() {
     showWordCount: true,
     compactMode: false,
     copyMarkdown: false,
-    theme: "light",
+    theme: "CoolSlate",
     autoFitHeight: false,
     centerCards: false,
     defaultCardWidth: 400,
     zenMode: false,
     showCompare: false,
-    autoPlayTimer: false,
+    autoPlayTimer: true,
+    muteSounds: false,
   });
 
   const [settings, setSettings] = useState(loadSettings());
@@ -1744,9 +1875,11 @@ export default function Qwinkling() {
                                     }
                                     className={`w-full text-sm ${themeClasses.text} ${themeClasses.card} border ${themeClasses.border} rounded px-2 py-1.5 outline-none`}
                                   >
-                                    <option value="light">Light</option>
-                                    <option value="dark">Dark</option>
-                                    <option value="warm">Warm</option>
+                                    <option value="Daylight">Daylight</option>
+                                    <option value="Mocha">Mocha</option>
+                                    <option value="CoolSlate">Cool slate</option>
+                                    <option value="Midnight">Midnight</option>
+                                    <option value="DeepOcean">Deep Ocean</option>
                                   </select>
                                 </div>
                                 <label className="flex items-center justify-between">
@@ -1999,6 +2132,29 @@ export default function Qwinkling() {
                                   When on, countdowns &amp; stopwatches start as
                                   soon as you select them.
                                 </p>
+                                <label className="flex items-center justify-between mt-2">
+                                  <span
+                                    className={`text-sm ${themeClasses.textMuted}`}
+                                  >
+                                    Mute timer sounds
+                                  </span>
+                                  <input
+                                    type="checkbox"
+                                    checked={settings.muteSounds}
+                                    onChange={(e) =>
+                                      updateSetting(
+                                        "muteSounds",
+                                        e.target.checked
+                                      )
+                                    }
+                                    className="w-4 h-4 text-blue-600 rounded border-slate-300 focus:ring-blue-500"
+                                  />
+                                </label>
+                                <p
+                                  className={`text-xs ${themeClasses.textMuted} mt-1`}
+                                >
+                                  Turn off the 5-second countdown beeps and end chime.
+                                </p>
                               </div>
                             </div>
 
@@ -2132,6 +2288,7 @@ export default function Qwinkling() {
             onSectionToggleCollapse={toggleSectionCollapse}
             showCompare={settings.showCompare}
             autoPlayTimer={settings.autoPlayTimer}
+            muteSounds={settings.muteSounds}
           />
         ))}
 

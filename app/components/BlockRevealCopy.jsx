@@ -15,7 +15,7 @@ const BLOCK_CLASSES =
 
 export default function Copy({
   children,
-  animateOnScroll = true,
+  animateOnScroll = false,
   delay = 0,
   blockColor = "#000",
   stagger = 0.15,

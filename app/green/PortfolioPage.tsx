@@ -1,4 +1,3 @@
-// page.tsx (or PortfolioPage.tsx)
 "use client";
 
 import { useEffect, useState } from "react";
@@ -17,10 +16,28 @@ import {
 import Copy from "../components/BlockRevealCopy";
 
 const tabOrder: Tab[] = ["projects", "experiments", "writing"];
+const tabMeta: Record<Tab, { label: string; subtitle: string }> = {
+  projects: {
+    label: "Projects",
+    subtitle: "(products & tools I’ve built)",
+  },
+  experiments: {
+    label: "Experiments",
+    subtitle: "(playground & half-baked ideas)",
+  },
+  writing: {
+    label: "Writing",
+    subtitle: "(learnings & reflections)",
+  },
+};
 
 export default function PortfolioPage() {
-  const [activeTab, setActiveTab] = useState<Tab>("projects");
-  const [phase, setPhase] = useState<"entering" | "leaving">("entering");
+  // 👇 start with NO active tab
+  const [activeTab, setActiveTab] = useState<Tab | null>(null);
+
+  // 👇 start in "leaving" so the sheet sits off-screen initially
+  const [phase, setPhase] = useState<"entering" | "leaving">("leaving");
+
   const [timeNZ, setTimeNZ] = useState<string>("");
   const [temperature, setTemperature] = useState<string | null>(null);
 
@@ -60,19 +77,50 @@ export default function PortfolioPage() {
       });
   }, []);
 
-  // initial enter
+  // ⏱️ delayed initial enter for the sheet
   useEffect(() => {
-    setPhase("entering");
+    const id = setTimeout(() => {
+      // if user hasn't chosen a tab yet, default to "projects"
+      setActiveTab((prev) => (prev === null ? "projects" : prev));
+      // trigger slide-in
+      setPhase("entering");
+    }, 3210);
+
+    return () => clearTimeout(id);
   }, []);
 
   const handleTabClick = (next: Tab) => {
+    // if sheet hasn't been "claimed" yet, just show the chosen tab
+    if (activeTab === null) {
+      setActiveTab(next);
+      setPhase("entering");
+      return;
+    }
+
     if (next === activeTab) return;
+
     setPhase("leaving");
     setTimeout(() => {
       setActiveTab(next);
       setPhase("entering");
     }, 420);
   };
+
+  useEffect(() => {
+  const handleKey = (e: KeyboardEvent) => {
+    if (!activeTab) return; // ignore during the initial 2s delay
+
+    if (e.key === "ArrowLeft") {
+      goToPrevTab();
+    }
+    if (e.key === "ArrowRight") {
+      goToNextTab();
+    }
+  };
+
+  window.addEventListener("keydown", handleKey);
+  return () => window.removeEventListener("keydown", handleKey);
+}, [activeTab]);
 
   const sheetTransformClass =
     phase === "leaving"
@@ -87,11 +135,13 @@ export default function PortfolioPage() {
   });
 
   const goToPrevTab = () => {
+    if (!activeTab) return;
     const index = tabOrder.indexOf(activeTab);
     if (index > 0) handleTabClick(tabOrder[index - 1]);
   };
 
   const goToNextTab = () => {
+    if (!activeTab) return;
     const index = tabOrder.indexOf(activeTab);
     if (index < tabOrder.length - 1) handleTabClick(tabOrder[index + 1]);
   };
@@ -115,9 +165,10 @@ export default function PortfolioPage() {
             <div className="space-y-6 px-4 lg:px-0">
               <Copy
                 blockColor="#8BAA52"
-                delay={0.42}
+                delay={0.92}
                 stagger={0.18}
-                duration={0.9}
+                duration={0.67}
+                animateOnScroll={false}
               >
                 <div>
                   <p className="mt-8 text-xs tracking-wide text-[#424D08]/80">
@@ -127,7 +178,7 @@ export default function PortfolioPage() {
                     Hi, I&apos;m Raunaq :)
                   </h1>
 
-                  <p className="xmt-4  max-w-sm text-sm leading-[1.45] text-[#3d3d3d]">
+                  <p className="max-w-sm text-sm leading-[1.45] text-[#3d3d3d]">
                     I love exploring creative itches and building things – small
                     experiments, tools that spark delight, and ideas that grow
                     by accident.
@@ -201,43 +252,53 @@ export default function PortfolioPage() {
               <header className="flex items-center justify-between border-b border-white/55 px-8 py-1 text-[12px] text-neutral-700">
                 <div className="flex items-center gap-2">
                   <div className="h-2 w-2 bg-[#424D08]" />
-                  <span className="pt-1 text-[13px] uppercase tracking-[0.08em]">
-                    {activeTab}
-                  </span>
+                  {activeTab && (
+                    <>
+                      <span className="pt-1 text-[13px] uppercase tracking-[0.08em]">
+                        {tabMeta[activeTab].label}
+                      </span>
+                      <span className="pt-1 opacity-80">
+                        {tabMeta[activeTab].subtitle}
+                      </span>
+                    </>
+                  )}
                 </div>
 
                 {/* subtle left/right arrows */}
                 <div className="flex items-center gap-1">
                   <button
                     onClick={goToPrevTab}
-                    disabled={activeTab === tabOrder[0]}
+                    disabled={!activeTab || activeTab === tabOrder[0]}
                     aria-label="Previous section"
                     className={`
-        h-6 w-6 flex items-center justify-center
-        transition-colors duration-150
-        ${
-          activeTab === tabOrder[0]
-            ? "text-neutral-400 cursor-default"
-            : "text-neutral-700 hover:text-[#424D08]"
-        }
-      `}
+                      h-6 w-6 flex items-center justify-center
+                      transition-colors duration-150
+                      ${
+                        !activeTab || activeTab === tabOrder[0]
+                          ? "text-neutral-400 cursor-default"
+                          : "text-neutral-700 hover:text-[#424D08]"
+                      }
+                    `}
                   >
                     ←
                   </button>
 
                   <button
                     onClick={goToNextTab}
-                    disabled={activeTab === tabOrder[tabOrder.length - 1]}
+                    disabled={
+                      !activeTab || activeTab === tabOrder[tabOrder.length - 1]
+                    }
                     aria-label="Next section"
                     className={`
-        h-6 w-6 flex items-center justify-center
-        transition-colors duration-150
-        ${
-          activeTab === tabOrder[tabOrder.length - 1]
-            ? "text-neutral-400 cursor-default"
-            : "text-neutral-700 hover:text-[#424D08]"
-        }
-      `}
+                      h-6 w-6 flex items-center justify-center
+                      transition-colors duration-150
+                      ${
+                        !activeTab ||
+                        activeTab === tabOrder[tabOrder.length - 1]
+                          ? "text-neutral-400 cursor-default"
+                          : "text-neutral-700 hover:text-[#424D08]"
+                      }
+                    `}
                   >
                     →
                   </button>

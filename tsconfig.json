@@ -26,8 +26,8 @@
     "next-env.d.ts",
     ".next/types/**/*.ts",
     "**/*.ts",
-    "**/*.tsx"
-, "app/qwinkling/page.jsx"  ],
+    "**/*.tsx",
+    "app/qwinkling/page.jsx", "app/components/BlockRevealCopy.jsx"  ],
   "exclude": [
     "node_modules"
   ]

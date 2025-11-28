@@ -173,7 +173,7 @@ export const projects: Project[] = [
   },
   {
     id: "speedround",
-    name: "How can I progress with bodyweight training?",
+    name: "How do I track my calisthenics training?",
     tagline: "Ascent Speedround - 17 minute bodyweight workouts",
     details: "Web app",
     // tagline: "Exactly 17 minutes to rep out 5 bodyweight exercises. Visual timer and cumulative reps tally tracker.",

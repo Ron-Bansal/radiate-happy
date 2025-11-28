@@ -43,9 +43,9 @@ const syne = Playfair_Display({
 
 export const metadata = {
   // title: "Raunaq • Product Designer and Developer",
-  title: "Radiate Happy • Creative Technologist",
+  title: "Raunaq (Ron) Bansal • Creative Technologist",
   description:
-    "Raunaq is a Creative Technologist passionate about empowering people with technology.",
+    "Raunaq is a product designer and creativer developer passionate about helping people do more with technology.",
   icons: {
     icon: "/greensquare-logo-grey-rise.png", // or "/favicon.png"
   },

@@ -14,6 +14,7 @@ import {
   ExperimentVisualBlock,
   WritingBlock,
 } from "./portfolio-components";
+import Copy from "../components/BlockRevealCopy";
 
 const tabOrder: Tab[] = ["projects", "experiments", "writing"];
 
@@ -112,23 +113,30 @@ export default function PortfolioPage() {
           {/* LEFT COLUMN */}
           <aside className="flex w-full flex-col gap-10 lg:w-[33%] lg:justify-between">
             <div className="space-y-6 px-4 lg:px-0">
-              <div>
-                <p className="mt-8 text-xs tracking-wide text-[#424D08]/80">
-                  Product Designer & Creative Developer
-                </p>
-                <h1 className="mt-1.5 text-5xl xfont-medium leading-tight text-[#424D08]">
-                  Hi, I&apos;m Raunaq :)
-                </h1>
+              <Copy
+                blockColor="#8BAA52"
+                delay={0.42}
+                stagger={0.18}
+                duration={0.9}
+              >
+                <div>
+                  <p className="mt-8 text-xs tracking-wide text-[#424D08]/80">
+                    Product Designer & Creative Developer
+                  </p>
+                  <h1 className="mt-1.5 mb-4 text-5xl xfont-medium leading-tight text-[#424D08]">
+                    Hi, I&apos;m Raunaq :)
+                  </h1>
 
-                <p className="mt-4 max-w-sm text-sm xleading-tight text-[#3d3d3d]">
-                  I love exploring creative itches and building things – small
-                  experiments, tools that spark delight, and ideas that grow by
-                  accident.
-                </p>
-              </div>
+                  <p className="xmt-4  max-w-sm text-sm leading-[1.45] text-[#3d3d3d]">
+                    I love exploring creative itches and building things – small
+                    experiments, tools that spark delight, and ideas that grow
+                    by accident.
+                  </p>
+                </div>
+              </Copy>
 
               {/* NAV – sticky on mobile only */}
-              <nav className="sticky top-0 z-20 -mx-6 border-b border-black/5 bg-[#FBEDC6]/95 px-6 py-3 lg:static lg:mx-0 lg:border-none lg:bg-transparent lg:px-0 lg:py-0">
+              <nav className="sticky top-0 z-20 -mx-6 border-b border-black/5 bg-[#FBEDC6]/95 px-6 py-3 lg:static lg:mx-0 lg:border-none lg:bg-transparent lg:px-0 lg:py-0 lg:mt-8">
                 <div className="flex gap-6 text-xs">
                   <TabLink
                     label="Projects"
@@ -186,7 +194,7 @@ export default function PortfolioPage() {
           </aside>
 
           {/* RIGHT SHEET */}
-          <section className="w-full lg:w-[67%] lg:h-full">
+          <section className="w-full lg:w-[67%] lg:h-full ">
             <div
               className={`flex flex-col pb-4 lg:pb-0 lg:min-h-[calc(100vh-32px)] border border-white/45 bg-white/40 bg-[#fdedc91a] hover:bg-[#fdedc960] xshadow-[0_28px_90px_rgba(0,0,0,0.35)] backdrop-blur-sm hover:backdrop-blur-2xl transform-gpu transition-all duration-700 ease-[cubic-bezier(0.19,0.9,0.22,1)] ${sheetTransformClass}`}
             >

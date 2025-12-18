@@ -2261,7 +2261,7 @@ export default function Qwinkling() {
         </button>
       )}
 
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="xmax-w-7xl mx-auto px-6 py-8">
         {sections.map((section) => (
           <Section
             key={section.id}

@@ -60,7 +60,6 @@ export const experimentVisuals: ExperimentVisual[] = [
   {
     id: "order-builder",
     image: "/assets/garden/order-builder.mp4",
-    link: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80m",
     size: 50,
   },
   {
@@ -85,7 +84,7 @@ export const experimentVisuals: ExperimentVisual[] = [
   {
     id: "receipts",
     image: "/assets/garden/receipts-wip.png",
-    caption: "Query your transactions in natural language",
+    caption: "Ask your your money questions",
     size: 100,
     align: "right",
   },
@@ -126,8 +125,8 @@ export const experimentVisuals: ExperimentVisual[] = [
 export const projects: Project[] = [
   {
     id: "moonstone",
-    name: "What do my playlists say about me?",
-    tagline: "Moonstone - Insightful way to connect with music",
+    name: "Moonstone - Insightful way to connect with music",
+    tagline: "What do my playlists say about me?",
     details: "Web app ⋅ Over 42,000 playlists analysed",
     images: [
       "/assets/moonstone-golden.png",
@@ -140,8 +139,8 @@ export const projects: Project[] = [
   },
   {
     id: "c3",
-    name: "How can kids build the skills that shape their future?",
-    tagline: "Curious & Creative Club - Learn by building",
+    name: "Curious & Creative Club - Learn by building",
+    tagline: "How can kids build the skills that shape their future?",
     details: "Weekly classes",
     images: [
       "/assets/garden/c3-blue.png",
@@ -161,8 +160,8 @@ export const projects: Project[] = [
   // },
   {
     id: "napkin-notes",
-    name: "I have 0.3 seconds to write something down before I forget",
-    tagline: "Napkin Notes - Quickest canvas for thought",
+    name: "Napkin Notes - Quickest canvas for thought",
+    tagline: "I have 0.3 seconds to write something down before I forget",
     details: "Chrome extension · 450+ active users",
     images: [
       "/assets/napkin-notes-golden.png",
@@ -173,8 +172,8 @@ export const projects: Project[] = [
   },
   {
     id: "speedround",
-    name: "How do I track my calisthenics training?",
-    tagline: "Ascent Speedround - 17 minute bodyweight workouts",
+    name: "Ascent Speedround - 17 minute bodyweight workouts",
+    tagline: "How do I track my calisthenics training?",
     details: "Web app",
     // tagline: "Exactly 17 minutes to rep out 5 bodyweight exercises. Visual timer and cumulative reps tally tracker.",
     images: [
@@ -186,8 +185,8 @@ export const projects: Project[] = [
   },
   {
     id: "asterisk",
-    name: "Where did I get this inspo image from?",
-    tagline: "Asterisk - Connect the dots behind design elements",
+    name: "Asterisk - Connect the dots behind design elements",
+    tagline: "Where did I find this moodboard image?",
     details: "Figma plugin ⋅ 35 users",
     images: ["/assets/garden/asterisk.png", "/assets/3asterisk-golden.png"],
     link: "https://www.figma.com/community/plugin/1488498485297162626/asterisk",

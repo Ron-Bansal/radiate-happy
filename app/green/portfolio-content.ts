@@ -7,7 +7,7 @@ export type Project = {
   name: string;
   tagline: string;
   details?: string;
-  images: string[];
+  images?: string[];
   link?: string;
 };
 
@@ -190,6 +190,14 @@ export const projects: Project[] = [
     details: "Figma plugin ⋅ 35 users",
     images: ["/assets/garden/asterisk.png", "/assets/3asterisk-golden.png"],
     link: "https://www.figma.com/community/plugin/1488498485297162626/asterisk",
+  },
+  {
+    id: "covered",
+    name: "Covered - Media posters in a click",
+    tagline: "Find movie/show/book covers for Notion databases",
+    details: "(niche) Extension built for Notion ⋅ 20 users",
+    images: ["/assets/garden/covered.png", "/assets/garden/covered2.webp"],
+    link: "chromewebstore.google.com/detail/covered/pllfacnikognkodbcnnjnhpecicageac",
   },
   // {
   //   id: "headcount",

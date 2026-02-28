@@ -148,16 +148,6 @@ export default function PortfolioPage() {
 
   return (
     <>
-      {/* Epilogue font */}
-      <style jsx global>{`
-        @import url("https://fonts.googleapis.com/css2?family=Epilogue:wght@300;400;500;600;700&display=swap");
-        html,
-        body {
-          font-family: "Epilogue", system-ui, -apple-system, BlinkMacSystemFont,
-            "Segoe UI", sans-serif;
-        }
-      `}</style>
-
       <main className="min-h-screen bg-fixed xbg-[#FBEDC6] text-[#1C180C] bg-[length:auto_120%] lg:bg-cover bg-[position:50%_65%] lg:bg-center bg-no-repeat xbg-[url('')] bg-[url('/assets/garden/hilly-gradient2.png')]">
         <div className="mx-auto min-h-screen flex max-w-[2100px] flex-col gap-10 px-2 xpy-8 lg:flex-row lg:px-0 lg:pl-10 lg:py-4">
           {/* LEFT COLUMN */}
@@ -181,7 +171,7 @@ export default function PortfolioPage() {
                   <p className="max-w-sm text-sm leading-[1.45] text-[#3d3d3d]">
                     I love exploring creative itches and building things – small
                     experiments, tools that spark delight, and ideas that grow
-                    by accident.
+                    through curiosity.
                   </p>
                 </div>
               </Copy>
@@ -219,7 +209,7 @@ export default function PortfolioPage() {
 
               <div className="flex flex-wrap items-center gap-4 pt-1 text-[#424D08] lg:text-[#FBEDC6]">
                 <a
-                  href="mailto:raunvq@gmail.com"
+                  href="mailto:raunaqbansal11@gmail.com"
                   className="border border-[#424D08] bg-[#FBEDC6] px-4 py-1.5 text-sm text-[#424D08] transition-transform duration-150 hover:-translate-y-[1px]"
                 >
                   Get in touch

@@ -6,8 +6,8 @@ const plotStyles = `
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&family=Space+Mono:wght@400;700&display=swap');
 
 :root {
-  --beige-50: #faf7f4;
-  --beige-100: #f2ebe3;
+  --beige-50: #F7F2EB;
+  --beige-100: #FAF8F5;
   --beige-200: #e8ddd0;
   --beige-300: #d4c4b0;
   --beige-400: #b8a890;
@@ -183,335 +183,374 @@ type Project = {
   name: string;
   description: string;
   learning: string;
-  state: "WIP" | "Complete" | "Active" | "Paused" | "Prototype" | "Concept";
+  state: "Concept" | "Exploring" | "Active" | "Complete";
   axes: { personal_shared: number; play_purpose: number };
   categories: string[];
   tags: string[];
 };
 
-export const projects: Project[] = [
+const projects: Project[] = [
   {
     id: "draftline",
     name: "Draftline",
-    description: "Writing studio designed for messy thinking and progessively iterating. Organize your unstructured thoughts and chisel your ideas to clarity. Trying to make writing feel less scary",
+    description:
+      "Writing studio designed for messy thinking and progressively iterating. Organize unstructured thoughts and chisel ideas toward clarity.",
     learning:
-      "This project taught me how fragmented my thinking actually is, and how interface design can remove mental blockers rather than add structure",
-    state: "WIP",
-    axes: { personal_shared: 40, play_purpose: 85 },
-    categories: ["writing", "productivity", "tools"],
-    tags: ["iteration", "clarity", "thinking"],
+      "This project taught me how fragmented my thinking actually is, and how interface design can remove mental blockers rather than add structure.",
+    state: "Active",
+    axes: { personal_shared: 60, play_purpose: 85 },
+    categories: ["writing", "tools", "productivity", "venture"],
+    tags: ["messy thinking", "iteration", "finding clarity"],
   },
   {
     id: "patina",
     name: "Patina",
-    description: "Draw using only the colours from your webcam background on a nostalgic canvas",
+    description:
+      "Draw using only the colours from your webcam background on a nostalgic canvas.",
     learning:
-      "I realised I’m most creatively free when there’s no pressure for usefulness, only curiosity and play. Started with 'I wonder how I can make my webcam feel more fun'",
-    state: "Complete",
-    axes: { personal_shared: 15, play_purpose: 20 },
-    categories: ["design", "visualisation"],
-    tags: ["texture", "expression", "play"],
+      "I realised I’m most creatively free when there’s no pressure for usefulness, only curiosity and play.",
+    state: "Exploring",
+    axes: { personal_shared: 10, play_purpose: 20 },
+    categories: ["design", "visual"],
+    tags: ["play", "expression", "texture"],
   },
   {
     id: "wander",
     name: "Wander",
-    description: "A non-linear interface that encourages curious drifting through tangential topics.",
+    description:
+      "A non-linear interface that encourages curious drifting through tangential topics.",
     learning:
-      "Designing for exploration showed me how overwhelming information becomes without progressive disclosure",
-    state: "WIP",
-    axes: { personal_shared: 30, play_purpose: 70 },
-    categories: ["productivity", "design", "tools"],
-    tags: ["curiosity", "connections", "nonlinear"],
+      "Designing for exploration showed me how overwhelming information becomes without progressive disclosure.",
+    state: "Active",
+    axes: { personal_shared: 35, play_purpose: 75 },
+    categories: ["tools", "productivity", "design", "education", "ai"],
+    tags: ["curiosity", "exploration", "connections"],
   },
   {
     id: "atrophy",
     name: "Atrophy",
-    description: "Turns gym attendance into an honest cost-per-session mirror. Don't be the reason your gym makes money",
+    description: "Turns gym attendance into an honest cost-per-session mirror.",
     learning:
-      "Reframing effort as cost and waste changed how I think about motivation more than tracking ever did",
-    state: "Prototype",
-    axes: { personal_shared: 30, play_purpose: 80 },
-    categories: ["fitness", "visualisation", "tools"],
-    tags: ["reframing", "honesty", "feedback"],
+      "Reframing effort as cost and waste changed how I think about motivation more than tracking ever did.",
+    state: "Active",
+    axes: { personal_shared: 30, play_purpose: 55 },
+    categories: ["health", "visual", "finance", "tools"],
+    tags: ["motivation", "honesty", "behaviour"],
   },
   {
     id: "story-content",
-    name: "STORY framework partner for content",
-    description: "Prompts rough ideas into clearer narratives and angles.",
+    name: "STORY framework partner",
+    description:
+      "Prompts rough content ideas into clearer narratives and angles.",
     learning:
-      "I learned that AI is better used to generate momentum through questions than drafting a full script",
+      "I learned that AI is better used to generate momentum through questions than drafting full scripts.",
     state: "Active",
-    axes: { personal_shared: 45, play_purpose: 75 },
-    categories: ["writing", "productivity"],
-    tags: ["storytelling", "structure", "prompts"],
+    axes: { personal_shared: 55, play_purpose: 75 },
+    categories: ["writing", "productivity", "ai", "tools"],
+    tags: ["storytelling", "structure", "momentum"],
   },
   {
     id: "ripple",
     name: "Ripple",
     description: "An exploration of credit, influence, and idea lineage.",
     learning:
-      "Trying to model attribution mechanically made me more aware of what ideas actually stick and quietly shape future thinking.",
+      "Trying to model attribution mechanically made me more aware of how ideas quietly shape future thinking.",
     state: "Concept",
-    axes: { personal_shared: 70, play_purpose: 80 },
-    categories: ["productivity", "tools"],
-    tags: ["attribution", "memory", "influence"],
+    axes: { personal_shared: 45, play_purpose: 60 },
+    categories: ["tools", "productivity"],
+    tags: ["credit", "influence", "memory"],
   },
   {
     id: "tendril",
     name: "Tendril",
-    description: "App to combat skill decay in junior doctors disguised as a Worldle-esque daily puzzle",
+    description: "A daily puzzle app to combat skill decay in junior doctors.",
     learning:
-      "This pushed me to think about how to make puzzles feel fun yet challenging",
-    state: "Concept",
-    axes: { personal_shared: 75, play_purpose: 85 },
-    categories: ["education", "productivity"],
-    tags: ["microlearning", "practice", "retention"],
+      "This pushed me to think deeply about balancing challenge with approachability.",
+    state: "Active",
+    axes: { personal_shared: 85, play_purpose: 85 },
+    categories: ["education", "venture", "health"],
+    tags: ["practice", "retention", "challenge"],
   },
   {
     id: "receipt-workbench",
     name: "Receipt Workbench",
-    description: "A receipt-style way to query personal finance - ask your money anything about your spending",
+    description:
+      "A receipt-style way to query personal finance and ask meaningful questions about spending.",
+    learning: "People don’t want dashboards — they want answers.",
+    state: "Complete",
+    axes: { personal_shared: 10, play_purpose: 85 },
+    categories: ["finance", "tools", "visual", "productivity", "ai"],
+    tags: ["money awareness", "questions", "understanding"],
+  },
+  {
+    id: "abundantly",
+    name: "Abundantly",
+    description:
+      "Personal finance tool that *encourages* spending, conciously, and with gratitude.",
     learning:
-      "People often don't care about dashboards - they just want easy answers to meaningful questions",
-    state: "WIP",
-    axes: { personal_shared: 35, play_purpose: 80 },
-    categories: ["finance", "visualisation", "tools"],
-    tags: ["metaphor", "clarity", "interface"],
+      "Cultural impacts on how receptive people are to tools and their behaviour",
+    state: "Complete",
+    axes: { personal_shared: 15, play_purpose: 80 },
+    categories: ["finance", "tools", "gratitude"],
+    tags: ["money awareness", "abundance", "gratitude"],
   },
   {
     id: "covered",
     name: "Covered",
-    description: "Fetches posters and cover art to track media",
+    description: "Fetches posters and cover art to help track media.",
     learning:
-      "Even the most niche tools have a market. Valuable tools remove tiny repeated friction rather than adding power features",
+      "Valuable tools often remove tiny repeated friction rather than adding power features.",
     state: "Complete",
-    axes: { personal_shared: 65, play_purpose: 75 },
+    axes: { personal_shared: 25, play_purpose: 80 },
     categories: ["tools", "productivity"],
-    tags: ["automation", "flow", "metadata"],
+    tags: ["organisation", "flow", "small frictions"],
   },
   {
     id: "headcount",
     name: "Headcount",
-    description: "Visualise your metrics. Uses real crowds to make large numbers feel human.",
-    learning:
-      "People intuitively understand scale through imagery long before numbers",
-    state: "Prototype",
-    axes: { personal_shared: 45, play_purpose: 30 },
-    categories: ["visualisation", "design"],
-    tags: ["scale", "perception", "people"],
+    description:
+      "Visualises large numbers using crowds to make scale feel human.",
+    learning: "People understand magnitude emotionally before numerically.",
+    state: "Exploring",
+    axes: { personal_shared: 75, play_purpose: 70 },
+    categories: ["visual", "design"],
+    tags: ["scale", "perspective", "people"],
   },
   {
     id: "gracious",
     name: "Gracious",
-    description: "Designed and developed a custom Shopify ecommerce store",
+    description: "Designed and developed a custom Shopify e-commerce store.",
     learning:
-      "Shopify Liquid is funky and using any platform has niche quirks and limitations",
+      "Every platform has quirks — working within constraints is part of the craft.",
     state: "Complete",
-    axes: { personal_shared: 70, play_purpose: 75 },
-    categories: ["ecommerce", "design"],
-    tags: ["layout", "brand", "presentation"],
+    axes: { personal_shared: 95, play_purpose: 90 },
+    categories: ["venture", "design"],
+    tags: ["craft", "presentation", "brand"],
   },
   {
     id: "ai-chef",
     name: "AI Chef Assistant",
-    description: "3 Hour hackathon project by ElevenLabs. A helper for meal ideas during decision fatigue.",
+    description:
+      "A hackathon project exploring meal suggestions during decision fatigue.",
     learning:
-      "Multi-modal capabilities are not easy and system prompt design requires a lot of care. But it's insane how much you can ship in just 3 hours with AI",
-    state: "Prototype",
-    axes: { personal_shared: 65, play_purpose: 60 },
-    categories: ["ai", "tools"],
-    tags: ["decision-fatigue", "prompts", "ux"],
+      "Prompt design and multimodal systems require care, even when moving fast.",
+    state: "Complete",
+    axes: { personal_shared: 35, play_purpose: 30 },
+    categories: ["ai", "tools", "design"],
+    tags: ["decision fatigue", "helpfulness", "everyday AI"],
   },
   {
     id: "c3",
-    name: "C3",
-    description: "Weekly curiosity-led classes for young students. Learning rooted in play",
+    name: "Curious & Creative Club",
+    description:
+      "Weekly online curiosity-led classes for young students, rooted in play",
     learning:
-      "Teaching showed me that young students are naturally curious and thrive in environments that let explore their natural interests",
+      "Children thrive when learning environments follow their natural interests.",
     state: "Active",
-    axes: { personal_shared: 85, play_purpose: 90 },
-    categories: ["education"],
-    tags: ["curiosity", "collaboration", "learning"],
+    axes: { personal_shared: 90, play_purpose: 90 },
+    categories: ["education", "venture"],
+    tags: ["curiosity", "learning through play", "community"],
   },
   {
     id: "c3-curated",
     name: "C3 Curated",
-    description: "A curated information diet for families.",
-    learning:
-      "I learned how difficult — and important — taste and constraint are in shaping learning environments.",
-    state: "WIP",
-    axes: { personal_shared: 80, play_purpose: 85 },
-    categories: ["education", "tools"],
-    tags: ["curation", "families", "signals"],
+    description:
+      "A curated newsletter of varried educational & entertaining content to deliver a rich information diet for families.",
+    learning: "Taste and constraint matter more than abundance.",
+    state: "Exploring",
+    axes: { personal_shared: 85, play_purpose: 80 },
+    categories: ["education", "venture", "productivity"],
+    tags: ["signal over noise", "taste", "families"],
   },
   {
     id: "c3-sizzle",
     name: "C3 Sizzle",
-    description: "A library of engaging warmups for classes. (the most anticipated + eager part of the classes)",
-    learning:
-      "Warmups aren’t filler - they set emotional tone and prime attention.",
-    state: "WIP",
-    axes: { personal_shared: 70, play_purpose: 65 },
-    categories: ["education", "design"],
-    tags: ["engagement", "attention", "warmups"],
+    description:
+      "A growing library of engaging warmups for learning environments.",
+    learning: "Warmups set emotional tone and prime attention.",
+    state: "Concept",
+    axes: { personal_shared: 80, play_purpose: 75 },
+    categories: ["education", "design", "tools"],
+    tags: ["energy", "attention", "engagement"],
   },
   {
     id: "moonstone",
     name: "Moonstone",
-    description: "Playlist insights for faster trust and discovery.",
-    learning:
-      "This taught me full-stack development, the instability of APIs, and how much storytelling through design shapes understanding.",
-    state: "Paused",
-    axes: { personal_shared: 80, play_purpose: 85 },
-    categories: ["music", "visualisation", "tools"],
-    tags: ["taste", "signal", "distribution"],
+    description:
+      "Playlist insights that help people assess trust and taste faster.",
+    learning: "Design and storytelling shape how people interpret data.",
+    state: "Complete",
+    axes: { personal_shared: 75, play_purpose: 80 },
+    categories: ["music", "visual", "tools", "design", "social"],
+    tags: ["taste", "discovery", "trust"],
   },
   {
     id: "tactictoe",
     name: "Tactictoe",
-    description: "Tactical twist to a classic game - my first solo web dev project",
-    learning:
-      "Need a deep level of understanding before implementing a solution",
+    description: "A tactical twist on the classic game of tic-tac-toe.",
+    learning: "You need a deep understanding before implementing solutions.",
     state: "Complete",
-    axes: { personal_shared: 40, play_purpose: 25 },
-    categories: ["games"],
-    tags: ["logic", "fun", "play"],
+    axes: { personal_shared: 10, play_purpose: 15 },
+    categories: ["games", "design"],
+    tags: ["logic", "strategy", "fun"],
   },
   {
     id: "napkin",
     name: "Napkin",
     description: "A fast canvas for fleeting ideas.",
-    learning:
-      "Not a feature-rich project but most active users because it solves a simple problem, simply",
+    learning: "Simple tools often see the most consistent use.",
     state: "Complete",
-    axes: { personal_shared: 25, play_purpose: 65 },
-    categories: ["writing", "productivity"],
-    tags: ["notes", "messy", "capture"],
+    axes: { personal_shared: 65, play_purpose: 95 },
+    categories: ["writing", "tools", "productivity"],
+    tags: ["quick thoughts", "messy ideas", "capture"],
   },
   {
     id: "colour-guesser",
     name: "Colour Guesser",
     description: "A perception game built around intuition.",
-    learning:
-      "Playful uncertainty is often more engaging than being correct.",
+    learning: "Uncertainty can be more engaging than correctness.",
     state: "Complete",
-    axes: { personal_shared: 50, play_purpose: 30 },
+    axes: { personal_shared: 5, play_purpose: 10 },
     categories: ["games", "design"],
-    tags: ["colour", "perception", "intuition"],
+    tags: ["intuition", "uncertainty", "perception"],
   },
   {
     id: "speedround",
     name: "Speedround",
-    description: "Timeboxed workouts with visual momentum.",
-    learning:
-      "Constraints turned motivation from a negotiation into a decision.",
-    state: "Prototype",
-    axes: { personal_shared: 30, play_purpose: 75 },
-    categories: ["fitness", "productivity"],
-    tags: ["timebox", "momentum", "focus"],
+    description: "Timeboxed workouts supported by visual momentum.",
+    learning: "Constraints remove negotiation and create commitment.",
+    state: "Exploring",
+    axes: { personal_shared: 30, play_purpose: 70 },
+    categories: ["health", "productivity", "tools", "visual"],
+    tags: ["momentum", "commitment", "focus"],
   },
   {
     id: "reel",
     name: "Reel",
-    description: "Interactive 3D display of your recent movies and TV shows",
-    learning:
-      "WebGL even with AI is a pain to implement/tweak",
-    state: "Complete",
+    description: "An interactive 3D display of recent movies and TV shows.",
+    learning: "Even with AI, WebGL remains complex and fragile.",
+    state: "Exploring",
     axes: { personal_shared: 20, play_purpose: 20 },
-    categories: ["design", "visualisation"],
-    tags: ["motion", "loops", "feel"],
+    categories: ["visual", "design"],
+    tags: ["motion", "presence", "delight"],
   },
   {
     id: "order-builder-3d",
     name: "3D Order Builder",
-    description: "A 3D interface for visualising shipping price logic.",
-    learning:
-      "Translating abstract pricing rules into spatial visuals dramatically improved comprehension - even when powered by the same underlying APIs.",
+    description: "A spatial interface for understanding shipping price logic.",
+    learning: "Spatial metaphors dramatically improve comprehension.",
     state: "Complete",
-    axes: { personal_shared: 85, play_purpose: 90 },
-    categories: ["visualisation", "tools"],
-    tags: ["pricing", "constraints", "3d"],
+    axes: { personal_shared: 85, play_purpose: 55 },
+    categories: ["tools", "visual"],
+    tags: ["understanding", "constraints", "pricing"],
   },
   {
     id: "asterisk",
     name: "Asterisk",
-    description: "Source-tracking for Figma elements.",
-    learning:
-      "Attribution only works when it’s captured at creation, not reconstructed later.",
+    description: "Figma plugin to add notes, links, and tags to Figma elements",
+    learning: "Attribution only works when captured at creation.",
     state: "Complete",
     axes: { personal_shared: 70, play_purpose: 85 },
-    categories: ["design", "tools"],
-    tags: ["metadata", "credit", "workflow"],
+    categories: ["design", "tools", "productivity"],
+    tags: ["credit", "ownership", "workflow"],
   },
   {
     id: "little-tap",
     name: "Little Tap",
-    description: "Introducing experiences that convert in e-commerce to brick and motar stores. Turn customers into brand champions",
-    learning:
-      "I'm still so afraid of sales.",
-    state: "WIP",
-    axes: { personal_shared: 90, play_purpose: 90 },
-    categories: ["tools", "productivity"],
-    tags: ["nfc", "offline-to-online", "behaviour"],
+    description:
+      "Physical NFC touchpoints that bridge offline experiences to online actions.",
+    learning: "I’m still learning to become comfortable with sales.",
+    state: "Concept",
+    axes: { personal_shared: 93, play_purpose: 87 },
+    categories: ["venture", "tools"],
+    tags: ["real-world touchpoints", "connection", "conversion"],
   },
   {
     id: "excelnt",
     name: "Exceln’t",
-    description: "Figma x Excel are my favourite tools - what if we combined them?",
-    learning:
-      "Reducing cognitive load can matter more than adding analytical power.",
-    state: "Concept",
-    axes: { personal_shared: 40, play_purpose: 70 },
-    categories: ["finance", "tools", "visualisation"],
-    tags: ["tables", "mental-load", "clarity"],
+    description: "A playful crossover between spreadsheets and design tools.",
+    learning: "Reducing mental load matters more than adding analytical power.",
+    state: "Exploring",
+    axes: { personal_shared: 10, play_purpose: 30 },
+    categories: ["finance", "tools", "visual", "design"],
+    tags: ["mental load", "simplicity", "numbers"],
   },
   {
     id: "ember",
     name: "Ember",
-    description: "Randomly discover saved bookmarks",
-    learning:
-      "Rediscovery is just as important as capture in knowledge systems",
+    description: "A tool to rediscover saved links and forgotten inspiration.",
+    learning: "Rediscovery is as important as capture in knowledge systems.",
     state: "Complete",
-    axes: { personal_shared: 20, play_purpose: 35 },
+    axes: { personal_shared: 75, play_purpose: 65 },
     categories: ["tools", "productivity"],
-    tags: ["memory", "serendipity", "links"],
+    tags: ["rediscovery", "inspiration", "memory"],
   },
   {
     id: "twelve-week-year",
     name: "12 Week Year",
-    description: "A cyclical personal planning system.",
-    learning:
-      "Short cycles created urgency without requiring a complete life reset.",
-    state: "Active",
-    axes: { personal_shared: 25, play_purpose: 85 },
-    categories: ["productivity"],
-    tags: ["planning", "reflection", "rhythm"],
+    description: "A cyclical planning system for short-term focus.",
+    learning: "Short cycles create urgency without requiring full resets.",
+    state: "Complete",
+    axes: { personal_shared: 65, play_purpose: 85 },
+    categories: ["productivity", "tools"],
+    tags: ["reflection", "rhythm", "progress"],
   },
   {
     id: "trademe-lock",
-    name: "TradeMe Lock",
-    description: "A safety layer to prevent accidental actions.",
-    learning:
-      "Preventing a single mistake can build more trust than adding features.",
-    state: "Prototype",
-    axes: { personal_shared: 55, play_purpose: 70 },
-    categories: ["tools"],
-    tags: ["guardrails", "safety", "ux"],
+    name: "TradeMe Filter Lock",
+    description: "A small UI safeguard to prevent accidental search resets.",
+    learning: "Even unshared projects deserve care and polish.",
+    state: "Complete",
+    axes: { personal_shared: 5, play_purpose: 80 },
+    categories: ["tools", "design"],
+    tags: ["safety", "confidence", "small wins"],
   },
   {
-    id: "ascent-lateral-raise-counter",
+    id: "ascent",
     name: "Ascent",
-    description: "A rep counter for strength training.",
-    learning:
-      "Making effort visible in real time made consistency feel achievable.",
-    state: "Prototype",
-    axes: { personal_shared: 25, play_purpose: 60 },
-    categories: ["fitness", "tools"],
-    tags: ["feedback", "motivation", "tracking"],
+    description: "Webcam-based rep counter for lateral raises.",
+    learning: "I enjoy building visual feedback loops.",
+    state: "Complete",
+    axes: { personal_shared: 15, play_purpose: 75 },
+    categories: ["health", "tools", "visual"],
+    tags: ["webcam", "motivation", "maths"],
+  },
+  {
+    id: "inink",
+    name: "In Ink",
+    description:
+      "Silly playful text interface to get over writer's block. Disappearing ink, shrinking text, disabled backspace.",
+    learning: "Adding some pressure can help create momentum",
+    state: "Complete",
+    axes: { personal_shared: 25, play_purpose: 35 },
+    categories: ["writing", "tools"],
+    tags: ["writing", "imperfect action"],
+  },
+  {
+    id: "candid",
+    name: "Candid",
+    description:
+      "Social app where candid photos are swapped like trading cards to encourage everyone to take more quality photos of their friends",
+    learning: "There's so much wrong with this idea hahaha",
+    state: "Concept",
+    axes: { personal_shared: 75, play_purpose: 35 },
+    categories: ["social", "photos"],
+    tags: ["photography", "ritual", "social platform"],
+  },
+  {
+    id: "buzzing",
+    name: "Buzzing",
+    description:
+      "Anonymous rating app for group chats for friends to show how keen they are to go out and their energy levels - is the group feeling a chill evening in or buzzing for eventful night",
+    learning: "There's so much wrong with this idea hahaha",
+    state: "Concept",
+    axes: { personal_shared: 65, play_purpose: 45 },
+    categories: ["social", "tool"],
+    tags: ["social", "connection"],
   },
 ];
 
-const lenses = [
+const xlenses = [
   { id: "all", label: "All Projects" },
 
   { id: "education", label: "Education" },
@@ -529,21 +568,46 @@ const lenses = [
   { id: "games", label: "Games" },
 ];
 
+const lenses = [
+  { id: "all", label: "All Projects" },
+
+  { id: "venture", label: "Venture" },
+  { id: "education", label: "Education" },
+  { id: "health", label: "Health & Fitness" },
+  { id: "finance", label: "Finance" },
+  { id: "social", label: "Social" },
+  { id: "music", label: "Music" },
+
+  { id: "writing", label: "Writing" },
+  { id: "ai", label: "AI" },
+
+  { id: "tools", label: "Tools" },
+  { id: "productivity", label: "Productivity" },
+
+  { id: "visual", label: "Visual" },
+  { id: "design", label: "Design" },
+
+  { id: "games", label: "Games" },
+];
+
 const statusFilters = [
   { id: "all", label: "All" },
+  { id: "Concept", label: "Concept" },
+  { id: "Exploring", label: "Exploring" },
+  { id: "Active", label: "Active" },
   { id: "Complete", label: "Complete" },
-  { id: "WIP", label: "In Progress" },
-  { id: "Paused", label: "Paused" },
 ];
 
 const getStatusLabel = (state: string) => {
   switch (state) {
-    case "WIP":
-      return "In Progress";
+    case "Concept":
+      return "Concept";
+    case "Exploring":
+      return "Exploring";
+    case "Active":
+      return "Active";
     case "Complete":
       return "Complete";
-    case "Paused":
-      return "Paused";
     default:
       return state;
   }
@@ -551,14 +615,24 @@ const getStatusLabel = (state: string) => {
 
 const getDotColor = (state: string) => {
   switch (state) {
+    // Concept — cool stone / pencil graphite
+    case "Concept":
+      return "#BF6E53";
+
+    // Exploring — desaturated moss green (curiosity, growth)
+    case "Exploring":
+      return "#E2BC3C";
+
+    // Active — warm amber / energy without screaming
+    case "Active":
+      return "#7DB393";
+
+    // Complete — deep umber / grounded finish
     case "Complete":
-      return "#8b6642";
-    case "WIP":
-      return "#b8875a";
-    case "Paused":
-      return "#9b9188";
+      return "#A18BB6";
+
     default:
-      return "#6b7264";
+      return "#6B7264";
   }
 };
 
@@ -676,7 +750,7 @@ function App() {
         <div className="flex-1 relative overflow-hidden">
           <div className="absolute inset-0 flex items-center justify-center">
             <div
-              className="relative chart-outline p-12"
+              className="relative chart-outline p-12 rounded bg-yellow-50/10"
               style={{ width: "60vmin", height: "60vmin" }}
             >
               {projects.map((project) => {
@@ -696,7 +770,9 @@ function App() {
                       height: isSelected ? "12px" : "8px",
                       backgroundColor: getDotColor(project.state),
                       opacity: highlighted ? 1 : 0.2,
-                      border: isSelected ? "2px solid var(--beige-50)" : "none",
+                      border: isSelected
+                        ? "2px solid var(--beige-100)"
+                        : "none",
                       boxShadow: isSelected
                         ? "0 0 0 1px var(--saddle)"
                         : "none",
@@ -797,7 +873,7 @@ function App() {
           borderLeft: "1px solid var(--beige-200)",
         }}
       >
-        <div className="flex-1 overflow-y-auto panel-scroll p-6 lg:p-8 space-y-4">
+        <div className="flex-1 overflow-y-auto panel-scroll p-4 lg:p-4 space-y-4">
           {filteredProjects.length === 0 ? (
             <p className="text-sm" style={{ color: "var(--oyster)" }}>
               No projects match current filters
@@ -808,16 +884,21 @@ function App() {
               return (
                 <button
                   key={project.name}
-                  ref={(el) => (cardRefs.current[project.name] = el)}
+                  ref={(el: HTMLButtonElement | null): void => {
+                    cardRefs.current[project.name] = el;
+                  }}
                   onClick={() => setSelectedProject(project)}
-                  className="project-card w-full text-left p-6 block"
+                  className="project-card w-full text-left px-6 py-4 block"
                   style={{
-                    backgroundColor: isSelected
-                      ? "var(--beige-100)"
-                      : "transparent",
+                    backgroundColor: isSelected ? "#faf8f5ef" : "#F7F2EB",
+                    //   : "transparent",
                     borderColor: isSelected
-                      ? "var(--beige-300)"
+                      ? "var(--beige-400)"
                       : "var(--beige-200)",
+                    boxShadow: isSelected
+                      ? "0 1px 0 rgba(0,0,0,0.04), 0 8px 20px rgba(0,0,0,0.06)"
+                      : "none",
+                    transform: isSelected ? "translateZ(0)" : "none",
                   }}
                 >
                   <div className="flex items-start justify-between gap-4 mb-2">
@@ -827,7 +908,7 @@ function App() {
                     >
                       {project.name}
                     </h3>
-                    <span className="status-badge shrink-0">
+                    <span className="status-badge shrink-0 -mr-3">
                       <div
                         className="status-dot"
                         style={{ backgroundColor: getDotColor(project.state) }}
@@ -837,7 +918,7 @@ function App() {
                   </div>
 
                   <p
-                    className="text-[13px] leading-[1.6] mb-5"
+                    className="text-[13px] leading-[1.5] mb-5"
                     style={{ color: "var(--flax)" }}
                   >
                     {project.description}

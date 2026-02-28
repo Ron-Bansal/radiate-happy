@@ -4873,349 +4873,349 @@ export default function MSPaintV0() {
     const canvas = canvasRef.current;
     if (canvas) canvas.releasePointerCapture(e.pointerId);
   }
-  function drawBrushSegment(
-    from: { x: number; y: number },
-    to: { x: number; y: number },
-    color: string,
-    preset: BrushPreset
-  ) {
-    return withCtx((ctx) => {
-      setStrokeStyleFromBrush(ctx, color, preset);
+  // function drawBrushSegment(
+  //   from: { x: number; y: number },
+  //   to: { x: number; y: number },
+  //   color: string,
+  //   preset: BrushPreset
+  // ) {
+  //   return withCtx((ctx) => {
+  //     setStrokeStyleFromBrush(ctx, color, preset);
 
-      if (preset.kind === "spray") {
-        const density = preset.density ?? 18;
-        const r = preset.size;
+  //     if (preset.kind === "spray") {
+  //       const density = preset.density ?? 18;
+  //       const r = preset.size;
 
-        const dx = to.x - from.x;
-        const dy = to.y - from.y;
-        const steps = Math.max(1, Math.ceil(Math.hypot(dx, dy) / 3));
+  //       const dx = to.x - from.x;
+  //       const dy = to.y - from.y;
+  //       const steps = Math.max(1, Math.ceil(Math.hypot(dx, dy) / 3));
 
-        for (let s = 0; s <= steps; s++) {
-          const t = s / steps;
-          const cx = from.x + dx * t;
-          const cy = from.y + dy * t;
-          for (let i = 0; i < density; i++) {
-            const a = Math.random() * Math.PI * 2;
-            const rr = Math.random() * r;
-            const px = cx + Math.cos(a) * rr;
-            const py = cy + Math.sin(a) * rr;
-            ctx.fillRect(px, py, 1, 1);
-          }
-        }
-        ctx.globalAlpha = 1;
-        return;
-      }
+  //       for (let s = 0; s <= steps; s++) {
+  //         const t = s / steps;
+  //         const cx = from.x + dx * t;
+  //         const cy = from.y + dy * t;
+  //         for (let i = 0; i < density; i++) {
+  //           const a = Math.random() * Math.PI * 2;
+  //           const rr = Math.random() * r;
+  //           const px = cx + Math.cos(a) * rr;
+  //           const py = cy + Math.sin(a) * rr;
+  //           ctx.fillRect(px, py, 1, 1);
+  //         }
+  //       }
+  //       ctx.globalAlpha = 1;
+  //       return;
+  //     }
 
-      if (preset.kind === "calligraphy") {
-        const angle = ((preset.angleDeg ?? 35) * Math.PI) / 180;
-        const w = preset.size;
-        const h = Math.max(2, Math.floor(preset.size / 3));
+  //     if (preset.kind === "calligraphy") {
+  //       const angle = ((preset.angleDeg ?? 35) * Math.PI) / 180;
+  //       const w = preset.size;
+  //       const h = Math.max(2, Math.floor(preset.size / 3));
 
-        const dx = to.x - from.x;
-        const dy = to.y - from.y;
-        const steps = Math.max(1, Math.ceil(Math.hypot(dx, dy) / 2));
+  //       const dx = to.x - from.x;
+  //       const dy = to.y - from.y;
+  //       const steps = Math.max(1, Math.ceil(Math.hypot(dx, dy) / 2));
 
-        for (let s = 0; s <= steps; s++) {
-          const t = s / steps;
-          const cx = from.x + dx * t;
-          const cy = from.y + dy * t;
-          ctx.save();
-          ctx.translate(cx, cy);
-          ctx.rotate(angle);
-          ctx.fillRect(-w / 2, -h / 2, w, h);
-          ctx.restore();
-        }
+  //       for (let s = 0; s <= steps; s++) {
+  //         const t = s / steps;
+  //         const cx = from.x + dx * t;
+  //         const cy = from.y + dy * t;
+  //         ctx.save();
+  //         ctx.translate(cx, cy);
+  //         ctx.rotate(angle);
+  //         ctx.fillRect(-w / 2, -h / 2, w, h);
+  //         ctx.restore();
+  //       }
 
-        ctx.globalAlpha = 1;
-        return;
-      }
+  //       ctx.globalAlpha = 1;
+  //       return;
+  //     }
 
-      ctx.beginPath();
-      ctx.moveTo(from.x, from.y);
-      ctx.lineTo(to.x, to.y);
-      ctx.stroke();
-      ctx.globalAlpha = 1;
-    });
-  }
+  //     ctx.beginPath();
+  //     ctx.moveTo(from.x, from.y);
+  //     ctx.lineTo(to.x, to.y);
+  //     ctx.stroke();
+  //     ctx.globalAlpha = 1;
+  //   });
+  // }
 
-  function drawLine(
-    a: { x: number; y: number },
-    b: { x: number; y: number },
-    color: string
-  ) {
-    return withCtx((ctx) => {
-      restorePreviewSnapshot();
-      setCommonStyle(ctx, color);
-      ctx.lineWidth = 2;
-      ctx.lineCap = "round";
-      ctx.beginPath();
-      ctx.moveTo(a.x, a.y);
-      ctx.lineTo(b.x, b.y);
-      ctx.stroke();
-    });
-  }
+  // function drawLine(
+  //   a: { x: number; y: number },
+  //   b: { x: number; y: number },
+  //   color: string
+  // ) {
+  //   return withCtx((ctx) => {
+  //     restorePreviewSnapshot();
+  //     setCommonStyle(ctx, color);
+  //     ctx.lineWidth = 2;
+  //     ctx.lineCap = "round";
+  //     ctx.beginPath();
+  //     ctx.moveTo(a.x, a.y);
+  //     ctx.lineTo(b.x, b.y);
+  //     ctx.stroke();
+  //   });
+  // }
 
-  function drawRect(
-    a: { x: number; y: number },
-    b: { x: number; y: number },
-    strokeColor: string,
-    mode: RectMode
-  ) {
-    return withCtx((ctx) => {
-      restorePreviewSnapshot();
-      const x = Math.min(a.x, b.x);
-      const y = Math.min(a.y, b.y);
-      const w = Math.abs(a.x - b.x);
-      const h = Math.abs(a.y - b.y);
+  // function drawRect(
+  //   a: { x: number; y: number },
+  //   b: { x: number; y: number },
+  //   strokeColor: string,
+  //   mode: RectMode
+  // ) {
+  //   return withCtx((ctx) => {
+  //     restorePreviewSnapshot();
+  //     const x = Math.min(a.x, b.x);
+  //     const y = Math.min(a.y, b.y);
+  //     const w = Math.abs(a.x - b.x);
+  //     const h = Math.abs(a.y - b.y);
 
-      setCommonStyle(ctx, strokeColor);
-      ctx.lineWidth = 2;
+  //     setCommonStyle(ctx, strokeColor);
+  //     ctx.lineWidth = 2;
 
-      if (mode === "fill") {
-        ctx.fillStyle = strokeColor;
-        ctx.fillRect(x, y, w, h);
-        return;
-      }
-      if (mode === "both") {
-        ctx.fillStyle = secondaryRef.current;
-        ctx.fillRect(x, y, w, h);
-        ctx.strokeStyle = strokeColor;
-        ctx.strokeRect(x, y, w, h);
-        return;
-      }
-      ctx.strokeStyle = strokeColor;
-      ctx.strokeRect(x, y, w, h);
-    });
-  }
+  //     if (mode === "fill") {
+  //       ctx.fillStyle = strokeColor;
+  //       ctx.fillRect(x, y, w, h);
+  //       return;
+  //     }
+  //     if (mode === "both") {
+  //       ctx.fillStyle = secondaryRef.current;
+  //       ctx.fillRect(x, y, w, h);
+  //       ctx.strokeStyle = strokeColor;
+  //       ctx.strokeRect(x, y, w, h);
+  //       return;
+  //     }
+  //     ctx.strokeStyle = strokeColor;
+  //     ctx.strokeRect(x, y, w, h);
+  //   });
+  // }
 
-  function hexToRgba(hex: string) {
-    const h = hex.replace("#", "");
-    const normalized =
-      h.length === 3
-        ? h
-            .split("")
-            .map((c) => c + c)
-            .join("")
-        : h;
-    const v = parseInt(normalized, 16);
-    const r = (v >> 16) & 255;
-    const g = (v >> 8) & 255;
-    const b = v & 255;
-    return [r, g, b, 255] as const;
-  }
+  // function hexToRgba(hex: string) {
+  //   const h = hex.replace("#", "");
+  //   const normalized =
+  //     h.length === 3
+  //       ? h
+  //           .split("")
+  //           .map((c) => c + c)
+  //           .join("")
+  //       : h;
+  //   const v = parseInt(normalized, 16);
+  //   const r = (v >> 16) & 255;
+  //   const g = (v >> 8) & 255;
+  //   const b = v & 255;
+  //   return [r, g, b, 255] as const;
+  // }
 
-  function floodFill(x0: number, y0: number, color: string) {
-    const ctx = getCtx();
-    const canvas = canvasRef.current;
-    if (!ctx || !canvas) return;
+  // function floodFill(x0: number, y0: number, color: string) {
+  //   const ctx = getCtx();
+  //   const canvas = canvasRef.current;
+  //   if (!ctx || !canvas) return;
 
-    const w = canvas.width;
-    const h = canvas.height;
-    const img = ctx.getImageData(0, 0, w, h);
-    const data = img.data;
+  //   const w = canvas.width;
+  //   const h = canvas.height;
+  //   const img = ctx.getImageData(0, 0, w, h);
+  //   const data = img.data;
 
-    const ix = (x0 | 0) + (y0 | 0) * w;
-    const i0 = ix * 4;
+  //   const ix = (x0 | 0) + (y0 | 0) * w;
+  //   const i0 = ix * 4;
 
-    const target = [
-      data[i0],
-      data[i0 + 1],
-      data[i0 + 2],
-      data[i0 + 3],
-    ] as const;
-    const fill = hexToRgba(color);
+  //   const target = [
+  //     data[i0],
+  //     data[i0 + 1],
+  //     data[i0 + 2],
+  //     data[i0 + 3],
+  //   ] as const;
+  //   const fill = hexToRgba(color);
 
-    if (
-      target[0] === fill[0] &&
-      target[1] === fill[1] &&
-      target[2] === fill[2] &&
-      target[3] === fill[3]
-    )
-      return;
+  //   if (
+  //     target[0] === fill[0] &&
+  //     target[1] === fill[1] &&
+  //     target[2] === fill[2] &&
+  //     target[3] === fill[3]
+  //   )
+  //     return;
 
-    const stack: number[] = [ix];
-    const visited = new Uint8Array(w * h);
+  //   const stack: number[] = [ix];
+  //   const visited = new Uint8Array(w * h);
 
-    const match = (i: number) => {
-      const p = i * 4;
-      return (
-        data[p] === target[0] &&
-        data[p + 1] === target[1] &&
-        data[p + 2] === target[2] &&
-        data[p + 3] === target[3]
-      );
-    };
+  //   const match = (i: number) => {
+  //     const p = i * 4;
+  //     return (
+  //       data[p] === target[0] &&
+  //       data[p + 1] === target[1] &&
+  //       data[p + 2] === target[2] &&
+  //       data[p + 3] === target[3]
+  //     );
+  //   };
 
-    const paint = (i: number) => {
-      const p = i * 4;
-      data[p] = fill[0];
-      data[p + 1] = fill[1];
-      data[p + 2] = fill[2];
-      data[p + 3] = fill[3];
-    };
+  //   const paint = (i: number) => {
+  //     const p = i * 4;
+  //     data[p] = fill[0];
+  //     data[p + 1] = fill[1];
+  //     data[p + 2] = fill[2];
+  //     data[p + 3] = fill[3];
+  //   };
 
-    while (stack.length) {
-      const i = stack.pop()!;
-      if (visited[i]) continue;
-      visited[i] = 1;
-      if (!match(i)) continue;
+  //   while (stack.length) {
+  //     const i = stack.pop()!;
+  //     if (visited[i]) continue;
+  //     visited[i] = 1;
+  //     if (!match(i)) continue;
 
-      paint(i);
+  //     paint(i);
 
-      const x = i % w;
-      const y = (i / w) | 0;
-      if (x > 0) stack.push(i - 1);
-      if (x < w - 1) stack.push(i + 1);
-      if (y > 0) stack.push(i - w);
-      if (y < h - 1) stack.push(i + w);
-    }
+  //     const x = i % w;
+  //     const y = (i / w) | 0;
+  //     if (x > 0) stack.push(i - 1);
+  //     if (x < w - 1) stack.push(i + 1);
+  //     if (y > 0) stack.push(i - w);
+  //     if (y < h - 1) stack.push(i + w);
+  //   }
 
-    ctx.putImageData(img, 0, 0);
-  }
+  //   ctx.putImageData(img, 0, 0);
+  // }
 
-  function beginActionColorFromButton(button: number) {
-    drawColorRef.current =
-      button === 2 ? secondaryRef.current : primaryRef.current;
-  }
+  // function beginActionColorFromButton(button: number) {
+  //   drawColorRef.current =
+  //     button === 2 ? secondaryRef.current : primaryRef.current;
+  // }
 
-  function resetCanvasAll() {
-    const ctx = getCtx();
-    const canvas = canvasRef.current;
-    if (!ctx || !canvas) return;
+  // function resetCanvasAll() {
+  //   const ctx = getCtx();
+  //   const canvas = canvasRef.current;
+  //   if (!ctx || !canvas) return;
 
-    ctx.save();
-    ctx.globalAlpha = 1;
-    ctx.setTransform(1, 0, 0, 1, 0, 0);
-    ctx.clearRect(0, 0, canvas.width, canvas.height);
-    ctx.fillStyle = "#ffffff";
-    ctx.fillRect(0, 0, canvas.width, canvas.height);
-    ctx.restore();
+  //   ctx.save();
+  //   ctx.globalAlpha = 1;
+  //   ctx.setTransform(1, 0, 0, 1, 0, 0);
+  //   ctx.clearRect(0, 0, canvas.width, canvas.height);
+  //   ctx.fillStyle = "#ffffff";
+  //   ctx.fillRect(0, 0, canvas.width, canvas.height);
+  //   ctx.restore();
 
-    undoStack.current = [ctx.getImageData(0, 0, canvas.width, canvas.height)];
-    redoStack.current = [];
-    bumpHistory((n) => n + 1);
+  //   undoStack.current = [ctx.getImageData(0, 0, canvas.width, canvas.height)];
+  //   redoStack.current = [];
+  //   bumpHistory((n) => n + 1);
 
-    setTexts([]);
-    setSelectedTextId(null);
-    setEditingTextId(null);
+  //   setTexts([]);
+  //   setSelectedTextId(null);
+  //   setEditingTextId(null);
 
-    setCams([]);
-    setSelectedCamId(null);
-  }
+  //   setCams([]);
+  //   setSelectedCamId(null);
+  // }
 
-  function onPointerDown(e: React.PointerEvent) {
-    const canvas = canvasRef.current;
-    if (!canvas) return;
+  // function onPointerDown(e: React.PointerEvent) {
+  //   const canvas = canvasRef.current;
+  //   if (!canvas) return;
 
-    beginActionColorFromButton(e.button);
+  //   beginActionColorFromButton(e.button);
 
-    const p = getPos(e);
-    isDown.current = true;
-    startPt.current = p;
-    lastPt.current = p;
+  //   const p = getPos(e);
+  //   isDown.current = true;
+  //   startPt.current = p;
+  //   lastPt.current = p;
 
-    if (tool === "line" || tool === "rect") savePreviewSnapshot();
+  //   if (tool === "line" || tool === "rect") savePreviewSnapshot();
 
-    if (tool === "fill") {
-      floodFill(p.x | 0, p.y | 0, drawColorRef.current);
-      pushUndo();
-      isDown.current = false;
-      return;
-    }
+  //   if (tool === "fill") {
+  //     floodFill(p.x | 0, p.y | 0, drawColorRef.current);
+  //     pushUndo();
+  //     isDown.current = false;
+  //     return;
+  //   }
 
-    if (tool === "text") {
-      const id = `t_${Math.random().toString(16).slice(2)}`;
-      const item: TextItem = {
-        id,
-        x: p.x,
-        y: p.y,
-        w: 240,
-        h: 72,
-        text: "",
-        fontCss: textFont.css,
-        fontName: textFont.name,
-        fontSize: DEFAULT_TEXT_SIZE,
-        color: primaryRef.current,
-      };
-      setTexts((arr) => [...arr, item]);
-      setSelectedTextId(id);
-      setEditingTextId(id);
-      isDown.current = false;
-      return;
-    }
+  //   if (tool === "text") {
+  //     const id = `t_${Math.random().toString(16).slice(2)}`;
+  //     const item: TextItem = {
+  //       id,
+  //       x: p.x,
+  //       y: p.y,
+  //       w: 240,
+  //       h: 72,
+  //       text: "",
+  //       fontCss: textFont.css,
+  //       fontName: textFont.name,
+  //       fontSize: DEFAULT_TEXT_SIZE,
+  //       color: primaryRef.current,
+  //     };
+  //     setTexts((arr) => [...arr, item]);
+  //     setSelectedTextId(id);
+  //     setEditingTextId(id);
+  //     isDown.current = false;
+  //     return;
+  //   }
 
-    if (tool === "camera") {
-      (async () => {
-        const stream = await ensureMedia();
-        if (stream) startMicBars(stream);
-      })();
+  //   if (tool === "camera") {
+  //     (async () => {
+  //       const stream = await ensureMedia();
+  //       if (stream) startMicBars(stream);
+  //     })();
 
-      const id = `c_${Math.random().toString(16).slice(2)}`;
-      const cam: CameraItem = {
-        id,
-        x: p.x,
-        y: p.y,
-        w: 260,
-        h: 180,
-        frame: camDefaultFrame,
-        borderStyle: camDefaultBorderStyle,
-        borderWidth: camDefaultBorderWidth,
-        accentColor: primaryRef.current, // snapshot at creation time
-      };
-      setCams((arr) => [...arr, cam]);
-      setSelectedCamId(id);
-      isDown.current = false;
-      return;
-    }
+  //     const id = `c_${Math.random().toString(16).slice(2)}`;
+  //     const cam: CameraItem = {
+  //       id,
+  //       x: p.x,
+  //       y: p.y,
+  //       w: 260,
+  //       h: 180,
+  //       frame: camDefaultFrame,
+  //       borderStyle: camDefaultBorderStyle,
+  //       borderWidth: camDefaultBorderWidth,
+  //       accentColor: primaryRef.current, // snapshot at creation time
+  //     };
+  //     setCams((arr) => [...arr, cam]);
+  //     setSelectedCamId(id);
+  //     isDown.current = false;
+  //     return;
+  //   }
 
-    if (tool === "brush") {
-      drawBrushSegment(
-        p,
-        { x: p.x + 0.01, y: p.y + 0.01 },
-        drawColorRef.current,
-        brushPreset
-      );
-    }
+  //   if (tool === "brush") {
+  //     drawBrushSegment(
+  //       p,
+  //       { x: p.x + 0.01, y: p.y + 0.01 },
+  //       drawColorRef.current,
+  //       brushPreset
+  //     );
+  //   }
 
-    canvas.setPointerCapture(e.pointerId);
-  }
+  //   canvas.setPointerCapture(e.pointerId);
+  // }
 
-  function onPointerMove(e: React.PointerEvent) {
-    if (!isDown.current) return;
-    const p = getPos(e);
+  // function onPointerMove(e: React.PointerEvent) {
+  //   if (!isDown.current) return;
+  //   const p = getPos(e);
 
-    if (tool === "brush") {
-      const last = lastPt.current;
-      if (last) drawBrushSegment(last, p, drawColorRef.current, brushPreset);
-      lastPt.current = p;
-      return;
-    }
+  //   if (tool === "brush") {
+  //     const last = lastPt.current;
+  //     if (last) drawBrushSegment(last, p, drawColorRef.current, brushPreset);
+  //     lastPt.current = p;
+  //     return;
+  //   }
 
-    if (tool === "line") {
-      const a = startPt.current;
-      if (a) drawLine(a, p, drawColorRef.current);
-      return;
-    }
+  //   if (tool === "line") {
+  //     const a = startPt.current;
+  //     if (a) drawLine(a, p, drawColorRef.current);
+  //     return;
+  //   }
 
-    if (tool === "rect") {
-      const a = startPt.current;
-      if (a) drawRect(a, p, drawColorRef.current, rectMode);
-      return;
-    }
-  }
+  //   if (tool === "rect") {
+  //     const a = startPt.current;
+  //     if (a) drawRect(a, p, drawColorRef.current, rectMode);
+  //     return;
+  //   }
+  // }
 
-  function onPointerUp(e: React.PointerEvent) {
-    if (!isDown.current) return;
-    isDown.current = false;
+  // function onPointerUp(e: React.PointerEvent) {
+  //   if (!isDown.current) return;
+  //   isDown.current = false;
 
-    if (tool === "brush" || tool === "line" || tool === "rect") pushUndo();
+  //   if (tool === "brush" || tool === "line" || tool === "rect") pushUndo();
 
-    startPt.current = null;
-    lastPt.current = null;
+  //   startPt.current = null;
+  //   lastPt.current = null;
 
-    const canvas = canvasRef.current;
-    if (canvas) canvas.releasePointerCapture(e.pointerId);
-  }
+  //   const canvas = canvasRef.current;
+  //   if (canvas) canvas.releasePointerCapture(e.pointerId);
+  // }
   // ---------- Menus ----------
   const [openMenu, setOpenMenu] = useState<string | null>(null);
   const menuBarRef = useRef<HTMLDivElement | null>(null);

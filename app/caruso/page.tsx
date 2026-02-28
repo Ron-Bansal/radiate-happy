@@ -1182,10 +1182,10 @@ const CarusoPage = () => {
               </h1>
             </div>
             <p className="mb-6 max-w-[500px] text-pretty text-[clamp(0.95rem,1.2vw,1.02rem)] font-light leading-[1.65] text-[hsl(60_3%_95%)] text-opacity-90" data-hero>
-              Hi, I'm Ron - I wanted to apply for the PM role at Caruso in a way that actually reflects the role.
+              Hi, I&apos;m Ron - I wanted to apply for the PM role at Caruso in a way that actually reflects the role.
             </p>
             <p className="mb-6 max-w-[500px] text-pretty text-[clamp(0.95rem,1.2vw,1.02rem)] font-light leading-[1.65] text-[hsl(60_3%_95%)] text-opacity-90" data-hero>
-              I've built this site to share what excites me, how I think, and where I hope to contribute.
+              I&apos;ve built this site to share what excites me, how I think, and where I hope to contribute.
             </p>
           </div>
           <div className="relative flex items-center justify-center" data-hero>
@@ -1202,9 +1202,9 @@ const CarusoPage = () => {
         <div className="mx-auto w-[min(1280px,calc(100%-48px))]">
           <div className="text-center mb-14" data-fade>
             <h2 className="font-['EB_Garamond',serif] text-[clamp(2rem,4vw,3.2rem)] font-normal leading-[1.05] tracking-[-0.01em] text-[#132C38]">
-              Show, don't tell.
+              Show, don&apos;t tell.
             </h2>
-            <p className="mt-4">I'm a PM who naturally gravitates towards exploring new, strategic ideas and building solutions.</p>
+            <p className="mt-4">I&apos;m a PM who naturally gravitates towards exploring new, strategic ideas and building solutions.</p>
           </div>
           <div className="grid gap-12 lg:grid-cols-[1.4fr_0.75fr] lg:gap-16 items-center min-h-[400px]">
             <div className="overflow-hidden rounded-tl-xl rounded-tr-xl shadow hover:shadow-md" data-fade>
@@ -1229,7 +1229,7 @@ const CarusoPage = () => {
         <div className="mx-auto w-[min(1280px,calc(100%-48px))]">
           <div className="mb-14 text-center" data-fade>
             <h2 className="font-['EB_Garamond',serif] text-[clamp(2rem,4vw,3.2rem)] font-normal leading-[1.05] tracking-[-0.01em] text-[hsl(60_3%_95%)]">Recent work</h2>
-            <p className="mt-4 text-[#f3f3f2d1]">A few projects across domains I'm particularly proud of</p>
+            <p className="mt-4 text-[#f3f3f2d1]">A few projects across domains I&apos;m particularly proud of</p>
           </div>
           <div className="grid gap-6">
             {carusoProjects.map((project, index) => {
@@ -1281,7 +1281,7 @@ const CarusoPage = () => {
         <div className="mx-auto w-[min(1280px,calc(100%-48px))]">
           <div className="mb-20 text-center" data-fade>
             <p className="mb-3 text-[12px] font-semibold uppercase tracking-[0.2em] text-[#7F6DF1]">Why Caruso</p>
-            <h2 className="font-['EB_Garamond',serif] text-[clamp(2rem,4vw,3.2rem)] font-normal leading-[1.05] tracking-[-0.01em] text-[#132C38]">Three reasons I'm drawn to this role</h2>
+            <h2 className="font-['EB_Garamond',serif] text-[clamp(2rem,4vw,3.2rem)] font-normal leading-[1.05] tracking-[-0.01em] text-[#132C38]">Three reasons I&apos;m drawn to this role</h2>
           </div>
           <div className="grid gap-4 mx-auto lg:grid-cols-3">
             {whyCards.map((card, i) => (
@@ -1307,7 +1307,7 @@ const CarusoPage = () => {
         </div>
         <div className="relative z-10 mx-auto w-[min(1280px,calc(100%-48px))] pt-24 pb-14 lg:pt-32 lg:pb-16">
           <div className="mb-24 text-center" data-fade>
-            <h2 className="mb-12 font-['EB_Garamond',serif] text-[clamp(1.8rem,3.5vw,2.4rem)] font-normal leading-[1.1] text-[hsl(60_3%_95%)]">Two things I'm curious about:</h2>
+            <h2 className="mb-12 font-['EB_Garamond',serif] text-[clamp(1.8rem,3.5vw,2.4rem)] font-normal leading-[1.1] text-[hsl(60_3%_95%)]">Two things I&apos;m curious about:</h2>
             <div className="mx-auto max-w-[920px] grid gap-6 lg:grid-cols-2">
               <div className="group relative overflow-hidden rounded-lg bg-[#F2F3F2] px-8 py-6 text-left transition-all duration-500 hover:shadow-[0_8px_24px_rgba(0,0,0,0.08)]">
                 <span className="pointer-events-none absolute -top-8 -right-2.5 font-['EB_Garamond',serif] text-[7rem] font-normal leading-none text-[#7F6DF1]/[0.10] transition-colors duration-500 group-hover:text-[#7F6DF1]/[0.2]">01</span>

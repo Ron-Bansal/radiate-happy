@@ -65,7 +65,7 @@ export const experimentVisuals: ExperimentVisual[] = [
   {
     id: "ember",
     image: "/assets/garden/ember.png",
-    link: "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80m",
+    link: "https://chromewebstore.google.com/detail/ember-rediscover-forgotte/lkhcbflcchcopglokccfpbkofhkbplbh",
     size: 25,
   },
   {
@@ -77,21 +77,33 @@ export const experimentVisuals: ExperimentVisual[] = [
   {
     id: "ascent-speedround",
     image: "/assets/garden/ascent-speedround-wip.png",
-    caption: "You always have 17 minutes for a workout",
+    caption: "initial design of Speedround had some UX issues",
     size: 50,
     align: "right",
+    link: "https://raunaqbansal.com/speedround",
   },
   {
     id: "receipts",
     image: "/assets/garden/receipts-wip.png",
-    caption: "Ask your your money questions",
+    caption:
+      "AI personal finance app - ask questions about your spending and get a receipt summary",
     size: 100,
     align: "right",
+  },
+      {
+    id: "patina",
+    image: "/assets/garden/patina-0.png",
+    caption: "Draw using only the colours from your webcam background on a nostalgic canvas",
+    size: 100,
+    align: "right",
+        link: "https://raunaqbansal.com/patina",
+
   },
   {
     id: "headcount",
     image: "/assets/garden/headcount-wip.png",
-    caption: "Visualise the people in your metrics",
+    caption:
+      "Visualise the people in your metrics. See the crowd behind the numbers",
     size: 75,
   },
   {
@@ -129,13 +141,14 @@ export const projects: Project[] = [
     tagline: "What do my playlists say about me?",
     details: "Web app ⋅ Over 42,000 playlists analysed",
     images: [
-      "/assets/moonstone-golden.png",
-      "/assets/moonstone-tall.png",
-      // "https://images.unsplash.com/photo-1600411833196-7c1f6b1a8b90?q=80&w=1064&auto=format&fit=crop",
-      // "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1600&q=80",
-      // "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80",
+      "/assets/garden/moonstone-1.png",
+      "/assets/garden/moonstone-4.png",
+      "/assets/garden/moonstone-3.png",
+      "/assets/garden/moonstone-2.png",
+      // "/assets/moonstone-golden.png",
+      // "/assets/moonstone-tall.png",
     ],
-    link: "https://moonstone.raunaqbansal.com",
+    link: "https://moonstone.raunaqbansal.com/playlist/6PehLzyryfuvHUUVrK3yTs",
   },
   {
     id: "c3",
@@ -171,9 +184,22 @@ export const projects: Project[] = [
     link: "https://chromewebstore.google.com/detail/napkin-notes-%E2%80%A2-side-panel/dlhljjkacijknfelknklfcohibfdciki",
   },
   {
+    id: "draftline",
+    name: "Draftline - Studio for thinking, writing, iterating",
+    tagline:
+      "Organize your unstructured thoughts and chisel your ideas to clarity",
+    details: "Web app ⋅ Early access",
+    images: [
+      "/assets/garden/draftline-0z.png",
+      "/assets/garden/draftline-0.png",
+      "/assets/garden/draftline-0d.png",
+    ],
+  },
+  {
     id: "speedround",
-    name: "Ascent Speedround - 17 minute bodyweight workouts",
-    tagline: "How do I track my calisthenics training?",
+    name: "Ascent Speedround - Intense timeboxed workout",
+    tagline:
+      " Simple (but not easy) 17 minute workout with statisfying visual progression",
     details: "Web app",
     // tagline: "Exactly 17 minutes to rep out 5 bodyweight exercises. Visual timer and cumulative reps tally tracker.",
     images: [
@@ -193,10 +219,10 @@ export const projects: Project[] = [
   },
   {
     id: "covered",
-    name: "Covered - Media posters in a click",
+    name: "Covered - Fetch media posters in a click",
     tagline: "Find movie/show/book covers for Notion databases",
     details: "(niche) Extension built for Notion ⋅ 20 users",
-    images: ["/assets/garden/covered.png", "/assets/garden/covered2.webp"],
+    images: ["/assets/garden/covered2.webp", "/assets/garden/covered.png"],
     link: "chromewebstore.google.com/detail/covered/pllfacnikognkodbcnnjnhpecicageac",
   },
   // {

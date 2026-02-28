@@ -3,7 +3,7 @@ import localFont from "next/font/local";
 import "../app/styles/globals.css";
 // import { Roboto, Syne } from "next/font/google";
 // import { Figtree, Instrument_Serif } from "next/font/google";
-import { Figtree, Playfair_Display } from "next/font/google";
+import { Figtree, Playfair_Display, Epilogue } from "next/font/google";
 import LoaderWrapper from "./components/LoaderWrapper";
 import { Analytics } from "@vercel/analytics/next";
 import Script from "next/script";
@@ -20,11 +20,11 @@ import { PostHogProvider } from "./components/PostHogProvider";
 //   weight: "100 900",
 // });
 
-const roboto = Figtree({
+const figtree = Figtree({
   subsets: ["latin"],
-  variable: "--font-roboto",
-  // weight: ["300", "400", "500"],
+  variable: "--font-figtree",
   weight: "variable",
+  display: "swap",
 });
 
 // const syne = Instrument_Serif({
@@ -39,6 +39,14 @@ const syne = Playfair_Display({
   variable: "--font-syne",
   weight: "variable",
   // weight: "400"
+  display: "swap",
+});
+
+const epilogue = Epilogue({
+  subsets: ["latin"],
+  variable: "--font-epilogue",
+  weight: ["300", "400", "500", "600", "700"],
+  display: "swap",
 });
 
 export const metadata = {
@@ -75,7 +83,7 @@ export default function RootLayout({ children }) {
           }}
         />
       </head>
-      <body className={`${roboto.variable} ${syne.variable}`}>        
+      <body className={`${figtree.variable} ${syne.variable} ${epilogue.variable}`}>        
         <PostHogProvider>
           <LoaderWrapper forceShow={isTestingLoader} />
           {/* Fluid background animation */}
@@ -86,7 +94,7 @@ export default function RootLayout({ children }) {
             id="grain-overlay"
             className="fixed inset-0 w-full h-full pointer-events-none z-50 opacity-30 animate-noise"
             style={{
-              backgroundImage: `url('/noise.webp')`,
+              // backgroundImage: `url('/noise.webp')`,
               backgroundSize: "cover",
             }}
           />

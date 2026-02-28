@@ -186,7 +186,7 @@ export const carusoProjects: Project[] = [
     title: "Curious & Creative Club - Teaching young students Science & Coding",
     category: "Teaching others",
     tags: ["Education", "Tech Literacy", "Problem Solving"],
-    hook: "Tutoring to build skills that will matter tomorrow. No curriculum. No exams. Just learning to love learning.",
+    hook: "Tutoring kids to build skills that will matter tomorrow. No curriculum. No exams. Just learning to love learning.",
     body: [
       "Every week for the last 5 years, I've run online classes where kids follow curiosity threads and build cool things. It started as coding and science classes. Now it's more about the process: how to ask good questions, how to deal with ambiguity, how to build something.",
       "Lately we've been exploring AI together. Not as a shortcut, but responsibly as a sparring partner for their ideas. The rule is it helps you think further, not think less. It has unlocked an insane amount of learning potential.",

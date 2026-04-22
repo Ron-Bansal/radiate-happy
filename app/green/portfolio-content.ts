@@ -90,14 +90,14 @@ export const experimentVisuals: ExperimentVisual[] = [
     size: 100,
     align: "right",
   },
-      {
+  {
     id: "patina",
     image: "/assets/garden/patina-0.png",
-    caption: "Draw using only the colours from your webcam background on a nostalgic canvas",
+    caption:
+      "Draw using only the colours from your webcam background on a nostalgic canvas",
     size: 100,
     align: "right",
-        link: "https://raunaqbansal.com/patina",
-
+    link: "https://raunaqbansal.com/patina",
   },
   {
     id: "headcount",
@@ -171,6 +171,14 @@ export const projects: Project[] = [
   //     "https://images.unsplash.com/photo-1516031190212-da133013de50?auto=format&fit=crop&w=1600&q=80",
   //   ],
   // },
+  {
+    id: "gracious",
+    name: "Gracious - E-commerce store for a womenswear label",
+    tagline: "Custom Shopify theme built to feel like flipping through a lookbook",
+    details: "Shopify design + development",
+    images: ["/assets/garden/gracious-1.png", "/assets/garden/gracious-2.png"],
+    link: "https://graciousnz.com/"
+  },
   {
     id: "napkin-notes",
     name: "Napkin Notes - Quickest canvas for thought",

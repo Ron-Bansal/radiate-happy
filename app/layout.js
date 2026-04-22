@@ -55,7 +55,7 @@ export const metadata = {
   description:
     "Raunaq is a product designer and creativer developer passionate about helping people do more with technology.",
   icons: {
-    icon: "/greensquare-logo-grey-rise.png", // or "/favicon.png"
+    icon: "/greensquare-logo-grey-rise.webp", // or "/favicon.png"
   },
 };
 

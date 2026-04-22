@@ -211,6 +211,13 @@
 // }
 "use client"
 import React, { useState, useEffect } from 'react';
+import { Kode_Mono } from "next/font/google";
+
+const kodeMono = Kode_Mono({
+  subsets: ["latin"],
+  weight: ["400", "500", "600"],
+  display: "swap",
+});
 
 // Sample blog posts data
 const blogPosts = [
@@ -391,7 +398,7 @@ function CalendarMonth({ year, month, monthName, onPostClick }) {
                     className="absolute top-2 right-2 text-sm z-10"
                     style={{ 
                       color: post ? '#ffffff' : '#3d1a17',
-                      fontFamily: "'Kode Mono', monospace",
+                      fontFamily: kodeMono.style.fontFamily,
                       textShadow: post ? '0 1px 3px rgba(0,0,0,0.5)' : 'none'
                     }}
                   >
@@ -527,8 +534,6 @@ export default function FailingLoudlyBlog() {
 
   return (
     <>
-      <link href="https://fonts.googleapis.com/css2?family=Kode+Mono:wght@400;500;600&display=swap" rel="stylesheet" />
-      
       <div className="min-h-screen" style={{ backgroundColor: '#f5ede7' }}>
         <div className="md:flex">
           <aside 

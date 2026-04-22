@@ -3,7 +3,7 @@ export default function About() {
     <section className="min-h-screen py-20 px-6 bg-[#F3F5F6] text-black">
       <div className="max-w-6xl xw-fit mx-auto z-20 relative">
         {/* <div className="absolute right-0 top-1/3 transform -translate-y-1/2">
-          <img src="/assets/ven.png" alt="Venn Diagram" />
+          <img src="/assets/ven.webp" alt="Venn Diagram" />
         </div> */}
         <h2 className="font-accent text-4xl md:text-6xl leading-[111%] tracking-[0.62px] mt-6">
           I enjoy creating products <br className="hidden md:block" /> that

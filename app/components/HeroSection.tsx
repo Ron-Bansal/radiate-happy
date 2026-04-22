@@ -53,7 +53,7 @@ export default function Hero() {
       {/* Bottom-left plant */}
       <div className="absolute bottom-0 left-0 z-0">
         <img
-          src="/assets/plant1.png"
+          src="/assets/plant1.webp"
           alt="Plant"
           className="w-full h-full max-h-[60vh] object-contain"
         />
@@ -88,7 +88,7 @@ export default function Hero() {
           {/* Gradient Banner */}
           <div className="relative h-7 w-full">
             <Image
-              src="/assets/grad-banner.png"
+              src="/assets/grad-banner.webp"
               alt="Gradient Banner"
               fill
               className="object-cover pointer-events-none"

@@ -134,7 +134,7 @@ const PulseDesign1V2 = () => {
 
         {/* Today's Challenges */}
         <div className="mb-8">
-          <h2 className="text-lg font-semibold text-gray-700 mb-4">Today's Challenges</h2>
+          <h2 className="text-lg font-semibold text-gray-700 mb-4">Today`&apos;`s Challenges</h2>
           
           <button 
             onClick={() => setCurrentView('case')}
@@ -356,7 +356,7 @@ const PulseDesign1V2 = () => {
         <div className="mb-8 p-8 bg-white/70 backdrop-blur-sm rounded-3xl shadow-md border border-gray-200/50">
           <div className="space-y-4 text-gray-700 leading-relaxed">
             <p>
-              A <span className="font-semibold text-red-600">67-year-old</span> man presents with lower back pain for <span className="font-semibold text-red-600">3 days</span>. He describes it as "the worst pain I've ever had" and rates it <span className="font-mono font-bold text-red-600">8/10</span>.
+              A <span className="font-semibold text-red-600">67-year-old</span> man presents with lower back pain for <span className="font-semibold text-red-600">3 days</span>. He describes it as `&apos;`the worst pain I`&apos;`ve ever had`&apos;` and rates it <span className="font-mono font-bold text-red-600">8/10</span>.
             </p>
             <div className="pt-3 border-t border-gray-200">
               <div className="text-xs font-bold text-gray-600 mb-2 uppercase tracking-wider">History</div>
@@ -723,7 +723,7 @@ const PulseDesign1V2 = () => {
                 <div className={`w-12 h-12 rounded-2xl bg-gradient-to-br ${log.color} flex-shrink-0 shadow-sm`}></div>
                 <div className="flex-1">
                   <p className="text-sm text-gray-700 leading-relaxed mb-3">
-                    "{log.text}"
+                    `&apos;`{log.text}`&apos;`
                   </p>
                   <div className="flex items-center gap-2 text-xs text-gray-500 font-medium">
                     <span>{log.role}</span>

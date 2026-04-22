@@ -319,13 +319,14 @@ const projects: Project[] = [
   {
     id: "gracious",
     name: "Gracious",
-    description: "Designed and developed a custom Shopify e-commerce store.",
+    description:
+      "Designed and developed a custom Shopify store for a womenswear label launching online.",
     learning:
-      "Every platform has quirks — working within constraints is part of the craft.",
+      "For brand-led commerce, clarity and presentation do most of the heavy lifting.",
     state: "Complete",
     axes: { personal_shared: 95, play_purpose: 90 },
     categories: ["venture", "design"],
-    tags: ["craft", "presentation", "brand"],
+    tags: ["shopify", "ecommerce", "brand"],
   },
   {
     id: "ai-chef",

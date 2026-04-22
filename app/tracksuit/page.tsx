@@ -330,7 +330,7 @@ export default function TracksuitPage() {
         >
           <img
             className="h-9 rounded"
-            src="/assets/tracksuit/wave-emoji.png"
+            src="/assets/tracksuit/wave-emoji.webp"
             alt="Ron wave"
           />
         </a>
@@ -364,7 +364,7 @@ export default function TracksuitPage() {
         </div>
         <div className="hero-seq flex justify-center">
           <img
-            src="assets/tracksuit/warmup.png"
+            src="assets/tracksuit/warmup.webp"
             alt="Ron with Lucy (placeholder)"
             className="w-[90%] max-w-md rounded xshadow-2xl"
           />
@@ -375,7 +375,7 @@ export default function TracksuitPage() {
       <section className="reveal mx-auto max-w-7xl rounded-3xl bg-[#8E81CC] text-[#FBF7F0] p-6 md:p-10 shadow-lg md:grid md:grid-cols-[360px_1fr] md:gap-10">
         <div>
           <img
-            src="assets/tracksuit/screenshot.png"
+            src="assets/tracksuit/screenshot.webp"
             alt="Event placeholder"
             className="w-full -mt-24 max-w-[350px] rounded-2xl border-4 border-[#FBF7F0]"
           />
@@ -399,17 +399,17 @@ export default function TracksuitPage() {
           <ul className="mt-12 space-y-1">
             {[
               {
-                icon: "/assets/tracksuit/fire.png",
+                icon: "/assets/tracksuit/fire.webp",
                 title: "Ambitious team",
                 desc: "The energy of the team is contagious. It’s so clear when speaking to someone from Tracksuit that they’re extremely passionate about their work and drive towards excellence - exactly the kind of environment I’d love to be a part of!",
               },
               {
-                icon: "/assets/tracksuit/heart.png",
+                icon: "/assets/tracksuit/heart.webp",
                 title: "Unmatched culture",
                 desc: "From collecting awards in tracksuits to breaking LinkedIn with celebration posts, you can feel the pride, care, and fun in how people show up for each other.",
               },
               {
-                icon: "/assets/tracksuit/rocketship.png",
+                icon: "/assets/tracksuit/rocketship.webp",
                 title: "Human-Centered Product",
                 desc: "As someone obsessed with crafting delightful user experiences, I love how Tracksuit’s playful, intuitive design stands out from other analytics platforms.",
               },
@@ -495,7 +495,7 @@ export default function TracksuitPage() {
               </ul>
             </div>
             <img
-              src="/assets/moonstone-golden2.png"
+              src="/assets/moonstone-golden2.webp"
               alt="Moonstone UI"
               className="w-full rounded-xl shadow-lg"
             />
@@ -638,7 +638,7 @@ export default function TracksuitPage() {
               </ul>
             </div>
             <img
-              src="/assets/garden/c3-blue.png"
+              src="/assets/garden/c3-blue.webp"
               alt="Curious & Creative Club illustration"
               className="w-full rounded-xl shadow-lg"
             />
@@ -716,7 +716,7 @@ export default function TracksuitPage() {
               </p> */}
             </div>
             <img
-              src="/assets/tracksuit/cropped-learning-grid.png"
+              src="/assets/tracksuit/cropped-learning-grid.webp"
               alt="Learning visual"
               className="h-full w-full object-cover"
             />
@@ -740,7 +740,7 @@ export default function TracksuitPage() {
         <div className="mt-10 grid items-start gap-10 md:mt-12 md:grid-cols-[1.1fr_.9fr]">
           <div className="flex">
             <img
-              src="/assets/garden/studio.png"
+              src="/assets/garden/studio.webp"
               alt="Ron in studio"
               className="mx-auto w-[80%] rounded-xl shadow-lg"
               loading="lazy"
@@ -872,7 +872,7 @@ export default function TracksuitPage() {
               >
                 <img
                   className="h-9 rounded"
-                  src="/assets/tracksuit/wave-emoji.png"
+                  src="/assets/tracksuit/wave-emoji.webp"
                   alt="Ron wave"
                 />
               </a>

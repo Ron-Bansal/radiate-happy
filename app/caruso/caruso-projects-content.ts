@@ -22,7 +22,7 @@
 //       "I visited the customer's warehouse to observe real usage, watched operators interact with the dimensioner hardware, and iterated on the UX based on what I saw — not what I assumed. The gap between a functional tool and one that fits a workflow only becomes visible when you stand next to the person using it.",
 //       "Shipped before peak season. The integration eliminated manual data entry errors and reduced processing time per package. The customer's team posted a LinkedIn appreciation post about the experience."
 //     ],
-//     images: ["/assets/garden/dimensioner-1.png", "/assets/garden/dimensioner-2.png"]
+//     images: ["/assets/garden/dimensioner-1.webp", "/assets/garden/dimensioner-2.webp"]
 //   },
 //   {
 //     id: "hubspot-sidepanel",
@@ -35,7 +35,7 @@
 //       "Instead of building a standalone dashboard, I built a browser extension that lives in the HubSpot sidebar. It auto-detects the customer email on screen and surfaces consolidated insights at the moment of need. Billing status, open tickets, feature requests, health score — all in one glance, zero clicks.",
 //       "Hotkey shortcuts for power users. Designed for the workflow, not around it. The best tool is the one you don't have to open."
 //     ],
-//     images: ["/assets/garden/insights-0.png", "/assets/garden/moonstone-1.png"]
+//     images: ["/assets/garden/insights-0.webp", "/assets/garden/moonstone-1.webp"]
 //   },
 //   {
 //     id: "draftline",
@@ -48,7 +48,7 @@
 //       "Draftline is designed for the early stages of thinking where you're not ready to commit to structure yet. Messy thinking deserves a dedicated space. It's an idea studio for people who don't think in straight lines.",
 //       "It changed how I plan, write, and develop ideas. The tool I use every day that nobody asked me to build."
 //     ],
-//     images: ["/assets/garden/draftline-0.png", "/assets/garden/draftline-0z.png"]
+//     images: ["/assets/garden/draftline-0.webp", "/assets/garden/draftline-0z.webp"]
 //   },
 //   {
 //     id: "curious-creative-club",
@@ -62,7 +62,7 @@
 //       "Recently evolved to embrace AI as a learning accelerator — teaching kids to use it responsibly to amplify their thinking, not replace it. If you can explain something to a 12-year-old and make them care, you can write a spec anyone can build from.",
 //       "This isn't a side hustle — it's the clearest expression of how I think about learning, problem-solving, and building."
 //     ],
-//     images: ["/assets/garden/c3-hero.png", "/assets/garden/c3-blue.png"]
+//     images: ["/assets/garden/c3-hero.webp", "/assets/garden/c3-blue.webp"]
 //   }
 // ];
 
@@ -88,7 +88,7 @@
 //       "Started by figuring out how the hardware actually worked, then built a standalone app in V0 to prove the concept. Once that was solid, I moved the integration into our real codebase. Added barcode scanning too — in a warehouse where you're processing hundreds of parcels, reaching for a mouse between every order didn't make sense.",
 //       "Went to the warehouse for the final demo and it worked how I'd hoped. Customer was really happy with the turnaround and posted about it on LinkedIn. That one felt good."
 //     ],
-//     images: ["/assets/garden/dimensioner-1.png", "/assets/garden/dimensioner-2.png"]
+//     images: ["/assets/garden/dimensioner-1.webp", "/assets/garden/dimensioner-2.webp"]
 //   },
 //   {
 //     id: "customer-insights-panel",
@@ -101,7 +101,7 @@
 //       "So I built a browser extension that sits in the HubSpot sidebar. One hotkey grabs the customer email from the page and pulls billing, open tickets, feature requests, install status — all into one panel. Threw in account overrides and keyboard shortcuts because once you start removing friction it's hard to stop.",
 //       "Nobody asked me to build it. I shared it and the whole team just started using it — no onboarding, no docs. People tell me their calls are better now because they actually know what's going on before they pick up. I still ship little updates to it whenever I spot something slow."
 //     ],
-//     images: ["/assets/garden/insights-0.png", "/assets/garden/moonstone-1.png"]
+//     images: ["/assets/garden/insights-0.webp", "/assets/garden/moonstone-1.webp"]
 //   },
 //   {
 //     id: "draftline",
@@ -114,7 +114,7 @@
 //       "Draftline is a web app I built for that. You work in cards you can shuffle, hide, reorder, and reshape — it's more like sculpting than writing. There's a visual trail of how your thinking changed over time, which makes editing feel like part of the process instead of something to dread.",
 //       "I built it with V0 and Claude and I use it every day — for planning, writing, working through problems. I call it personalware. Software with an audience of one."
 //     ],
-//     images: ["/assets/garden/draftline-0.png", "/assets/garden/draftline-0z.png"]
+//     images: ["/assets/garden/draftline-0.webp", "/assets/garden/draftline-0z.webp"]
 //   },
 //   {
 //     id: "curious-creative-club",
@@ -127,7 +127,7 @@
 //       "Lately we've been playing with AI together. Not as a shortcut — more like a sparring partner for their ideas. The rule is it helps you think further, not think less. The kids get it faster than most adults.",
 //       "I do this because I love it. There's nothing like watching a kid get genuinely excited about an idea they came up with. And honestly, having to explain things simply and clearly every week has made me better at it everywhere else too."
 //     ],
-//     images: ["/assets/garden/c3-hero.png", "/assets/garden/c3-blue.png"]
+//     images: ["/assets/garden/c3-hero.webp", "/assets/garden/c3-blue.webp"]
 //   }
 // ];
 
@@ -153,7 +153,7 @@ export const carusoProjects: Project[] = [
       "I ran discovery on how the hardware worked, then built a fully functional standalone app in v0. To further improve UX, I moved the implementation into our real codebase and added barcode scanning so operators could trigger actions without reaching for a mouse between parcels. In a warehouse doing hundreds of orders a day, that kind of detail matters.",
       "Turnaround of just a few weeks. Shipped before peak season. Even got to visit their warehouse for the final demo to see it in action. The customer was beaming and a lovely success story was posted on LinkedIn."
     ],
-    images: ["/assets/garden/dimensioner-1.png", "/assets/garden/dimensioner-2.png"]
+    images: ["/assets/garden/dimensioner-1.webp", "/assets/garden/dimensioner-2.webp"]
   },
   {
     id: "customer-insights-panel",
@@ -166,7 +166,7 @@ export const carusoProjects: Project[] = [
       "I built a Chrome sidepanel extension that automatically detects the customer email from the HubSpot page and pulls billing/trial status, open support tickets, and feature requests into a single panel. I added account overrides and keyboard shortcuts to remove even more friction from the workflow.",
       "Nobody asked me to build this. I shared it and the entire Sales and Onboarding team adopted it within a week, no training required. Reps say their customer conversations are richer now because they walk into every call with full context."
     ],
-    images: ["/assets/caruso/insight-1.png", "/assets/caruso/insight-2.png"]
+    images: ["/assets/caruso/insight-1.webp", "/assets/caruso/insight-2.webp"]
   },
   {
     id: "draftline",
@@ -179,7 +179,7 @@ export const carusoProjects: Project[] = [
       "Draftline is a web app I built with Claude and Lovable for non-linear thinking. You work in cards you can shuffle, hide, reorder, and reshape. It shows a visual trail of how your thinking evolves over time. Now writing feels like sculpting ideas.",
       "It eliminated my writer's block, made revisions feel less precious, and gave me confidence to build things I need but don't exist."
     ],
-    images: ["/assets/garden/draftline-0.png", "/assets/garden/draftline-0z.png"]
+    images: ["/assets/garden/draftline-0.webp", "/assets/garden/draftline-0z.webp"]
   },
   {
     id: "curious-creative-club",
@@ -192,6 +192,6 @@ export const carusoProjects: Project[] = [
       "Lately we've been exploring AI together. Not as a shortcut, but responsibly as a sparring partner for their ideas. The rule is it helps you think further, not think less. It has unlocked an insane amount of learning potential.",
       "Explaining complex ideas simply and clearly every class has made me a better communicator everywhere else. A PM is often the translator between teams, and this is where I built that muscle."
     ],
-    images: ["/assets/garden/c3-hero.png", "/assets/caruso/c3-2.png"]
+    images: ["/assets/garden/c3-hero.webp", "/assets/caruso/c3-2.webp"]
   }
 ];

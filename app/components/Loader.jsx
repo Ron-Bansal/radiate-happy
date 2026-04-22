@@ -129,7 +129,7 @@ export default function Loader({ onComplete }) {
           {/* Logo */}
           <div ref={logoRef} className="mb-8">
             <img
-              src="/assets/logo-grey-rise.png" 
+              src="/assets/logo-grey-rise.webp" 
               alt="Raunaq" 
               className="h-16 opacity-90"
             />
@@ -280,7 +280,7 @@ export default function Loader({ onComplete }) {
 //             }
 //           `}</style>
 //           <img
-//             src="/assets/logo-grey-rise.png" 
+//             src="/assets/logo-grey-rise.webp" 
 //             alt="Raunaq" 
 //             className="h-20 md:h-24"
 //           />

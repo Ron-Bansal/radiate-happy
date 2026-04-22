@@ -374,13 +374,13 @@
 //         <div className="mx-auto flex w-[min(1280px,calc(100%-48px))] items-center justify-between py-3.5">
 //           <div className="flex items-center gap-3">
 //             <img
-//               src="/assets/caruso/caruso.png"
+//               src="/assets/caruso/caruso.webp"
 //               alt="Caruso"
 //               className="h-9 opacity-80 rounded"
 //             />
 //             <span className="text-[24px] leading-none">🤝</span>
 //             <img
-//               src="/assets/tracksuit/wave-emoji.png"
+//               src="/assets/tracksuit/wave-emoji.webp"
 //               alt="Ron"
 //               className="h-8 opacity-80"
 //             />
@@ -470,7 +470,7 @@
 //             <div className="relative w-full max-w-[420px] aspect-[3/4] rounded-xl bg-[#1a3a48] xoverflow-hidden">
 //               <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#132C38]/60 z-10" />
 //               <img
-//                 src="/assets/garden/studio.png"
+//                 src="/assets/garden/studio.webp"
 //                 alt="Ron"
 //                 className="h-full w-full object-cover object-center rounded-xl"
 //               />
@@ -539,7 +539,7 @@
 //               data-reveal
 //             >
 //               <img
-//                 src="/assets/caruso/v0-888.png"
+//                 src="/assets/caruso/v0-888.webp"
 //                 alt="v0 activity heatmap showing 888 prompts over 12 months"
 //                 className="w-full object-cover shadow-3xl border-1"
 //               />
@@ -998,7 +998,7 @@ const HeroImage = () => {
   return (
     <div ref={containerRef} className="relative w-full max-w-[420px] aspect-[3/4] rounded-xl bg-[#1a3a48]">
       <div className="absolute inset-0 bg-gradient-to-b from-transparent via-transparent to-[#132C38]/60 z-10 rounded-xl" />
-      <img src="/assets/garden/studio.png" alt="Ron" className="h-full w-full object-cover object-center rounded-xl" />
+      <img src="/assets/garden/studio.webp" alt="Ron" className="h-full w-full object-cover object-center rounded-xl" />
       {heroLabels.map((label, i) => (
         <span key={i} ref={(el) => { labelRefs.current[i] = el; }} className={`${label.className} will-change-transform`}>
           <span className="inline-block rounded-full bg-white/70 backdrop-blur-sm px-3.5 py-1.5 text-[11px] font-medium tracking-[0.05em] text-black/75">
@@ -1144,10 +1144,10 @@ const CarusoPage = () => {
       <nav ref={navRef} className="fixed top-0 left-0 right-0 z-40 bg-[#132C38]/90 backdrop-blur-md border-b border-white/[0.06] transition-transform duration-300 ease-out">
         <div className="mx-auto flex w-[min(1280px,calc(100%-48px))] items-center justify-between py-3.5">
           <div className="flex items-center gap-3">
-            <img src="/assets/caruso/caruso.png" alt="Caruso" className="h-9 opacity-80 rounded" />
+            <img src="/assets/caruso/caruso.webp" alt="Caruso" className="h-9 opacity-80 rounded" />
             <span className="text-[24px] leading-none">🤝</span>
-            <img src="/assets/tracksuit/wave-emoji.png" alt="Ron" className="h-8 opacity-80" />
-            <h5 className="text-white tracking-[0.01em] font-medium text-xl">Ron Bansal</h5>
+            <img src="/assets/tracksuit/wave-emoji.webp" alt="Ron" className="h-8 opacity-80" />
+            {/* <h5 className="text-white tracking-[0.01em] font-medium text-xl">Ron Bansal</h5> */}
           </div>
           <div className="flex items-center gap-5">
             <AucklandClock />
@@ -1208,7 +1208,7 @@ const CarusoPage = () => {
           </div>
           <div className="grid gap-12 lg:grid-cols-[1.4fr_0.75fr] lg:gap-16 items-center min-h-[400px]">
             <div className="overflow-hidden rounded-tl-xl rounded-tr-xl shadow hover:shadow-md" data-fade>
-              <img src="/assets/caruso/v0-888.png" alt="v0 activity heatmap" className="w-full object-cover" />
+              <img src="/assets/caruso/v0-888.webp" alt="v0 activity heatmap" className="w-full object-cover" />
             </div>
             <div data-fade>
               <p className="mb-1 font-['EB_Garamond',serif] text-[clamp(3rem,5vw,4.2rem)] font-normal leading-[1] tracking-[-0.02em] text-[#132C38]">

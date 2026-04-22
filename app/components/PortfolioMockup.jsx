@@ -292,25 +292,25 @@
 //   const getImagePlaceholder = (type) => {
 //     switch(type) {
 //       case 'project':
-//         return '/assets/moonstone-golden.png';
+//         return '/assets/moonstone-golden.webp';
 //       case 'community':
-//         return '/assets/moonstone-square.png';
+//         return '/assets/moonstone-square.webp';
 //       case 'work':
-//         return '/assets/moonstone-golden.png';
+//         return '/assets/moonstone-golden.webp';
 //       case 'mobile':
-//         return '/assets/napkin-notes-golden.png';
+//         return '/assets/napkin-notes-golden.webp';
 //       case 'design':
 //         return '/assets/napkin-notes-tall.webp';
 //       case 'meetup':
-//         return '/assets/napkin-notes-golden.png';
+//         return '/assets/napkin-notes-golden.webp';
 //       case 'workshop':
-//         return '/assets/moonstone-tall.png';
+//         return '/assets/moonstone-tall.webp';
 //       case 'opensource':
 //         return '/assets/napkin-notes-tall.webp';
 //       case 'speaking':
 //         return '/api/placeholder/400/240';
 //       default:
-//         return '/assets/moonstone-golden.png';
+//         return '/assets/moonstone-golden.webp';
 //     }
 //   };
 
@@ -1147,25 +1147,25 @@ const PortfolioMockup = () => {
   const getImagePlaceholder = (type) => {
     switch (type) {
       case "project":
-        return "/assets/moonstone-tall.png";
+        return "/assets/moonstone-tall.webp";
       case "community":
-        return "/assets/moonstone-square.png";
+        return "/assets/moonstone-square.webp";
       case "work":
-        return "/assets/moonstone-golden.png";
+        return "/assets/moonstone-golden.webp";
       case "mobile":
         return "/assets/napkin-notes-square.webp";
       case "design":
         return "/assets/napkin-notes-tall.webp";
       case "meetup":
-        return "/assets/napkin-notes-golden.png";
+        return "/assets/napkin-notes-golden.webp";
       case "workshop":
-        return "/assets/moonstone-tall.png";
+        return "/assets/moonstone-tall.webp";
       case "opensource":
         return "/assets/napkin-notes-tall.webp";
       case "speaking":
         return "/assets/napkin-notes-square.webp";
       default:
-        return "/assets/moonstone-golden.png";
+        return "/assets/moonstone-golden.webp";
     }
   };
 

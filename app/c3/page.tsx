@@ -3,7 +3,7 @@ import React from "react";
 import ObjectRibbonMarquee from "./ribbon-path";
 import { Sora, Plus_Jakarta_Sans } from "next/font/google";
 
-const sora = Sora({ subsets: ["latin"], variable: "--font-sora", weight: ["400", "600", "700", "800"] });
+const sora = Sora({ subsets: ["latin"], variable: "--font-sora", weight: ["400", "500","600", "700", "800"] });
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   variable: "--font-plus-jakarta",
@@ -13,8 +13,8 @@ const plusJakarta = Plus_Jakarta_Sans({
 // NOTE: Replace this with your real logo asset if you have one.
 function LogoMark() {
   return (
-    <div className="h-12 w-12 overflow-hidden rounded-xl bg-[#EDE6DA] ring-1 ring-black/10">
-      <div className="grid h-full w-full place-items-center text-[22px]">🦋</div>
+    <div className="h-12 w-12 overflow-hidden rounded-xl xbg-[#EDE6DA]">
+            <img src="/assets/round-things/c3-logo.webp" alt="logo" />
     </div>
   );
 }
@@ -43,16 +43,16 @@ export default function Page() {
             </div>
           </div>
 
-          <nav className="flex items-center gap-2 sm:gap-3">
+          <nav className="flex items-center gap-1 lg:gap-1.5 font-semibold">
             {[
               { label: "About" },
               { label: "Format" },
-              { label: "Format" },
+              { label: "Showcase" },
             ].map((x, idx) => (
               <button
                 key={`${x.label}-${idx}`}
                 type="button"
-                className="rounded-full border border-black/25 bg-transparent px-3 py-1.5 text-[13px] font-medium text-black/70 transition-colors hover:bg-black/5"
+                className="rounded-full border border-black/25 bg-transparent px-3 py-1.5 text-[13px] font-medium text-black/70 transition-colors bg-white hover:bg-black/5"
               >
                 {x.label}
               </button>
@@ -60,7 +60,7 @@ export default function Page() {
 
             <button
               type="button"
-              className="rounded-full bg-black px-4 py-1.5 text-[13px] font-semibold text-white shadow-[0_6px_18px_rgba(0,0,0,0.18)] transition-colors hover:bg-black/90"
+              className="rounded-full bg-black px-4 py-1.5 text-[13px] text-white transition-colors hover:bg-black/90"
             >
               Apply to Enrol
             </button>
@@ -71,11 +71,12 @@ export default function Page() {
         <div className="mx-auto w-full max-w-[1280px] px-4 pb-2 pt-10 sm:px-8 sm:pt-14">
           <div className="mx-auto max-w-[900px] text-center">
             <h1
-              className="text-balance text-4xl font-[550] leading-[1.2] tracking-[-0.04em] text-[#1b1b1b] lg:text-6xl"
+              className="text-balance text-4xl font-[500] leading-snug tracking-[-0.04em] text-[#1b1b1b] lg:text-6xl lg:leading-snug"
               style={{ fontFamily: "var(--font-sora)" }}
             >
               Where Curious Kids Learn
-              <br />
+              <br className="hidden md:block"/>
+              <span> </span>
               by Building Cool Things
             </h1>
 
@@ -88,7 +89,7 @@ export default function Page() {
             <div className="mt-12 flex justify-center">
               <button
                 type="button"
-                className="group inline-flex items-center gap-2 rounded-full border border-black/35 bg-white px-5 py-2 text-[14px] font-medium text-black/80 shadow-[0_2px_0_rgba(0,0,0,0.06)] transition-colors xhover:bg-black/5"
+                className="group inline-flex items-center gap-2 rounded-full border border-black/35 bg-white px-5 py-2 text-[14px] font-medium text-black/80 transition-colors"
               >
                 Apply to enrol
                 <span className="grid h-6 w-6 place-items-center rounded-full bg-black/80 text-white transition-transform group-hover:rotate-45 duration-500-">
@@ -103,26 +104,30 @@ export default function Page() {
         <div className="relative mt-4">
           <ObjectRibbonMarquee
             items={[
-              { src: "./assets/round-things/img1.png", alt: "Round object" },
-              { src: "./assets/round-things/img2.png", alt: "Round object" },
-              { src: "./assets/round-things/img3.png", alt: "Round object" },
-              { src: "./assets/round-things/img4.png", alt: "Round object" },
-              { src: "./assets/round-things/img5.png", alt: "Round object" },
-              { src: "./assets/round-things/img6.png", alt: "Round object" },
-              { src: "./assets/round-things/img7.png", alt: "Round object" },
-              { src: "./assets/round-things/img8.png", alt: "Round object" },
-              { src: "./assets/round-things/img9.png", alt: "Round object" },
-              { src: "./assets/round-things/img10.png", alt: "Round object" },
-              { src: "./assets/round-things/img12.png", alt: "Round object" },
-              { src: "./assets/round-things/img13.png", alt: "Round object" },
-              { src: "./assets/round-things/img14.png", alt: "Round object" },
-              { src: "./assets/round-things/img15.png", alt: "Round object" },
-              { src: "./assets/round-things/img16.png", alt: "Round object" },
-              { src: "./assets/round-things/img17.png", alt: "Round object" },
-              { src: "./assets/round-things/img18.png", alt: "Round object" },
-              { src: "./assets/round-things/img19.png", alt: "Round object" },
-              { src: "./assets/round-things/img20.png", alt: "Round object" },
-            ]}
+                { src: "/assets/round-things/img4.webp", alt: "Shiny CD" },
+                { src: "/assets/round-things/img1.webp", alt: "Blueberry" },
+                { src: "/assets/round-things/img15.webp", alt: "Jupiter planet" },
+                { src: "/assets/round-things/img13.webp", alt: "Chocolate chip cookie" },
+            
+                { src: "/assets/round-things/img3.webp", alt: "Blue button" },
+                { src: "/assets/round-things/img9.webp", alt: "Orange slice" },
+                { src: "/assets/round-things/img8.webp", alt: "Pearl" },
+                { src: "/assets/round-things/img12.webp", alt: "Camera lens" },
+                { src: "/assets/round-things/img17.webp", alt: "Egg yolk" },
+                { src: "/assets/round-things/img18.webp", alt: "Green wax seal" },
+                { src: "/assets/round-things/img16.webp", alt: "Road with balloon" },
+            
+                { src: "/assets/round-things/img11.webp", alt: "Tennis ball" },
+                { src: "/assets/round-things/img2.webp", alt: "Latte art" },
+                { src: "/assets/round-things/img10.webp", alt: "Moon" },
+                { src: "/assets/round-things/img20.webp", alt: "Color wheel" },
+                { src: "/assets/round-things/img6.webp", alt: "Disco ball" },
+            
+                { src: "/assets/round-things/img7.webp", alt: "Blue evil eye bead" },
+                { src: "/assets/round-things/img19.webp", alt: "Golden sun coin" },
+                { src: "/assets/round-things/img14.webp", alt: "Fish bowl" },
+                { src: "/assets/round-things/img5.webp", alt: "Pink 8-ball" },
+                ]}
           />
         </div>
 
@@ -130,7 +135,7 @@ export default function Page() {
         <footer className="mx-auto w-full max-w-[1280px] px-4 pb-10 pt-6 sm:px-8 sm:pb-12">
           <div className="mx-auto flex max-w-[900px] flex-col items-center justify-center gap-3">
             <p className="text-[14px] text-black/60">
-              We combine concepts <span className="font-semibold text-black/80">across</span> subjects
+              We combine concepts <span className="font-semibold text-black/80">across subjects</span>
             </p>
 
             <div className="flex flex-wrap justify-center gap-2">

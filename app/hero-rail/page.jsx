@@ -5,23 +5,23 @@ import CigaretteBurnTransition from "../components/CigaretteBurnTransition";
 import StretchBurnTransition from "../components/StretchBurnTransition";
 
 const gallery = [
-//   { src: "/assets/moonstone-square.png", alt: "Moonstone" },
-//   { src: "/assets/3asterisk-square.png", alt: "Asterisk" },
+//   { src: "/assets/moonstone-square.webp", alt: "Moonstone" },
+//   { src: "/assets/3asterisk-square.webp", alt: "Asterisk" },
 //   { src: "/assets/napkin-notes-square.webp", alt: "Napkin" },
 //   { src: "/assets/garden/gradientbg2.webp", alt: "green" },
-//   { src: "/assets/logo-grey-rise.png", alt: "logo " },
+//   { src: "/assets/logo-grey-rise.webp", alt: "logo " },
 
 
-{ src: "/assets/garden/asterisk.png", alt: "asterisk" },
-{ src: "/assets/garden/studio.png", alt: "studio" },
+{ src: "/assets/garden/asterisk.webp", alt: "asterisk" },
+{ src: "/assets/garden/studio.webp", alt: "studio" },
 { src: "/assets/garden/3dreel.mp4", alt: "reel" },
-{ src: "/assets/garden/butterfly.png", alt: "art" },
-{ src: "/assets/garden/moonstone-heatmap.png", alt: "moonstone" },
-{ src: "/assets/garden/napkin.png", alt: "napkin" },
-  { src: "/assets/garden/c3-blue.png", alt: "c3 academy" },
-  { src: "/assets/garden/ember.png", alt: "ember" },
-  { src: "/assets/garden/dashboard.png", alt: "dashboard" },
-  { src: "/assets/garden/tictactoe.png", alt: "tactictoe" },
+{ src: "/assets/garden/butterfly.webp", alt: "art" },
+{ src: "/assets/garden/moonstone-heatmap.webp", alt: "moonstone" },
+{ src: "/assets/garden/napkin.webp", alt: "napkin" },
+  { src: "/assets/garden/c3-blue.webp", alt: "c3 academy" },
+  { src: "/assets/garden/ember.webp", alt: "ember" },
+  { src: "/assets/garden/dashboard.webp", alt: "dashboard" },
+  { src: "/assets/garden/tictactoe.webp", alt: "tactictoe" },
 //   { src: "https://picsum.photos/seed/1/800/800", alt: "Card 1" },
 //   { src: "https://picsum.photos/seed/2/800/800", alt: "Card 2" },
 //   { src: "https://picsum.photos/seed/3/800/800", alt: "Card 3" },
@@ -37,7 +37,7 @@ const gallery = [
 export default function Page() {
   return (
     <div className="flex flex-col">
-      <section className="min-h-screen grid md:grid-cols-[1fr_42%] gap-8 xp-6 items-stretch bg-[url('/assets/garden/gradientbg3.png')] bg-cover bg-center">
+      <section className="min-h-screen grid md:grid-cols-[1fr_42%] gap-8 xp-6 items-stretch bg-[url('/assets/garden/gradientbg3.webp')] bg-cover bg-center">
         <div className="self-center p-6">
           <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight">
             Hi Im Raunaq :)
@@ -79,7 +79,7 @@ export default function Page() {
       </section>
       {/* <div style={{ minHeight: "120vh" }} />  */}
       {/* <ScrollFlattenImage
-        src="/assets/garden/diapixel2.png"
+        src="/assets/garden/diapixel2.webp"
         alt="Cigarette-burn scroll"
         peak={3} // 1–5: more = taller stretch
         maxBlur={10} // px at peak
@@ -110,7 +110,7 @@ export default function Page() {
         beforeColor="#FFFFF6"
         afterColor="#002207"
         // imageSrc="/assets/garden/diapixel.svg" // ← your PNG here
-        imageSrc="/assets/garden/diapixel3.png" // ← your PNG here
+        imageSrc="/assets/garden/diapixel3.webp" // ← your PNG here
         imageAlt="Cigarette-burn strip"
         objectFit="cover" // or "contain", "fill", etc.
         minVh={6} // bottom/start flatness (vh)
@@ -122,8 +122,8 @@ export default function Page() {
         beforeColor="#FFFFF6"
         // afterColor="#002207"
         afterColor="#687A29"
-        // imageSrc="/assets/garden/diapixel3.png"
-        imageSrc="/assets/garden/greengradientbg.png"
+        // imageSrc="/assets/garden/diapixel3.webp"
+        imageSrc="/assets/garden/greengradientbg.webp"
         imageAlt="Cigarette-burn strip"
         objectFit="contain"
         objectPosition="bottom"

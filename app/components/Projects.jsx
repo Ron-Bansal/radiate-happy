@@ -22,7 +22,7 @@ const projects = [
       "Explore your favourite playlists through a new lens through beautiful playlist insights that uncover trends and stories behind the journey.",
     type: "WebApp",
     tags: "Design, Development, Marketing",
-    thumbnail: "/assets/pulsifyplaceholder.png",
+    thumbnail: "/assets/pulsifyplaceholder.webp",
     accentColor: "purple",
     caseStudyLink: "/work/moonstone",
     liveSiteLink: "https://moonstone-music.vercel.app/",

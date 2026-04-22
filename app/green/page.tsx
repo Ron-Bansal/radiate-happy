@@ -74,7 +74,7 @@ const experimentVisuals: ExperimentVisual[] = [
     title: "Paper airplane physics toy",
     caption:
       "Tiny browser game to play with gravity, easing, and micro-interactions.",
-    image: "/assets/moonstone-tall.png",
+    image: "/assets/moonstone-tall.webp",
     size: 25,
     // align: "right",
   },
@@ -102,7 +102,7 @@ const experimentVisuals: ExperimentVisual[] = [
     id: "scrapbook-big",
     title: "Generative grid test",
     caption: "A weird UI tile that didn’t fit anywhere else.",
-    image: "/assets/moonstone-golden.png",
+    image: "/assets/moonstone-golden.webp",
     size: 75,
     align: "right",
     maxHeight: 320,
@@ -116,8 +116,8 @@ const projects: Project[] = [
     tagline: "Moonstone - Insightful way to connect with music",
     details: "Web app ⋅ Over 42,000 playlists analysed",
     images: [
-      "/assets/moonstone-golden.png",
-      "/assets/moonstone-tall.png",
+      "/assets/moonstone-golden.webp",
+      "/assets/moonstone-tall.webp",
       "https://images.unsplash.com/photo-1600411833196-7c1f6b1a8b90?q=80&w=1064&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D",
       "https://images.unsplash.com/photo-1511671782779-c97d3d27a1d4?auto=format&fit=crop&w=1600&q=80",
       "https://images.unsplash.com/photo-1512428559087-560fa5ceab42?auto=format&fit=crop&w=1600&q=80",
@@ -140,7 +140,7 @@ const projects: Project[] = [
     tagline: "Napkin Notes - Quickest canvas for thought",
     details: "Chrome extension · 300+ active users",
     images: [
-      "/assets/napkin-notes-golden.png",
+      "/assets/napkin-notes-golden.webp",
       "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80",
       "https://images.unsplash.com/photo-1517244864778-5ee2fda3db5e?auto=format&fit=crop&w=1600&q=80",
     ],
@@ -151,8 +151,8 @@ const projects: Project[] = [
     tagline: "Asterisk - Connect the dots behind design elements",
     details: "Figma plugin ⋅ 35 users",
     images: [
-      "/assets/garden/asterisk.png",
-      "/assets/3asterisk-golden.png",
+      "/assets/garden/asterisk.webp",
+      "/assets/3asterisk-golden.webp",
       //   "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=80",
       //   "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1600&q=80",
     ],
@@ -259,7 +259,7 @@ export default function PortfolioPage() {
         }
       `}</style>
 
-      <main className="min-h-screen bg-fixed xbg-[#FBEDC6] text-[#1C180C] bg-[length:auto_120%] lg:bg-cover bg-[position:50%_65%] lg:bg-center bg-no-repeat bg-[url('/assets/garden/hilly-gradient2.png')]">
+      <main className="min-h-screen bg-fixed xbg-[#FBEDC6] text-[#1C180C] bg-[length:auto_120%] lg:bg-cover bg-[position:50%_65%] lg:bg-center bg-no-repeat bg-[url('/assets/garden/hilly-gradient2.webp')]">
         <div className="mx-auto min-h-screen flex max-w-[2100px] flex-col gap-10 px-2 xpy-8 lg:flex-row lg:px-0 lg:pl-10 lg:py-4">
           {/* LEFT COLUMN */}
           <aside className="flex w-full flex-col gap-10 lg:w-[33%] lg:justify-between">

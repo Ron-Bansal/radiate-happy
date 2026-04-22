@@ -11,7 +11,7 @@ export const portfolioContent = [
     rowSpan: 1,
     backgroundColor: 'bg-gradient-to-r from-blue-100 to-purple-100',
     customClasses: 'rounded-t-3xl',
-    image: '../assets/garden/header-banner.png',
+    image: '../assets/garden/header-banner.webp',
     title: "garden 🪴",
     subtitle: "an informal collection of my explorations, projects, & photos",
     sectionSpacing: 32,

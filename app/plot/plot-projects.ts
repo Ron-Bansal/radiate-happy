@@ -111,11 +111,12 @@ export const projects: Project[] = [
   {
     id: "gracious",
     name: "Gracious",
-    description: "A design-forward storefront experiment in tasteful presentation.",
+    description:
+      "Built a custom Shopify store that helped a womenswear label launch with a polished online presence.",
     state: "Complete",
     axes: { personal_shared: 70, play_purpose: 75 },
     categories: ["product-shaped", "ecommerce"],
-    tags: ["shopify", "layout", "brand"],
+    tags: ["shopify", "ecommerce", "fashion"],
   },
   {
     id: "ai-chef",

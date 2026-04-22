@@ -144,10 +144,10 @@ export interface Project {
 export const carusoProjects: Project[] = [
   {
     id: "dimensioner",
-    title: "Dimensioner -  new hardware integration",
+    title: "Dimensioner - Shipped a new hardware integration for a key Enterprise customer",
     category: "End-to-end ownership",
     tags: ["Enterprise", "Hardware", "v0 Prototype"],
-    hook: "v0 prototype to production code to warehouse floor. All before Black Friday.",
+    hook: "From v0 prototype to production code to warehouse floor. All before Black Friday.",
     body: [
       "One of our biggest enterprise customers, a 3PL processing over 1,000 orders a day, needed to integrate a dimensioner. It's a scale with a camera that captures parcel dimensions and weight in a single scan. Their warehouse team was manually measuring every box heading into peak season, costing them speed and accuracy.",
       "I ran discovery on how the hardware worked, then built a fully functional standalone app in v0. To further improve UX, I moved the implementation into our real codebase and added barcode scanning so operators could trigger actions without reaching for a mouse between parcels. In a warehouse doing hundreds of orders a day, that kind of detail matters.",
@@ -170,7 +170,7 @@ export const carusoProjects: Project[] = [
   },
   {
     id: "draftline",
-    title: "Draftline - A thinking studio for refining ideas",
+    title: "Draftline - A thinking studio for refining raw ideas",
     category: "Personal craft",
     tags: ["Web App", "Writing", "Built with AI"],
     hook: "Built an interface that has changed how I plan, write, and develop ideas.",

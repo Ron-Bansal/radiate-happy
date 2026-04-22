@@ -137,9 +137,9 @@ export const experimentVisuals: ExperimentVisual[] = [
 export const projects: Project[] = [
   {
     id: "moonstone",
-    name: "Moonstone - Insightful way to connect with music",
+    name: "Moonstone - Insightful way to connect with music (Sunset)",
     tagline: "What do my playlists say about me?",
-    details: "Web app ⋅ Over 42,000 playlists analysed",
+    details: "Web app ⋅ Over 1.5M playlists analysed",
     images: [
       "/assets/garden/moonstone-1.png",
       "/assets/garden/moonstone-4.png",
@@ -197,7 +197,7 @@ export const projects: Project[] = [
   },
   {
     id: "speedround",
-    name: "Ascent Speedround - Intense timeboxed workout",
+    name: "Speedround - Intense timeboxed calisthenics workout",
     tagline:
       " Simple (but not easy) 17 minute workout with statisfying visual progression",
     details: "Web app",
@@ -213,7 +213,7 @@ export const projects: Project[] = [
     id: "asterisk",
     name: "Asterisk - Connect the dots behind design elements",
     tagline: "Where did I find this moodboard image?",
-    details: "Figma plugin ⋅ 35 users",
+    details: "Figma plugin ⋅ 50 users",
     images: ["/assets/garden/asterisk.png", "/assets/3asterisk-golden.png"],
     link: "https://www.figma.com/community/plugin/1488498485297162626/asterisk",
   },
@@ -221,7 +221,7 @@ export const projects: Project[] = [
     id: "covered",
     name: "Covered - Fetch media posters in a click",
     tagline: "Find movie/show/book covers for Notion databases",
-    details: "(niche) Extension built for Notion ⋅ 20 users",
+    details: "(niche) Extension built for Notion ⋅ 25 users",
     images: ["/assets/garden/covered2.webp", "/assets/garden/covered.png"],
     link: "chromewebstore.google.com/detail/covered/pllfacnikognkodbcnnjnhpecicageac",
   },

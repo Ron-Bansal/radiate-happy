@@ -54,7 +54,7 @@ export default function LoaderWrapper({ children, forceShow = false }) {
 
   // During SSR or first render, return a minimal structure to avoid flashing
   if (initialRender) {
-    return <div className="bg-[#2c292a] w-full h-screen"></div>;
+    return <div className="fixed inset-0 bg-[#2c292a] z-[100001] pointer-events-none" />;
   }
 
   return (

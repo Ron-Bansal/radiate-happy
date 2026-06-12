@@ -281,9 +281,9 @@ const entries0 = [
 const entries = [
   {
     id: 1,
-    title: "Start before you feel ready",
-    subtitle: "Hitting record without knowing what it’s for yet",
-    body: "I’ve wanted to make videos for a long time. I’ve also been very good at finding reasons not to.\n\nThis was me finally hitting record without knowing what I was doing, what the point was, or where it would go.\n\nThe fear wasn’t really about messing up — it was about being seen messing up.\n\nThis episode wasn’t good. But it existed. And that was the win.",
+    title: "I hit record before I had a reason",
+    subtitle: "Episode one. Camera on. No plan yet.",
+    body: "I’ve wanted to make videos for years, which mostly meant opening the camera app, checking my hair, and closing it again.\n\nThis was me finally hitting record before I knew what the project was. No outline. No clean point. Just a slightly uncomfortable first take.\n\nThe scary part wasn’t making something bad. It was having evidence that I’d made something bad.\n\nAnyway, evidence exists now.",
     images: [
       "https://images.pexels.com/photos/3225517/pexels-photo-3225517.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/1266810/pexels-photo-1266810.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -291,18 +291,18 @@ const entries = [
   },
   {
     id: 2,
-    title: "To be human is to be imperfect",
-    subtitle: "Stitching a Spider-Man logo I’d been avoiding for years",
-    body: "I put this off for an embarrassingly long time because I didn’t want to “ruin it.”\n\nI tried cutting the logo out of fabric. Kept slicing the legs off. Repeatedly.\n\nEventually I gave up on perfection and switched to embroidery — which accidentally made the logo look more like a spider web.\n\nWay cooler than what I planned.\n\nPeter Parker works because he’s flawed.\n\nApparently my sewing does too.",
+    title: "The Spider-Man logo survived me",
+    subtitle: "Stitching something I’d avoided for years",
+    body: "I kept putting this off because I didn’t want to ruin the hoodie.\n\nThe first plan was fabric. I cut one spider leg off, then another, then quietly accepted that precision was not the day’s theme.\n\nEmbroidery worked better. It also made the logo look a bit like a web, which was accidentally more Spider-Man than the thing I was trying to copy.\n\nPeter Parker would understand. Probably.",
     images: [
       "https://images.pexels.com/photos/1438761/pexels-photo-1438761.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
     id: 3,
-    title: "You don’t need to grade your hobbies",
-    subtitle: "Painting my dog with 10-year-old paint",
-    body: "I bought the canvas months ago. The paint is over a decade old.\n\nI kept telling myself I’d do it “when I was better at painting.”\n\nI was scared I’d mess it up — especially because you can’t undo paint like you can on a screen.\n\nBut the point wasn’t to honor the photo perfectly. It was to finally start.\n\nIt’s messy. It’s uneven.\n\nAnd I love it way more than a blank canvas.",
+    title: "I painted Lucy with ancient paint",
+    subtitle: "Ten-year-old tubes, one dog photo, no undo button",
+    body: "The canvas sat in my room for months. The paint was old enough to have opinions.\n\nI kept waiting until I was better at painting, which is a convenient way to never paint.\n\nThen I picked a photo of Lucy and made the thing. The proportions are strange. The colours are doing their best.\n\nStill better than the blank canvas looking at me every morning.",
     images: [
       "https://images.pexels.com/photos/2387873/pexels-photo-2387873.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/1287145/pexels-photo-1287145.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -311,9 +311,9 @@ const entries = [
   },
   {
     id: 4,
-    title: "I can’t read” was a lie i practiced",
-    subtitle: "Reading a book in one sitting",
-    body: "Somewhere along the way I decided I’m “not a reader.”\n\nMostly because I kept saying it.\n\nI picked The Four Agreements, fully expecting my attention to wander.\n\nInstead, I stayed locked in and finished the whole thing in one sitting.\n\nTurns out focus isn’t a personality trait — it’s a muscle.\n\nAnd I’d just never trained it.",
+    title: "I finished a book in one sitting",
+    subtitle: "After years of saying I’m not a reader",
+    body: "I’ve said “I can’t read” so many times it started sounding like a fact.\n\nI picked up The Four Agreements expecting to last 14 minutes, check my phone, then blame my attention span.\n\nInstead, I finished it in one sitting.\n\nA very annoying development for the story I’d been telling about myself.",
     images: [
       "https://images.pexels.com/photos/1323550/pexels-photo-1323550.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/2559941/pexels-photo-2559941.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -321,18 +321,18 @@ const entries = [
   },
   {
     id: 5,
-    title: "Doing the thing badly beats skipping it entirely",
-    subtitle: "Going to the dog parade anyway",
-    body: "I almost bailed on this.\n\nCouldn’t stay for the whole thing. Couldn’t see my friend. Schedule was messy.\n\nThere are always a million logical reasons not to go.\n\nI went anyway — and had a genuinely great time.\n\nThis one reminded me how often “almost didn’t go” becomes a pattern.\n\nAnd how rarely I regret going once I’m there.",
+    title: "I went to the dog parade anyway",
+    subtitle: "Messy timing, short visit, still worth it",
+    body: "I nearly skipped this because the timing was awkward.\n\nCouldn’t stay long. Couldn’t line it up with my friend. Had just enough logistical friction to make bailing feel sensible.\n\nI went anyway. Saw a bunch of dogs in ridiculous outfits. Had a good time.\n\nA tiny blow to the very persuasive committee in my head.",
     images: [
       "https://images.pexels.com/photos/2387418/pexels-photo-2387418.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
     id: 6,
-    title: "Share before you’re ready",
-    subtitle: "Talking about a project that wasn’t even released",
-    body: "I shared a tiny project I built for myself — hyper-niche, not approved, not polished.\n\nPosted about it anyway.\n\nPeople immediately said, “wait… I have this problem too.”\n\nI shipped it properly, and 12 people used it on day one.\n\nShipping early didn’t embarrass me.\n\nIt clarified what mattered.",
+    title: "I shared the project too early",
+    subtitle: "Tiny tool, no polish, twelve users on day one",
+    body: "I posted about a small project I built for myself before it felt like a real thing.\n\nIt was niche, unfinished, and still had that slightly cursed prototype smell.\n\nThen people replied with the worst possible news: they also had the problem.\n\nI shipped it properly. Twelve people used it on day one.\n\nThe rough version did its job.",
     images: [
       "https://images.pexels.com/photos/1480807/pexels-photo-1480807.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/2387866/pexels-photo-2387866.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -342,18 +342,18 @@ const entries = [
   },
   {
     id: 7,
-    title: "The one that didn’t happen",
-    subtitle: "LinkedIn is still scary",
-    body: "This was supposed to be a public goal: earn $25 MRR by year-end.\n\nOne free pizza per month.\n\nI had the idea. The framing. Even the words.\n\nBut I didn’t have the “right” photo.\n\nThen a week passed. Then I bailed.\n\nThis one feels different — because I didn’t even try.\n\nWhich probably means it’s worth revisiting.",
+    title: "The LinkedIn post I dodged",
+    subtitle: "$25 MRR, one free pizza, zero post",
+    body: "This was supposed to be a public goal: make $25 MRR by the end of the year.\n\nOne free pizza a month. Very noble work.\n\nI had the idea, the framing, and most of the words. Then I decided I didn’t have the right photo, which is a surprisingly elegant excuse.\n\nA week passed. I posted nothing.\n\nThis one gets a slot because I didn’t even fail out loud. I failed quietly, which is less useful and somehow more embarrassing.",
     images: [
       "https://images.pexels.com/photos/2662116/pexels-photo-2662116.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
     id: 8,
-    title: "It was never as bad as i imagined",
-    subtitle: "Trying a handstand",
-    body: "I built this up so much in my head.\n\nConvinced myself I’d be terrible.\n\nTurns out I was… fine?\n\nNot great. Not awful. Just someone who needed to try once.\n\nMost fear is pre-effort fiction.",
+    title: "The handstand was mostly fine",
+    subtitle: "Less dramatic than the version in my head",
+    body: "I made this feel huge before I tried it.\n\nIn my head, the handstand had become a full public referendum on my athletic ability. In reality, I kicked up, wobbled around, and survived.\n\nNot graceful. Not tragic. Just a person upside down for a bit.\n\nThe preview was worse than the thing.",
     images: [
       "https://images.pexels.com/photos/1366919/pexels-photo-1366919.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/1402787/pexels-photo-1402787.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -361,9 +361,9 @@ const entries = [
   },
   {
     id: 9,
-    title: "Perfection is literally not an option",
-    subtitle: "Building my first planter box",
-    body: "First time woodworking. No idea what I was doing.\n\nLots of measuring. Lots of second-guessing.\n\nIt’s not perfect — but it holds dirt and plants, which feels like success.\n\nThere’s something grounding about making something physical that just… exists.",
+    title: "The planter box holds dirt",
+    subtitle: "First woodworking attempt. Structurally optimistic.",
+    body: "I measured a lot for someone who still ended up guessing.\n\nThis was my first proper woodworking attempt, so every cut felt more permanent than it probably was. I kept checking the same corners like they might confess something.\n\nThe planter box isn’t perfect. It holds dirt and plants.\n\nThat feels like a fair contract.",
     images: [
       "https://images.pexels.com/photos/2387793/pexels-photo-2387793.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/1761279/pexels-photo-1761279.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -372,18 +372,18 @@ const entries = [
   },
   {
     id: 10,
-    title: "Losing in public (and liking it)",
-    subtitle: "A 3-hour worldwide hackathon",
-    body: "We submitted our project on the literal final second.\n\nThen our demo broke in the funniest possible way.\n\nDidn’t place top three. Still had a great time.\n\nAnd a few weeks later, we randomly won a partner prize anyway.\n\nOutcome aside — the energy of building alongside other people was the real reward.",
+    title: "Our demo broke at the finish line",
+    subtitle: "Three-hour hackathon, final-second submit",
+    body: "We submitted our project on the literal final second.\n\nThen the demo broke in the funniest possible way, which is rude but thematically consistent for a hackathon.\n\nWe didn’t place top three. A few weeks later, we somehow won a partner prize anyway.\n\nThe room had that specific build-night energy where everyone is tired, slightly frantic, and weirdly kind.\n\nI missed that.",
     images: [
       "https://images.pexels.com/photos/1770809/pexels-photo-1770809.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
     id: 11,
-    title: "Committing before you know the result",
-    subtitle: "Building a stool for the living room",
-    body: "I told myself this stool was going in the living room no matter what.\n\nThat rule changed how I worked.\n\nInstead of chasing perfection, I focused on making something solid.\n\nAnd now it lives in the house — flaws and all.\n\n(Also, my dog loves it. She jumps up on it for treats.)",
+    title: "The stool lives in the house now",
+    subtitle: "A furniture commitment made too early",
+    body: "Before I built it, I decided the stool had to go in the living room.\n\nThat made the stakes slightly ridiculous. It also stopped me from treating it like a disposable practice run.\n\nI focused on making it solid enough to earn its spot. It has flaws. It also has a job.\n\nLucy uses it to beg for treats, which feels like official approval.",
     images: [
       "https://images.pexels.com/photos/1671324/pexels-photo-1671324.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/2559484/pexels-photo-2559484.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -391,9 +391,9 @@ const entries = [
   },
   {
     id: 12,
-    title: "Doing the boring scary thing",
-    subtitle: "Finally staining the deck",
-    body: "I delayed this for two months.\n\nWorried about patchiness. Rain. Messing it up.\n\nNone of that mattered once I started.\n\nIt was mostly just time, effort, and getting out of my own head.",
+    title: "I finally stained the deck",
+    subtitle: "Two months of avoidance for a job that mostly needed a brush",
+    body: "I delayed this for about two months.\n\nI was worried about rain, patchiness, choosing the wrong stain, and discovering some new way to make a deck look worse.\n\nOnce I started, it was mostly brushing, waiting, and moving things out of the way.\n\nVery rude when the boring answer is the correct one.",
     images: [
       "https://images.pexels.com/photos/1770775/pexels-photo-1770775.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/1486974/pexels-photo-1486974.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -404,18 +404,18 @@ const entries = [
   },
   {
     id: 13,
-    title: "Raising the bar removed the pressure",
-    subtitle: "Three (ugly) muscle-ups",
-    body: "A muscle-up has been a goal for years.\n\nSo I randomly moved the goalpost to three, assuming I’d fail.\n\nSomehow that made it easier.\n\nI did them — badly — and don’t really count them.\n\nBut mentally, something unlocked.\n\nThe goal didn’t change my body.\n\nIt changed my belief.",
+    title: "I did three ugly muscle-ups",
+    subtitle: "A goal I moved just far enough to trick myself",
+    body: "A muscle-up has been on the list for years.\n\nSo naturally, instead of trying one, I changed the goal to three and gave myself permission to fail. Strange brain. Useful brain, occasionally.\n\nI got them. Ugly reps. Questionable form. Probably not gym-floor certified.\n\nBut my body went over the bar three times.\n\nThat counts for something.",
     images: [
       "https://images.pexels.com/photos/2387871/pexels-photo-2387871.jpeg?auto=compress&cs=tinysrgb&w=800",
     ],
   },
   {
     id: 14,
-    title: "sharing creatively",
-    subtitle: "posting a playful coding experiment",
-    body: "I shared patina — a small creative coding project — just for fun.\n\nNo lesson. No productivity angle.\n\nJust something I enjoyed making.\n\nWhich might be the most important thing to share.",
+    title: "I posted patina for no good reason",
+    subtitle: "A small coding experiment that just looked nice",
+    body: "I shared patina, a tiny creative coding project, without turning it into a productivity sermon.\n\nNo launch plan. No thread. No neat insight about taste or craft.\n\nJust a thing I liked looking at.\n\nHonestly, that felt cleaner.",
     images: [
       "https://images.pexels.com/photos/1252869/pexels-photo-1252869.jpeg?auto=compress&cs=tinysrgb&w=800",
       "https://images.pexels.com/photos/1562/italian-landscape-mountains-702934.jpeg?auto=compress&cs=tinysrgb&w=800",
@@ -718,7 +718,7 @@ export default function App() {
                   color: "rgba(74,10,7,0.55)",
                 }}
               >
-                A personal experiment
+                A 25-part personal experiment
               </p>
 
               {/* headline */}
@@ -729,11 +729,11 @@ export default function App() {
                   letterSpacing: "-0.04em",
                 }}
               >
-                I’m trying
+                Twenty-five things
                 <br />
-                things I usually
+                I nearly
                 <br />
-                talk myself out of.
+                talked myself out of.
               </h1>
 
               {/* lede */}
@@ -741,9 +741,9 @@ export default function App() {
                 className="mt-8 text-lg md:text-xl max-w-xl leading-relaxed"
                 style={{ color: "rgba(74,10,7,0.72)" }}
               >
-                This is a small project about starting before I’m ready.
-                Twenty-five attempts. No optimisation. No “personal brand”. Just
-                seeing what happens when I show up anyway.
+                A record of small avoided things. Sewing a Spider-Man logo.
+                Painting Lucy. Posting unfinished projects. Trying handstands.
+                Some went fine. Some got weird. A few still didn’t happen.
               </p>
 
               {/* quiet context */}
@@ -751,7 +751,7 @@ export default function App() {
                 className="mt-6 text-sm"
                 style={{ color: "rgba(74,10,7,0.55)" }}
               >
-                I call it <em>Failing Loudly</em>.
+                The working title is <em>Failing Loudly</em>, which is maybe a little dramatic. Keeping it for now.
               </p>
             </div>
 
@@ -783,8 +783,7 @@ export default function App() {
                     letterSpacing: "0.02em",
                   }}
                 >
-                  An early attempt. Some worked. Most felt awkward. That’s kind
-                  of the point.
+                  Early evidence. Slightly awkward. Useful anyway.
                 </p>
               </div>
             </div>

@@ -229,7 +229,7 @@ export const projects: Project[] = [
     id: "covered",
     name: "Covered - Fetch media posters in a click",
     tagline: "Find movie/show/book covers for Notion databases",
-    details: "(niche) Extension built for Notion ⋅ 25 users",
+    details: "(niche) Extension built for Notion ⋅ 55 users",
     images: ["/assets/garden/covered2.webp", "/assets/garden/covered.webp"],
     link: "chromewebstore.google.com/detail/covered/pllfacnikognkodbcnnjnhpecicageac",
   },

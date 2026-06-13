@@ -37,7 +37,7 @@ export const writingEntries: WritingEntry[] = [
     title: "You either make mistakes or you don’t make anything",
     date: "12 Nov, 2025",
     description:
-      "Kicking off a public experiment in imperfect practice – sharing work before it feels finished and treating the internet like a sketchbook.",
+      "A small public experiment in showing the sketch while the paint is still wet. Some ideas deserve daylight before they deserve polish.",
     // link: "https://substack.com/your-link-here",
   },
   {
@@ -45,7 +45,7 @@ export const writingEntries: WritingEntry[] = [
     title: "Learning should feel like play",
     date: "04 Nov, 2025",
     description:
-      "Notes from building Curious & Creative Club – how following kids’ obsessions beats a rigid curriculum every time.",
+      "Notes from building Curious & Creative Club, where a 12-year-old's obsession usually beats my tidy lesson plan by minute seven.",
   },
   // {
   //   id: "playlist-identity",
@@ -77,7 +77,7 @@ export const experimentVisuals: ExperimentVisual[] = [
   {
     id: "ascent-speedround",
     image: "/assets/garden/ascent-speedround-wip.webp",
-    caption: "initial design of Speedround had some UX issues",
+    caption: "first Speedround design. lot of UX issues",
     size: 50,
     align: "right",
     link: "https://raunaqbansal.com/speedround",
@@ -86,7 +86,7 @@ export const experimentVisuals: ExperimentVisual[] = [
     id: "receipts",
     image: "/assets/garden/receipts-wip.webp",
     caption:
-      "AI personal finance app - ask questions about your spending and get a receipt summary",
+      "AI personal finance app - ask plain questions about spending and get a receipt summary",
     size: 100,
     align: "right",
   },
@@ -94,7 +94,7 @@ export const experimentVisuals: ExperimentVisual[] = [
     id: "patina",
     image: "/assets/garden/patina-0.webp",
     caption:
-      "Draw using only the colours from your webcam background on a nostalgic canvas",
+      "Draw with the colours your webcam can see. A tiny nostalgia machine for background noise.",
     size: 100,
     align: "right",
     link: "https://raunaqbansal.com/patina",
@@ -103,7 +103,7 @@ export const experimentVisuals: ExperimentVisual[] = [
     id: "headcount",
     image: "/assets/garden/headcount-wip.webp",
     caption:
-      "Visualise the people in your metrics. See the crowd behind the numbers",
+      "A way to see the people hiding inside a metric, before they become a neat little chart",
     size: 75,
   },
   {
@@ -137,9 +137,9 @@ export const experimentVisuals: ExperimentVisual[] = [
 export const projects: Project[] = [
   {
     id: "moonstone",
-    name: "Moonstone - Insightful way to connect with music (Sunset)",
-    tagline: "What do my playlists say about me?",
-    details: "Web app ⋅ Over 1.5M playlists analysed",
+    name: "Moonstone - patterns and stories behind your playlists",
+    tagline: "A Spotify project for reading the seasons hiding inside a playlist",
+    details: "Web app · 1.5M+ playlists analysed · now sunset",
     images: [
       "/assets/garden/moonstone-1.webp",
       "/assets/garden/moonstone-4.webp",
@@ -152,9 +152,9 @@ export const projects: Project[] = [
   },
   {
     id: "c3",
-    name: "Curious & Creative Club - Learn by building",
-    tagline: "How can kids build the skills that shape their future?",
-    details: "Weekly classes",
+    name: "Curious & Creative Club - small classes for curious kids",
+    tagline: "Weekly sessions where kids build, argue with ideas, and occasionally outsmart the lesson plan",
+    details: "Online classes · 5+ years running",
     images: [
       "/assets/garden/c3-blue.webp",
       // "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=80",
@@ -173,15 +173,15 @@ export const projects: Project[] = [
   // },
   {
     id: "gracious",
-    name: "Gracious - E-commerce store for a womenswear label",
-    tagline: "Custom Shopify theme built to feel like flipping through a lookbook",
+    name: "Gracious - Shopify store for a chic womenswear label",
+    tagline: "A custom storefront built to feel like flipping through a lookbook",
     details: "Shopify design + development",
     images: ["/assets/garden/gracious-2.webp", "/assets/garden/gracious-1.webp"],
-    link: "https://graciousnz.com/"
+    link: "https://graciousnz.com/",
   },
   {
     id: "napkin-notes",
-    name: "Napkin Notes - Quickest canvas for thought",
+    name: "Napkin Notes - quickest canvas for thought",
     tagline: "I have 0.3 seconds to write something down before I forget",
     details: "Chrome extension · 450+ active users",
     images: [
@@ -193,10 +193,9 @@ export const projects: Project[] = [
   },
   {
     id: "draftline",
-    name: "Draftline - Studio for thinking, writing, iterating",
-    tagline:
-      "Organize your unstructured thoughts and chisel your ideas to clarity",
-    details: "Web app ⋅ Early access",
+    name: "Draftline - the writing tool built for messy thinking",
+    tagline: "Organize your unstructured thoughts and chisel your ideas to clarity",
+    details: "Web app · early access",
     images: [
       "/assets/garden/draftline-0z.webp",
       "/assets/garden/draftline-0.webp",
@@ -205,10 +204,10 @@ export const projects: Project[] = [
   },
   {
     id: "speedround",
-    name: "Speedround - Intense timeboxed calisthenics workout",
+    name: "Speedround - 17 minutes of honest bodyweight work",
     tagline:
-      " Simple (but not easy) 17 minute workout with statisfying visual progression",
-    details: "Web app",
+      "Five exercises, one visual timer, and no room to negotiate with yourself",
+    details: "Web app · calisthenics timer + rep tracker",
     // tagline: "Exactly 17 minutes to rep out 5 bodyweight exercises. Visual timer and cumulative reps tally tracker.",
     images: [
       "/assets/garden/ascent-speedround.webp",
@@ -219,19 +218,19 @@ export const projects: Project[] = [
   },
   {
     id: "asterisk",
-    name: "Asterisk - Connect the dots behind design elements",
-    tagline: "Where did I find this moodboard image?",
-    details: "Figma plugin ⋅ 50 users",
+    name: "Asterisk - breadcrumbs for design references",
+    tagline: "A Figma plugin for remembering where that one moodboard image came from",
+    details: "Figma plugin · 55 users",
     images: ["/assets/garden/asterisk.webp", "/assets/3asterisk-golden.webp"],
     link: "https://www.figma.com/community/plugin/1488498485297162626/asterisk",
   },
   {
     id: "covered",
-    name: "Covered - Fetch media posters in a click",
-    tagline: "Find movie/show/book covers for Notion databases",
-    details: "(niche) Extension built for Notion ⋅ 55 users",
+    name: "Covered - fetch media posters in a click",
+    tagline: "A Chrome extension that finds movie, show. and book covers for Notion databases",
+    details: "Chrome extension · niche Notion tool · 25 users",
     images: ["/assets/garden/covered2.webp", "/assets/garden/covered.webp"],
-    link: "chromewebstore.google.com/detail/covered/pllfacnikognkodbcnnjnhpecicageac",
+    link: "https://chromewebstore.google.com/detail/covered/pllfacnikognkodbcnnjnhpecicageac",
   },
   // {
   //   id: "headcount",

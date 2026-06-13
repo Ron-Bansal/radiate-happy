@@ -1,8 +1,8 @@
 "use client";
 
-import { useState, useEffect, useRef, useMemo } from "react";
+import { useState, useEffect, useRef } from "react";
 
-// ----------------------------- Helpers -------------------------------------
+// ----------------------------- Helpers & Tests ------------------------------
 const formatTime = (s) => {
   const m = Math.floor(s / 60);
   const ss = String(s % 60).padStart(2, "0");
@@ -19,30 +19,27 @@ if (typeof window !== "undefined") {
 
 // ----------------------------- Data ----------------------------------------
 const EXERCISES = [
-  { name: "Pull Ups", short: "Pulls", last: 27 },
-  { name: "Dips", short: "Dips", last: 27 },
-  { name: "Squats", short: "Squats", last: 27 },
-  { name: "Hanging Leg Raises", short: "Legs", last: 27 },
-  { name: "Push Ups", short: "Push", last: 27 },
+  { name: "Pull Ups", last: 27 },
+  { name: "Dips", last: 27 },
+  { name: "Squats", last: 27 },
+  { name: "Hanging Leg Raises", last: 27 },
+  { name: "Push Ups", last: 27 },
 ];
 
-const TOTAL_SECONDS = 17 * 60;
-
 // ----------------------------- Tally SVGs ----------------------------------
-const ACCENT = "#B74B65"; // desaturated rose, single accent
-const ACCENT_SOFT = "#E6A9B8";
+const TALLY_COLOR = "#B74B65";
 
-const TallyMark = ({ size = 36, color = ACCENT }) => (
+const TallyMark = ({ size = 36 }) => (
   <svg
+    className="inline-block"
     width={size * 0.22}
     height={size}
     viewBox="0 0 6 24"
     aria-hidden
-    className="inline-block"
   >
     <line
-      stroke={color}
-      strokeWidth="2.6"
+      className="stroke-[2.8]"
+      stroke={TALLY_COLOR}
       strokeLinecap="round"
       x1="3"
       y1="3"
@@ -52,29 +49,53 @@ const TallyMark = ({ size = 36, color = ACCENT }) => (
   </svg>
 );
 
-const TallyFive = ({ size = 36, color = ACCENT }) => (
+const TallyFive = ({ size = 36 }) => (
   <svg
+    className="inline-block"
     width={size}
     height={size}
     viewBox="0 0 28 24"
     aria-hidden
-    className="inline-block"
   >
-    {[3, 9, 15, 21].map((x) => (
-      <line
-        key={x}
-        stroke={color}
-        strokeWidth="2.6"
-        strokeLinecap="round"
-        x1={x}
-        y1="3"
-        x2={x}
-        y2="21"
-      />
-    ))}
     <line
-      stroke={color}
-      strokeWidth="2.6"
+      stroke={TALLY_COLOR}
+      className="stroke-[2.8]"
+      strokeLinecap="round"
+      x1="3"
+      y1="3"
+      x2="3"
+      y2="21"
+    />
+    <line
+      stroke={TALLY_COLOR}
+      className="stroke-[2.8]"
+      strokeLinecap="round"
+      x1="9"
+      y1="3"
+      x2="9"
+      y2="21"
+    />
+    <line
+      stroke={TALLY_COLOR}
+      className="stroke-[2.8]"
+      strokeLinecap="round"
+      x1="15"
+      y1="3"
+      x2="15"
+      y2="21"
+    />
+    <line
+      stroke={TALLY_COLOR}
+      className="stroke-[2.8]"
+      strokeLinecap="round"
+      x1="21"
+      y1="3"
+      x2="21"
+      y2="21"
+    />
+    <line
+      stroke={TALLY_COLOR}
+      className="stroke-[2.8]"
       strokeLinecap="round"
       x1="1.5"
       y1="20"
@@ -84,57 +105,48 @@ const TallyFive = ({ size = 36, color = ACCENT }) => (
   </svg>
 );
 
-const TallyDisplay = ({ count, size = 34, color = ACCENT }) => {
+const TallyDisplay = ({ count, size = 40 }) => {
   const tens = Math.floor(count / 10);
   const afterTens = count % 10;
   const fives = Math.floor(afterTens / 5);
   const ones = afterTens % 5;
 
   return (
-    <div className="flex items-center flex-wrap gap-y-2">
+    <div className="flex items-center flex-wrap">
       {Array.from({ length: tens }).map((_, i) => (
         <div key={`ten-${i}`} className="flex items-center mr-4">
           <div className="-mr-[3px]">
-            <TallyFive size={size} color={color} />
+            <TallyFive size={size} />
           </div>
-          <TallyFive size={size} color={color} />
+          <div>
+            <TallyFive size={size} />
+          </div>
         </div>
       ))}
       {Array.from({ length: fives }).map((_, i) => (
-        <div key={`five-${i}`} className="mr-3">
-          <TallyFive size={size} color={color} />
+        <div key={`five-${i}`} className="mr-2">
+          <TallyFive size={size} />
         </div>
       ))}
       {Array.from({ length: ones }).map((_, i) => (
         <div key={`one-${i}`} className="mr-2">
-          <TallyMark size={size} color={color} />
+          <TallyMark size={size} />
         </div>
       ))}
     </div>
   );
 };
 
-// ----------------------------- Icons ---------------------------------------
-const PlayIcon = (props) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <path d="M8 5.5v13a.5.5 0 0 0 .76.43l10.5-6.5a.5.5 0 0 0 0-.86L8.76 5.07A.5.5 0 0 0 8 5.5z" />
-  </svg>
-);
-const PauseIcon = (props) => (
-  <svg viewBox="0 0 24 24" fill="currentColor" {...props}>
-    <rect x="6.5" y="5" width="3.75" height="14" rx="1" />
-    <rect x="13.75" y="5" width="3.75" height="14" rx="1" />
-  </svg>
-);
-
 // ----------------------------- Main Component ------------------------------
-export default function SpeedRound() {
-  const [remain, setRemain] = useState(TOTAL_SECONDS);
+export default function AscentWorkout() {
+  const [totalSecs] = useState(17 * 60);
+  const [remain, setRemain] = useState(17 * 60);
   const [running, setRunning] = useState(false);
   const [reps, setReps] = useState(
     Object.fromEntries(EXERCISES.map((e) => [e.name, 0]))
   );
   const [flashExercise, setFlashExercise] = useState(null);
+
   const [activeExercise, setActiveExercise] = useState(EXERCISES[0].name);
   const [logInput, setLogInput] = useState("");
 
@@ -142,9 +154,10 @@ export default function SpeedRound() {
   const intervalRef = useRef(null);
   const rafRef = useRef(null);
   const lastTickRef = useRef(0);
+
   const inputRef = useRef(null);
 
-  // auto-focus when active exercise changes
+  // auto-focus & select when active exercise changes
   useEffect(() => {
     if (inputRef.current) {
       inputRef.current.focus();
@@ -152,7 +165,7 @@ export default function SpeedRound() {
     }
   }, [activeExercise]);
 
-  // 1s countdown
+  // 1s tick for countdown
   useEffect(() => {
     if (!running) {
       if (intervalRef.current) {
@@ -161,9 +174,12 @@ export default function SpeedRound() {
       }
       return;
     }
+
     lastTickRef.current = performance.now();
+
     intervalRef.current = setInterval(() => {
       lastTickRef.current = performance.now();
+
       setRemain((prev) => {
         if (prev <= 1) {
           setRunning(false);
@@ -172,6 +188,7 @@ export default function SpeedRound() {
         return prev - 1;
       });
     }, 1000);
+
     return () => {
       if (intervalRef.current) {
         clearInterval(intervalRef.current);
@@ -180,14 +197,17 @@ export default function SpeedRound() {
     };
   }, [running]);
 
-  // RAF for smooth second-hand
+  // RAF for smooth seconds progress between ticks
   useEffect(() => {
     if (!running) return;
+
     const loop = (t) => {
       setNowMs(t);
       rafRef.current = requestAnimationFrame(loop);
     };
+
     rafRef.current = requestAnimationFrame(loop);
+
     return () => {
       if (rafRef.current != null) cancelAnimationFrame(rafRef.current);
     };
@@ -199,7 +219,7 @@ export default function SpeedRound() {
       [name]: Math.max(0, (prev[name] ?? 0) + delta),
     }));
     setFlashExercise(name);
-    setTimeout(() => setFlashExercise(null), 260);
+    setTimeout(() => setFlashExercise(null), 280);
   };
 
   const handleSetAdd = (name, value) => {
@@ -212,116 +232,56 @@ export default function SpeedRound() {
     if (!activeExercise) return;
     handleSetAdd(activeExercise, logInput);
     setLogInput("");
-    inputRef.current?.focus();
+    if (inputRef.current) {
+      inputRef.current.focus();
+    }
   };
 
   const resetTimer = () => {
     setRunning(false);
-    setRemain(TOTAL_SECONDS);
+    setRemain(totalSecs);
     lastTickRef.current = 0;
   };
 
-  const totalReps = useMemo(
-    () => Object.values(reps).reduce((a, b) => a + b, 0),
-    [reps]
-  );
-  const lastTotal = useMemo(
-    () => EXERCISES.reduce((a, e) => a + e.last, 0),
-    []
-  );
-  const deltaVsLast = totalReps - lastTotal;
+  const totalReps = Object.values(reps).reduce((a, b) => a + b, 0);
 
   const secondsIntoMinute = (60 - (remain % 60)) % 60;
+
   let fractional = 0;
   if (running && lastTickRef.current) {
     const elapsed = nowMs - lastTickRef.current;
     fractional = Math.max(0, Math.min(1, elapsed / 1000));
   }
-  const secondProgressFraction = (secondsIntoMinute + fractional) / 60;
-  const sessionProgress = (1 - remain / TOTAL_SECONDS) * 100;
-  const elapsedSeconds = TOTAL_SECONDS - remain;
-  const minutesElapsed = Math.floor(elapsedSeconds / 60);
 
-  const pacePerMin =
-    elapsedSeconds > 0 ? (totalReps / elapsedSeconds) * 60 : 0;
+  const secondProgressFraction = (secondsIntoMinute + fractional) / 60;
+  const sessionProgress = (1 - remain / totalSecs) * 100;
 
   return (
-    <div
-      className="min-h-[100dvh] bg-[#0B0B0D] text-zinc-100 relative overflow-x-hidden selection:bg-[#B74B65]/40"
-      style={{ fontFamily: "var(--font-epilogue), ui-sans-serif, system-ui" }}
-    >
-      {/* Subtle grain only — no ambient blobs */}
-      <div
-        className="pointer-events-none fixed inset-0 opacity-[0.05] mix-blend-overlay z-0"
-        style={{
-          backgroundImage:
-            "url(\"data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='160' height='160'><filter id='n'><feTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2'/></filter><rect width='100%' height='100%' filter='url(%23n)' opacity='0.7'/></svg>\")",
-        }}
-      />
+    <div className="min-h-screen bg-[#0A0A0B] text-white font-sans relative overflow-x-hidden">
+      {/* Ambient gradient */}
+      <div className="fixed inset-0 opacity-30 pointer-events-none">
+        <div className="absolute top-0 right-0 w-[600px] h-[600px] bg-[#83344A] rounded-full blur-[150px]" />
+        <div className="absolute bottom-0 left-0 w-[500px] h-[500px] bg-[#4A1F2E] rounded-full blur-[120px]" />
+      </div>
 
-      {/* ───────── FIXED HEADER ───────── */}
-      <header className="fixed top-0 left-0 right-0 z-50 backdrop-blur-xl bg-[#0B0B0D]/75 border-b border-white/[0.06]">
-        <div className="max-w-[1400px] mx-auto px-5 md:px-10 pt-5 pb-4">
-          <div className="flex items-end justify-between gap-6 mb-4">
-            {/* Brand */}
-            <div className="flex items-baseline gap-4 min-w-0">
-              <div className="flex items-center gap-2.5">
-                <span
-                  className="inline-block h-2 w-2 rounded-full"
-                  style={{
-                    background: ACCENT,
-                    boxShadow: running
-                      ? `0 0 0 4px ${ACCENT}22`
-                      : "none",
-                    transition: "box-shadow 200ms ease",
-                  }}
-                />
-                <h1 className="text-[15px] md:text-base font-semibold tracking-[0.22em] uppercase">
-                  Ascent
-                </h1>
-              </div>
-              <span className="text-[10px] md:text-[11px] tracking-[0.3em] uppercase text-white/40 font-mono hidden sm:inline">
-                Speed Round · 17:00
+      {/* FIXED HEADER */}
+      <div className="fixed top-0 left-0 right-0 z-50 backdrop-blur bg-black/55">
+        <div className="max-w-[1400px] mx-auto px-4 sm:px-6 pt-4 pb-3">
+          {/* Title + timer row */}
+          <div className="flex items-center justify-between mb-3 gap-4">
+            <div className="flex items-baseline gap-3 min-w-0">
+              <h1 className="text-2xl md:text-3xl font-black tracking-tight">
+                ASCENT
+              </h1>
+              <span className="text-[13px] md:text-sm text-[#B74B65] font-mono">
+                SPEED ROUND
               </span>
             </div>
 
-            {/* Timer cluster */}
-            <div className="flex items-center gap-4 md:gap-6">
-              <div className="hidden md:flex flex-col items-end leading-none">
-                <span className="text-[10px] tracking-[0.25em] uppercase text-white/40 font-mono">
-                  Elapsed
-                </span>
-                <span className="tabular-nums font-mono text-sm text-white/75 mt-1">
-                  {formatTime(elapsedSeconds)}
-                </span>
+            <div className="flex items-center gap-3">
+              <div className="hidden sm:block text-xs md:text-sm text-white/70 font-mono">
+                Session: {Math.round(sessionProgress)}%
               </div>
-
-              <div className="flex items-baseline gap-1">
-                <span
-                  className="tabular-nums font-mono text-3xl md:text-[40px] font-light tracking-tight leading-none"
-                  style={{ color: remain < 60 ? ACCENT : "white" }}
-                >
-                  {formatTime(remain)}
-                </span>
-              </div>
-
-              <button
-                onClick={() => setRunning((v) => !v)}
-                className="group inline-flex items-center justify-center h-11 w-11 md:h-12 md:w-12 rounded-full text-white transition-transform duration-200 active:scale-95"
-                style={{
-                  background: ACCENT,
-                  boxShadow:
-                    "0 10px 30px -12px rgba(183,75,101,0.55), inset 0 1px 0 rgba(255,255,255,0.18)",
-                }}
-                aria-label={running ? "Pause session" : "Start session"}
-              >
-                {running ? (
-                  <PauseIcon width="18" height="18" />
-                ) : (
-                  <PlayIcon width="18" height="18" />
-                )}
-              </button>
-
               <button
                 onClick={() => {
                   if (
@@ -332,322 +292,329 @@ export default function SpeedRound() {
                     resetTimer();
                   }
                 }}
-                className="hidden sm:inline-flex items-center h-11 md:h-12 px-4 rounded-full bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-[11px] tracking-[0.2em] uppercase font-medium text-white/75 transition-colors"
+                className="px-3 py-1.5 rounded-full bg-white/5 hover:bg-white/10 border border-white/10 text-[11px] md:text-[12px] font-semibold"
               >
                 Reset
               </button>
-            </div>
-          </div>
-
-          {/* Progress rail */}
-          <div className="space-y-2.5">
-            {/* Session rail — hairline */}
-            <div className="relative h-[3px] rounded-full bg-white/[0.06] overflow-hidden">
-              <div
-                className="h-full rounded-full will-change-transform"
-                style={{
-                  width: `${sessionProgress}%`,
-                  background: `linear-gradient(90deg, ${ACCENT} 0%, ${ACCENT_SOFT} 100%)`,
-                }}
-              />
-            </div>
-
-            {/* Seconds rail with tick marks */}
-            <div className="relative h-5 rounded-full bg-white/[0.05] overflow-hidden border border-white/[0.06]">
-              <div
-                className="absolute inset-y-0 left-0 rounded-full will-change-transform"
-                style={{
-                  width: "100%",
-                  transformOrigin: "left",
-                  transform: `scaleX(${secondProgressFraction})`,
-                  background: ACCENT,
-                  opacity: 0.85,
-                }}
-              />
-              {[15, 30, 45].map((n) => (
-                <div
-                  key={n}
-                  className="absolute inset-y-0 pointer-events-none"
-                  style={{ left: `${(n / 60) * 100}%` }}
-                >
-                  <div className="absolute top-0 bottom-0 left-0 w-px bg-white/40" />
-                  <div className="absolute -top-[22px] -translate-x-1/2 text-[10px] tracking-wider font-mono text-white/50">
-                    {n}s
-                  </div>
+              <div className="flex items-center gap-2">
+                <div className="font-mono tabular-nums text-lg md:text-2xl tracking-tight">
+                  {formatTime(remain)}
                 </div>
-              ))}
-            </div>
-          </div>
-        </div>
-      </header>
-
-      {/* ───────── MAIN ───────── */}
-      <main className="relative z-10 max-w-[1280px] mx-auto px-5 md:px-10 pt-32 md:pt-36 pb-48 md:pb-44">
-        {/* Meta strip */}
-        <div className="flex items-center justify-between mb-6 md:mb-8">
-          <div className="flex items-center gap-3 text-[10px] tracking-[0.3em] uppercase font-mono text-white/45">
-            <span className="h-px w-8 bg-white/20" />
-            <span>Session 027 · 17 min interval</span>
-          </div>
-          <div className="flex items-center gap-6 text-[11px] font-mono text-white/50">
-            <div>
-              <span className="text-white/35 mr-1.5">Total</span>
-              <span
-                className="tabular-nums text-white"
-                style={{ color: ACCENT }}
-              >
-                {totalReps}
-              </span>
-            </div>
-            <div>
-              <span className="text-white/35 mr-1.5">Pace</span>
-              <span className="tabular-nums text-white/85">
-                {pacePerMin.toFixed(1)}/min
-              </span>
-            </div>
-            <div>
-              <span className="text-white/35 mr-1.5">Δ</span>
-              <span
-                className="tabular-nums"
-                style={{ color: deltaVsLast >= 0 ? ACCENT : "rgba(255,255,255,0.7)" }}
-              >
-                {deltaVsLast >= 0 ? "+" : ""}
-                {deltaVsLast}
-              </span>
-            </div>
-          </div>
-        </div>
-
-        {/* ── Tally wall — the main instrument ── */}
-        <section className="rounded-lg border border-white/[0.08] bg-white/[0.015] overflow-hidden">
-          {EXERCISES.map((exercise, idx) => {
-            const count = reps[exercise.name] ?? 0;
-            const isActive = activeExercise === exercise.name;
-            const isFlash = flashExercise === exercise.name;
-            const delta = count - exercise.last;
-            const progressVsLast = Math.min(
-              1,
-              exercise.last > 0 ? count / exercise.last : 0
-            );
-
-            return (
-              <div
-                key={exercise.name}
-                role="button"
-                tabIndex={0}
-                onClick={() => setActiveExercise(exercise.name)}
-                onKeyDown={(e) => {
-                  if (e.key === "Enter" || e.key === " ") {
-                    e.preventDefault();
-                    setActiveExercise(exercise.name);
-                  }
-                }}
-                className="group relative cursor-pointer"
-                style={{
-                  background: isActive
-                    ? "rgba(183,75,101,0.06)"
-                    : "transparent",
-                  borderTop:
-                    idx === 0 ? "none" : "1px solid rgba(255,255,255,0.06)",
-                  transform: isFlash ? "translateY(-1px)" : "translateY(0)",
-                  transition:
-                    "background 200ms ease, transform 220ms cubic-bezier(0.16,1,0.3,1)",
-                }}
-              >
-                {/* Active accent bar */}
-                <span
-                  className="absolute left-0 top-0 bottom-0 w-[3px] transition-opacity"
-                  style={{
-                    background: ACCENT,
-                    opacity: isActive ? 1 : 0,
-                  }}
-                />
-
-                <div className="px-5 md:px-8 py-5 md:py-6 grid grid-cols-12 gap-4 md:gap-6 items-center">
-                  {/* Label */}
-                  <div className="col-span-12 md:col-span-3 min-w-0">
-                    <div className="flex items-center gap-3 mb-1.5">
-                      <span className="text-[10px] font-mono text-white/35 tabular-nums">
-                        {String(idx + 1).padStart(2, "0")}
-                      </span>
-                      <h3 className="text-[15px] md:text-base font-medium tracking-tight truncate text-white">
-                        {exercise.name}
-                      </h3>
-                    </div>
-                    <div className="flex items-center gap-2 text-[10px] font-mono tracking-wider text-white/40">
-                      <span>PREV {exercise.last}</span>
-                      <span className="h-3 w-px bg-white/15" />
-                      <span
-                        style={{
-                          color:
-                            delta > 0
-                              ? ACCENT_SOFT
-                              : delta < 0
-                              ? "rgba(255,255,255,0.55)"
-                              : "rgba(255,255,255,0.35)",
-                        }}
-                      >
-                        Δ {delta >= 0 ? "+" : ""}
-                        {delta}
-                      </span>
-                    </div>
-                    {/* Progress bar vs last */}
-                    <div className="mt-2.5 h-[2px] bg-white/[0.06] rounded-full overflow-hidden max-w-[160px]">
-                      <div
-                        className="h-full will-change-transform"
-                        style={{
-                          width: `${progressVsLast * 100}%`,
-                          background: ACCENT,
-                          opacity: 0.8,
-                          transition: "width 360ms cubic-bezier(0.16,1,0.3,1)",
-                        }}
-                      />
-                    </div>
-                  </div>
-
-                  {/* Tally display — the hero */}
-                  <div className="col-span-12 md:col-span-7 min-h-[44px] flex items-center">
-                    {count > 0 ? (
-                      <TallyDisplay count={count} size={40} />
-                    ) : (
-                      <span className="text-[11px] font-mono tracking-[0.2em] uppercase text-white/25">
-                        — awaiting first rep
-                      </span>
-                    )}
-                  </div>
-
-                  {/* Count + quick controls */}
-                  <div className="col-span-12 md:col-span-2 flex items-center justify-between md:justify-end gap-3">
-                    <div
-                      className="tabular-nums text-4xl md:text-5xl font-light tracking-tight leading-none"
-                      style={{
-                        color: count > 0 ? ACCENT : "rgba(255,255,255,0.18)",
-                      }}
+                <button
+                  onClick={() => setRunning((v) => !v)}
+                  className="inline-flex items-center justify-center h-9 w-9 md:h-10 md:w-10 rounded-full bg-gradient-to-r from-[#B74B65] to-[#D96686] hover:shadow-[0_0_22px_rgba(183,75,101,0.45)] active:scale-95"
+                  aria-label={running ? "Pause session" : "Start session"}
+                  title={running ? "Pause session" : "Start session"}
+                >
+                  {running ? (
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
                     >
-                      {String(count).padStart(2, "0")}
+                      <rect x="6" y="5" width="4" height="14" rx="1.2" />
+                      <rect x="14" y="5" width="4" height="14" rx="1.2" />
+                    </svg>
+                  ) : (
+                    <svg
+                      width="18"
+                      height="18"
+                      viewBox="0 0 24 24"
+                      fill="currentColor"
+                    >
+                      <path d="M8 5v14l11-7-11-7z" />
+                    </svg>
+                  )}
+                </button>
+              </div>
+            </div>
+          </div>
+
+          {/* Progress bars */}
+          <div className="space-y-2">
+            <div className="h-1 rounded-full bg-white/10 overflow-hidden">
+              <div
+                className="h-full bg-gradient-to-r from-[#B74B65] via-[#D06180] to-[#EA7894]"
+                style={{ width: `${sessionProgress}%` }}
+              />
+            </div>
+
+            <div className="relative">
+              <div className="relative h-6 rounded-full bg-white/10 overflow-hidden border border-white/10">
+                <div
+                  className="absolute inset-y-0 left-0 z-10 bg-gradient-to-r from-[#B74B65] via-[#D06180] to-[#EA7894] shadow-[0_0_18px_rgba(183,75,101,0.55)] will-change-transform"
+                  style={{
+                    width: "100%",
+                    transformOrigin: "left",
+                    transform: `scaleX(${secondProgressFraction})`,
+                  }}
+                />
+
+                {[15, 30, 45].map((n, i) => (
+                  <div
+                    key={i}
+                    className="absolute inset-y-0 z-20 pointer-events-none"
+                    style={{ left: `${(n / 60) * 100}%` }}
+                  >
+                    <div className="absolute -top-5 -translate-x-1/2 text-[11px] md:text-xs text-white drop-shadow-[0_1px_0_rgba(0,0,0,0.45)]">
+                      {n}
                     </div>
-                    <div className="flex items-center gap-1.5">
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          bump(exercise.name, -1);
-                        }}
-                        className="h-8 w-8 rounded-full bg-white/[0.04] hover:bg-white/[0.1] border border-white/10 text-sm text-white/75 active:scale-95 transition-all"
-                        aria-label={`Decrease ${exercise.name}`}
-                      >
-                        −
-                      </button>
-                      <button
-                        onClick={(e) => {
-                          e.stopPropagation();
-                          bump(exercise.name, 1);
-                        }}
-                        className="h-8 w-8 rounded-full text-sm text-white active:scale-95 transition-all"
-                        style={{ background: ACCENT }}
-                        aria-label={`Increase ${exercise.name}`}
-                      >
-                        +
-                      </button>
+                    <div className="absolute top-0 bottom-0 left-1/2 -translate-x-1/2">
+                      <div className="absolute top-0 h-full w-[1.5px] bg-white/50 mix-blend-normal" />
                     </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      {/* Main container */}
+      <div className="relative z-10 max-w-[1400px] mx-auto px-4 sm:px-6 pb-24 md:pb-28 pt-28 md:pt-32">
+        <div className="grid gap-6 lg:gap-8 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1.2fr)] items-start">
+          {/* LEFT COLUMN */}
+          <div className="space-y-4 max-w-xl w-full mx-auto lg:mx-0 min-w-0">
+            {/* Summary card (calm) */}
+            <div className="rounded-xl bg-white/[0.025] border border-white/10 p-4 md:p-5">
+              <div className="mb-3 flex items-center justify-between">
+                <div className="text-[11px] uppercase tracking-wide text-white/45 font-mono">
+                  Summary
+                </div>
+                {/* <div className="text-[10px] text-white/35 font-mono">
+                  No action needed
+                </div> */}
+              </div>
+
+              <div className="grid grid-cols-5 text-left mb-2 gap-2">
+                {EXERCISES.map((ex) => (
+                  <div
+                    key={ex.name}
+                    className="text-[11px] md:text-xs text-white/60 font-mono truncate"
+                  >
+                    {ex.name}
+                  </div>
+                ))}
+              </div>
+
+              <div className="grid grid-cols-5 text-left gap-2">
+                {EXERCISES.map((ex) => {
+                  const count = reps[ex.name] ?? 0;
+                  return (
+                    <div
+                      key={ex.name + "-count"}
+                      className="text-lg md:text-xl font-black tabular-nums text-[#B74B65]"
+                    >
+                      {count}
+                    </div>
+                  );
+                })}
+              </div>
+
+              <div className="mt-4 flex justify-end">
+                <div className="text-right">
+                  <div className="text-2xl md:text-3xl font-black text-[#B74B65] leading-none">
+                    {totalReps}
+                  </div>
+                  <div className="text-[11px] uppercase tracking-[0.18em] text-white/45 font-mono">
+                    Total Reps
                   </div>
                 </div>
               </div>
-            );
-          })}
-        </section>
+            </div>
 
-        {/* Footer note */}
-        <div className="mt-5 flex items-center justify-between text-[10px] font-mono tracking-[0.25em] uppercase text-white/30">
-          <span>Tap a row to target · Enter to log</span>
-          <span>Reset keeps your reps</span>
-        </div>
-      </main>
-
-      {/* ───────── BOTTOM DOCK — Console ───────── */}
-      <div className="fixed bottom-0 left-0 right-0 z-40 backdrop-blur-xl bg-[#0B0B0D]/85 border-t border-white/[0.08]">
-        <div className="max-w-[1280px] mx-auto px-5 md:px-10 py-4 md:py-5">
-          <div className="grid gap-4 md:grid-cols-[minmax(0,auto)_minmax(0,1fr)_minmax(0,auto)] md:items-center">
-            {/* Active indicator */}
-            <div className="flex items-center gap-3 min-w-0">
-              <span
-                className="h-2 w-2 rounded-full shrink-0"
-                style={{ background: ACCENT }}
-              />
-              <div className="min-w-0">
-                <div className="text-[10px] tracking-[0.25em] uppercase text-white/40 font-mono">
-                  Logging
+            {/* Logging card (CTA) */}
+            <div className="rounded-xl border border-[#B74B65]/60 bg-gradient-to-br from-[#B74B65]/40 via-[#B74B65]/18 to-white/[0.02] p-4 md:p-5 flex flex-col gap-3 shadow-[0_0_28px_rgba(183,75,101,0.35)]">
+              <div className="flex items-center justify-between gap-2">
+                <div>
+                  <div className="text-[11px] uppercase tracking-wide text-[#FDECF2] font-mono">
+                    Log reps
+                  </div>
+                  <div className="text-xs text-[#FDECF2]/70">
+                    Choose an exercise, then log number of reps
+                  </div>
                 </div>
-                <div className="text-sm md:text-base font-medium tracking-tight truncate text-white">
-                  {activeExercise}
+                {/* <span className="px-3 py-1 rounded-full bg-black/30 border border-white/15 text-[10px] font-mono text-white/80">
+                  Primary action
+                </span> */}
+              </div>
+
+              <div>
+                <div className="mt-2 flex gap-2 overflow-x-auto pb-1 -mx-1 px-1">
+                  {EXERCISES.map((ex) => {
+                    const isActive = ex.name === activeExercise;
+                    return (
+                      <button
+                        key={ex.name}
+                        onClick={() => {
+                          setActiveExercise(ex.name);
+                        }}
+                        className={`whitespace-nowrap px-3 py-1.5 rounded-full border text-xs font-mono transition-colors ${
+                          isActive
+                            ? "bg-black/40 border-[#FDECF2] text-[#FDECF2] shadow-[0_0_16px_rgba(0,0,0,0.65)]"
+                            : "bg-black/10 border-white/20 text-white/80 hover:bg-black/20"
+                        }`}
+                      >
+                        {ex.name}
+                      </button>
+                    );
+                  })}
+                </div>
+              </div>
+
+              <div className="flex flex-col gap-2 mt-2.5">
+                <div className="text-xs text-[#FDECF2]/90 font-mono">
+                  Active:{" "}
+                  <span className="font-semibold text-white">
+                    {activeExercise}
+                  </span>
+                </div>
+                <div className="flex gap-2">
+                  <button
+                    onClick={() => bump(activeExercise, -1)}
+                    className="h-8 px-2.5 rounded-lg bg-black/10 hover:bg-black/25 border border-white/25 text-[13px] font-bold text-white/80 active:scale-95"
+                  >
+                    −1
+                  </button>
+                  <button
+                    onClick={() => bump(activeExercise, 1)}
+                    className="h-9 px-3 rounded-lg bg-black/35 hover:bg-black/45 border border-white/25 text-sm font-bold text-white active:scale-95"
+                  >
+                    +1
+                  </button>
+                  <button
+                    onClick={() => bump(activeExercise, 5)}
+                    className="h-9 px-3 rounded-lg bg-black/35 hover:bg-black/45 border border-white/25 text-sm font-bold text-white active:scale-95"
+                  >
+                    +5
+                  </button>
+                </div>
+                <div className="relative">
+                  <input
+                    ref={inputRef}
+                    type="text"
+                    inputMode="numeric"
+                    placeholder="Enter reps… e.g. 8 or -5"
+                    className="w-full pr-24 pl-3 py-2.5 rounded-xl bg-black/35 border border-white/25 text-left font-mono text-sm placeholder:text-white/40 focus:outline-none focus:ring-2 focus:ring-[#FDECF2]/70"
+                    value={logInput}
+                    onChange={(e) => setLogInput(e.target.value)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter") {
+                        handleAddActive();
+                        e.currentTarget.blur();
+                      }
+                    }}
+                  />
+                  <button
+                    onClick={handleAddActive}
+                    className="absolute right-1 top-1 h-[34px] px-3 rounded-lg bg-[#FDECF2]/10 hover:bg-[#FDECF2]/20 border border-[#FDECF2]/50 text-[11px] font-semibold text-[#FDECF2] active:scale-95"
+                  >
+                    Add set
+                  </button>
                 </div>
               </div>
             </div>
+          </div>
 
-            {/* Steppers + input */}
-            <div className="flex items-center gap-2">
-              {[
-                { label: "−1", v: -1 },
-                { label: "+1", v: 1 },
-                { label: "+5", v: 5 },
-                { label: "+10", v: 10 },
-              ].map(({ label, v }) => (
-                <button
-                  key={label}
-                  onClick={() => bump(activeExercise, v)}
-                  className="h-11 px-3 md:px-4 rounded-lg bg-white/[0.04] hover:bg-white/[0.08] border border-white/10 text-sm font-medium tabular-nums text-white/90 active:scale-95 transition-all shrink-0"
-                >
-                  {label}
-                </button>
-              ))}
-              <div className="relative flex-1 min-w-[140px]">
-                <input
-                  ref={inputRef}
-                  type="text"
-                  inputMode="numeric"
-                  placeholder="Custom reps…"
-                  className="w-full h-11 pr-20 pl-3.5 rounded-lg bg-black/30 border border-white/15 font-mono text-sm placeholder:text-white/35 focus:outline-none focus:border-[#B74B65]/60 focus:bg-black/50 transition-colors"
-                  value={logInput}
-                  onChange={(e) => setLogInput(e.target.value)}
-                  onKeyDown={(e) => {
-                    if (e.key === "Enter") {
-                      handleAddActive();
-                      e.currentTarget.blur();
-                    }
-                  }}
-                />
-                <button
-                  onClick={handleAddActive}
-                  className="absolute right-1 top-1 bottom-1 px-3 rounded-md text-[11px] tracking-[0.2em] uppercase font-semibold text-white active:scale-95 transition-transform"
-                  style={{ background: ACCENT }}
-                >
-                  Add
-                </button>
+          {/* RIGHT COLUMN: tallies */}
+          <div className="rounded-xl bg-white/[0.04] border border-white/10 p-4 sm:p-5 min-w-0">
+            <div className="flex items-baseline justify-between mb-2">
+              <div className="text-[11px] uppercase tracking-wide text-white/45 font-mono">
+                Totals
+              </div>
+              <div className="text-[11px] text-white/35 font-mono">
+                Tap a row to switch exercise
               </div>
             </div>
 
-            {/* Running total */}
-            <div className="hidden md:flex items-baseline justify-end gap-3">
-              <span className="text-[10px] tracking-[0.25em] uppercase text-white/40 font-mono">
-                Total
-              </span>
-              <span
-                className="tabular-nums text-2xl font-light tracking-tight"
-                style={{ color: ACCENT }}
-              >
-                {String(totalReps).padStart(3, "0")}
-              </span>
+            <div className="divide-y divide-white/10">
+              {EXERCISES.map((exercise, idx) => {
+                const count = reps[exercise.name] ?? 0;
+                const isActive = activeExercise === exercise.name;
+
+                return (
+                  <div
+                    key={exercise.name}
+                    role="button"
+                    tabIndex={0}
+                    onClick={() => setActiveExercise(exercise.name)}
+                    onKeyDown={(e) => {
+                      if (e.key === "Enter" || e.key === " ") {
+                        setActiveExercise(exercise.name);
+                      }
+                    }}
+                    className={`py-2 md:py-3 transition-all duration-300 cursor-pointer rounded-xl px-3 sm:px-4 md:px-5 sm:-mx-4 md:-mx-5 ${
+                      isActive
+                        ? "bg-[#B74B65]/18 border border-[#B74B65]/70 shadow-[0_0_22px_rgba(183,75,101,0.32)]"
+                        : "border border-transparent hover:bg-white/[0.02]"
+                    } ${
+                      flashExercise === exercise.name
+                        ? "scale-[1.01]"
+                        : "scale-[1]"
+                    }`}
+                    style={{
+                      animation:
+                        flashExercise === exercise.name
+                          ? "pulse 0.28s ease"
+                          : "none",
+                    }}
+                  >
+                    <div className="flex items-start justify-between gap-3 mb-1.5">
+                      <div className="min-w-0">
+                        <div className="flex items-center gap-2 mb-1">
+                          <span className="text-[#B74B65] font-mono text-[11px] opacity-60">
+                            0{idx + 1}
+                          </span>
+                          <h3 className="text-sm md:text-base font-semibold tracking-tight truncate">
+                            {exercise.name}
+                          </h3>
+                          {isActive && (
+                            <span className="text-[10px] font-mono px-2 py-0.5 rounded-full bg-[#B74B65]/35 border border-[#FDECF2]/40 text-[#FDECF2]">
+                              ACTIVE
+                            </span>
+                          )}
+                        </div>
+                      </div>
+
+                      <div className="text-right shrink-0">
+                        <div className="text-2xl md:text-3xl font-black tabular-nums text-[#B74B65] leading-none">
+                          {count}
+                        </div>
+                        <div className="text-white/30 text-[10px] md:text-[11px] font-mono uppercase">
+                          Reps
+                        </div>
+                      </div>
+                    </div>
+
+                    <div
+                      className={`transition-all duration-300 ease-out overflow-hidden ${
+                        count > 0
+                          ? "max-h-24 opacity-100 mt-1"
+                          : "max-h-0 opacity-0 -mb-1"
+                      }`}
+                    >
+                      <div className="flex items-center">
+                        <TallyDisplay count={count} size={38} />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
             </div>
           </div>
         </div>
       </div>
 
       <style jsx global>{`
-        .scrollbar-thin::-webkit-scrollbar {
-          height: 4px;
-        }
-        .scrollbar-thin::-webkit-scrollbar-thumb {
-          background: rgba(255, 255, 255, 0.08);
-          border-radius: 9999px;
+        @keyframes pulse {
+          0%,
+          100% {
+            transform: scale(1);
+          }
+          50% {
+            transform: scale(1.015);
+          }
         }
       `}</style>
     </div>

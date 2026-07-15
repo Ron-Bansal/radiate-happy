@@ -5,7 +5,8 @@ import {
   ArrowLeft,
   ArrowRight,
   Check,
-  ChevronDown,
+  CircleHelp,
+  Clock3,
   Flame,
   Lightbulb,
   Pause,
@@ -16,20 +17,21 @@ import {
   TimerReset,
   Volume2,
   VolumeX,
+  X,
 } from "lucide-react";
 import styles from "./sizzle.module.css";
 
 const heatRank = { easy: 1, med: 2, spicy: 3 };
 
 const activities = [
-  { id: "spark", no: "01", name: "Spark", icon: "✦", tone: "Think wider", blurb: "One question. Follow the interesting thread.", mode: "stopwatch", seconds: 120 },
-  { id: "hot-take", no: "02", name: "Hot Take", icon: "◐", tone: "Build a case", blurb: "Defend a claim, then turn the table.", mode: "countdown", seconds: 90 },
-  { id: "of-course", no: "03", name: "Ah, Of Course", icon: "◎", tone: "Improvise", blurb: "Sound certain about something unfamiliar.", mode: "countdown", seconds: 60 },
-  { id: "word-web", no: "04", name: "Word Web", icon: "⌘", tone: "Connect ideas", blurb: "Weave five distant words into one thought.", mode: "countdown", seconds: 120 },
-  { id: "pitch", no: "05", name: "The Pitch", icon: "◇", tone: "Persuade", blurb: "Make the wrong buyer want the wrong thing.", mode: "countdown", seconds: 90 },
-  { id: "wrong", no: "06", name: "Wrong Answers", icon: "↯", tone: "Reframe", blurb: "Find a useful truth inside a bad idea.", mode: "countdown", seconds: 90 },
-  { id: "riddle", no: "07", name: "Riddle Room", icon: "?", tone: "Reason aloud", blurb: "Make the thinking visible, not just correct.", mode: "stopwatch", seconds: 120 },
-  { id: "box", no: "08", name: "Out of the Box", icon: "□", tone: "Solve sideways", blurb: "Try a real case before seeing what worked.", mode: "stopwatch", seconds: 120 },
+  { id: "spark", no: "01", name: "Spark", icon: "✦", tone: "Think wider", blurb: "Start with your honest answer, then keep going. The interesting bit usually arrives after the obvious answer." },
+  { id: "hot-take", no: "02", name: "Hot Take", icon: "◐", tone: "Build a case", blurb: "Defend the claim with three genuinely different reasons. Halfway through, swap sides and challenge your own argument." },
+  { id: "of-course", no: "03", name: "Ah, Of Course", icon: "◎", tone: "Improvise", blurb: "Open with “Ah, of course…” and teach this topic with total confidence. Examples and invented evidence are encouraged." },
+  { id: "word-web", no: "04", name: "Word Web", icon: "⌘", tone: "Connect ideas", blurb: "Give one flowing talk that connects all five words. Tap each word when you use it, but don’t start a sentence with one." },
+  { id: "pitch", no: "05", name: "The Pitch", icon: "◇", tone: "Persuade", blurb: "Work out what this buyer really cares about, turn the product’s weakness into a strength, and finish with a price." },
+  { id: "wrong", no: "06", name: "Wrong Answers", icon: "↯", tone: "Reframe", blurb: "Generate deliberately terrible solutions first. Then choose the most interesting one and rescue the useful idea inside it." },
+  { id: "riddle", no: "07", name: "Riddle Room", icon: "?", tone: "Reason aloud", blurb: "Say what you notice, what you’re assuming and what you can rule out. A clear wrong path is still useful progress." },
+  { id: "box", no: "08", name: "Out of the Box", icon: "□", tone: "Solve sideways", blurb: "Read the real-world case, name the problem beneath the complaint, then offer one sensible fix and one sideways fix." },
 ];
 
 const sparks = [
@@ -145,17 +147,27 @@ const cases = [
   { h: "spicy", title: "The library without fines", problem: "Late fees are meant to bring books back, but they also keep low-income families away from libraries. How might a library protect access and its collection?", reveal: "Many libraries removed daily fines while still charging for truly lost items and sending better reminders. Returns stayed broadly stable while access improved.", lesson: "A policy’s side effects can work against its original purpose." },
 ];
 
-function pick(items, heat, previous) {
-  const exact = items.filter((item) => item.h === heat);
-  const pool = exact.length ? exact : items.filter((item) => heatRank[item.h] <= heatRank[heat]);
-  const candidates = pool.filter((item) => (item.text || item.title) !== previous);
-  return (candidates.length ? candidates : pool)[Math.floor(Math.random() * (candidates.length || pool.length))];
+function hashNumber(value) {
+  let hash = 2166136261;
+  for (const character of String(value)) {
+    hash ^= character.charCodeAt(0);
+    hash = Math.imul(hash, 16777619);
+  }
+  return hash >>> 0;
 }
 
-function shuffled(list) {
+function pick(items, heat, seed, salt = "") {
+  const exact = items.filter((item) => item.h === heat);
+  const pool = exact.length ? exact : items.filter((item) => heatRank[item.h] <= heatRank[heat]);
+  return pool[hashNumber(`${seed}-${salt}-${heat}`) % pool.length];
+}
+
+function shuffled(list, seed = 1) {
   const copy = [...list];
+  let state = hashNumber(seed) || 1;
   for (let i = copy.length - 1; i > 0; i -= 1) {
-    const j = Math.floor(Math.random() * (i + 1));
+    state = (Math.imul(state, 1664525) + 1013904223) >>> 0;
+    const j = state % (i + 1);
     [copy[i], copy[j]] = [copy[j], copy[i]];
   }
   return copy;
@@ -255,7 +267,6 @@ function ActivityBody({ id, heat, seed }) {
   const [phase, setPhase] = useState(0);
   const [hintCount, setHintCount] = useState(0);
   const [usedWords, setUsedWords] = useState([]);
-  const previous = useRef("");
 
   useEffect(() => {
     setPhase(0);
@@ -264,31 +275,27 @@ function ActivityBody({ id, heat, seed }) {
   }, [id, heat, seed]);
 
   const content = useMemo(() => {
-    void seed;
     let value;
-    if (id === "spark") value = pick(sparks, heat, previous.current);
-    if (id === "hot-take") value = pick(hotTakes, heat, previous.current);
-    if (id === "of-course") value = pick(expertTopics, heat, previous.current);
-    if (id === "wrong") value = pick(problems, heat, previous.current);
-    if (id === "riddle") value = pick(riddles, heat, previous.current);
-    if (id === "box") value = pick(cases, heat, previous.current);
-    if (value) previous.current = value.text || value.title;
+    if (id === "spark") value = pick(sparks, heat, seed, id);
+    if (id === "hot-take") value = pick(hotTakes, heat, seed, id);
+    if (id === "of-course") value = pick(expertTopics, heat, seed, id);
+    if (id === "wrong") value = pick(problems, heat, seed, id);
+    if (id === "riddle") value = pick(riddles, heat, seed, id);
+    if (id === "box") value = pick(cases, heat, seed, id);
     return value;
   }, [heat, id, seed]);
 
   const webWords = useMemo(() => {
-    void seed;
     if (id !== "word-web") return [];
-    if (heat === "easy") return shuffled(words.easy).slice(0, 5);
-    if (heat === "med") return shuffled([...words.easy, ...words.med]).slice(0, 5);
-    return [...shuffled(words.med).slice(0, 2), ...shuffled(words.spicy).slice(0, 3)];
+    if (heat === "easy") return shuffled(words.easy, seed).slice(0, 5);
+    if (heat === "med") return shuffled([...words.easy, ...words.med], seed).slice(0, 5);
+    return [...shuffled(words.med, `${seed}-a`).slice(0, 2), ...shuffled(words.spicy, `${seed}-b`).slice(0, 3)];
   }, [heat, id, seed]);
 
   const pitch = useMemo(() => {
-    void seed;
     return id === "pitch" ? {
-      object: pitchObjects[Math.floor(Math.random() * pitchObjects.length)],
-      buyer: buyers[heat][Math.floor(Math.random() * buyers[heat].length)],
+      object: pitchObjects[hashNumber(`${seed}-object`) % pitchObjects.length],
+      buyer: buyers[heat][hashNumber(`${seed}-buyer-${heat}`) % buyers[heat].length],
     } : null;
   }, [heat, id, seed]);
 
@@ -315,7 +322,7 @@ function ActivityBody({ id, heat, seed }) {
           return <button key={word} className={on ? styles.wordUsed : ""} onClick={() => setUsedWords((used) => on ? used.filter((item) => item !== index) : [...used, index])}>{on && <Check size={17} />}{word}</button>;
         })}
       </div>
-      {usedWords.length === 5 && <p className={styles.completeLine}><Sparkles size={17} /> All five. Now give the story a final sentence.</p>}
+      <p className={`${styles.completeLine} ${usedWords.length === 5 ? "" : styles.completePending}`} aria-hidden={usedWords.length !== 5}><Sparkles size={17} /> All five. Now give the story a final sentence.</p>
     </div>
   );
 
@@ -338,7 +345,7 @@ function ActivityBody({ id, heat, seed }) {
   if (id === "riddle") return (
     <div className={styles.riddleWrap}>
       <TextPrompt kicker="Think out loud" note="Name what you notice, what you assume and what you can rule out.">{content.text}</TextPrompt>
-      <div className={styles.revealStack}>
+      <div className={styles.revealStack} aria-live="polite">
         {content.hints.slice(0, hintCount).map((hint, index) => <p key={hint}><span>Hint {index + 1}</span>{hint}</p>)}
         {phase === 1 && <div className={styles.answer}><span>Answer</span>{content.answer}</div>}
       </div>
@@ -351,11 +358,12 @@ function ActivityBody({ id, heat, seed }) {
 
   return (
     <div className={styles.caseWrap}>
-      <p className={styles.kicker}>{phase ? "What happened" : "Case file"}</p>
-      <h2>{content.title}</h2>
-      <p className={styles.caseText}>{phase ? content.reveal : content.problem}</p>
-      {phase ? <div className={styles.lesson}><Lightbulb size={18} /><span><b>Design lesson</b>{content.lesson}</span></div> : <p className={styles.coachNote}>Name the real problem first. Then pitch one sensible fix and one sideways fix.</p>}
-      <button className={styles.inlineAction} onClick={() => setPhase((p) => 1 - p)}>{phase ? <ArrowLeft size={16} /> : <ArrowRight size={16} />}{phase ? "Back to the problem" : "See what worked"}</button>
+      <p className={styles.kicker}>Case file</p>
+      <p className={styles.caseText}><b>The challenge</b>{content.problem}</p>
+      <div className={`${styles.caseReveal} ${phase ? styles.caseRevealVisible : ""}`} aria-live="polite">
+        {phase ? <><p><b>{content.title} · What happened</b>{content.reveal}</p><div className={styles.lesson}><Lightbulb size={18} /><span><b>Design lesson</b>{content.lesson}</span></div></> : <p className={styles.casePlaceholder}>Take a minute to pitch your own solutions before revealing what happened.</p>}
+      </div>
+      <button className={styles.inlineAction} onClick={() => setPhase((p) => 1 - p)}>{phase ? <ArrowLeft size={16} /> : <ArrowRight size={16} />}{phase ? "Hide the answer" : "See what worked"}</button>
     </div>
   );
 }
@@ -384,20 +392,38 @@ export default function SizzlePage() {
   const [seed, setSeed] = useState(1);
   const [sound, setSound] = useState(true);
   const [intro, setIntro] = useState(true);
+  const [instructionsVisible, setInstructionsVisible] = useState(true);
+  const [history, setHistory] = useState([]);
   const active = activities.find((activity) => activity.id === activeId);
-  const timer = useTimer(active.mode, active.seconds);
+  const timer = useTimer("countdown", 120);
   const { load, reset, toggle } = timer;
 
+  const rememberCurrent = useCallback(() => {
+    setHistory((items) => [...items.slice(-11), { activeId, heat, seed }]);
+  }, [activeId, heat, seed]);
+
   const openActivity = useCallback((activity) => {
+    rememberCurrent();
     setActiveId(activity.id);
     setSeed((value) => value + 1);
-    load(activity.mode, activity.seconds);
-  }, [load]);
+    load("countdown", 120);
+  }, [load, rememberCurrent]);
 
   const reroll = useCallback(() => {
+    rememberCurrent();
     setSeed((value) => value + 1);
     reset();
-  }, [reset]);
+  }, [rememberCurrent, reset]);
+
+  const goBack = useCallback(() => {
+    if (!history.length) return;
+    const previous = history[history.length - 1];
+    setActiveId(previous.activeId);
+    setHeat(previous.heat);
+    setSeed(previous.seed);
+    setHistory((items) => items.slice(0, -1));
+    load("countdown", 120);
+  }, [history, load]);
 
   useEffect(() => {
     if (timer.finished && sound) playChime();
@@ -441,7 +467,13 @@ export default function SizzlePage() {
       <div className={styles.ambientOne} /><div className={styles.ambientTwo} />
       <header className={styles.header}>
         <button className={styles.wordmark} onClick={() => setIntro(true)}><span><Flame size={16} fill="currentColor" /></span>Sizzle</button>
-        <div className={styles.sessionLabel}><span className={styles.liveDot} />Warm-up in progress</div>
+        <div className={styles.topTimer}>
+          <button className={styles.modeButton} onClick={timer.swapMode} aria-label={timer.mode === "countdown" ? "Switch to stopwatch" : "Switch to two minute countdown"} title={timer.mode === "countdown" ? "Switch to stopwatch" : "Switch to countdown"}><Clock3 size={17} /><span>{timer.mode === "countdown" ? "Timer" : "Stopwatch"}</span></button>
+          {timer.mode === "countdown" && <button className={styles.topNudge} onClick={() => timer.nudge(-30)}>−30</button>}
+          <button className={styles.topPlay} onClick={timer.toggle}>{timer.running ? <Pause size={17} fill="currentColor" /> : <Play size={17} fill="currentColor" />}<strong>{formatTime(timer.seconds)}</strong></button>
+          {timer.mode === "countdown" && <button className={styles.topNudge} onClick={() => timer.nudge(30)}>+30</button>}
+          <button className={styles.topReset} onClick={timer.reset} aria-label="Reset timer"><TimerReset size={17} /></button>
+        </div>
         <div className={styles.headerActions}>
           <button onClick={() => setSound((value) => !value)} aria-label={sound ? "Mute timer chime" : "Unmute timer chime"}>{sound ? <Volume2 size={18} /> : <VolumeX size={18} />}</button>
           <button className={styles.surprise} onClick={surprise}><Shuffle size={16} /> Surprise me</button>
@@ -453,39 +485,27 @@ export default function SizzlePage() {
       </nav>
 
       <section className={styles.workspace}>
-        <aside className={styles.contextPanel}>
-          <p className={styles.kicker}>{active.no} · {active.tone}</p>
-          <h2>{active.name}</h2>
-          <p>{active.blurb}</p>
-          <div className={styles.heatControl}>
-            <label><Flame size={15} /> Difficulty</label>
-            <div>{["easy", "med", "spicy"].map((level) => <button key={level} className={heat === level ? styles.activeHeat : ""} onClick={() => { setHeat(level); setSeed((value) => value + 1); timer.reset(); }}>{level}</button>)}</div>
-          </div>
-          <div className={styles.teacherCue}><span>Teacher cue</span><p>{active.id === "spark" ? "Ask for an example before offering your own view." : active.id === "riddle" ? "Praise a clear wrong path—it makes reasoning safer." : active.id === "box" ? "Hold the reveal until the student has named the real problem." : "Let the silence breathe. The student should do most of the talking."}</p></div>
-        </aside>
-
         <div className={styles.stageColumn}>
           <div className={styles.stageLayers} aria-hidden="true"><span /><span /></div>
           <article className={styles.stage} key={`${activeId}-${seed}`}>
             <div className={styles.stageTop}>
-              <span>{active.icon} {active.name}</span>
-              <div className={styles.modeMenu}>
-                <button onClick={timer.swapMode}>{timer.mode === "countdown" ? "Countdown" : "Stopwatch"}<ChevronDown size={14} /></button>
+              <div className={styles.stageIdentity}><span>{active.icon}</span><div><small>{active.no} · {active.tone}</small><h2>{active.name}</h2></div></div>
+              <div className={styles.cardActions}>
+                {!instructionsVisible && <button onClick={() => setInstructionsVisible(true)} aria-label="Show instructions" title="Show instructions"><CircleHelp size={18} /></button>}
+                <button onClick={goBack} disabled={!history.length} aria-label="Previous prompt" title="Previous prompt"><ArrowLeft size={18} /><span>Back</span></button>
+                <button onClick={reroll} aria-label="New prompt" title="New prompt"><RefreshCw size={18} /><span>New</span></button>
               </div>
+            </div>
+            {instructionsVisible && <div className={styles.instructions}><p>{active.blurb}</p><button onClick={() => setInstructionsVisible(false)} aria-label="Hide instructions"><X size={14} /> Hide</button></div>}
+            <div className={styles.cardSettings}>
+              <span>Difficulty</span>
+              <div>{["easy", "med", "spicy"].map((level) => <button key={level} className={heat === level ? styles.activeHeat : ""} onClick={() => { rememberCurrent(); setHeat(level); setSeed((value) => value + 1); reset(); }}>{level}</button>)}</div>
             </div>
             <div className={styles.activityBody}><ActivityBody id={activeId} heat={heat} seed={seed} /></div>
             <div className={styles.stageFooter}><span>{heat} mode</span><span>space · timer</span><span>r · new prompt</span></div>
           </article>
         </div>
       </section>
-
-      <div className={styles.timerDock}>
-        <button className={styles.rerollButton} onClick={reroll} aria-label="New prompt"><RefreshCw size={20} /></button>
-        {timer.mode === "countdown" && <button className={styles.nudge} onClick={() => timer.nudge(-30)}>−30</button>}
-        <button className={styles.playButton} onClick={timer.toggle}>{timer.running ? <Pause size={19} fill="currentColor" /> : <Play size={19} fill="currentColor" />}<span>{timer.running ? "Pause" : timer.seconds < timer.duration && timer.seconds > 0 ? "Resume" : "Start"}</span><strong>{formatTime(timer.seconds)}</strong></button>
-        {timer.mode === "countdown" && <button className={styles.nudge} onClick={() => timer.nudge(30)}>+30</button>}
-        <button className={styles.resetButton} onClick={timer.reset} aria-label="Reset timer"><TimerReset size={19} /></button>
-      </div>
     </main>
   );
 }

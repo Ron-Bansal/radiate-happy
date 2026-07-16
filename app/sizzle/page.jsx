@@ -35,10 +35,10 @@ const activities = [
 ];
 
 const introActivities = [
-  { id: "spark", note: "An open question to ease into conversation" },
-  { id: "hot-take", note: "A quick argument that builds speaking confidence" },
-  { id: "word-web", note: "A five-word challenge for connected thinking" },
-  { id: "box", note: "A real case for practical, lateral problem-solving" },
+  { id: "spark", note: "Find more than one useful answer", skill: "Idea fluency" },
+  { id: "hot-take", note: "Build a case, then challenge it", skill: "Argument building" },
+  { id: "word-web", note: "Connect five unrelated words out loud", skill: "Verbal flexibility" },
+  { id: "box", note: "Solve a real problem from a new angle", skill: "Lateral problem-solving" },
 ];
 
 const sparks = [
@@ -410,6 +410,24 @@ function playChime() {
   } catch (_) {}
 }
 
+function playStartSound() {
+  try {
+    const Audio = window.AudioContext || window.webkitAudioContext;
+    const context = new Audio();
+    const oscillator = context.createOscillator();
+    const gain = context.createGain();
+    oscillator.type = "sine";
+    oscillator.frequency.setValueAtTime(440, context.currentTime);
+    oscillator.frequency.exponentialRampToValueAtTime(560, context.currentTime + 0.08);
+    gain.gain.setValueAtTime(0.0001, context.currentTime);
+    gain.gain.exponentialRampToValueAtTime(0.055, context.currentTime + 0.012);
+    gain.gain.exponentialRampToValueAtTime(0.0001, context.currentTime + 0.14);
+    oscillator.connect(gain).connect(context.destination);
+    oscillator.start();
+    oscillator.stop(context.currentTime + 0.15);
+  } catch (_) {}
+}
+
 export default function SizzlePage() {
   const [activeId, setActiveId] = useState("spark");
   const [heat, setHeat] = useState("med");
@@ -421,6 +439,11 @@ export default function SizzlePage() {
   const active = activities.find((activity) => activity.id === activeId);
   const timer = useTimer("countdown", 120);
   const { load, reset, toggle } = timer;
+
+  const toggleTimer = useCallback(() => {
+    if (!timer.running && sound) playStartSound();
+    toggle();
+  }, [sound, timer.running, toggle]);
 
   const rememberCurrent = useCallback(() => {
     setHistory((items) => [...items.slice(-11), { activeId, heat, seed }]);
@@ -456,12 +479,12 @@ export default function SizzlePage() {
   useEffect(() => {
     const onKeyDown = (event) => {
       if (["INPUT", "TEXTAREA", "BUTTON"].includes(document.activeElement?.tagName)) return;
-      if (event.code === "Space") { event.preventDefault(); toggle(); }
+      if (event.code === "Space") { event.preventDefault(); toggleTimer(); }
       if (event.key.toLowerCase() === "r") reroll();
     };
     window.addEventListener("keydown", onKeyDown);
     return () => window.removeEventListener("keydown", onKeyDown);
-  }, [reroll, toggle]);
+  }, [reroll, toggleTimer]);
 
   const surprise = () => {
     const options = activities.filter((activity) => activity.id !== activeId);
@@ -476,21 +499,27 @@ export default function SizzlePage() {
     setIntro(false);
   };
 
+  const pickWarmup = () => {
+    const options = activities.filter((activity) => activity.id !== activeId);
+    startWith(options[Math.floor(Math.random() * options.length)].id);
+  };
+
   if (intro) return (
     <main className={styles.intro}>
       <div className={styles.ambientOne} /><div className={styles.ambientTwo} />
       <section className={styles.introCard}>
         <div className={styles.cardLayers} aria-hidden="true"><span /><span /></div>
         <div className={styles.introContent}>
-          <header className={styles.introHeader}><div><span className={styles.introMark}><Sparkles size={17} /></span><b>Sizzle</b></div><span>Warm-ups for live 1:1 classes</span></header>
+          <header className={styles.introHeader}><div><span className={styles.introMark}><Sparkles size={17} /></span><b>Sizzle</b></div><span>Short thinking and speaking activities</span></header>
           <div className={styles.introHero}>
-            <p className={styles.kicker}>Before the lesson begins</p>
-            <h1>Start with a short activity that gets your student talking.</h1>
-            <p>Choose one, share your screen, and spend the first few minutes thinking out loud together.</p>
+            <p className={styles.kicker}>A few minutes, one prompt</p>
+            <h1>Small challenges for better thinking and speaking.</h1>
+            <p>Practise finding original ideas, making a clear case, improvising and reasoning out loud—together or on your own.</p>
+            <button className={styles.introPrimary} onClick={pickWarmup}>Pick a warm-up for me <ArrowRight size={16} /></button>
           </div>
           <div className={styles.introChoices}>
-            <span>Choose a starting point</span>
-            <div>{introActivities.map((choice) => { const activity = activities.find((item) => item.id === choice.id); return <button key={choice.id} onClick={() => startWith(choice.id)}><span>{activity.icon}</span><div><b>{activity.name}</b><small>{choice.note}</small></div><ArrowRight size={16} /></button>; })}</div>
+            <span>Warm-up activities</span>
+            <div>{introActivities.map((choice) => { const activity = activities.find((item) => item.id === choice.id); return <button key={choice.id} onClick={() => startWith(choice.id)}><span>{activity.icon}</span><div><b>{activity.name}</b><small>{choice.note}</small><em>{choice.skill}</em></div><ArrowRight size={16} /></button>; })}</div>
           </div>
         </div>
       </section>
@@ -508,7 +537,7 @@ export default function SizzlePage() {
             <button className={timer.mode === "stopwatch" ? styles.activeMode : ""} onClick={() => load("stopwatch", 120)} aria-label="Use stopwatch" data-tooltip="Stopwatch"><Clock3 size={16} /></button>
           </div>
           {timer.mode === "countdown" && <button className={styles.topNudge} onClick={() => timer.nudge(-30)}>−30</button>}
-          <button className={styles.topPlay} onClick={timer.toggle}>{timer.running ? <Pause size={17} fill="currentColor" /> : <Play size={17} fill="currentColor" />}<strong>{formatTime(timer.seconds)}</strong></button>
+          <button className={styles.topPlay} onClick={toggleTimer}>{timer.running ? <Pause size={17} fill="currentColor" /> : <Play size={17} fill="currentColor" />}<strong>{formatTime(timer.seconds)}</strong></button>
           {timer.mode === "countdown" && <button className={styles.topNudge} onClick={() => timer.nudge(30)}>+30</button>}
           {timer.dirty && <button className={styles.topReset} onClick={timer.reset} aria-label="Reset timer" data-tooltip="Reset"><RotateCcw size={16} /></button>}
         </div>

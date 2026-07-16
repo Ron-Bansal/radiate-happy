@@ -50,15 +50,16 @@
 .headerActions button { border: 1px solid rgba(255,255,255,.72); background: rgba(255,255,255,.52); height: 40px; border-radius: 999px; padding: 0 12px; cursor: pointer; display: flex; align-items: center; gap: 7px; box-shadow: 0 6px 24px rgba(48,42,68,.06); }
 .headerActions .surprise { padding: 0 16px; font-size: 13px; font-weight: 600; }
 
-.activityRail { max-width: 1120px; margin: 8px auto 0; padding: 8px 12px 10px; display: flex; align-items: stretch; justify-content: center; gap: 4px; position: relative; z-index: 4; overflow-x: auto; scrollbar-width: none; }
+.activityRail { max-width: 1030px; margin: 8px auto 0; padding: 8px 12px 10px; display: flex; align-items: stretch; justify-content: center; gap: 2px; position: relative; z-index: 4; overflow-x: auto; scrollbar-width: none; }
 .activityRail::-webkit-scrollbar { display: none; }
-.activityRail button { min-width: 128px; border: 1px solid rgba(81,31,47,.1); background: rgba(255,248,242,.22); padding: 8px; border-radius: 17px; cursor: pointer; display: grid; grid-template-columns: 34px 1fr; text-align: left; align-items: center; color: #341923; opacity: 1; transition: .18s ease; }
-.activityRail button:hover { color: #231017; background: rgba(255,248,242,.46); transform: translateY(-1px); }
-.activityRail button > span { grid-row: 1 / 3; width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; font-size: 16px; color: #5f293b; background: rgba(255,248,242,.42); border: 1px solid rgba(91,40,56,.12); }
-.activityRail small { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: #784452; }
-.activityRail b { font-size: 11px; white-space: nowrap; font-weight: 650; }
+.activityRail button { min-width: 104px; border: 0; background: transparent; padding: 9px 8px 11px; border-radius: 18px; cursor: pointer; display: grid; grid-template-columns: 23px 1fr; text-align: left; align-items: center; color: #fff8f2; opacity: .76; transition: .18s ease; }
+.activityRail button:hover { opacity: 1; color: white; background: rgba(255,248,242,.12); }
+.activityRail button > span { grid-row: 1 / 3; font-size: 19px; color: #fff8f2; }
+.activityRail small { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,248,242,.72); }
+.activityRail b { font-size: 11px; white-space: normal; line-height: 1.15; font-weight: 600; }
 .activityRail .activeActivity { opacity: 1; color: #341821; background: #fff8f2; box-shadow: 0 7px 26px rgba(61,20,35,.12), inset 0 0 0 1px rgba(255,255,255,.7); }
-.activityRail .activeActivity > span { color: white; background: var(--lime); border-color: transparent; box-shadow: 0 5px 13px rgba(116,28,61,.22); }
+.activityRail .activeActivity > span { color: #8d3658; }
+.activityRail .activeActivity small { color: #8b5a67; }
 
 .workspace { width: min(790px, calc(100% - 40px)); margin: 13px auto 60px; position: relative; z-index: 2; }
 .kicker { margin: 0 0 10px; text-transform: uppercase; letter-spacing: .13em; font-weight: 700; font-size: 11px; color: #8f525a; }
@@ -151,15 +152,18 @@
 .introHero { align-self: center; max-width: 760px; padding: 32px 0; }
 .introHero .kicker { color: #88405a; margin-bottom: 13px; }
 .introHero h1 { max-width: 720px; margin: 0; font-size: clamp(42px, 5.3vw, 68px); line-height: .99; letter-spacing: -.06em; font-weight: 580; text-wrap: balance; }
-.introHero > p:last-child { max-width: 530px; margin: 20px 0 0; color: #6d656b; font-size: 14px; line-height: 1.55; }
+.introHero > p:not(.kicker) { max-width: 530px; margin: 20px 0 0; color: #6d656b; font-size: 14px; line-height: 1.55; }
+.introHero .introPrimary { width: fit-content; margin-top: 22px; border: 0; border-radius: 999px; background: var(--ink); color: white; padding: 12px 15px 12px 18px; display: flex; align-items: center; gap: 18px; cursor: pointer; font-size: 12px; font-weight: 650; box-shadow: 0 11px 24px rgba(41,36,52,.16); transition: transform .18s ease, box-shadow .18s ease; }
+.introHero .introPrimary:hover { transform: translateY(-2px); box-shadow: 0 15px 28px rgba(41,36,52,.2); }
 .introChoices > span { display: block; margin-bottom: 10px; color: #8b5968; font-size: 10px; font-weight: 700; letter-spacing: .1em; text-transform: uppercase; }
 .introChoices > div { display: grid; grid-template-columns: repeat(4, 1fr); gap: 9px; }
-.introChoices button { min-width: 0; min-height: 92px; border: 1px solid #eadbdc; border-radius: 17px; background: #f8ece9; padding: 14px; display: grid; grid-template-columns: 28px 1fr 18px; align-items: center; gap: 10px; cursor: pointer; text-align: left; transition: transform .18s ease, background .18s ease, border-color .18s ease; }
+.introChoices button { min-width: 0; min-height: 112px; border: 1px solid #eadbdc; border-radius: 17px; background: #f8ece9; padding: 14px; display: grid; grid-template-columns: 28px 1fr 18px; align-items: center; gap: 10px; cursor: pointer; text-align: left; transition: transform .18s ease, background .18s ease, border-color .18s ease; }
 .introChoices button:hover { transform: translateY(-3px); background: #f4e2e3; border-color: #dfc5cc; }
 .introChoices button > span { width: 28px; height: 28px; display: grid; place-items: center; border-radius: 9px; background: #e8cbd5; color: #702d48; font-size: 16px; }
-.introChoices button > div { min-width: 0; display: flex; flex-direction: column; gap: 4px; }
-.introChoices button b { font-size: 13px; letter-spacing: -.02em; }
-.introChoices button small { color: #74696f; font-size: 10px; line-height: 1.3; }
+.introChoices button > div { min-width: 0; display: flex; flex-direction: column; align-items: flex-start; gap: 5px; }
+.introChoices button b { font-size: 14px; letter-spacing: -.02em; }
+.introChoices button small { color: #655c62; font-size: 11.5px; line-height: 1.35; }
+.introChoices button em { margin-top: 2px; padding: 4px 7px; border-radius: 999px; background: #ead3db; color: #71334b; font-size: 9px; line-height: 1; font-style: normal; font-weight: 700; letter-spacing: .025em; }
 .introChoices button > svg { color: #906779; transition: transform .18s ease; }
 .introChoices button:hover > svg { transform: translateX(2px); }
 
@@ -184,7 +188,7 @@
   .headerActions > button:first-child { display: none; }
   .headerActions .surprise { font-size: 0; width: 40px; padding: 0; justify-content: center; }
   .activityRail { margin-top: 0; scroll-snap-type: x proximity; }
-  .activityRail button { min-width: 138px; scroll-snap-align: start; }
+  .activityRail button { min-width: 126px; scroll-snap-align: start; }
   .workspace { margin-bottom: 104px; }
   .stage { height: 600px; min-height: 600px; border-radius: 25px; padding: 17px 16px 14px; }
   .stageLayers span { border-radius: 25px; }
@@ -209,7 +213,7 @@
   .introHero { padding: 44px 0 36px; }
   .introHero h1 { font-size: clamp(37px, 11vw, 51px); }
   .introChoices > div { grid-template-columns: 1fr; }
-  .introChoices button { min-height: 72px; }
+  .introChoices button { min-height: 92px; }
 }
 
 @media (prefers-reduced-motion: reduce) {

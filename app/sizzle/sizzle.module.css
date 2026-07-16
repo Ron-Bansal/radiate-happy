@@ -50,9 +50,9 @@
 .headerActions button { border: 1px solid rgba(255,255,255,.72); background: rgba(255,255,255,.52); height: 40px; border-radius: 999px; padding: 0 12px; cursor: pointer; display: flex; align-items: center; gap: 7px; box-shadow: 0 6px 24px rgba(48,42,68,.06); }
 .headerActions .surprise { padding: 0 16px; font-size: 13px; font-weight: 600; }
 
-.activityRail { max-width: 1030px; margin: 8px auto 0; padding: 8px 12px 10px; display: flex; align-items: stretch; justify-content: center; gap: 2px; position: relative; z-index: 4; overflow-x: auto; scrollbar-width: none; }
+.activityRail { max-width: 1120px; margin: 8px auto 0; padding: 8px 12px 10px; display: flex; align-items: stretch; justify-content: center; gap: 4px; position: relative; z-index: 4; overflow-x: auto; scrollbar-width: none; }
 .activityRail::-webkit-scrollbar { display: none; }
-.activityRail button { min-width: 104px; border: 0; background: transparent; padding: 9px 8px 11px; border-radius: 18px; cursor: pointer; display: grid; grid-template-columns: 23px 1fr; text-align: left; align-items: center; color: #fff8f2; opacity: .76; transition: .18s ease; }
+.activityRail button { min-width: 118px; border: 0; background: transparent; padding: 9px 13px 11px; border-radius: 18px; cursor: pointer; display: grid; grid-template-columns: 23px 1fr; text-align: left; align-items: center; color: #fff8f2; opacity: .76; transition: .18s ease; }
 .activityRail button:hover { opacity: 1; color: white; background: rgba(255,248,242,.12); }
 .activityRail button > span { grid-row: 1 / 3; font-size: 19px; color: #fff8f2; }
 .activityRail small { font-size: 10px; letter-spacing: .1em; text-transform: uppercase; color: rgba(255,248,242,.72); }
@@ -78,6 +78,8 @@
 .stageTitleRow { display: flex; align-items: center; gap: 4px; }
 .instructionToggle { width: 22px; height: 22px; padding: 0; border: 0; border-radius: 999px; background: transparent; color: #875d69; display: grid; place-items: center; cursor: pointer; }
 .instructionToggle:hover { background: #eee0e4; color: #5e263b; }
+.instructionHide { margin-left: 1px; padding: 3px 0; border: 0; background: transparent; color: #8c6872; cursor: pointer; font-size: 9px; }
+.instructionHide:hover { color: #5e263b; }
 .cardActions { display: flex; gap: 5px; }
 .cardActions button { height: 34px; border: 1px solid rgba(49,43,58,.09); border-radius: 999px; background: rgba(255,255,255,.6); padding: 0 10px; display: flex; align-items: center; gap: 5px; cursor: pointer; font-size: 10px; color: #68616e; }
 .cardActions button:disabled { opacity: .28; cursor: default; }
@@ -85,7 +87,6 @@
 .instructions > div { display: flex; align-items: center; justify-content: flex-start; gap: 9px; margin-bottom: 5px; }
 .instructions > div > span { color: #a04a42; font-size: 10px; font-weight: 700; text-transform: uppercase; letter-spacing: .09em; }
 .instructions p { margin: 0; color: #6d5a5e; font-size: 12px; line-height: 1.46; max-width: 610px; }
-.instructions button { flex: none; border: 0; background: transparent; display: flex; gap: 4px; align-items: center; cursor: pointer; color: #916b70; font-size: 10px; }
 .cardSettings { margin-top: 10px; display: flex; justify-content: flex-end; align-items: center; gap: 8px; }
 .cardSettings > span { text-transform: uppercase; letter-spacing: .1em; color: #8f636a; font-size: 10px; }
 .cardSettings > div { display: flex; padding: 2px; border-radius: 10px; background: #f0d3c8; }
@@ -114,10 +115,13 @@
 .pitchDivider { display: flex; align-items: center; gap: 12px; color: #8f525a; margin: 15px 0 6px; font-size: 11px; font-weight: 700; text-transform: uppercase; letter-spacing: .12em; }
 .pitchDivider::before, .pitchDivider::after { content: ""; display: block; height: 1px; flex: 1; background: rgba(104,55,66,.14); }
 .pitchPrompt h2 { margin: 0; font-size: clamp(27px, 3.2vw, 44px); line-height: 1.08; letter-spacing: -.045em; font-weight: 540; color: #625d6a; }
-.revealStack { margin-top: 17px; height: 146px; min-height: 146px; overflow-y: auto; display: flex; flex-direction: column; justify-content: flex-start; gap: 7px; }
-.revealStack p { display: grid; grid-template-columns: 60px 1fr; margin: 0; padding: 8px 11px; border-radius: 10px; background: rgba(255,255,255,.45); font-size: 12px; }
+.revealStack { margin-top: 17px; height: 146px; min-height: 146px; overflow-y: scroll; scrollbar-gutter: stable; scrollbar-width: thin; scrollbar-color: #c9aab4 transparent; display: flex; flex-direction: column; justify-content: flex-start; gap: 5px; padding-right: 5px; }
+.revealStack::-webkit-scrollbar { width: 6px; }
+.revealStack::-webkit-scrollbar-track { background: rgba(92,53,65,.05); border-radius: 999px; }
+.revealStack::-webkit-scrollbar-thumb { background: #c9aab4; border-radius: 999px; }
+.revealStack p { display: grid; grid-template-columns: 52px 1fr; margin: 0; padding: 6px 9px; border-radius: 9px; background: rgba(255,255,255,.52); border: 1px solid rgba(102,65,76,.07); font-size: 11px; line-height: 1.3; }
 .revealStack p span, .answer span { text-transform: uppercase; letter-spacing: .08em; font-size: 9px; font-weight: 700; color: #8a5660; }
-.answer { padding: 13px 15px; border-radius: 13px; background: var(--lime); display: flex; flex-direction: column; gap: 4px; font-size: 13px; }
+.answer { flex: none; padding: 10px 12px; border-radius: 11px; background: #f3e4e8; border: 1px solid #e5ccd4; border-left: 3px solid var(--lime); display: grid; grid-template-columns: 52px 1fr; align-items: start; gap: 0; color: #3f3438; font-size: 12px; line-height: 1.4; }
 .revealActions { display: flex; gap: 8px; margin-top: 14px; }
 .revealActions button { border: 1px solid rgba(44,39,52,.12); background: rgba(255,255,255,.6); padding: 9px 13px; border-radius: 999px; font-size: 10px; cursor: pointer; }
 .revealActions button:last-child { background: var(--ink); color: white; }
@@ -133,7 +137,8 @@
 .caseReveal > p { margin: 0; color: #625c68; font-size: 12px; line-height: 1.42; }
 .caseReveal .casePlaceholder { color: #99919c; max-width: 410px; }
 .caseRevealVisible { justify-content: flex-start; }
-.lesson { margin-top: 9px; background: var(--lime); border-radius: 11px; padding: 9px 11px; display: flex; align-items: flex-start; gap: 8px; font-size: 10px; }
+.lesson { margin-top: 9px; background: #f3e4e8; border: 1px solid #e5ccd4; border-left: 3px solid var(--lime); color: #463a3f; border-radius: 11px; padding: 9px 11px; display: flex; align-items: flex-start; gap: 8px; font-size: 10px; }
+.lesson > svg { color: #91415f; flex: none; }
 .lesson span { display: flex; flex-direction: column; gap: 2px; line-height: 1.4; }
 .lesson b { text-transform: uppercase; font-size: 9px; letter-spacing: .1em; }
 

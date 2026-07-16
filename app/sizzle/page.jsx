@@ -17,7 +17,6 @@ import {
   Timer,
   Volume2,
   VolumeX,
-  X,
 } from "lucide-react";
 import styles from "./sizzle.module.css";
 
@@ -35,10 +34,10 @@ const activities = [
 ];
 
 const introActivities = [
-  { id: "spark", note: "Find more than one useful answer", skill: "Idea fluency" },
-  { id: "hot-take", note: "Build a case, then challenge it", skill: "Argument building" },
-  { id: "word-web", note: "Connect five unrelated words out loud", skill: "Verbal flexibility" },
-  { id: "box", note: "Solve a real problem from a new angle", skill: "Lateral problem-solving" },
+  { id: "spark", note: "Find more than one useful answer", skill: "More ways to think" },
+  { id: "hot-take", note: "Build a case, then challenge it", skill: "Make your point" },
+  { id: "word-web", note: "Connect five unrelated words out loud", skill: "Keep ideas connected" },
+  { id: "box", note: "Solve a real problem from a new angle", skill: "Try another angle" },
 ];
 
 const sparks = [
@@ -286,6 +285,7 @@ function ActivityBody({ id, heat, seed }) {
   const [usedWords, setUsedWords] = useState([]);
   const [productNonce, setProductNonce] = useState(0);
   const [buyerNonce, setBuyerNonce] = useState(0);
+  const answerRef = useRef(null);
 
   useEffect(() => {
     setPhase(0);
@@ -294,6 +294,14 @@ function ActivityBody({ id, heat, seed }) {
     setProductNonce(0);
     setBuyerNonce(0);
   }, [id, heat, seed]);
+
+  useEffect(() => {
+    if (id !== "riddle" || phase !== 1) return undefined;
+    const frame = window.requestAnimationFrame(() => {
+      answerRef.current?.scrollIntoView({ behavior: "smooth", block: "nearest" });
+    });
+    return () => window.cancelAnimationFrame(frame);
+  }, [id, phase]);
 
   const content = useMemo(() => {
     let value;
@@ -371,7 +379,7 @@ function ActivityBody({ id, heat, seed }) {
       <TextPrompt kicker="Think out loud" note="Name what you notice, what you assume and what you can rule out.">{content.text}</TextPrompt>
       <div className={styles.revealStack} aria-live="polite">
         {content.hints.slice(0, hintCount).map((hint, index) => <p key={hint}><span>Hint {index + 1}</span>{hint}</p>)}
-        {phase === 1 && <div className={styles.answer}><span>Answer</span>{content.answer}</div>}
+        {phase === 1 && <div ref={answerRef} className={styles.answer}><span>Answer</span><div>{content.answer}</div></div>}
       </div>
       <div className={styles.revealActions}>
         <button disabled={hintCount === 3 || phase === 1} onClick={() => setHintCount((count) => Math.min(3, count + 1))}>Hint · {3 - hintCount} left</button>
@@ -556,13 +564,13 @@ export default function SizzlePage() {
           <div className={styles.stageLayers} aria-hidden="true"><span /><span /></div>
           <article className={styles.stage} key={`${activeId}-${seed}`}>
             <div className={styles.stageTop}>
-              <div className={styles.stageIdentity}><span>{active.icon}</span><div><small>{active.no} · {active.tone}</small><div className={styles.stageTitleRow}><h2>{active.name}</h2><button className={styles.instructionToggle} onClick={() => setInstructionsVisible((visible) => !visible)} aria-label={instructionsVisible ? "Hide instructions" : "Show instructions"} aria-pressed={instructionsVisible}><CircleHelp size={13} /></button></div></div></div>
+              <div className={styles.stageIdentity}><span>{active.icon}</span><div><small>{active.no} · {active.tone}</small><div className={styles.stageTitleRow}><h2>{active.name}</h2><button className={styles.instructionToggle} onClick={() => setInstructionsVisible((visible) => !visible)} aria-label={instructionsVisible ? "Hide instructions" : "Show instructions"} aria-pressed={instructionsVisible}><CircleHelp size={13} /></button>{instructionsVisible && <button className={styles.instructionHide} onClick={() => setInstructionsVisible(false)}>Hide instructions</button>}</div></div></div>
               <div className={styles.cardActions}>
                 <button onClick={goBack} disabled={!history.length} aria-label="Previous prompt" title="Previous prompt"><ArrowLeft size={18} /><span>Back</span></button>
                 <button onClick={reroll} aria-label="New prompt" title="New prompt"><RefreshCw size={18} /><span>New</span></button>
               </div>
             </div>
-            {instructionsVisible && <div className={styles.instructions}><div><span>How to play</span><button onClick={() => setInstructionsVisible(false)} aria-label="Hide instructions"><X size={13} /> Hide instructions</button></div><p>{active.blurb}</p></div>}
+            {instructionsVisible && <div className={styles.instructions}><div><span>How to play</span></div><p>{active.blurb}</p></div>}
             <div className={styles.cardSettings}>
               <span>Difficulty</span>
               <div>{["easy", "med", "spicy"].map((level) => <button key={level} className={heat === level ? styles.activeHeat : ""} onClick={() => { rememberCurrent(); setHeat(level); setSeed((value) => value + 1); reset(); }}>{level}</button>)}</div>

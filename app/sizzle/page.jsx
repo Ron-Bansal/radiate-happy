@@ -7,14 +7,14 @@ import {
   Check,
   CircleHelp,
   Clock3,
-  Flame,
   Lightbulb,
   Pause,
   Play,
   RefreshCw,
+  RotateCcw,
   Shuffle,
   Sparkles,
-  TimerReset,
+  Timer,
   Volume2,
   VolumeX,
   X,
@@ -24,14 +24,21 @@ import styles from "./sizzle.module.css";
 const heatRank = { easy: 1, med: 2, spicy: 3 };
 
 const activities = [
-  { id: "spark", no: "01", name: "Spark", icon: "✦", tone: "Think wider", blurb: "Start with your honest answer, then keep going. The interesting bit usually arrives after the obvious answer." },
-  { id: "hot-take", no: "02", name: "Hot Take", icon: "◐", tone: "Build a case", blurb: "Defend the claim with three genuinely different reasons. Halfway through, swap sides and challenge your own argument." },
-  { id: "of-course", no: "03", name: "Ah, Of Course", icon: "◎", tone: "Improvise", blurb: "Open with “Ah, of course…” and teach this topic with total confidence. Examples and invented evidence are encouraged." },
-  { id: "word-web", no: "04", name: "Word Web", icon: "⌘", tone: "Connect ideas", blurb: "Give one flowing talk that connects all five words. Tap each word when you use it, but don’t start a sentence with one." },
-  { id: "pitch", no: "05", name: "The Pitch", icon: "◇", tone: "Persuade", blurb: "Work out what this buyer really cares about, turn the product’s weakness into a strength, and finish with a price." },
-  { id: "wrong", no: "06", name: "Wrong Answers", icon: "↯", tone: "Reframe", blurb: "Generate deliberately terrible solutions first. Then choose the most interesting one and rescue the useful idea inside it." },
-  { id: "riddle", no: "07", name: "Riddle Room", icon: "?", tone: "Reason aloud", blurb: "Say what you notice, what you’re assuming and what you can rule out. A clear wrong path is still useful progress." },
-  { id: "box", no: "08", name: "Out of the Box", icon: "□", tone: "Solve sideways", blurb: "Read the real-world case, name the problem beneath the complaint, then offer one sensible fix and one sideways fix." },
+  { id: "spark", no: "01", name: "Spark", icon: "✦", tone: "Think wider", blurb: "Give your first answer, then look for a second one that’s less obvious. Follow whichever idea feels most interesting." },
+  { id: "hot-take", no: "02", name: "Hot Take", icon: "◐", tone: "Build a case", blurb: "Make three different arguments for the claim. Then swap sides and see how well you can challenge your own case." },
+  { id: "of-course", no: "03", name: "Ah, Of Course", icon: "◎", tone: "Improvise", blurb: "Start with “Ah, of course…” and explain the topic as if you know it inside out. Make up examples when you need them." },
+  { id: "word-web", no: "04", name: "Word Web", icon: "⌘", tone: "Connect ideas", blurb: "Work all five words into one flowing talk. Tap each word when you use it, but don’t use one to start a sentence." },
+  { id: "pitch", no: "05", name: "The Pitch", icon: "◇", tone: "Persuade", blurb: "Figure out what this buyer cares about, make the product feel useful to them, and finish by naming your price." },
+  { id: "wrong", no: "06", name: "Wrong Answers", icon: "↯", tone: "Reframe", blurb: "Come up with the worst solutions you can. Pick the most interesting bad idea and turn one part of it into something useful." },
+  { id: "riddle", no: "07", name: "Riddle Room", icon: "?", tone: "Reason aloud", blurb: "Talk through what you notice, what you’re assuming, and what you can rule out. The reasoning matters more than a quick answer." },
+  { id: "box", no: "08", name: "Out of the Box", icon: "□", tone: "Solve sideways", blurb: "Read the case, decide what the real problem is, then suggest one practical fix and one unusual one." },
+];
+
+const introActivities = [
+  { id: "spark", note: "An open question to ease into conversation" },
+  { id: "hot-take", note: "A quick argument that builds speaking confidence" },
+  { id: "word-web", note: "A five-word challenge for connected thinking" },
+  { id: "box", note: "A real case for practical, lateral problem-solving" },
 ];
 
 const sparks = [
@@ -95,11 +102,19 @@ const words = {
   spicy: ["nostalgia", "contradiction", "bias", "ritual", "scarcity", "trust", "identity", "uncertainty", "status", "patience", "legacy", "coincidence", "ambition", "context", "tension", "belonging"],
 };
 
-const pitchObjects = ["a blunt pencil", "a cracked mug", "one left glove", "an empty notebook", "a noisy chair", "a paper clip", "last year’s calendar", "a tiny umbrella", "a button with no shirt", "a slow toaster", "a map of nowhere", "a brick", "a half-used eraser", "a doorstop", "an unplugged lamp", "a very average stick"];
+const pitchObjects = [
+  "a reusable bottle with a stubborn lid", "a notebook missing its last ten pages", "a desk lamp that is slightly too bright",
+  "a travel pillow that takes up half your bag", "a tiny whiteboard", "an analogue alarm clock", "an umbrella made for one person",
+  "a single oven mitt", "a tote bag with very short handles", "a surprisingly heavy keyring", "a folding chair with no cup holder",
+  "a plain cardboard box", "a phone stand that only works sideways", "a mug that keeps drinks warm for twenty minutes", "a pocket-sized tape measure",
+  "a basic kitchen timer", "a raincoat with no pockets", "a set of blank postcards", "a small desk fan", "a clipboard with a weak clip",
+  "a compact mirror", "a roll of masking tape", "a magnetic shopping list", "a manual pencil sharpener", "a cushion that is a little too firm",
+  "a plain canvas apron", "a luggage tag with oversized lettering", "a rechargeable reading light", "a weekly paper planner", "a stackable lunch container",
+];
 const buyers = {
-  easy: ["your best friend", "a busy teacher", "your grandparent", "a lost tourist", "the local café owner"],
-  med: ["an astronaut packing light", "a billionaire who owns everything", "a museum curator", "the world’s most impatient person", "a medieval king"],
-  spicy: ["a goldfish with a credit card", "a ghost who hates clutter", "a robot with no hands", "a time traveller leaving in ten seconds", "a penguin opening a beach resort"],
+  easy: ["a friend moving into their first flat", "a parent who hates clutter", "a teacher planning a field trip", "a café owner", "a daily train commuter", "someone working from home", "a student starting university", "a family packing for a road trip", "a neighbour organising a garage sale", "a traveller with one small bag"],
+  med: ["a startup founder cutting costs", "a boutique hotel manager", "a large event organiser", "a museum gift-shop buyer", "an airline cabin-crew manager", "a university librarian", "a restaurant owner redesigning their tables", "a school principal with a tight budget", "a productivity-app founder", "a buyer for an outdoor retailer"],
+  spicy: ["an Antarctic research team", "a film-set prop master", "a disaster-relief coordinator", "a mayor running for re-election", "a luxury-brand creative director", "a crew preparing for a year in space", "a hospital operations manager", "the producer of a live television show", "a national park ranger", "an architect designing a micro-apartment"],
 };
 
 const problems = [
@@ -159,7 +174,8 @@ function hashNumber(value) {
 function pick(items, heat, seed, salt = "") {
   const exact = items.filter((item) => item.h === heat);
   const pool = exact.length ? exact : items.filter((item) => heatRank[item.h] <= heatRank[heat]);
-  return pool[hashNumber(`${seed}-${salt}-${heat}`) % pool.length];
+  const start = hashNumber(`${salt}-${heat}`) % pool.length;
+  return pool[(start + seed) % pool.length];
 }
 
 function shuffled(list, seed = 1) {
@@ -250,7 +266,8 @@ function useTimer(initialMode, initialSeconds) {
   }, [duration, mode, running]);
 
   const swapMode = useCallback(() => load(mode === "countdown" ? "stopwatch" : "countdown", duration), [duration, load, mode]);
-  return { mode, duration, seconds, running, finished, load, reset, toggle, nudge, swapMode };
+  const dirty = running || (mode === "countdown" ? Math.abs(seconds - duration) > 0.5 : seconds > 0.5);
+  return { mode, duration, seconds, running, finished, dirty, load, reset, toggle, nudge, swapMode };
 }
 
 function TextPrompt({ kicker, children, note }) {
@@ -267,11 +284,15 @@ function ActivityBody({ id, heat, seed }) {
   const [phase, setPhase] = useState(0);
   const [hintCount, setHintCount] = useState(0);
   const [usedWords, setUsedWords] = useState([]);
+  const [productNonce, setProductNonce] = useState(0);
+  const [buyerNonce, setBuyerNonce] = useState(0);
 
   useEffect(() => {
     setPhase(0);
     setHintCount(0);
     setUsedWords([]);
+    setProductNonce(0);
+    setBuyerNonce(0);
   }, [id, heat, seed]);
 
   const content = useMemo(() => {
@@ -294,10 +315,10 @@ function ActivityBody({ id, heat, seed }) {
 
   const pitch = useMemo(() => {
     return id === "pitch" ? {
-      object: pitchObjects[hashNumber(`${seed}-object`) % pitchObjects.length],
-      buyer: buyers[heat][hashNumber(`${seed}-buyer-${heat}`) % buyers[heat].length],
+      object: pitchObjects[(hashNumber(`${seed}-object`) + productNonce) % pitchObjects.length],
+      buyer: buyers[heat][(hashNumber(`${seed}-buyer-${heat}`) + buyerNonce) % buyers[heat].length],
     } : null;
-  }, [heat, id, seed]);
+  }, [buyerNonce, heat, id, productNonce, seed]);
 
   if (id === "spark") return <TextPrompt kicker="Follow the interesting thread" note="Answer once. Then ask: what else might be true?">{content.text}</TextPrompt>;
 
@@ -328,9 +349,12 @@ function ActivityBody({ id, heat, seed }) {
 
   if (id === "pitch") return (
     <div className={styles.pitchPrompt}>
-      <p className={styles.kicker}>Your product</p><h1>{pitch.object}</h1>
+      <p className={styles.kicker}>Your product</p>
+      <h1>{pitch.object}</h1>
+      <button className={styles.pitchReroll} onClick={() => setProductNonce((value) => value + 1)}><RefreshCw size={13} /> New product</button>
       <div className={styles.pitchDivider}><span>sell it to</span></div>
       <h2>{pitch.buyer}</h2>
+      <button className={styles.pitchReroll} onClick={() => setBuyerNonce((value) => value + 1)}><RefreshCw size={13} /> New buyer</button>
       <p className={styles.coachNote}>Find their real need. Turn the flaw into a feature. Name your price at the end.</p>
     </div>
   );
@@ -444,21 +468,32 @@ export default function SizzlePage() {
     openActivity(options[Math.floor(Math.random() * options.length)]);
   };
 
+  const startWith = (activityId) => {
+    setActiveId(activityId);
+    setSeed((value) => value + 1);
+    setHistory([]);
+    load("countdown", 120);
+    setIntro(false);
+  };
+
   if (intro) return (
     <main className={styles.intro}>
       <div className={styles.ambientOne} /><div className={styles.ambientTwo} />
-      <nav className={styles.introNav}><a href="/">Ron / C3</a><span>Creative warm-ups</span></nav>
       <section className={styles.introCard}>
         <div className={styles.cardLayers} aria-hidden="true"><span /><span /></div>
         <div className={styles.introContent}>
-          <div className={styles.introMark}><Flame size={22} fill="currentColor" /></div>
-          <p className={styles.kicker}>A small ritual for better starts</p>
-          <h1>Get the room<br />thinking out loud.</h1>
-          <p>Eight playful speaking challenges for the first few minutes of a live class. Pick one, share your screen and go.</p>
-          <button onClick={() => setIntro(false)}>Start a warm-up <ArrowRight size={18} /></button>
+          <header className={styles.introHeader}><div><span className={styles.introMark}><Sparkles size={17} /></span><b>Sizzle</b></div><span>Warm-ups for live 1:1 classes</span></header>
+          <div className={styles.introHero}>
+            <p className={styles.kicker}>Before the lesson begins</p>
+            <h1>Start with a short activity that gets your student talking.</h1>
+            <p>Choose one, share your screen, and spend the first few minutes thinking out loud together.</p>
+          </div>
+          <div className={styles.introChoices}>
+            <span>Choose a starting point</span>
+            <div>{introActivities.map((choice) => { const activity = activities.find((item) => item.id === choice.id); return <button key={choice.id} onClick={() => startWith(choice.id)}><span>{activity.icon}</span><div><b>{activity.name}</b><small>{choice.note}</small></div><ArrowRight size={16} /></button>; })}</div>
+          </div>
         </div>
       </section>
-      <div className={styles.introFoot}><span>3–8 minute activities</span><span>No prep needed</span><span>Built for screen sharing</span></div>
     </main>
   );
 
@@ -466,13 +501,16 @@ export default function SizzlePage() {
     <main className={`${styles.app} ${timer.finished ? styles.finished : ""}`}>
       <div className={styles.ambientOne} /><div className={styles.ambientTwo} />
       <header className={styles.header}>
-        <button className={styles.wordmark} onClick={() => setIntro(true)}><span><Flame size={16} fill="currentColor" /></span>Sizzle</button>
+        <button className={styles.wordmark} onClick={() => setIntro(true)}><span><Sparkles size={15} /></span>Sizzle</button>
         <div className={styles.topTimer}>
-          <button className={styles.modeButton} onClick={timer.swapMode} aria-label={timer.mode === "countdown" ? "Switch to stopwatch" : "Switch to two minute countdown"} title={timer.mode === "countdown" ? "Switch to stopwatch" : "Switch to countdown"}><Clock3 size={17} /><span>{timer.mode === "countdown" ? "Timer" : "Stopwatch"}</span></button>
+          <div className={styles.modeSwitch} role="group" aria-label="Timer mode">
+            <button className={timer.mode === "countdown" ? styles.activeMode : ""} onClick={() => load("countdown", 120)} aria-label="Use two minute timer" data-tooltip="2 minute timer"><Timer size={16} /></button>
+            <button className={timer.mode === "stopwatch" ? styles.activeMode : ""} onClick={() => load("stopwatch", 120)} aria-label="Use stopwatch" data-tooltip="Stopwatch"><Clock3 size={16} /></button>
+          </div>
           {timer.mode === "countdown" && <button className={styles.topNudge} onClick={() => timer.nudge(-30)}>−30</button>}
           <button className={styles.topPlay} onClick={timer.toggle}>{timer.running ? <Pause size={17} fill="currentColor" /> : <Play size={17} fill="currentColor" />}<strong>{formatTime(timer.seconds)}</strong></button>
           {timer.mode === "countdown" && <button className={styles.topNudge} onClick={() => timer.nudge(30)}>+30</button>}
-          <button className={styles.topReset} onClick={timer.reset} aria-label="Reset timer"><TimerReset size={17} /></button>
+          {timer.dirty && <button className={styles.topReset} onClick={timer.reset} aria-label="Reset timer" data-tooltip="Reset"><RotateCcw size={16} /></button>}
         </div>
         <div className={styles.headerActions}>
           <button onClick={() => setSound((value) => !value)} aria-label={sound ? "Mute timer chime" : "Unmute timer chime"}>{sound ? <Volume2 size={18} /> : <VolumeX size={18} />}</button>
@@ -489,14 +527,13 @@ export default function SizzlePage() {
           <div className={styles.stageLayers} aria-hidden="true"><span /><span /></div>
           <article className={styles.stage} key={`${activeId}-${seed}`}>
             <div className={styles.stageTop}>
-              <div className={styles.stageIdentity}><span>{active.icon}</span><div><small>{active.no} · {active.tone}</small><h2>{active.name}</h2></div></div>
+              <div className={styles.stageIdentity}><span>{active.icon}</span><div><small>{active.no} · {active.tone}</small><div className={styles.stageTitleRow}><h2>{active.name}</h2><button className={styles.instructionToggle} onClick={() => setInstructionsVisible((visible) => !visible)} aria-label={instructionsVisible ? "Hide instructions" : "Show instructions"} aria-pressed={instructionsVisible}><CircleHelp size={13} /></button></div></div></div>
               <div className={styles.cardActions}>
-                {!instructionsVisible && <button onClick={() => setInstructionsVisible(true)} aria-label="Show instructions" title="Show instructions"><CircleHelp size={18} /></button>}
                 <button onClick={goBack} disabled={!history.length} aria-label="Previous prompt" title="Previous prompt"><ArrowLeft size={18} /><span>Back</span></button>
                 <button onClick={reroll} aria-label="New prompt" title="New prompt"><RefreshCw size={18} /><span>New</span></button>
               </div>
             </div>
-            {instructionsVisible && <div className={styles.instructions}><p>{active.blurb}</p><button onClick={() => setInstructionsVisible(false)} aria-label="Hide instructions"><X size={14} /> Hide</button></div>}
+            {instructionsVisible && <div className={styles.instructions}><div><span>How to play</span><button onClick={() => setInstructionsVisible(false)} aria-label="Hide instructions"><X size={13} /> Hide instructions</button></div><p>{active.blurb}</p></div>}
             <div className={styles.cardSettings}>
               <span>Difficulty</span>
               <div>{["easy", "med", "spicy"].map((level) => <button key={level} className={heat === level ? styles.activeHeat : ""} onClick={() => { rememberCurrent(); setHeat(level); setSeed((value) => value + 1); reset(); }}>{level}</button>)}</div>

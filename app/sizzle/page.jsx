@@ -22,6 +22,7 @@ import {
 import styles from "./sizzle.module.css";
 
 const heatRank = { easy: 1, med: 2, spicy: 3 };
+const heatLabels = { easy: "Light", med: "Stretch", spicy: "Spicy" };
 
 const activities = [
   { id: "spark", no: "01", name: "Spark", icon: "✦", tone: "Think wider", blurb: "Give your first answer, then look for a second one that’s less obvious. Follow whichever idea feels most interesting." },
@@ -454,6 +455,7 @@ export default function SizzlePage() {
   const [history, setHistory] = useState([]);
   const preferencesRef = useRef(null);
   const active = activities.find((activity) => activity.id === activeId);
+  const cardHeat = heat === "all" ? ["easy", "med", "spicy"][hashNumber(`${activeId}-${seed}-heat`) % 3] : heat;
   const timer = useTimer("countdown", 120);
   const { load, reset, toggle } = timer;
 
@@ -588,7 +590,7 @@ export default function SizzlePage() {
           {preferencesOpen && <div className={styles.preferencesMenu} role="dialog" aria-label="Preferences">
             <div className={styles.preferencesHeading}><div><small>Preferences</small><b>Session settings</b></div><SlidersHorizontal size={16} /></div>
             <button className={styles.soundSetting} onClick={() => setSound((value) => !value)}><span>{sound ? <Volume2 size={16} /> : <VolumeX size={16} />}<span><b>Sound</b><small>Timer cues and finish chime</small></span></span><i className={sound ? styles.switchOn : ""} aria-hidden="true"><span /></i></button>
-            <div className={styles.difficultySetting}><span><b>Difficulty</b><small>Controls the prompt pool</small></span><div>{[["all", "All"], ["easy", "Easy"], ["med", "Medium"], ["spicy", "Spicy"]].map(([value, label]) => <button key={value} className={heat === value ? styles.preferenceSelected : ""} onClick={() => changeDifficulty(value)}>{label}</button>)}</div></div>
+            <div className={styles.difficultySetting}><span><b>Prompt range</b><small>Choose how far the prompts should push</small></span><div>{[["all", "Mixed"], ["easy", "Light"], ["med", "Stretch"], ["spicy", "Spicy"]].map(([value, label]) => <button key={value} className={heat === value ? styles.preferenceSelected : ""} onClick={() => changeDifficulty(value)}>{label}</button>)}</div></div>
             <div className={styles.shortcutSetting}><span>Keyboard shortcuts</span><p><kbd>Space</kbd><span>Start or pause timer</span></p><p><kbd>R</kbd><span>New prompt</span></p></div>
           </div>}
         </div>
@@ -603,15 +605,15 @@ export default function SizzlePage() {
           <div className={styles.stageLayers} key={`layers-${activeId}-${seed}`} aria-hidden="true"><span /><span /></div>
           <article className={styles.stage} key={`${activeId}-${seed}`}>
             <div className={styles.stageTop}>
-              <div className={styles.stageIdentity}><span>{active.icon}</span><div><small>{active.no} · {active.tone}</small><div className={styles.stageTitleRow}><h2>{active.name}</h2><button className={styles.instructionToggle} onClick={() => setInstructionsVisible((visible) => !visible)} aria-label={instructionsVisible ? "Hide instructions" : "Show instructions"} aria-pressed={instructionsVisible}><CircleHelp size={13} /></button>{instructionsVisible && <button className={styles.instructionHide} onClick={() => setInstructionsVisible(false)}>Hide instructions</button>}</div></div></div>
+              <div className={styles.stageIdentity}><span>{active.icon}</span><div><small>{active.no} · {active.tone}</small><div className={styles.stageTitleRow}><h2>{active.name}</h2><button className={styles.instructionToggle} onClick={() => setInstructionsVisible((visible) => !visible)} aria-label={instructionsVisible ? "Hide instructions" : "Show instructions"} aria-pressed={instructionsVisible}><CircleHelp size={13} /></button><button className={`${styles.instructionHide} ${!instructionsVisible ? styles.instructionHideInvisible : ""}`} onClick={() => setInstructionsVisible(false)} tabIndex={instructionsVisible ? 0 : -1}>Hide instructions</button></div></div></div>
               <div className={styles.cardActions}>
                 <button onClick={goBack} disabled={!history.length} aria-label="Previous prompt" title="Previous prompt"><ArrowLeft size={18} /><span>Back</span></button>
                 <button onClick={reroll} aria-label="New prompt" title="New prompt"><RefreshCw size={18} /><span>New</span></button>
               </div>
             </div>
-            {instructionsVisible && <div className={styles.instructions}><div><span>How to play</span></div><p>{active.blurb}</p></div>}
-            <div className={styles.activityBody}><ActivityBody id={activeId} heat={heat} seed={seed} /></div>
-            <div className={styles.stageFooter}><span>{heat === "all" ? "all difficulties" : `${heat} mode`}</span><span>space · timer</span><span>r · new prompt</span></div>
+            <div className={`${styles.instructions} ${!instructionsVisible ? styles.instructionsHidden : ""}`} aria-hidden={!instructionsVisible}><p>{active.blurb}</p></div>
+            <div className={styles.activityBody}><ActivityBody id={activeId} heat={cardHeat} seed={seed} /></div>
+            <div className={styles.stageFooter}><span>{heatLabels[cardHeat]} prompt</span><span>{active.tone}</span></div>
           </article>
         </div>
       </section>

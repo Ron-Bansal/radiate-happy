@@ -13,6 +13,7 @@ import {
   RefreshCw,
   RotateCcw,
   Shuffle,
+  SlidersHorizontal,
   Sparkles,
   Timer,
   Volume2,
@@ -171,6 +172,10 @@ function hashNumber(value) {
 }
 
 function pick(items, heat, seed, salt = "") {
+  if (heat === "all") {
+    const start = hashNumber(`${salt}-all`) % items.length;
+    return items[(start + seed) % items.length];
+  }
   const exact = items.filter((item) => item.h === heat);
   const pool = exact.length ? exact : items.filter((item) => heatRank[item.h] <= heatRank[heat]);
   const start = hashNumber(`${salt}-${heat}`) % pool.length;
@@ -316,15 +321,17 @@ function ActivityBody({ id, heat, seed }) {
 
   const webWords = useMemo(() => {
     if (id !== "word-web") return [];
+    if (heat === "all") return shuffled([...words.easy, ...words.med, ...words.spicy], seed).slice(0, 5);
     if (heat === "easy") return shuffled(words.easy, seed).slice(0, 5);
     if (heat === "med") return shuffled([...words.easy, ...words.med], seed).slice(0, 5);
     return [...shuffled(words.med, `${seed}-a`).slice(0, 2), ...shuffled(words.spicy, `${seed}-b`).slice(0, 3)];
   }, [heat, id, seed]);
 
   const pitch = useMemo(() => {
+    const buyerPool = heat === "all" ? Object.values(buyers).flat() : buyers[heat];
     return id === "pitch" ? {
       object: pitchObjects[(hashNumber(`${seed}-object`) + productNonce) % pitchObjects.length],
-      buyer: buyers[heat][(hashNumber(`${seed}-buyer-${heat}`) + buyerNonce) % buyers[heat].length],
+      buyer: buyerPool[(hashNumber(`${seed}-buyer-${heat}`) + buyerNonce) % buyerPool.length],
     } : null;
   }, [buyerNonce, heat, id, productNonce, seed]);
 
@@ -438,12 +445,14 @@ function playStartSound() {
 
 export default function SizzlePage() {
   const [activeId, setActiveId] = useState("spark");
-  const [heat, setHeat] = useState("med");
+  const [heat, setHeat] = useState("all");
   const [seed, setSeed] = useState(1);
   const [sound, setSound] = useState(true);
+  const [preferencesOpen, setPreferencesOpen] = useState(false);
   const [intro, setIntro] = useState(true);
   const [instructionsVisible, setInstructionsVisible] = useState(true);
   const [history, setHistory] = useState([]);
+  const preferencesRef = useRef(null);
   const active = activities.find((activity) => activity.id === activeId);
   const timer = useTimer("countdown", 120);
   const { load, reset, toggle } = timer;
@@ -456,6 +465,22 @@ export default function SizzlePage() {
   const rememberCurrent = useCallback(() => {
     setHistory((items) => [...items.slice(-11), { activeId, heat, seed }]);
   }, [activeId, heat, seed]);
+
+  useEffect(() => {
+    if (!preferencesOpen) return undefined;
+    const close = (event) => {
+      if (!preferencesRef.current?.contains(event.target)) setPreferencesOpen(false);
+    };
+    const closeOnEscape = (event) => {
+      if (event.key === "Escape") setPreferencesOpen(false);
+    };
+    document.addEventListener("pointerdown", close);
+    window.addEventListener("keydown", closeOnEscape);
+    return () => {
+      document.removeEventListener("pointerdown", close);
+      window.removeEventListener("keydown", closeOnEscape);
+    };
+  }, [preferencesOpen]);
 
   const openActivity = useCallback((activity) => {
     rememberCurrent();
@@ -479,6 +504,14 @@ export default function SizzlePage() {
     setHistory((items) => items.slice(0, -1));
     load("countdown", 120);
   }, [history, load]);
+
+  const changeDifficulty = (level) => {
+    if (level === heat) return;
+    rememberCurrent();
+    setHeat(level);
+    setSeed((value) => value + 1);
+    reset();
+  };
 
   useEffect(() => {
     if (timer.finished && sound) playChime();
@@ -549,9 +582,15 @@ export default function SizzlePage() {
           {timer.mode === "countdown" && <button className={styles.topNudge} onClick={() => timer.nudge(30)}>+30</button>}
           {timer.dirty && <button className={styles.topReset} onClick={timer.reset} aria-label="Reset timer" data-tooltip="Reset"><RotateCcw size={16} /></button>}
         </div>
-        <div className={styles.headerActions}>
-          <button onClick={() => setSound((value) => !value)} aria-label={sound ? "Mute timer chime" : "Unmute timer chime"}>{sound ? <Volume2 size={18} /> : <VolumeX size={18} />}</button>
+        <div className={styles.headerActions} ref={preferencesRef}>
+          <button className={styles.preferencesTrigger} onClick={() => setPreferencesOpen((open) => !open)} aria-label="Open preferences" aria-expanded={preferencesOpen}><SlidersHorizontal size={18} /></button>
           <button className={styles.surprise} onClick={surprise}><Shuffle size={16} /> Surprise me</button>
+          {preferencesOpen && <div className={styles.preferencesMenu} role="dialog" aria-label="Preferences">
+            <div className={styles.preferencesHeading}><div><small>Preferences</small><b>Session settings</b></div><SlidersHorizontal size={16} /></div>
+            <button className={styles.soundSetting} onClick={() => setSound((value) => !value)}><span>{sound ? <Volume2 size={16} /> : <VolumeX size={16} />}<span><b>Sound</b><small>Timer cues and finish chime</small></span></span><i className={sound ? styles.switchOn : ""} aria-hidden="true"><span /></i></button>
+            <div className={styles.difficultySetting}><span><b>Difficulty</b><small>Controls the prompt pool</small></span><div>{[["all", "All"], ["easy", "Easy"], ["med", "Medium"], ["spicy", "Spicy"]].map(([value, label]) => <button key={value} className={heat === value ? styles.preferenceSelected : ""} onClick={() => changeDifficulty(value)}>{label}</button>)}</div></div>
+            <div className={styles.shortcutSetting}><span>Keyboard shortcuts</span><p><kbd>Space</kbd><span>Start or pause timer</span></p><p><kbd>R</kbd><span>New prompt</span></p></div>
+          </div>}
         </div>
       </header>
 
@@ -561,7 +600,7 @@ export default function SizzlePage() {
 
       <section className={styles.workspace}>
         <div className={styles.stageColumn}>
-          <div className={styles.stageLayers} aria-hidden="true"><span /><span /></div>
+          <div className={styles.stageLayers} key={`layers-${activeId}-${seed}`} aria-hidden="true"><span /><span /></div>
           <article className={styles.stage} key={`${activeId}-${seed}`}>
             <div className={styles.stageTop}>
               <div className={styles.stageIdentity}><span>{active.icon}</span><div><small>{active.no} · {active.tone}</small><div className={styles.stageTitleRow}><h2>{active.name}</h2><button className={styles.instructionToggle} onClick={() => setInstructionsVisible((visible) => !visible)} aria-label={instructionsVisible ? "Hide instructions" : "Show instructions"} aria-pressed={instructionsVisible}><CircleHelp size={13} /></button>{instructionsVisible && <button className={styles.instructionHide} onClick={() => setInstructionsVisible(false)}>Hide instructions</button>}</div></div></div>
@@ -571,12 +610,8 @@ export default function SizzlePage() {
               </div>
             </div>
             {instructionsVisible && <div className={styles.instructions}><div><span>How to play</span></div><p>{active.blurb}</p></div>}
-            <div className={styles.cardSettings}>
-              <span>Difficulty</span>
-              <div>{["easy", "med", "spicy"].map((level) => <button key={level} className={heat === level ? styles.activeHeat : ""} onClick={() => { rememberCurrent(); setHeat(level); setSeed((value) => value + 1); reset(); }}>{level}</button>)}</div>
-            </div>
             <div className={styles.activityBody}><ActivityBody id={activeId} heat={heat} seed={seed} /></div>
-            <div className={styles.stageFooter}><span>{heat} mode</span><span>space · timer</span><span>r · new prompt</span></div>
+            <div className={styles.stageFooter}><span>{heat === "all" ? "all difficulties" : `${heat} mode`}</span><span>space · timer</span><span>r · new prompt</span></div>
           </article>
         </div>
       </section>

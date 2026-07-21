@@ -52,7 +52,7 @@ export default function AscentPage() {
           <h2>A few reps.<br />Get on with your day.</h2>
           <p>
             You do not need to find another hour. Do a manageable set after a
-            meeting, before lunch, or whenever you walk past the bar.
+            meeting, before lunch, or whenever you pass the bar.
           </p>
         </div>
         <div className={styles.dayCard}>
@@ -82,8 +82,8 @@ export default function AscentPage() {
           <p className={styles.stepNumber}>02 · ACCUMULATED VOLUME</p>
           <h2>Strength adds up.</h2>
           <p>
-            Each set is easy to dismiss on its own. Together, they become meaningful
-            training volume—and a clear picture of the work you actually did.
+            Six reps may not feel like much. Four sets later, you have done 24.
+            Ascent makes the work visible—today, this week, and over time.
           </p>
         </div>
       </section>
@@ -96,11 +96,11 @@ export default function AscentPage() {
         <div className={styles.methodCopy}>
           <p>
             Ascent is inspired by grease-the-groove training: manageable sets spread
-            across the day instead of repeatedly training to failure.
+            across the day instead of one exhausting session.
           </p>
           <p>
-            The aim is not to exhaust yourself in one session. It is to return to the
-            bar, accumulate good reps, and gradually become stronger.
+            Stop while you still feel fresh. Return to the bar later. The goal is to
+            practise often, accumulate volume, and gradually raise what you can do.
           </p>
         </div>
       </section>
@@ -119,23 +119,24 @@ export default function AscentPage() {
 
       <section className={styles.modelSection}>
         <div className={styles.sectionIntro}>
-          <p className={styles.overline}>FREE, AND EARNED THROUGH PRACTICE</p>
-          <h2>Show up for the app.<br />The app opens up for you.</h2>
+          <p className={styles.overline}>THE PLAN AFTER BETA</p>
+          <h2>Pull-ups stay free.<br />Log 30 days to unlock the rest.</h2>
           <p>
-            Pull-up tracking, personal targets, and full stats stay free. Additional
-            exercises unlock after 30 days of logging—non-consecutive, no streak pressure.
+            Pull-up tracking, personal targets, and full stats will stay free. Log on
+            any 30 days and every additional exercise unlocks for life. The days do not
+            need to be consecutive.
           </p>
         </div>
         <div className={styles.unlockGrid}>
           <article>
             <span className={styles.unlockValue}>30</span>
             <h3>days of practice</h3>
-            <p>Unlock every exercise free for life by using the app as intended.</p>
+            <p>Log on any 30 days. Keep every exercise, free for life.</p>
           </article>
           <article>
             <span className={styles.unlockValue}>$19.99</span>
-            <h3>once, if you prefer</h3>
-            <p>Skip the wait with one payment. No subscription.</p>
+            <h3>to unlock now</h3>
+            <p>One payment. No subscription.</p>
           </article>
         </div>
       </section>
@@ -146,9 +147,9 @@ export default function AscentPage() {
           <h2>I kept walking past my pull-up bar.</h2>
           <p>
             I work from home, sit for too long, and had been stuck at 12 pull-ups for
-            ages. I did not need another workout plan. I needed a reason to do a few
-            reps throughout the day—and a way to see whether they were getting me closer
-            to 15 or 20. So I built Ascent.
+            ages. I did not need another programme. I needed a reason to use the bar in
+            my doorway—and a way to see whether those small sets could get me to 15 or
+            20. So I built Ascent.
           </p>
         </div>
       </section>
@@ -156,7 +157,7 @@ export default function AscentPage() {
       <section className={styles.finalCta}>
         <div className={styles.finalIcon} aria-hidden="true">A</div>
         <h2>More pull-ups.<br />No extra workout.</h2>
-        <p>I’m inviting a small first group to TestFlight. It’s free during beta; honest feedback is the whole deal.</p>
+        <p>I’m inviting a small group of founding users to try Ascent on TestFlight and tell me what needs work.</p>
         <a className={styles.primaryAction} href={testFlightHref}>Join the first beta</a>
       </section>
 

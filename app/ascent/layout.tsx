@@ -14,9 +14,9 @@ const cinzel = localFont({
 });
 
 export const metadata: Metadata = {
-  title: "Ascent — Strength Adds Up",
+  title: "Ascent — More Pull-ups, No Extra Workout",
   description:
-    "A focused iPhone rep tracker for building strength through small sets, high frequency, and steady progress.",
+    "Do more pull-ups by spreading manageable sets throughout your day. Track every rep, follow your weekly volume, and build strength without adding another workout.",
 };
 
 export default function AscentLayout({ children }: { children: React.ReactNode }) {

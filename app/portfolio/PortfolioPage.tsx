@@ -1,5 +1,6 @@
 import { experimentVisuals, projects } from "../green/portfolio-content";
-import { Github, Linkedin, Mail } from "lucide-react";
+import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
+import AucklandStatus from "./AucklandStatus";
 import ExperimentsGrid from "./ExperimentsGrid";
 import PortfolioCarousel from "./PortfolioCarousel";
 import styles from "./portfolio.module.css";
@@ -36,11 +37,11 @@ export default function PortfolioPage() {
         </div>
         <div className={styles.introCopy}>
           <p>
-            I design and build playful, useful products at the intersection of
+            I design and build useful and playful products at the intersection of
             technology, creativity, and human behaviour.
           </p>
           <p>
-            I&apos;m especially interested in tools that help people learn,
+            I&apos;m particularly interested in tools that help people learn,
             connect, make things, and feel a little more capable.
           </p>
         </div>
@@ -63,6 +64,9 @@ export default function PortfolioPage() {
             const image = projectImage(project);
             const body = (
               <>
+                <div className={styles.projectMeta}>
+                  {project.details ?? null}
+                </div>
                 <div className={styles.mobileProjectVisual}>
                   {image ? (
                     <img src={image} alt="" />
@@ -71,9 +75,15 @@ export default function PortfolioPage() {
                   )}
                 </div>
                 <div className={styles.mobileProjectCopy}>
-                  <h2>{project.name}</h2>
+                  <h2>
+                    {project.name}
+                    {project.link ? (
+                      <span className={styles.projectArrow} aria-hidden="true">
+                        <ArrowUpRight size={14} strokeWidth={1.7} />
+                      </span>
+                    ) : null}
+                  </h2>
                   <p>{project.tagline}</p>
-                  {project.details ? <span>{project.details}</span> : null}
                 </div>
               </>
             );
@@ -109,7 +119,7 @@ export default function PortfolioPage() {
 
       <footer className={styles.footer}>
         <span className={styles.footerMeta}>
-          Raunaq Bansal · Auckland, New Zealand
+          <AucklandStatus />
         </span>
         <div className={styles.footerActions}>
           <nav className={styles.socialLinks} aria-label="Social links">

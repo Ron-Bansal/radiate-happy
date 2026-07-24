@@ -168,11 +168,18 @@ export default function PortfolioPage() {
                     Hi, I&apos;m Raunaq :)
                   </h1>
 
-                  <p className="max-w-sm text-sm leading-[1.45] text-[#3d3d3d]">
-                    I love exploring creative itches and building things – small
-                    experiments, tools that spark delight, and ideas that grow
-                    through curiosity.
-                  </p>
+                  <div className="max-w-sm space-y-3 text-sm leading-[1.45] text-[#3d3d3d]">
+                    <p>
+                      I design and build useful and playful products at the
+                      intersection of technology, creativity, and human
+                      behaviour.
+                    </p>
+                    <p>
+                      I&apos;m particularly interested in tools that help people
+                      learn, connect, make things, and feel a little more
+                      capable.
+                    </p>
+                  </div>
                 </div>
               </Copy>
 

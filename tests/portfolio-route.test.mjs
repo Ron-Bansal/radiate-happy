@@ -5,11 +5,13 @@ import test from "node:test";
 const readSource = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("portfolio route uses the shared content and accessible GSAP carousel", async () => {
-  const [page, content, carousel, experiments, styles] = await Promise.all([
+  const [page, content, homePortfolio, carousel, experiments, aucklandStatus, styles] = await Promise.all([
     readSource("app/portfolio/page.tsx"),
     readSource("app/portfolio/PortfolioPage.tsx"),
+    readSource("app/green/PortfolioPage.tsx"),
     readSource("app/portfolio/PortfolioCarousel.tsx"),
     readSource("app/portfolio/ExperimentsGrid.tsx"),
+    readSource("app/portfolio/AucklandStatus.tsx"),
     readSource("app/portfolio/portfolio.module.css"),
   ]);
 
@@ -25,6 +27,29 @@ test("portfolio route uses the shared content and accessible GSAP carousel", asy
   assert.match(carousel, /const isHorizontal/);
   assert.match(carousel, /if \(!isHorizontal\) return/);
   assert.match(carousel, /event\.shiftKey \? event\.deltaY : event\.deltaX/);
+  assert.match(carousel, /projectMeta/);
+  assert.match(carousel, /projectArrow/);
+  assert.match(content, /projectMeta/);
+  assert.match(content, /projectArrow/);
+  assert.match(carousel, /ArrowUpRight/);
+  assert.match(content, /ArrowUpRight/);
+  assert.doesNotMatch(carousel, /↗/);
+  assert.doesNotMatch(content, /↗/);
+  assert.match(content, /AucklandStatus/);
+  assert.match(
+    content,
+    /I design and build useful and playful products at the[\s\S]*intersection of[\s\S]*technology, creativity, and human behaviour/,
+  );
+  assert.match(
+    homePortfolio,
+    /I design and build useful and playful products at the[\s\S]*intersection of technology, creativity, and human[\s\S]*behaviour/,
+  );
+  assert.match(
+    homePortfolio,
+    /particularly interested in tools that help people[\s\S]*learn, connect, make things, and feel a little more[\s\S]*capable/,
+  );
+  assert.match(aucklandStatus, /Pacific\/Auckland/);
+  assert.match(aucklandStatus, /api\.open-meteo\.com/);
   assert.doesNotMatch(content, /Drag to explore/);
   assert.doesNotMatch(content, /ongoing curiosities/);
   assert.match(content, /projects\.length/);
@@ -41,5 +66,31 @@ test("portfolio route uses the shared content and accessible GSAP carousel", asy
   assert.match(
     styles,
     /\.intro,\s*\.sectionHeader\s*\{[^}]*var\(--content-column\)/s,
+  );
+  assert.match(
+    styles,
+    /\.projectVisual\s*\{[^}]*aspect-ratio:\s*1\.618\s*\/\s*1/s,
+  );
+  assert.match(
+    styles,
+    /\.projectItem\s*\{[^}]*width:\s*clamp\(360px,\s*36vw,\s*540px\)/s,
+  );
+  assert.match(
+    styles,
+    /@media \(hover: hover\) and \(pointer: fine\)[\s\S]*\.projectItem:hover\s*\{[^}]*width:\s*clamp\(390px,\s*40vw,\s*590px\)/s,
+  );
+  assert.match(
+    styles,
+    /\.projectSet\s*\{[^}]*min-height:\s*clamp\(373px,\s*calc\(24\.72vw \+ 132px\),\s*497px\)/s,
+  );
+  assert.match(styles, /text-wrap:\s*pretty/);
+  assert.match(
+    styles,
+    /\.mobileProject \.projectMeta\s*\{[^}]*text-align:\s*right/s,
+  );
+  assert.match(styles, /\.workSection\s*\{[^}]*padding-bottom:\s*72px/s);
+  assert.match(
+    styles,
+    /@media \(max-width: 767px\)[\s\S]*\.workSection\s*\{[^}]*padding-bottom:\s*64px/s,
   );
 });

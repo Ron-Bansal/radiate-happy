@@ -54,8 +54,12 @@
   letter-spacing: -0.012em;
 }
 
+.introCopy p {
+  text-wrap: pretty;
+}
+
 .workSection {
-  padding-bottom: 132px;
+  padding-bottom: 72px;
 }
 
 .sectionHeader {
@@ -118,20 +122,32 @@
   align-items: flex-start;
   flex: none;
   gap: 18px;
+  min-height: clamp(373px, calc(24.72vw + 132px), 497px);
 }
 
 .projectItem {
   display: block;
-  flex: 0 0 clamp(390px, 42vw, 630px);
+  flex: 0 0 auto;
+  width: clamp(360px, 36vw, 540px);
   color: var(--ink);
   outline: none;
+  transition: width 520ms cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .projectVisual {
-  aspect-ratio: 16 / 10;
+  aspect-ratio: 1.618 / 1;
   overflow: hidden;
   border-radius: 6px;
   background: #e8e8e4;
+}
+
+.projectMeta {
+  box-sizing: border-box;
+  min-height: 26px;
+  padding: 0 2px 8px;
+  color: #9a9995;
+  font-size: 12px;
+  line-height: 18px;
 }
 
 .projectVisual img {
@@ -165,19 +181,25 @@
   font-weight: 500;
   line-height: 1.4;
   letter-spacing: -0.015em;
+  text-wrap: pretty;
 }
 
 .projectCopy p {
   max-width: 50ch;
   color: var(--muted);
   font-size: 13px;
+  text-wrap: pretty;
 }
 
-.projectCopy span {
+.projectArrow {
+  display: inline-block;
+  margin-left: 5px;
+  color: var(--muted);
+  vertical-align: -0.12em;
+}
+
+.projectArrow svg {
   display: block;
-  margin-top: 7px;
-  color: #9a9995;
-  font-size: 12px;
 }
 
 .projectItem:hover .projectCopy,
@@ -188,6 +210,16 @@
 
 .projectItem:focus-visible .projectVisual {
   box-shadow: 0 0 0 2px var(--ink);
+}
+
+@media (hover: hover) and (pointer: fine) {
+  .projectItem:hover {
+    width: clamp(390px, 40vw, 590px);
+  }
+
+  .projectItem:focus-visible {
+    width: clamp(390px, 40vw, 590px);
+  }
 }
 
 .mobileProjects {
@@ -255,6 +287,7 @@
   color: rgba(255, 255, 255, 0.68);
   font-size: 12px;
   line-height: 1.45;
+  text-wrap: pretty;
 }
 
 .experimentTile:hover img,
@@ -283,6 +316,10 @@
   border-top: 1px solid var(--hairline);
   color: var(--muted);
   font-size: 12px;
+}
+
+.footerMeta {
+  font-variant-numeric: tabular-nums;
 }
 
 .footerActions,
@@ -346,7 +383,7 @@
   }
 
   .workSection {
-    padding-bottom: 94px;
+    padding-bottom: 64px;
   }
 
   .sectionHeader {
@@ -369,8 +406,12 @@
     color: inherit;
   }
 
+  .mobileProject .projectMeta {
+    text-align: right;
+  }
+
   .mobileProjectVisual {
-    aspect-ratio: 16 / 10;
+    aspect-ratio: 1.618 / 1;
     overflow: hidden;
     border-radius: 6px;
     background: #e8e8e4;
@@ -391,19 +432,14 @@
     font-weight: 500;
     line-height: 1.35;
     letter-spacing: -0.018em;
+    text-wrap: pretty;
   }
 
   .mobileProjectCopy p {
     margin-top: 5px;
     color: var(--muted);
     line-height: 1.5;
-  }
-
-  .mobileProjectCopy span {
-    display: block;
-    margin-top: 8px;
-    color: #9a9995;
-    font-size: 12px;
+    text-wrap: pretty;
   }
 
   .experimentsSection {
@@ -478,11 +514,17 @@
   }
 
   .projectVisual img,
+  .projectItem,
   .projectCopy,
   .experimentTile img,
   .experimentTile video,
   .experimentCaption {
     transition: none;
+  }
+
+  .projectItem:hover,
+  .projectItem:focus-visible {
+    width: clamp(360px, 36vw, 540px);
   }
 
   .experimentTile:hover img,

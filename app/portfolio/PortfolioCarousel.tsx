@@ -2,6 +2,7 @@
 
 import { useEffect, useRef } from "react";
 import { gsap } from "gsap";
+import { ArrowUpRight } from "lucide-react";
 import type { Project } from "../green/portfolio-content";
 import styles from "./portfolio.module.css";
 
@@ -18,6 +19,7 @@ function ProjectCard({ project, duplicate = false }: ProjectCardProps) {
   const image = project.images?.[0] ?? null;
   const content = (
     <>
+      <div className={styles.projectMeta}>{project.details ?? null}</div>
       <div className={styles.projectVisual}>
         {image ? (
           <img src={image} alt={duplicate ? "" : project.name} />
@@ -26,9 +28,15 @@ function ProjectCard({ project, duplicate = false }: ProjectCardProps) {
         )}
       </div>
       <div className={styles.projectCopy}>
-        <h2>{project.name}</h2>
+        <h2>
+          {project.name}
+          {project.link ? (
+            <span className={styles.projectArrow} aria-hidden="true">
+              <ArrowUpRight size={13} strokeWidth={1.7} />
+            </span>
+          ) : null}
+        </h2>
         <p>{project.tagline}</p>
-        {project.details ? <span>{project.details}</span> : null}
       </div>
     </>
   );
@@ -69,6 +77,7 @@ export default function PortfolioCarousel({
     let loop: gsap.core.Tween | null = null;
     let loopDistance = 1;
     let resumeTimer = 0;
+    let resizeTimer = 0;
     let isDragging = false;
     let dragStartX = 0;
     let dragStartProgress = 0;
@@ -113,6 +122,18 @@ export default function PortfolioCarousel({
         repeat: -1,
       });
       loop.progress(previousProgress);
+
+      if (
+        viewport.matches(":hover") ||
+        viewport.contains(document.activeElement)
+      ) {
+        loop.pause();
+      }
+    };
+
+    const scheduleBuildLoop = () => {
+      window.clearTimeout(resizeTimer);
+      resizeTimer = window.setTimeout(buildLoop, 90);
     };
 
     const handlePointerDown = (event: PointerEvent) => {
@@ -163,11 +184,11 @@ export default function PortfolioCarousel({
       else resume();
     };
 
-    const resizeObserver = new ResizeObserver(buildLoop);
+    const resizeObserver = new ResizeObserver(scheduleBuildLoop);
     resizeObserver.observe(primarySet);
     reducedMotion.addEventListener("change", buildLoop);
     viewport.addEventListener("mouseenter", pause);
-    viewport.addEventListener("mouseleave", resume);
+    viewport.addEventListener("mouseleave", resumeSoon);
     viewport.addEventListener("focusin", pause);
     viewport.addEventListener("focusout", handleFocusOut);
     viewport.addEventListener("pointerdown", handlePointerDown);
@@ -180,11 +201,12 @@ export default function PortfolioCarousel({
 
     return () => {
       window.clearTimeout(resumeTimer);
+      window.clearTimeout(resizeTimer);
       loop?.kill();
       resizeObserver.disconnect();
       reducedMotion.removeEventListener("change", buildLoop);
       viewport.removeEventListener("mouseenter", pause);
-      viewport.removeEventListener("mouseleave", resume);
+      viewport.removeEventListener("mouseleave", resumeSoon);
       viewport.removeEventListener("focusin", pause);
       viewport.removeEventListener("focusout", handleFocusOut);
       viewport.removeEventListener("pointerdown", handlePointerDown);

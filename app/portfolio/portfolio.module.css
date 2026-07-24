@@ -1,0 +1,473 @@
+.page {
+  --ink: #191918;
+  --muted: #777672;
+  --hairline: rgba(25, 25, 24, 0.12);
+  min-height: 100vh;
+  overflow: hidden;
+  background: #f8f8f6;
+  color: var(--ink);
+  font-family: var(--font-figtree), sans-serif;
+  font-size: 14px;
+  line-height: 1.55;
+}
+
+.intro,
+.sectionHeader,
+.experimentsSection,
+.footer {
+  width: min(100% - 48px, 1120px);
+  margin-inline: auto;
+}
+
+.intro {
+  max-width: 650px;
+  padding: 112px 0 104px;
+}
+
+.identity {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin-bottom: 38px;
+  font-weight: 600;
+  letter-spacing: -0.01em;
+}
+
+.mark {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--ink);
+  box-shadow: 0 0 0 4px rgba(25, 25, 24, 0.06);
+}
+
+.introCopy {
+  display: grid;
+  gap: 22px;
+  color: var(--muted);
+  font-size: clamp(16px, 1.25vw, 18px);
+  line-height: 1.7;
+  letter-spacing: -0.012em;
+}
+
+.workSection {
+  padding-bottom: 132px;
+}
+
+.sectionHeader {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  margin-bottom: 24px;
+}
+
+.sectionHeader h1,
+.sectionHeader h2 {
+  font-size: 14px;
+  font-weight: 500;
+  letter-spacing: -0.01em;
+}
+
+.sectionHeader span {
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.desktopProjects {
+  width: 100vw;
+}
+
+.carouselViewport {
+  width: 100%;
+  overflow: hidden;
+  cursor: grab;
+  outline: none;
+  touch-action: pan-y;
+}
+
+.carouselViewport:focus-visible {
+  box-shadow: inset 0 0 0 2px var(--ink);
+}
+
+.carouselViewport.isDragging {
+  cursor: grabbing;
+}
+
+.carouselTrack {
+  display: flex;
+  width: max-content;
+  gap: 18px;
+  will-change: transform;
+}
+
+.projectSet {
+  display: flex;
+  flex: none;
+  gap: 18px;
+}
+
+.projectCard {
+  position: relative;
+  display: block;
+  flex: 0 0 clamp(390px, 42vw, 630px);
+  aspect-ratio: 16 / 10;
+  overflow: hidden;
+  border-radius: 22px;
+  background: #e8e8e4;
+  color: #fff;
+  isolation: isolate;
+  outline: none;
+}
+
+.projectCard img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform 650ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.projectFallback {
+  display: block;
+  width: 100%;
+  height: 100%;
+  background:
+    radial-gradient(circle at 80% 15%, rgba(255, 255, 255, 0.9), transparent 30%),
+    linear-gradient(135deg, #deddd8, #b9bab4);
+}
+
+.projectShade {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  background: linear-gradient(180deg, transparent 30%, rgba(0, 0, 0, 0.78));
+  opacity: 0;
+  transition: opacity 350ms ease;
+}
+
+.projectCopy {
+  position: absolute;
+  right: 28px;
+  bottom: 26px;
+  left: 28px;
+  z-index: 2;
+  opacity: 0;
+  transform: translateY(12px);
+  transition:
+    opacity 350ms ease,
+    transform 450ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.projectCopy h2 {
+  max-width: 34ch;
+  margin-bottom: 7px;
+  font-size: clamp(17px, 1.5vw, 22px);
+  font-weight: 500;
+  line-height: 1.25;
+  letter-spacing: -0.025em;
+}
+
+.projectCopy p {
+  max-width: 50ch;
+  color: rgba(255, 255, 255, 0.78);
+}
+
+.projectCopy span {
+  display: block;
+  margin-top: 11px;
+  color: rgba(255, 255, 255, 0.55);
+  font-size: 12px;
+}
+
+.projectCard:hover img,
+.projectCard:focus-visible img {
+  transform: scale(1.025);
+}
+
+.projectCard:hover .projectShade,
+.projectCard:focus-visible .projectShade,
+.projectCard:hover .projectCopy,
+.projectCard:focus-visible .projectCopy {
+  opacity: 1;
+}
+
+.projectCard:hover .projectCopy,
+.projectCard:focus-visible .projectCopy {
+  transform: translateY(0);
+}
+
+.projectCard:focus-visible {
+  box-shadow: inset 0 0 0 3px #fff;
+}
+
+.mobileProjects {
+  display: none;
+}
+
+.experimentsSection {
+  padding-bottom: 128px;
+}
+
+.experimentsSection .sectionHeader {
+  width: 100%;
+  margin-bottom: 28px;
+  padding-bottom: 18px;
+  border-bottom: 1px solid var(--hairline);
+}
+
+.experimentsGrid {
+  columns: 3;
+  column-gap: 16px;
+}
+
+.experimentTile {
+  position: relative;
+  display: block;
+  width: 100%;
+  margin-bottom: 16px;
+  overflow: hidden;
+  break-inside: avoid;
+  border-radius: 14px;
+  background: #e8e8e4;
+  color: #fff;
+  outline: none;
+}
+
+.experimentTile img,
+.experimentTile video {
+  display: block;
+  width: 100%;
+  height: auto;
+  transition:
+    filter 350ms ease,
+    transform 550ms cubic-bezier(0.2, 0.7, 0.2, 1);
+}
+
+.experimentCaption {
+  position: absolute;
+  inset: auto 0 0;
+  padding: 54px 18px 17px;
+  background: linear-gradient(transparent, rgba(0, 0, 0, 0.82));
+  opacity: 0;
+  transform: translateY(8px);
+  transition:
+    opacity 300ms ease,
+    transform 350ms ease;
+}
+
+.experimentCaption span {
+  display: block;
+  margin-bottom: 3px;
+  font-weight: 500;
+}
+
+.experimentCaption p {
+  color: rgba(255, 255, 255, 0.68);
+  font-size: 12px;
+  line-height: 1.45;
+}
+
+.experimentTile:hover img,
+.experimentTile:hover video,
+.experimentTile:focus-visible img,
+.experimentTile:focus-visible video {
+  filter: brightness(0.82);
+  transform: scale(1.015);
+}
+
+.experimentTile:hover .experimentCaption,
+.experimentTile:focus-visible .experimentCaption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.experimentTile:focus-visible {
+  box-shadow: 0 0 0 2px var(--ink);
+}
+
+.footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 28px 0 40px;
+  border-top: 1px solid var(--hairline);
+  color: var(--muted);
+  font-size: 12px;
+}
+
+.footer a {
+  color: var(--ink);
+  text-decoration: underline;
+  text-decoration-color: var(--hairline);
+  text-underline-offset: 4px;
+}
+
+@media (max-width: 767px) {
+  .intro,
+  .sectionHeader,
+  .experimentsSection,
+  .footer {
+    width: min(100% - 32px, 560px);
+  }
+
+  .intro {
+    padding: 72px 0 76px;
+  }
+
+  .identity {
+    margin-bottom: 30px;
+  }
+
+  .introCopy {
+    gap: 18px;
+    font-size: 16px;
+    line-height: 1.62;
+  }
+
+  .workSection {
+    padding-bottom: 94px;
+  }
+
+  .sectionHeader {
+    margin-bottom: 18px;
+  }
+
+  .sectionHeader span {
+    display: none;
+  }
+
+  .desktopProjects {
+    display: none;
+  }
+
+  .mobileProjects {
+    display: grid;
+    width: min(100% - 32px, 560px);
+    margin-inline: auto;
+    gap: 42px;
+  }
+
+  .mobileProject {
+    display: block;
+    color: inherit;
+  }
+
+  .mobileProjectVisual {
+    aspect-ratio: 16 / 10;
+    overflow: hidden;
+    border-radius: 14px;
+    background: #e8e8e4;
+  }
+
+  .mobileProjectVisual img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+  .mobileProjectCopy {
+    padding-top: 15px;
+  }
+
+  .mobileProjectCopy h2 {
+    font-size: 16px;
+    font-weight: 500;
+    line-height: 1.35;
+    letter-spacing: -0.018em;
+  }
+
+  .mobileProjectCopy p {
+    margin-top: 5px;
+    color: var(--muted);
+    line-height: 1.5;
+  }
+
+  .mobileProjectCopy span {
+    display: block;
+    margin-top: 8px;
+    color: #9a9995;
+    font-size: 12px;
+  }
+
+  .experimentsSection {
+    padding-bottom: 84px;
+  }
+
+  .experimentsGrid {
+    columns: 2;
+    column-gap: 10px;
+  }
+
+  .experimentTile {
+    margin-bottom: 10px;
+    border-radius: 10px;
+  }
+
+  .experimentCaption {
+    position: static;
+    padding: 11px 12px 13px;
+    background: #ecece8;
+    color: var(--ink);
+    opacity: 1;
+    transform: none;
+  }
+
+  .experimentCaption p {
+    color: var(--muted);
+  }
+
+  .experimentTile:hover img,
+  .experimentTile:hover video,
+  .experimentTile:focus-visible img,
+  .experimentTile:focus-visible video {
+    filter: none;
+    transform: none;
+  }
+
+  .footer {
+    align-items: flex-start;
+    gap: 24px;
+  }
+}
+
+@media (max-width: 420px) {
+  .experimentsGrid {
+    columns: 1;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .carouselViewport {
+    overflow-x: auto;
+    scroll-snap-type: x proximity;
+  }
+
+  .carouselTrack {
+    transform: none !important;
+  }
+
+  .duplicateSet {
+    display: none;
+  }
+
+  .projectCard {
+    scroll-snap-align: start;
+  }
+
+  .projectCard img,
+  .projectCopy,
+  .projectShade,
+  .experimentTile img,
+  .experimentTile video,
+  .experimentCaption {
+    transition: none;
+  }
+
+  .projectCard:hover img,
+  .projectCard:focus-visible img,
+  .experimentTile:hover img,
+  .experimentTile:hover video,
+  .experimentTile:focus-visible img,
+  .experimentTile:focus-visible video {
+    transform: none;
+  }
+}

@@ -1,4 +1,5 @@
 .page {
+  --content-column: 590px;
   --ink: #191918;
   --muted: #777672;
   --hairline: rgba(25, 25, 24, 0.12);
@@ -12,7 +13,11 @@
 }
 
 .intro,
-.sectionHeader,
+.sectionHeader {
+  width: min(100% - 48px, var(--content-column));
+  margin-inline: auto;
+}
+
 .experimentsSection,
 .footer {
   width: min(100% - 48px, 1120px);
@@ -20,7 +25,6 @@
 }
 
 .intro {
-  max-width: 650px;
   padding: 112px 0 104px;
 }
 
@@ -195,7 +199,7 @@
 }
 
 .experimentsSection .sectionHeader {
-  width: 100%;
+  width: min(100%, var(--content-column));
   margin-bottom: 28px;
   padding-bottom: 18px;
   border-bottom: 1px solid var(--hairline);
@@ -318,7 +322,10 @@
 
 @media (max-width: 767px) {
   .intro,
-  .sectionHeader,
+  .sectionHeader {
+    width: min(100% - 32px, var(--content-column));
+  }
+
   .experimentsSection,
   .footer {
     width: min(100% - 32px, 560px);

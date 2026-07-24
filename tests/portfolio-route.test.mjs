@@ -22,6 +22,9 @@ test("portfolio route uses the shared content and accessible GSAP carousel", asy
   assert.match(carousel, /aria-hidden/);
   assert.match(carousel, /tabIndex=\{duplicate \? -1 : undefined\}/);
   assert.match(carousel, /prefers-reduced-motion/);
+  assert.match(carousel, /const isHorizontal/);
+  assert.match(carousel, /if \(!isHorizontal\) return/);
+  assert.match(carousel, /event\.shiftKey \? event\.deltaY : event\.deltaX/);
   assert.doesNotMatch(content, /Drag to explore/);
   assert.doesNotMatch(content, /ongoing curiosities/);
   assert.match(content, /projects\.length/);
@@ -34,4 +37,9 @@ test("portfolio route uses the shared content and accessible GSAP carousel", asy
   assert.match(carousel, /projectVisual/);
   assert.doesNotMatch(styles, /border-radius:\s*(14|22)px/);
   assert.match(styles, /\.introCopy\s*\{[^}]*font-size:\s*14px/s);
+  assert.match(styles, /--content-column:\s*590px/);
+  assert.match(
+    styles,
+    /\.intro,\s*\.sectionHeader\s*\{[^}]*var\(--content-column\)/s,
+  );
 });

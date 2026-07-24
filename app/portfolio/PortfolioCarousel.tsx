@@ -143,12 +143,14 @@ export default function PortfolioCarousel({
 
     const handleWheel = (event: WheelEvent) => {
       if (!loop) return;
+
+      const isHorizontal =
+        event.shiftKey || Math.abs(event.deltaX) > Math.abs(event.deltaY);
+      if (!isHorizontal) return;
+
       event.preventDefault();
       pause();
-      const delta =
-        Math.abs(event.deltaX) > Math.abs(event.deltaY)
-          ? event.deltaX
-          : event.deltaY;
+      const delta = event.shiftKey ? event.deltaY : event.deltaX;
       loop.progress(wrapProgress(loop.progress() + delta / loopDistance));
       resumeSoon();
     };

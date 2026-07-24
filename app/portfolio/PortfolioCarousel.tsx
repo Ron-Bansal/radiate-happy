@@ -18,12 +18,13 @@ function ProjectCard({ project, duplicate = false }: ProjectCardProps) {
   const image = project.images?.[0] ?? null;
   const content = (
     <>
-      {image ? (
-        <img src={image} alt={duplicate ? "" : project.name} />
-      ) : (
-        <span className={styles.projectFallback} aria-hidden="true" />
-      )}
-      <div className={styles.projectShade} />
+      <div className={styles.projectVisual}>
+        {image ? (
+          <img src={image} alt={duplicate ? "" : project.name} />
+        ) : (
+          <span className={styles.projectFallback} aria-hidden="true" />
+        )}
+      </div>
       <div className={styles.projectCopy}>
         <h2>{project.name}</h2>
         <p>{project.tagline}</p>
@@ -34,7 +35,7 @@ function ProjectCard({ project, duplicate = false }: ProjectCardProps) {
 
   return project.link ? (
     <a
-      className={styles.projectCard}
+      className={styles.projectItem}
       href={project.link}
       target="_blank"
       rel="noreferrer"
@@ -43,7 +44,7 @@ function ProjectCard({ project, duplicate = false }: ProjectCardProps) {
       {content}
     </a>
   ) : (
-    <article className={styles.projectCard}>{content}</article>
+    <article className={styles.projectItem}>{content}</article>
   );
 }
 

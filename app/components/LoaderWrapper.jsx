@@ -1,12 +1,17 @@
 // components/LoaderWrapper.jsx
 "use client";
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Loader from './Loader';
 
 export default function LoaderWrapper({ children, forceShow = false }) {
   const [loading, setLoading] = useState(true);
   const [initialRender, setInitialRender] = useState(true);
-  
+  // /ascent is a standalone product landing page — people arrive there from the
+  // App Store, not from the portfolio, so the site intro loader is skipped.
+  const pathname = usePathname();
+  const skipLoader = pathname?.startsWith('/ascent') ?? false;
+
   // Use useEffect to safely check session storage on client-side
   useEffect(() => {
     // Mark that we've completed initial render
@@ -51,6 +56,10 @@ export default function LoaderWrapper({ children, forceShow = false }) {
     
     setLoading(false);
   };
+
+  if (skipLoader) {
+    return <>{children}</>;
+  }
 
   // During SSR or first render, return a minimal structure to avoid flashing
   if (initialRender) {

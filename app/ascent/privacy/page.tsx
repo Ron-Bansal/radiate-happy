@@ -8,13 +8,12 @@ export const metadata = {
 
 export default function AscentPrivacyPage() {
   return (
-    <main className={styles.page}>
-      <nav className={styles.nav} aria-label="Ascent privacy">
-        <Link className={styles.wordmark} href="/ascent">
-          <span className={styles.appIcon} aria-hidden="true">A</span>
-          <span>Ascent</span>
+    <main className={styles.doc}>
+      <nav className={styles.docNav} aria-label="Ascent privacy">
+        <Link className={styles.docMark} href="/ascent">
+          Ascent
         </Link>
-        <Link className={styles.navLink} href="/ascent">
+        <Link className={styles.docBack} href="/ascent">
           Back
         </Link>
       </nav>

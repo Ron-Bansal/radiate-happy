@@ -170,14 +170,12 @@ export default function PortfolioPage() {
 
                   <div className="max-w-sm space-y-3 text-sm leading-[1.45] text-[#3d3d3d]">
                     <p>
-                      I design and build useful and playful products at the
-                      intersection of technology, creativity, and human
-                      behaviour.
+                      I design and build playful and practical products at the intersection of
+                      technology, art, and human experience.
                     </p>
                     <p>
-                      I&apos;m particularly interested in tools that help people
-                      learn, connect, make things, and feel a little more
-                      capable.
+                      Particularly curious about tools that help people learn,
+                      connect, and make things.
                     </p>
                   </div>
                 </div>

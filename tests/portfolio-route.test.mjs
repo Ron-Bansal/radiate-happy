@@ -38,15 +38,19 @@ test("portfolio route uses the shared content and accessible GSAP carousel", asy
   assert.match(content, /AucklandStatus/);
   assert.match(
     content,
-    /I design and build useful and playful products at the[\s\S]*intersection of[\s\S]*technology, creativity, and human behaviour/,
+    /I design and build playful and practical products at the[\s\S]*intersection of[\s\S]*technology, art, and human experience/,
   );
   assert.match(
     homePortfolio,
-    /I design and build useful and playful products at the[\s\S]*intersection of technology, creativity, and human[\s\S]*behaviour/,
+    /I design and build playful and practical products at the[\s\S]*intersection of[\s\S]*technology, art, and human experience/,
+  );
+  assert.match(
+    content,
+    /Particularly curious about tools that help people learn,[\s\S]*connect, and make things/,
   );
   assert.match(
     homePortfolio,
-    /particularly interested in tools that help people[\s\S]*learn, connect, make things, and feel a little more[\s\S]*capable/,
+    /Particularly curious about tools that help people learn,[\s\S]*connect, and make things/,
   );
   assert.match(aucklandStatus, /Pacific\/Auckland/);
   assert.match(aucklandStatus, /api\.open-meteo\.com/);

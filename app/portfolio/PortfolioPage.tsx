@@ -38,7 +38,7 @@ export default function PortfolioPage() {
         <div className={styles.introCopy}>
           <p>
             I design and build playful and practical products at the intersection of
-            technology, creativity, and human experience.
+            technology, art, and human experience.
           </p>
           <p>
             Particularly curious about tools that help people learn,

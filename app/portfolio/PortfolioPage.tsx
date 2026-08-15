@@ -44,10 +44,10 @@ export default function PortfolioPage() {
         </div>
       </header>
 
-      <section className={styles.workSection} aria-labelledby="selected-work">
+      <section className={styles.workSection} aria-labelledby="featured-projects">
         <div className={styles.sectionHeader}>
-          <h1 className={styles.sectionTitle} id="selected-work">
-            Selected work
+          <h1 className={styles.sectionTitle} id="featured-projects">
+            Featured projects
             <sup className={styles.sectionCount}>[{projects.length}]</sup>
           </h1>
         </div>

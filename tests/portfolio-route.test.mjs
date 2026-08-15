@@ -23,6 +23,8 @@ test("portfolio route uses the shared content and accessible GSAP carousel", asy
   assert.match(carousel, /export function ProjectMedia/);
   assert.match(carousel, /<video[\s\S]*autoPlay[\s\S]*loop[\s\S]*muted[\s\S]*playsInline/);
   assert.match(content, /ProjectMedia/);
+  assert.match(content, /Featured projects/);
+  assert.doesNotMatch(content, /Selected work/);
   assert.match(content, /projects\.map/);
   assert.match(content, /experimentVisuals/);
   assert.match(experiments, /items\.map/);

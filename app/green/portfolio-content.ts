@@ -151,6 +151,15 @@ export const projects: Project[] = [
     link: "https://moonstone.raunaqbansal.com/playlist/6PehLzyryfuvHUUVrK3yTs",
   },
   {
+    id: "builder-taste",
+    name: "Builder Taste - Lenny’s lightning rounds visualised",
+    tagline:
+      "Explore what 200+ of tech’s brightest minds recommend when asked the same questions.",
+    details: "Creative data visualisation",
+    images: ["/assets/garden/lennys-lightning-rounds-1.png"],
+    link: "https://buildertaste.raunaqbansal.com",
+  },
+  {
     id: "c3",
     name: "Curious & Creative Club - Learn by building",
     tagline: "How can kids build the skills that shape their future?",

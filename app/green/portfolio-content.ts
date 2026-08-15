@@ -8,7 +8,7 @@ export type Project = {
   tagline: string;
   details?: string;
   images?: string[];
-  portfolioMedia?: string;
+  thumbnailLandscape?: string;
   link?: string;
 };
 
@@ -162,6 +162,8 @@ export const projects: Project[] = [
       "/assets/garden/lennys-lightning-rounds-2.webp",
       "/assets/garden/lennys-lightning-rounds-3.webp",
     ],
+    thumbnailLandscape:
+      "/assets/garden/lennys-lightning-rounds-landscape-1.webp",
     link: "https://buildertaste.raunaqbansal.com",
   },
   {

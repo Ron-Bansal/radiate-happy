@@ -25,7 +25,7 @@ export function ProjectMedia({
   project: Project;
   alt: string;
 }) {
-  const media = project.portfolioMedia ?? project.images?.[0] ?? null;
+  const media = project.thumbnailLandscape ?? project.images?.[0] ?? null;
 
   if (!media) {
     return <span className={styles.projectFallback} aria-hidden="true" />;

@@ -156,7 +156,11 @@ export const projects: Project[] = [
     tagline:
       "Explore what 200+ of tech’s brightest minds recommend when asked the same questions.",
     details: "Creative data visualisation",
-    images: ["/assets/garden/lennys-lightning-rounds-1.png"],
+    images: [
+      "/assets/garden/lennys-lightning-rounds-1.png",
+      "/assets/garden/lennys-lightning-rounds-2.png",
+      "/assets/garden/lennys-lightning-rounds-3.png",
+    ],
     link: "https://buildertaste.raunaqbansal.com",
   },
   {

@@ -5,9 +5,10 @@ import test from "node:test";
 const readSource = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("portfolio route uses the shared content and accessible GSAP carousel", async () => {
-  const [page, content, homePortfolio, carousel, experiments, aucklandStatus, styles] = await Promise.all([
+  const [page, content, portfolioData, homePortfolio, carousel, experiments, aucklandStatus, styles] = await Promise.all([
     readSource("app/portfolio/page.tsx"),
     readSource("app/portfolio/PortfolioPage.tsx"),
+    readSource("app/green/portfolio-content.ts"),
     readSource("app/green/PortfolioPage.tsx"),
     readSource("app/portfolio/PortfolioCarousel.tsx"),
     readSource("app/portfolio/ExperimentsGrid.tsx"),
@@ -17,6 +18,11 @@ test("portfolio route uses the shared content and accessible GSAP carousel", asy
 
   assert.match(page, /PortfolioPage/);
   assert.match(content, /from ["']\.\.\/green\/portfolio-content["']/);
+  assert.match(portfolioData, /portfolioMedia\?: string/);
+  assert.match(carousel, /project\.portfolioMedia\s*\?\?\s*project\.images\?\.\[0\]/);
+  assert.match(carousel, /export function ProjectMedia/);
+  assert.match(carousel, /<video[\s\S]*autoPlay[\s\S]*loop[\s\S]*muted[\s\S]*playsInline/);
+  assert.match(content, /ProjectMedia/);
   assert.match(content, /projects\.map/);
   assert.match(content, /experimentVisuals/);
   assert.match(experiments, /items\.map/);

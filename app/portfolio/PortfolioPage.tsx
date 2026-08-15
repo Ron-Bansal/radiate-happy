@@ -2,11 +2,8 @@ import { experimentVisuals, projects } from "../green/portfolio-content";
 import { ArrowUpRight, Github, Linkedin, Mail } from "lucide-react";
 import AucklandStatus from "./AucklandStatus";
 import ExperimentsGrid from "./ExperimentsGrid";
-import PortfolioCarousel from "./PortfolioCarousel";
+import PortfolioCarousel, { ProjectMedia } from "./PortfolioCarousel";
 import styles from "./portfolio.module.css";
-
-const projectImage = (project: (typeof projects)[number]) =>
-  project.images?.[0] ?? null;
 
 function XIcon() {
   return (
@@ -61,18 +58,13 @@ export default function PortfolioPage() {
 
         <div className={styles.mobileProjects}>
           {projects.map((project) => {
-            const image = projectImage(project);
             const body = (
               <>
                 <div className={styles.projectMeta}>
                   {project.details ?? null}
                 </div>
                 <div className={styles.mobileProjectVisual}>
-                  {image ? (
-                    <img src={image} alt="" />
-                  ) : (
-                    <span className={styles.projectFallback} aria-hidden="true" />
-                  )}
+                  <ProjectMedia project={project} alt="" />
                 </div>
                 <div className={styles.mobileProjectCopy}>
                   <h2>

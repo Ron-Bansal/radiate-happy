@@ -15,17 +15,45 @@ type ProjectCardProps = {
   duplicate?: boolean;
 };
 
+const isVideoMedia = (src: string) =>
+  /\.(mp4|webm|mov|m4v)(?:[?#].*)?$/i.test(src);
+
+export function ProjectMedia({
+  project,
+  alt,
+}: {
+  project: Project;
+  alt: string;
+}) {
+  const media = project.portfolioMedia ?? project.images?.[0] ?? null;
+
+  if (!media) {
+    return <span className={styles.projectFallback} aria-hidden="true" />;
+  }
+
+  if (isVideoMedia(media)) {
+    return (
+      <video
+        aria-label={alt || undefined}
+        autoPlay
+        loop
+        muted
+        playsInline
+        preload="metadata"
+        src={media}
+      />
+    );
+  }
+
+  return <img src={media} alt={alt} loading="lazy" />;
+}
+
 function ProjectCard({ project, duplicate = false }: ProjectCardProps) {
-  const image = project.images?.[0] ?? null;
   const content = (
     <>
       <div className={styles.projectMeta}>{project.details ?? null}</div>
       <div className={styles.projectVisual}>
-        {image ? (
-          <img src={image} alt={duplicate ? "" : project.name} />
-        ) : (
-          <span className={styles.projectFallback} aria-hidden="true" />
-        )}
+        <ProjectMedia project={project} alt={duplicate ? "" : project.name} />
       </div>
       <div className={styles.projectCopy}>
         <h2>

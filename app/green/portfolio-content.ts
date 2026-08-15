@@ -8,6 +8,7 @@ export type Project = {
   tagline: string;
   details?: string;
   images?: string[];
+  portfolioMedia?: string;
   link?: string;
 };
 

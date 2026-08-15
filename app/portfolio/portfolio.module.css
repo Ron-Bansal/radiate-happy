@@ -150,7 +150,8 @@
   line-height: 18px;
 }
 
-.projectVisual img {
+.projectVisual img,
+.projectVisual video {
   display: block;
   width: 100%;
   height: 100%;
@@ -417,7 +418,9 @@
     background: #e8e8e4;
   }
 
-  .mobileProjectVisual img {
+  .mobileProjectVisual img,
+  .mobileProjectVisual video {
+    display: block;
     width: 100%;
     height: 100%;
     object-fit: cover;
@@ -514,6 +517,7 @@
   }
 
   .projectVisual img,
+  .projectVisual video,
   .projectItem,
   .projectCopy,
   .experimentTile img,

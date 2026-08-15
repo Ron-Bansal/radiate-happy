@@ -164,15 +164,16 @@ export const projects: Project[] = [
     link: "https://buildertaste.raunaqbansal.com",
   },
   {
-    id: "c3",
-    name: "Curious & Creative Club - Learn by building",
-    tagline: "How can kids build the skills that shape their future?",
-    details: "Weekly classes",
+    id: "napkin-notes",
+    name: "Napkin Notes - Quickest canvas for thought",
+    tagline: "I have 0.3 seconds to write something down before I forget",
+    details: "Chrome extension · 450+ active users",
     images: [
-      "/assets/garden/c3-blue.webp",
-      // "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=80",
-      // "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1600&q=80",
+      "/assets/napkin-notes-golden.webp",
+      // "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80",
+      // "https://images.unsplash.com/photo-1517244864778-5ee2fda3db5e?auto=format&fit=crop&w=1600&q=80",
     ],
+    link: "https://chromewebstore.google.com/detail/napkin-notes-%E2%80%A2-side-panel/dlhljjkacijknfelknklfcohibfdciki",
   },
   // {
   //   id: "glowstick",
@@ -193,16 +194,15 @@ export const projects: Project[] = [
     link: "https://graciousnz.com/"
   },
   {
-    id: "napkin-notes",
-    name: "Napkin Notes - Quickest canvas for thought",
-    tagline: "I have 0.3 seconds to write something down before I forget",
-    details: "Chrome extension · 450+ active users",
+    id: "c3",
+    name: "Curious & Creative Club - Learn by building",
+    tagline: "How can kids build the skills that shape their future?",
+    details: "Weekly classes",
     images: [
-      "/assets/napkin-notes-golden.webp",
-      // "https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?auto=format&fit=crop&w=1600&q=80",
-      // "https://images.unsplash.com/photo-1517244864778-5ee2fda3db5e?auto=format&fit=crop&w=1600&q=80",
+      "/assets/garden/c3-blue.webp",
+      // "https://images.unsplash.com/photo-1513151233558-d860c5398176?auto=format&fit=crop&w=1600&q=80",
+      // "https://images.unsplash.com/photo-1526498460520-4c246339dccb?auto=format&fit=crop&w=1600&q=80",
     ],
-    link: "https://chromewebstore.google.com/detail/napkin-notes-%E2%80%A2-side-panel/dlhljjkacijknfelknklfcohibfdciki",
   },
   {
     id: "draftline",

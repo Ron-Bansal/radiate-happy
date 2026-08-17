@@ -60,6 +60,14 @@ test("portfolio route uses the shared content and accessible GSAP carousel", asy
     homePortfolio,
     /Particularly curious about tools that help people learn,[\s\S]*connect, and make things/,
   );
+  assert.match(
+    homePortfolio,
+    /max-w-sm space-y-1 text-sm leading-\[1\.45\]/,
+  );
+  assert.doesNotMatch(
+    homePortfolio,
+    /max-w-sm space-y-3 text-sm leading-\[1\.45\]/,
+  );
   assert.match(aucklandStatus, /Pacific\/Auckland/);
   assert.match(aucklandStatus, /api\.open-meteo\.com/);
   assert.doesNotMatch(content, /Drag to explore/);

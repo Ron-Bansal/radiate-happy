@@ -168,7 +168,7 @@ export default function PortfolioPage() {
                     Hi, I&apos;m Raunaq :)
                   </h1>
 
-                  <div className="max-w-sm space-y-3 text-sm leading-[1.45] text-[#3d3d3d]">
+                  <div className="max-w-sm space-y-1 text-sm leading-[1.45] text-[#3d3d3d]">
                     <p>
                       I design and build playful and practical products at the intersection of
                       technology, art, and human experience.

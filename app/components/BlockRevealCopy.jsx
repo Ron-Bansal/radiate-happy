@@ -8,8 +8,8 @@ import { useGSAP } from "@gsap/react";
 
 gsap.registerPlugin(SplitText, ScrollTrigger);
 
-const WRAPPER_CLASSES = "relative block w-full leading-none";
-const LINE_CLASSES = "relative block leading-none";
+const WRAPPER_CLASSES = "relative block w-full";
+const LINE_CLASSES = "relative block";
 const BLOCK_CLASSES =
   "absolute top-0 left-0 w-[101%] h-[101%] pointer-events-none will-change-[transform] z-[1]"; // replaces .block-revealer
 
@@ -20,6 +20,8 @@ export default function Copy({
   blockColor = "#000",
   stagger = 0.15,
   duration = 0.75,
+  preserveLineHeight = false,
+  elementGap = 0,
 }) {
   const containerRef = useRef(null);
   const splitRefs = useRef([]);
@@ -41,7 +43,7 @@ export default function Copy({
         elements = [containerRef.current];
       }
 
-      elements.forEach((element) => {
+      elements.forEach((element, elementIndex) => {
         const split = SplitText.create(element, {
           type: "lines",
           linesClass: "block-line++", // GSAP helper class (no styles needed)
@@ -50,13 +52,18 @@ export default function Copy({
 
         splitRefs.current.push(split);
 
-        split.lines.forEach((line) => {
+        split.lines.forEach((line, lineIndex) => {
           // Make sure each line acts like a block element
           line.classList.add(...LINE_CLASSES.split(" "));
+          if (!preserveLineHeight) line.classList.add("leading-none");
 
           const wrapper = document.createElement("div");
           // keep the class name for cleanup, add Tailwind for layout
           wrapper.className = `block-line-wrapper ${WRAPPER_CLASSES}`;
+          if (!preserveLineHeight) wrapper.classList.add("leading-none");
+          if (elementIndex > 0 && lineIndex === 0 && elementGap > 0) {
+            wrapper.style.marginTop = `${elementGap}px`;
+          }
           line.parentNode.insertBefore(wrapper, line);
           wrapper.appendChild(line);
 
@@ -124,7 +131,15 @@ export default function Copy({
     },
     {
       scope: containerRef,
-      dependencies: [animateOnScroll, delay, blockColor, stagger, duration],
+      dependencies: [
+        animateOnScroll,
+        delay,
+        blockColor,
+        stagger,
+        duration,
+        preserveLineHeight,
+        elementGap,
+      ],
     }
   );
 

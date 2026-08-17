@@ -5,11 +5,12 @@ import test from "node:test";
 const readSource = (path) => readFile(new URL(`../${path}`, import.meta.url), "utf8");
 
 test("portfolio route uses the shared content and accessible GSAP carousel", async () => {
-  const [page, content, portfolioData, homePortfolio, carousel, experiments, aucklandStatus, styles] = await Promise.all([
+  const [page, content, portfolioData, homePortfolio, blockReveal, carousel, experiments, aucklandStatus, styles] = await Promise.all([
     readSource("app/portfolio/page.tsx"),
     readSource("app/portfolio/PortfolioPage.tsx"),
     readSource("app/green/portfolio-content.ts"),
     readSource("app/green/PortfolioPage.tsx"),
+    readSource("app/components/BlockRevealCopy.jsx"),
     readSource("app/portfolio/PortfolioCarousel.tsx"),
     readSource("app/portfolio/ExperimentsGrid.tsx"),
     readSource("app/portfolio/AucklandStatus.tsx"),
@@ -60,14 +61,12 @@ test("portfolio route uses the shared content and accessible GSAP carousel", asy
     homePortfolio,
     /Particularly curious about tools that help people learn,[\s\S]*connect, and make things/,
   );
-  assert.match(
-    homePortfolio,
-    /max-w-sm space-y-1 text-sm leading-\[1\.45\]/,
-  );
-  assert.doesNotMatch(
-    homePortfolio,
-    /max-w-sm space-y-3 text-sm leading-\[1\.45\]/,
-  );
+  assert.match(homePortfolio, /preserveLineHeight/);
+  assert.match(homePortfolio, /elementGap=\{8\}/);
+  assert.doesNotMatch(homePortfolio, /max-w-sm space-y-/);
+  assert.match(blockReveal, /preserveLineHeight = false/);
+  assert.match(blockReveal, /elementGap = 0/);
+  assert.match(blockReveal, /wrapper\.style\.marginTop/);
   assert.match(aucklandStatus, /Pacific\/Auckland/);
   assert.match(aucklandStatus, /api\.open-meteo\.com/);
   assert.doesNotMatch(content, /Drag to explore/);

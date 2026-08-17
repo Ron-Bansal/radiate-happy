@@ -168,17 +168,25 @@ export default function PortfolioPage() {
                     Hi, I&apos;m Raunaq :)
                   </h1>
 
-                  <div className="max-w-sm space-y-1 text-sm leading-[1.45] text-[#3d3d3d]">
-                    <p>
-                      I design and build playful and practical products at the intersection of
-                      technology, art, and human experience.
-                    </p>
-                    <p>
-                      Particularly curious about tools that help people learn,
-                      connect, and make things.
-                    </p>
-                  </div>
                 </div>
+              </Copy>
+              <Copy
+                blockColor="#8BAA52"
+                delay={1.28}
+                stagger={0.18}
+                duration={0.67}
+                animateOnScroll={false}
+                preserveLineHeight
+                elementGap={8}
+              >
+                <p className="max-w-sm text-sm leading-[1.45] text-[#3d3d3d]">
+                  I design and build playful and practical products at the intersection of
+                  technology, art, and human experience.
+                </p>
+                <p className="max-w-sm text-sm leading-[1.45] text-[#3d3d3d]">
+                  Particularly curious about tools that help people learn,
+                  connect, and make things.
+                </p>
               </Copy>
 
               {/* NAV – sticky on mobile only */}

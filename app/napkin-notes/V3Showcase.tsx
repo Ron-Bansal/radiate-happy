@@ -115,14 +115,22 @@ export default function V3Showcase() {
         ))}
       </div>
 
-      {/* Screenshot area - right side with dark grid */}
+      {/* Screenshot area - right side with dark 5x5 grid */}
       <div className="flex-1 bg-[#1e1e1e] relative min-h-[360px] md:min-h-[480px]">
         <div
-          className="absolute inset-0 opacity-[0.12]"
+          className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
-            backgroundSize: "30px 30px",
+              "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
+            backgroundSize: "10px 10px",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px)",
+            backgroundSize: "50px 50px",
           }}
         />
         <div className="absolute inset-0 flex items-center justify-center p-8">

@@ -18,6 +18,8 @@ const personalNotes = [
   { type: "link", text: "developer.chrome.com/docs/extensions" },
 ];
 
+const TOOLBAR_H = 36;
+
 export default function HeroSidePanel() {
   const [panelOpen, setPanelOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
@@ -94,28 +96,31 @@ export default function HeroSidePanel() {
             backgroundSize: "48px 48px",
           }}
         />
-        {/* Browser toolbar - solid bg */}
-        <div className="relative z-10 flex items-center gap-2 px-4 py-3 bg-[#1E1E1E] border-b border-white/[0.06]">
+        {/* Browser toolbar - compact, solid bg */}
+        <div
+          className="relative z-10 flex items-center gap-2 px-4 bg-[#1E1E1E] border-b border-white/[0.06]"
+          style={{ height: `${TOOLBAR_H}px` }}
+        >
           <div className="flex gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
             <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
             <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
           </div>
           <div className="flex-1 mx-8">
-            <div className="bg-white/[0.06] rounded-md h-7 max-w-sm mx-auto flex items-center px-3">
-              <span className="text-[11px] text-white/25 font-mono">your-workflow.app</span>
+            <div className="bg-white/[0.06] rounded-md h-6 max-w-sm mx-auto flex items-center px-3">
+              <span className="text-[10px] text-white/25 font-mono">your-workflow.app</span>
             </div>
           </div>
-          {/* Extension icon - always visible */}
           <button
             onClick={() => setPanelOpen(!panelOpen)}
-            className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-white/10 border border-white/[0.08] hover:bg-white/15 transition-all"
+            className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-white/10 border border-white/[0.08] hover:bg-white/15 transition-all"
           >
             <div className="w-4 h-4 rounded bg-[#4DAD75]/20 flex items-center justify-center">
               <span className="text-[7px] font-bold text-[#4DAD75]">N</span>
             </div>
           </button>
         </div>
+
         {/* Fake page content */}
         <div className="relative z-10 p-8 max-w-[50%]">
           <div className="space-y-4 mb-10">
@@ -129,23 +134,23 @@ export default function HeroSidePanel() {
           </div>
         </div>
 
-        {/* "Always one click away" - bottom right, below panel, with arrow to toolbar icon */}
+        {/* "Always one click away" - top right, with arrow down to toolbar icon */}
         <div
-          className="absolute z-10 right-6 flex flex-col items-end gap-1 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          className="absolute z-10 flex items-start gap-2 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
           style={{
-            bottom: "16px",
+            top: `${TOOLBAR_H + 14}px`,
+            right: panelOpen ? "40%" : "20px",
             opacity: panelOpen ? 0 : 1,
-            transform: panelOpen ? "translateY(10px)" : "translateY(0)",
+            transform: panelOpen ? "translateY(-5px)" : "translateY(0)",
           }}
         >
-          {/* Arrow pointing up-right toward toolbar icon */}
-          <svg width="40" height="50" viewBox="0 0 40 50" fill="none" className="mr-4 mb-[-4px]">
-            <path d="M20 48 C20 30 30 15 35 5" stroke="white" strokeWidth="1" strokeLinecap="round" strokeDasharray="2 3" opacity="0.25" />
-            <path d="M32 3 L36 5 L33 9" stroke="white" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" opacity="0.25" fill="none" />
-          </svg>
-          <p className="text-white text-[13px] leading-snug font-medium text-right">
-            Always one click away<br /><span className="text-white/60">(literally)</span>
+          <p className="text-white/70 text-[12px] leading-snug text-right">
+            Always one click away<br /><span className="text-white/35">(literally)</span>
           </p>
+          <svg width="30" height="36" viewBox="0 0 30 36" fill="none" className="mt-[-30px] mr-1">
+            <path d="M15 36 C15 22 20 12 26 4" stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeDasharray="2 3" opacity="0.2" />
+            <path d="M23 2 L27 4 L24 7" stroke="white" strokeWidth="0.8" strokeLinecap="round" strokeLinejoin="round" opacity="0.2" fill="none" />
+          </svg>
         </div>
 
         {/* Shortcut hint - bottom left */}
@@ -170,11 +175,11 @@ export default function HeroSidePanel() {
         )}
       </div>
 
-      {/* Close tab on left edge of panel - slides in with panel */}
+      {/* Close tab - aligned to top of side panel, slides in with it */}
       <div
         className="absolute z-30 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)] pointer-events-none"
         style={{
-          top: "52px",
+          top: `${TOOLBAR_H + 1}px`,
           right: panelOpen ? "38%" : "-20px",
           opacity: panelOpen ? 1 : 0,
         }}
@@ -189,17 +194,17 @@ export default function HeroSidePanel() {
         </button>
       </div>
 
-      {/* Side panel - sits below the toolbar */}
+      {/* Side panel - top aligned with toolbar bottom */}
       <div
         className="absolute right-0 bottom-0 w-[50%] md:w-[38%] bg-[#F5F6F7] z-20 flex flex-col transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
         style={{
-          top: "46px",
+          top: `${TOOLBAR_H + 1}px`,
           transform: panelOpen ? "translateX(0)" : "translateX(calc(100% + 20px))",
           opacity: panelOpen ? 1 : 0,
           borderLeft: "1px solid rgba(0,0,0,0.08)",
         }}
       >
-        {/* Header - no divider, sleek */}
+        {/* Header */}
         <div className="flex items-center justify-between px-3.5 py-2">
           <div className="flex items-center gap-2.5">
             <div className="w-[22px] h-[22px] rounded-md bg-[#4DAD75]/15 flex items-center justify-center">
@@ -219,7 +224,7 @@ export default function HeroSidePanel() {
           </div>
         </div>
 
-        {/* Tab row - single pill bg behind all tabs */}
+        {/* Tab row */}
         <div className="px-3 py-1.5">
           <div className="flex items-center bg-[#ECEEF0] rounded-full px-1 py-1 gap-0.5">
             {tabs.map((tab, i) => (
@@ -256,7 +261,7 @@ export default function HeroSidePanel() {
           </div>
         </div>
 
-        {/* Editor - increased height */}
+        {/* Editor */}
         <div className="flex-1 px-3 pb-1.5 pt-1 overflow-hidden">
           <div
             className="w-full h-full bg-white rounded-lg overflow-hidden"
@@ -289,7 +294,7 @@ export default function HeroSidePanel() {
           </div>
         </div>
 
-        {/* Footer - sleek, no divider */}
+        {/* Footer */}
         <div className="px-3.5 py-1.5 flex items-center justify-end gap-3">
           <div className="flex items-center gap-1.5">
             <div className="w-[5px] h-[5px] rounded-full bg-[#4DAD75]" />

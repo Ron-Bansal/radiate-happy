@@ -5,6 +5,7 @@ import HeroSidePanel from "./HeroSidePanel";
 import V3Showcase from "./V3Showcase";
 import UseCaseCarousel from "./UseCaseCarousel";
 import FAQAccordion from "./FAQAccordion";
+import ProNoteCards from "./ProNoteCards";
 
 export const metadata: Metadata = {
   title: "Napkin Notes | Side-panel notes for your browser",
@@ -132,6 +133,9 @@ export default function NapkinNotesPage() {
         </h2>
         <div className="grid md:grid-cols-3 gap-12 md:gap-16">
           <div>
+            <div className="aspect-[4/3] rounded-lg bg-[#f0f0ee] mb-5 flex items-center justify-center">
+              <span className="text-xs text-[#1a1a1a]/15">Image</span>
+            </div>
             <h3 className="font-semibold text-[17px] mb-2">Always beside your page</h3>
             <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
               Opens in the browser&apos;s side panel, right alongside whatever
@@ -139,6 +143,9 @@ export default function NapkinNotesPage() {
             </p>
           </div>
           <div>
+            <div className="aspect-[4/3] rounded-lg bg-[#f0f0ee] mb-5 flex items-center justify-center">
+              <span className="text-xs text-[#1a1a1a]/15">Image</span>
+            </div>
             <h3 className="font-semibold text-[17px] mb-2">Rich text, zero setup</h3>
             <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
               Bold, lists, links, images. Use markdown shortcuts or select and
@@ -146,6 +153,9 @@ export default function NapkinNotesPage() {
             </p>
           </div>
           <div>
+            <div className="aspect-[4/3] rounded-lg bg-[#f0f0ee] mb-5 flex items-center justify-center">
+              <span className="text-xs text-[#1a1a1a]/15">Image</span>
+            </div>
             <h3 className="font-semibold text-[17px] mb-2">Local and private</h3>
             <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
               Your notes stay on your machine. No cloud, no server, no tracking.
@@ -183,14 +193,22 @@ export default function NapkinNotesPage() {
         <UseCaseCarousel />
       </section>
 
-      {/* Pro - entire section dark grid bg */}
+      {/* Pro - entire section dark 5x5 grid bg */}
       <section className="border-t border-[#e5e5e3] bg-[#1a1a1a] relative overflow-hidden">
         <div
-          className="absolute inset-0 opacity-[0.06]"
+          className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
-            backgroundSize: "40px 40px",
+              "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
+            backgroundSize: "10px 10px",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
+            backgroundSize: "50px 50px",
           }}
         />
         <div className="relative z-10 px-6 md:px-12 py-20 max-w-6xl mx-auto">
@@ -200,14 +218,13 @@ export default function NapkinNotesPage() {
               Pro
             </span>
             <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white leading-[1.15] mb-4">
-              More notes.
+              Unlock advanced features
               <br />
-              More context.
+              for power users.
             </h2>
             <p className="text-white/45 text-[15px] leading-relaxed mb-8">
-              Free is perfect for most people. Pro unlocks 10 extra notes, smart
-              linking, and quick capture. For power users or anyone who wants to
-              support an indie developer.
+              Free is perfect for most people. Pro adds extra notes, smart
+              linking, quick capture, and a direct line to shape what gets built next.
             </p>
             <div>
               <a
@@ -222,69 +239,24 @@ export default function NapkinNotesPage() {
             </div>
           </div>
 
-          {/* Visual: stacked note cards showing 10 Pro notes */}
-          <div className="relative h-[280px] md:h-[320px] mb-16">
-            {[
-              { num: 1, name: "Personal", heading: "This week", lines: 4 },
-              { num: 2, name: "COMP3901 Capstone", heading: "Week 9 deliverables (due Oct 4)", lines: 3 },
-              { num: 3, name: "Japan Trip", heading: "Tokyo sources", lines: 5 },
-              { num: 4, name: "Work / Linear", heading: "Sprint 14 standup", lines: 3 },
-              { num: 5, name: "Research Project", heading: "Literature review notes", lines: 4 },
-              { num: 6, name: "Brand Moodboard", heading: "Visual direction", lines: 2 },
-              { num: 7, name: "Q4 Goals", heading: "Revenue targets", lines: 3 },
-              { num: 8, name: "Side Project", heading: "Auth flow TODO", lines: 4 },
-              { num: 9, name: "Reading List", heading: null, lines: 3 },
-              { num: 10, name: "Inspo / UI Patterns", heading: null, lines: 2 },
-            ].map((note, i) => (
-              <div
-                key={i}
-                className="absolute rounded-xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm overflow-hidden"
-                style={{
-                  width: `${180 + (i % 3) * 10}px`,
-                  height: `${160 + (i % 2) * 20}px`,
-                  left: `${(i % 5) * 19}%`,
-                  top: `${i < 5 ? 0 : 45}%`,
-                  transform: `rotate(${(i % 2 === 0 ? -1 : 1) * (1 + (i % 3))}deg)`,
-                  zIndex: 10 - i,
-                }}
-              >
-                <div className="px-3 pt-2.5 pb-1.5">
-                  <div className="flex items-center gap-1.5 mb-2">
-                    <span className="text-[10px] font-semibold text-[#4DAD75]">{note.num}</span>
-                    <span className="text-[10px] font-medium text-white/60 truncate">{note.name}</span>
-                  </div>
-                  {note.heading && (
-                    <div className="text-[9px] font-semibold text-white/40 mb-1.5 truncate">{note.heading}</div>
-                  )}
-                  <div className="space-y-1.5">
-                    {Array.from({ length: note.lines }).map((_, j) => (
-                      <div
-                        key={j}
-                        className="h-[4px] bg-white/[0.04] rounded"
-                        style={{ width: `${50 + ((j * 17 + i * 13) % 40)}%` }}
-                      />
-                    ))}
-                  </div>
-                </div>
+          {/* Main benefit: More notes than you need - full width */}
+          <div className="mb-14">
+            <h3 className="font-semibold text-[18px] mb-2 text-white">More notes than you need</h3>
+            <p className="text-sm text-white/40 leading-relaxed mb-6 max-w-lg">
+              Napkin Notes intentionally limits how many notes you can create so
+              they don&apos;t turn into clutter. Pro users can create up to 10 notes
+              to organise ideas across every context. You can&apos;t reorder them,
+              because the point is to stay fast, not to manage a system.
+            </p>
+            <ProNoteCards />
+          </div>
+
+          {/* 4 additional Pro features */}
+          <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
+            <div>
+              <div className="aspect-[16/9] rounded-lg bg-white/[0.04] border border-white/[0.06] mb-4 flex items-center justify-center">
+                <span className="text-xs text-white/15">Image / Video</span>
               </div>
-            ))}
-          </div>
-
-          {/* Placeholder image */}
-          <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] aspect-[21/9] mb-16 flex items-center justify-center">
-            <span className="text-sm text-white/15">Screenshot</span>
-          </div>
-
-          {/* Pro features grid */}
-          <div className="grid md:grid-cols-2 gap-x-20 gap-y-10">
-            <div>
-              <h3 className="font-semibold text-[16px] mb-2 text-white">10 extra notes</h3>
-              <p className="text-sm text-white/40 leading-relaxed">
-                Dedicated spaces for every context: work, research, side projects,
-                coursework. Name them, reorder them, use as many or as few as you need.
-              </p>
-            </div>
-            <div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Quick capture</h3>
               <p className="text-sm text-white/40 leading-relaxed">
                 Select any text on a page and send it to your note in one click.
@@ -292,6 +264,9 @@ export default function NapkinNotesPage() {
               </p>
             </div>
             <div>
+              <div className="aspect-[16/9] rounded-lg bg-white/[0.04] border border-white/[0.06] mb-4 flex items-center justify-center">
+                <span className="text-xs text-white/15">Image / Video</span>
+              </div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Search across all notes</h3>
               <p className="text-sm text-white/40 leading-relaxed">
                 See every note at a glance. Search across all of them to surface
@@ -299,10 +274,23 @@ export default function NapkinNotesPage() {
               </p>
             </div>
             <div>
+              <div className="aspect-[16/9] rounded-lg bg-white/[0.04] border border-white/[0.06] mb-4 flex items-center justify-center">
+                <span className="text-xs text-white/15">Image / Video</span>
+              </div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Link websites to notes</h3>
               <p className="text-sm text-white/40 leading-relaxed">
                 Open Napkin on linear.app and it jumps straight to your Work note.
                 On github.com, Side Project. The right context, automatically.
+              </p>
+            </div>
+            <div>
+              <div className="aspect-[16/9] rounded-lg bg-white/[0.04] border border-white/[0.06] mb-4 flex items-center justify-center">
+                <span className="text-xs text-white/15">Image / Video</span>
+              </div>
+              <h3 className="font-semibold text-[16px] mb-2 text-white">Priority feedback on the roadmap</h3>
+              <p className="text-sm text-white/40 leading-relaxed">
+                Pro users get a direct channel to suggest features and vote on
+                what gets built next. Your input shapes where Napkin Notes goes.
               </p>
             </div>
           </div>
@@ -371,31 +359,66 @@ export default function NapkinNotesPage() {
       </section>
 
       {/* Footer */}
-      <footer className="px-6 md:px-12 py-8 max-w-6xl mx-auto border-t border-[#e5e5e3] flex flex-wrap items-center justify-between gap-4 text-xs text-[#1a1a1a]/35">
-        <span>
-          Made by{" "}
-          <Link
-            href="/"
-            className="underline underline-offset-2 hover:text-[#1a1a1a]/60 transition-colors"
-          >
-            Ron
-          </Link>
-        </span>
-        <div className="flex items-center gap-6">
-          <Link
-            href="/napkin-notes/privacy"
-            className="hover:text-[#1a1a1a]/60 transition-colors"
-          >
-            Privacy
-          </Link>
-          <a
-            href={CHROME_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="hover:text-[#1a1a1a]/60 transition-colors"
-          >
-            Chrome Web Store
-          </a>
+      <footer className="relative overflow-hidden bg-[#1a3a28] px-6 md:px-12 py-10">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(77,173,117,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.12) 1px, transparent 1px)",
+            backgroundSize: "10px 10px",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(77,173,117,0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.22) 1px, transparent 1px)",
+            backgroundSize: "50px 50px",
+          }}
+        />
+        <div className="relative z-10 max-w-6xl mx-auto">
+        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+          <div className="flex items-center gap-3">
+            <Image
+              src="/assets/napkin-notes-square.webp"
+              alt="Napkin Notes icon"
+              width={24}
+              height={24}
+              className="rounded-md opacity-40"
+            />
+            <span className="text-xs text-white/30">
+              Made by{" "}
+              <Link
+                href="/"
+                className="underline underline-offset-2 hover:text-white/60 transition-colors"
+              >
+                Ron
+              </Link>
+            </span>
+          </div>
+          <div className="flex items-center gap-6 text-xs text-white/30">
+            <Link
+              href="/napkin-notes/privacy"
+              className="hover:text-white/60 transition-colors"
+            >
+              Privacy
+            </Link>
+            <a
+              href="mailto:hello@raunaqbansal.com"
+              className="hover:text-white/60 transition-colors"
+            >
+              Contact
+            </a>
+            <a
+              href={CHROME_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="hover:text-white/60 transition-colors"
+            >
+              Chrome Web Store
+            </a>
+          </div>
+        </div>
         </div>
       </footer>
     </main>

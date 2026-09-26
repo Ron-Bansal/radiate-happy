@@ -193,14 +193,14 @@ export default function NapkinNotesPage() {
         <UseCaseCarousel />
       </section>
 
-      {/* Pro - entire section dark 5x5 grid bg */}
+      {/* Pro - entire section dark grid bg */}
       <section className="border-t border-[#e5e5e3] bg-[#1a1a1a] relative overflow-hidden">
         <div
           className="absolute inset-0"
           style={{
             backgroundImage:
               "linear-gradient(rgba(255,255,255,0.03) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.03) 1px, transparent 1px)",
-            backgroundSize: "10px 10px",
+            backgroundSize: "16px 16px",
           }}
         />
         <div
@@ -208,7 +208,7 @@ export default function NapkinNotesPage() {
           style={{
             backgroundImage:
               "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
+            backgroundSize: "160px 160px",
           }}
         />
         <div className="relative z-10 px-6 md:px-12 py-20 max-w-6xl mx-auto">
@@ -241,20 +241,20 @@ export default function NapkinNotesPage() {
 
           {/* Main benefit: More notes than you need - full width */}
           <div className="mb-14">
-            <h3 className="font-semibold text-[18px] mb-2 text-white">More notes than you need</h3>
-            <p className="text-sm text-white/40 leading-relaxed mb-6 max-w-lg">
+            <ProNoteCards />
+            <h3 className="font-semibold text-[18px] mb-2 text-white mt-6">More notes than you need</h3>
+            <p className="text-sm text-white/40 leading-relaxed max-w-lg">
               Napkin Notes intentionally limits how many notes you can create so
               they don&apos;t turn into clutter. Pro users can create up to 10 notes
               to organise ideas across every context. You can&apos;t reorder them,
               because the point is to stay fast, not to manage a system.
             </p>
-            <ProNoteCards />
           </div>
 
           {/* 4 additional Pro features */}
           <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
             <div>
-              <div className="aspect-[16/9] rounded-lg bg-white/[0.04] border border-white/[0.06] mb-4 flex items-center justify-center">
+              <div className="aspect-[16/9] rounded-lg bg-[#222] border border-white/[0.06] mb-4 flex items-center justify-center">
                 <span className="text-xs text-white/15">Image / Video</span>
               </div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Quick capture</h3>
@@ -264,7 +264,7 @@ export default function NapkinNotesPage() {
               </p>
             </div>
             <div>
-              <div className="aspect-[16/9] rounded-lg bg-white/[0.04] border border-white/[0.06] mb-4 flex items-center justify-center">
+              <div className="aspect-[16/9] rounded-lg bg-[#222] border border-white/[0.06] mb-4 flex items-center justify-center">
                 <span className="text-xs text-white/15">Image / Video</span>
               </div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Search across all notes</h3>
@@ -274,7 +274,7 @@ export default function NapkinNotesPage() {
               </p>
             </div>
             <div>
-              <div className="aspect-[16/9] rounded-lg bg-white/[0.04] border border-white/[0.06] mb-4 flex items-center justify-center">
+              <div className="aspect-[16/9] rounded-lg bg-[#222] border border-white/[0.06] mb-4 flex items-center justify-center">
                 <span className="text-xs text-white/15">Image / Video</span>
               </div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Link websites to notes</h3>
@@ -284,7 +284,7 @@ export default function NapkinNotesPage() {
               </p>
             </div>
             <div>
-              <div className="aspect-[16/9] rounded-lg bg-white/[0.04] border border-white/[0.06] mb-4 flex items-center justify-center">
+              <div className="aspect-[16/9] rounded-lg bg-[#222] border border-white/[0.06] mb-4 flex items-center justify-center">
                 <span className="text-xs text-white/15">Image / Video</span>
               </div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Priority feedback on the roadmap</h3>
@@ -321,8 +321,8 @@ export default function NapkinNotesPage() {
         </div>
       </section>
 
-      {/* Bottom CTA - dark green grid */}
-      <section className="border-t border-[#e5e5e3] relative overflow-hidden bg-[#1a3a28]">
+      {/* Bottom CTA + Footer - shared dark green grid */}
+      <footer className="border-t border-[#e5e5e3] relative overflow-hidden bg-[#1a3a28]">
         <div
           className="absolute inset-0"
           style={{
@@ -336,89 +336,69 @@ export default function NapkinNotesPage() {
           style={{
             backgroundImage:
               "linear-gradient(rgba(77,173,117,0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.22) 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
+            backgroundSize: "100px 100px",
           }}
         />
-        <div className="relative z-10 px-6 md:px-12 py-20 max-w-6xl mx-auto text-center">
-          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4 text-white">
-            Try it out
-          </h2>
-          <p className="text-white/50 text-base mb-8 max-w-md mx-auto">
-            Free to use, takes two seconds to install, and your notes never leave
-            your browser
-          </p>
-          <a
-            href={CHROME_STORE_URL}
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center px-6 py-3 rounded-lg bg-white text-[#1a1a1a] text-sm font-medium hover:bg-white/90 transition-colors"
-          >
-            Add to Chrome, Free
-          </a>
-        </div>
-      </section>
-
-      {/* Footer */}
-      <footer className="relative overflow-hidden bg-[#1a3a28] px-6 md:px-12 py-10">
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(77,173,117,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.12) 1px, transparent 1px)",
-            backgroundSize: "10px 10px",
-          }}
-        />
-        <div
-          className="absolute inset-0"
-          style={{
-            backgroundImage:
-              "linear-gradient(rgba(77,173,117,0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.22) 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
-          }}
-        />
-        <div className="relative z-10 max-w-6xl mx-auto">
-        <div className="flex flex-col md:flex-row items-center justify-between gap-6">
-          <div className="flex items-center gap-3">
-            <Image
-              src="/assets/napkin-notes-square.webp"
-              alt="Napkin Notes icon"
-              width={24}
-              height={24}
-              className="rounded-md opacity-40"
-            />
-            <span className="text-xs text-white/30">
-              Made by{" "}
-              <Link
-                href="/"
-                className="underline underline-offset-2 hover:text-white/60 transition-colors"
-              >
-                Ron
-              </Link>
-            </span>
-          </div>
-          <div className="flex items-center gap-6 text-xs text-white/30">
-            <Link
-              href="/napkin-notes/privacy"
-              className="hover:text-white/60 transition-colors"
-            >
-              Privacy
-            </Link>
-            <a
-              href="mailto:hello@raunaqbansal.com"
-              className="hover:text-white/60 transition-colors"
-            >
-              Contact
-            </a>
+        <div className="relative z-10 px-6 md:px-12 pt-20 pb-10 max-w-6xl mx-auto">
+          <div className="text-center mb-20">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4 text-white">
+              Try it out
+            </h2>
+            <p className="text-white/50 text-base mb-8 max-w-md mx-auto">
+              Free to use, takes two seconds to install, and your notes never leave
+              your browser
+            </p>
             <a
               href={CHROME_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="hover:text-white/60 transition-colors"
+              className="inline-flex items-center px-6 py-3 rounded-lg bg-white text-[#1a1a1a] text-sm font-medium hover:bg-white/90 transition-colors"
             >
-              Chrome Web Store
+              Add to Chrome, Free
             </a>
           </div>
-        </div>
+          <div className="flex flex-col md:flex-row items-center justify-between gap-6">
+            <div className="flex items-center gap-3">
+              <Image
+                src="/assets/napkin-notes-square.webp"
+                alt="Napkin Notes icon"
+                width={24}
+                height={24}
+                className="rounded-md opacity-50"
+              />
+              <span className="text-xs text-white/50">
+                Made by{" "}
+                <Link
+                  href="/"
+                  className="underline underline-offset-2 hover:text-white/80 transition-colors"
+                >
+                  Ron
+                </Link>
+              </span>
+            </div>
+            <div className="flex items-center gap-6 text-xs text-white/50">
+              <Link
+                href="/napkin-notes/privacy"
+                className="hover:text-white/80 transition-colors"
+              >
+                Privacy
+              </Link>
+              <a
+                href="mailto:hello@raunaqbansal.com"
+                className="hover:text-white/80 transition-colors"
+              >
+                Contact
+              </a>
+              <a
+                href={CHROME_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="hover:text-white/80 transition-colors"
+              >
+                Chrome Web Store
+              </a>
+            </div>
+          </div>
         </div>
       </footer>
     </main>

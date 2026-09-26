@@ -115,13 +115,13 @@ export default function V3Showcase() {
         ))}
       </div>
 
-      {/* Screenshot area - right side with dark 5x5 grid */}
-      <div className="flex-1 bg-[#1e1e1e] relative min-h-[360px] md:min-h-[480px]">
+      {/* Screenshot area - right side with green grid */}
+      <div className="flex-1 bg-[#1a3a28] relative min-h-[360px] md:min-h-[480px]">
         <div
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.06) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.06) 1px, transparent 1px)",
+              "linear-gradient(rgba(77,173,117,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.12) 1px, transparent 1px)",
             backgroundSize: "10px 10px",
           }}
         />
@@ -129,8 +129,8 @@ export default function V3Showcase() {
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(255,255,255,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.12) 1px, transparent 1px)",
-            backgroundSize: "50px 50px",
+              "linear-gradient(rgba(77,173,117,0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.22) 1px, transparent 1px)",
+            backgroundSize: "100px 100px",
           }}
         />
         <div className="absolute inset-0 flex items-center justify-center p-8">

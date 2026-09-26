@@ -1,104 +1,52 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
 
-const personalNotes = [
-  "Dinner ideas this week:",
-  "• Try that ramen place on King St",
-  "• Make pasta from scratch (finally)",
-  "",
-  "Book recs from Sam:",
-  "• Designing Your Life — Burnett",
-  "• The Creative Act — Rick Rubin",
+const taskNotes = [
+  { text: "Reply to Alex about the timeline", done: true },
+  { text: "Review PR #47 — auth refactor", done: true },
+  { text: "Draft copy for onboarding flow", done: false },
+  { text: "Book dentist appointment", done: false },
+  { text: "Read through Q3 retro notes", done: false },
 ];
 
 export default function HeroSidePanel() {
-  const [visible, setVisible] = useState(false);
-  const [closed, setClosed] = useState(false);
+  const [panelOpen, setPanelOpen] = useState(false);
   const [activeTab, setActiveTab] = useState(0);
-  const [typedLines, setTypedLines] = useState(0);
+  const [typedCount, setTypedCount] = useState(0);
+  const [animDone, setAnimDone] = useState(false);
   const editorRef = useRef<HTMLDivElement>(null);
 
   useEffect(() => {
-    const timer = setTimeout(() => setVisible(true), 600);
+    const timer = setTimeout(() => setPanelOpen(true), 600);
     return () => clearTimeout(timer);
   }, []);
 
   useEffect(() => {
-    if (!visible || activeTab !== 0) return;
-    setTypedLines(0);
-    let line = 0;
+    if (!panelOpen || activeTab !== 0) return;
+    if (animDone) return;
+    setTypedCount(0);
+    let count = 0;
     const interval = setInterval(() => {
-      line++;
-      if (line > personalNotes.length) {
+      count++;
+      if (count > taskNotes.length) {
         clearInterval(interval);
+        setAnimDone(true);
         return;
       }
-      setTypedLines(line);
-    }, 400);
+      setTypedCount(count);
+    }, 500);
     return () => clearInterval(interval);
-  }, [visible, activeTab]);
+  }, [panelOpen, activeTab, animDone]);
 
   const tabs = [
-    { name: "Personal" },
-    { name: "Work" },
-    { name: "3" },
+    { num: 1, name: "Personal" },
+    { num: 2, name: "Work" },
+    { num: 3, name: null },
   ];
-
-  const placeholders = [
-    "",
-    "Sprint planning notes...",
-    "Quick scratch pad...",
-  ];
-
-  if (closed) {
-    return (
-      <div className="relative w-full h-[480px] md:h-[520px] rounded-xl overflow-hidden border border-[#2a2a2a]/20">
-        <div className="absolute inset-0 bg-[#1e1e1e]">
-          <div
-            className="absolute inset-0 opacity-[0.07]"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
-              backgroundSize: "48px 48px",
-            }}
-          />
-          <div className="relative z-10 flex items-center gap-2 px-4 py-3 border-b border-white/[0.06]">
-            <div className="flex gap-1.5">
-              <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-              <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-              <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
-            </div>
-            <div className="flex-1 mx-8">
-              <div className="bg-white/[0.06] rounded-md h-7 max-w-sm mx-auto flex items-center px-3">
-                <span className="text-[11px] text-white/25 font-mono">your-workflow.app</span>
-              </div>
-            </div>
-          </div>
-          <div className="relative z-10 p-8 space-y-4">
-            <div className="h-3 bg-white/[0.04] rounded w-3/4" />
-            <div className="h-3 bg-white/[0.04] rounded w-1/2" />
-            <div className="h-3 bg-white/[0.04] rounded w-5/6" />
-            <div className="mt-8 h-3 bg-white/[0.04] rounded w-2/3" />
-            <div className="h-3 bg-white/[0.04] rounded w-3/5" />
-          </div>
-        </div>
-        {/* Reopen button */}
-        <button
-          onClick={() => setClosed(false)}
-          className="absolute top-1/2 right-6 -translate-y-1/2 z-30 flex items-center gap-2 px-4 py-2.5 rounded-lg bg-white/10 backdrop-blur-sm border border-white/10 text-white/60 text-sm hover:bg-white/15 hover:text-white/80 transition-all"
-        >
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
-            <path d="M15 3h6v6M9 21H3v-6M21 3l-7 7M3 21l7-7" />
-          </svg>
-          Open Napkin
-        </button>
-      </div>
-    );
-  }
 
   return (
     <div className="relative w-full h-[480px] md:h-[520px] rounded-xl overflow-hidden border border-[#2a2a2a]/20">
-      {/* Left side - fake browser content with grid */}
+      {/* Browser bg */}
       <div className="absolute inset-0 bg-[#1e1e1e]">
         <div
           className="absolute inset-0 opacity-[0.07]"
@@ -108,6 +56,7 @@ export default function HeroSidePanel() {
             backgroundSize: "48px 48px",
           }}
         />
+        {/* Browser chrome */}
         <div className="relative z-10 flex items-center gap-2 px-4 py-3 border-b border-white/[0.06]">
           <div className="flex gap-1.5">
             <div className="w-2.5 h-2.5 rounded-full bg-white/10" />
@@ -119,7 +68,28 @@ export default function HeroSidePanel() {
               <span className="text-[11px] text-white/25 font-mono">your-workflow.app</span>
             </div>
           </div>
+          {/* Extension icon area — top right */}
+          {!panelOpen && (
+            <div className="flex items-center gap-2 animate-[fadeIn_0.3s_ease-out]">
+              <button
+                onClick={() => setPanelOpen(true)}
+                className="flex items-center gap-1.5 px-2.5 py-1.5 rounded-md bg-white/10 border border-white/[0.08] hover:bg-white/15 transition-all group"
+              >
+                <div className="w-4 h-4 rounded bg-[#4DAD75]/20 flex items-center justify-center">
+                  <span className="text-[7px] font-bold text-[#4DAD75]">N</span>
+                </div>
+              </button>
+              <button
+                onClick={() => setPanelOpen(true)}
+                className="flex items-center gap-1 px-2 py-1.5 rounded-md bg-[#4DAD75]/10 border border-[#4DAD75]/15 hover:bg-[#4DAD75]/20 transition-all text-[10px] text-[#4DAD75]/80 font-medium"
+              >
+                <span>⌥</span>
+                <span>X</span>
+              </button>
+            </div>
+          )}
         </div>
+        {/* Fake page content */}
         <div className="relative z-10 p-8 space-y-4 max-w-[50%]">
           <div className="h-3 bg-white/[0.04] rounded w-3/4" />
           <div className="h-3 bg-white/[0.04] rounded w-1/2" />
@@ -129,113 +99,146 @@ export default function HeroSidePanel() {
         </div>
       </div>
 
+      {/* Close tab — vertical tab on the left edge of the panel */}
+      {panelOpen && (
+        <button
+          onClick={() => setPanelOpen(false)}
+          className="absolute z-30 top-1/2 -translate-y-1/2 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+          style={{
+            right: panelOpen ? "calc(58% - 14px)" : "-28px",
+          }}
+        >
+          <div className="w-[14px] h-[72px] md:w-[14px] md:h-[80px] bg-[#e8e8e6] hover:bg-[#ddd] rounded-l-md flex items-center justify-center transition-colors cursor-pointer border-r-0 border border-[#d5d5d3]">
+            <svg
+              width="6"
+              height="10"
+              viewBox="0 0 6 10"
+              fill="none"
+              className="text-[#1a1a1a]/30"
+            >
+              <path d="M1 1l4 4-4 4" stroke="currentColor" strokeWidth="1.5" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+        </button>
+      )}
+
       {/* Side panel */}
       <div
-        className="absolute top-0 right-0 bottom-0 w-[58%] md:w-[46%] bg-[#f5f5f4] border-l border-[#d5d5d3] z-20 flex flex-col transition-transform duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
+        className="absolute top-0 right-0 bottom-0 w-[58%] md:w-[46%] bg-[#f5f5f4] border-l border-[#d5d5d3] z-20 flex flex-col transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
         style={{
-          transform: visible ? "translateX(0)" : "translateX(100%)",
+          transform: panelOpen ? "translateX(0)" : "translateX(calc(100% + 14px))",
+          opacity: panelOpen ? 1 : 0,
         }}
       >
-        {/* Header — matches real extension */}
-        <div className="flex items-center justify-between px-3 py-2.5 bg-white border-b border-[#e8e8e6]">
+        {/* Header */}
+        <div className="flex items-center justify-between px-3.5 py-2.5 bg-white border-b border-[#e8e8e6]">
           <div className="flex items-center gap-2.5">
-            {/* Close button */}
-            <button
-              onClick={() => setClosed(true)}
-              className="w-6 h-6 rounded flex items-center justify-center text-[#1a1a1a]/30 hover:text-[#1a1a1a]/60 hover:bg-[#1a1a1a]/5 transition-all active:scale-90"
-            >
-              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2.5" strokeLinecap="round">
-                <path d="M18 6L6 18M6 6l12 12" />
-              </svg>
-            </button>
-            {/* Logo */}
-            <div className="flex items-center gap-2">
-              <div className="w-[22px] h-[22px] rounded-md bg-[#4DAD75]/15 flex items-center justify-center">
-                <span className="text-[9px] font-bold text-[#4DAD75]">N</span>
+            <div className="w-[24px] h-[24px] rounded-md bg-[#4DAD75]/15 flex items-center justify-center">
+              <span className="text-[10px] font-bold text-[#4DAD75]">N</span>
+            </div>
+            <div>
+              <div className="text-[12px] font-semibold text-[#1a1a1a] leading-tight">
+                Napkin Notes
               </div>
-              <div>
-                <div className="text-[12px] font-semibold text-[#1a1a1a] leading-tight">
-                  Napkin Notes
-                </div>
-                <div className="text-[8px] text-[#1a1a1a]/30 leading-tight">
-                  quickest canvas for thought
-                </div>
+              <div className="text-[8px] text-[#1a1a1a]/30 leading-tight">
+                quickest canvas for thought
               </div>
             </div>
           </div>
-          <div className="flex items-center gap-1">
-            {/* Open in tab icon */}
-            <div className="w-6 h-6 rounded flex items-center justify-center text-[#1a1a1a]/25">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+          <div className="flex items-center gap-1.5">
+            <div className="w-7 h-7 rounded-full flex items-center justify-center text-[#1a1a1a]/25 hover:bg-[#f0f0ee] transition-colors">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
                 <path d="M18 13v6a2 2 0 01-2 2H5a2 2 0 01-2-2V8a2 2 0 012-2h6M15 3h6v6M10 14L21 3" />
               </svg>
             </div>
-            {/* Three dot menu */}
-            <div className="w-6 h-6 rounded flex items-center justify-center text-[#1a1a1a]/25">
-              <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor">
-                <circle cx="12" cy="5" r="2" />
-                <circle cx="12" cy="12" r="2" />
-                <circle cx="12" cy="19" r="2" />
+            <div className="w-7 h-7 rounded-full flex items-center justify-center text-[#1a1a1a]/25 hover:bg-[#f0f0ee] transition-colors">
+              <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
+                <circle cx="12" cy="5" r="1.5" />
+                <circle cx="12" cy="12" r="1.5" />
+                <circle cx="12" cy="19" r="1.5" />
               </svg>
             </div>
           </div>
         </div>
 
-        {/* Tabs — numbered with arrows like the real extension */}
-        <div className="flex items-center px-2 py-1.5 bg-white border-b border-[#e8e8e6] gap-0">
+        {/* Pill tabs — matching real extension UI */}
+        <div className="flex items-center px-3 py-2 bg-white border-b border-[#e8e8e6] gap-1">
           {tabs.map((tab, i) => (
             <button
               key={i}
               onClick={() => setActiveTab(i)}
-              className={`relative px-2.5 py-1 text-[11px] rounded-md transition-all ${
+              className={`transition-all text-[12px] leading-none ${
                 activeTab === i
-                  ? "bg-[#4DAD75]/8 text-[#4DAD75] font-medium"
-                  : "text-[#1a1a1a]/35 hover:text-[#1a1a1a]/55"
+                  ? "bg-[#f0f0ee] rounded-full px-3 py-1.5 flex items-center gap-1.5"
+                  : "px-2 py-1.5 text-[#1a1a1a]/35 hover:text-[#1a1a1a]/55"
               }`}
             >
-              {activeTab === i && i < 2 ? tab.name : (i < 2 ? tab.name : tab.name)}
-              {activeTab === i && (
-                <span className="absolute -top-0.5 -right-0.5 w-2.5 h-2.5 rounded-full flex items-center justify-center text-[6px] text-[#1a1a1a]/25 bg-[#f0f0ee] leading-none">
-                  x
+              <span
+                className={
+                  activeTab === i
+                    ? "font-semibold text-[#4DAD75]"
+                    : ""
+                }
+              >
+                {tab.num}
+              </span>
+              {activeTab === i && tab.name && (
+                <span className="font-medium text-[#1a1a1a]/80">
+                  {tab.name}
                 </span>
+              )}
+              {activeTab !== i && tab.name && (
+                <span className="sr-only">{tab.name}</span>
               )}
             </button>
           ))}
-          <div className="ml-auto flex items-center gap-0.5 text-[#1a1a1a]/20">
-            <button className="w-5 h-5 rounded flex items-center justify-center hover:text-[#1a1a1a]/40 transition-colors text-[10px]">&lsaquo;</button>
-            <button className="w-5 h-5 rounded flex items-center justify-center hover:text-[#1a1a1a]/40 transition-colors text-[10px]">&rsaquo;</button>
+          <button className="px-2 py-1.5 text-[12px] text-[#4DAD75]/60 hover:text-[#4DAD75] transition-colors">
+            +
+          </button>
+          <div className="ml-auto flex items-center gap-0 text-[#1a1a1a]/20">
+            <button className="w-5 h-5 flex items-center justify-center hover:text-[#1a1a1a]/40 transition-colors text-[11px]">
+              &lsaquo;
+            </button>
+            <button className="w-5 h-5 flex items-center justify-center hover:text-[#1a1a1a]/40 transition-colors text-[11px]">
+              &rsaquo;
+            </button>
           </div>
         </div>
 
-        {/* Editor area — inset grey bg with green-bordered editor */}
-        <div className="flex-1 p-3 bg-[#f0efed] overflow-hidden">
-          <div
-            className={`w-full h-full bg-white rounded-lg p-3 transition-shadow duration-300 ${
-              activeTab === 0 ? "shadow-[0_0_0_1.5px_rgba(77,173,117,0.35)]" : "shadow-[0_0_0_1px_rgba(0,0,0,0.06)]"
-            }`}
-          >
+        {/* Editor area — grey inset, white editor with green outline */}
+        <div className="flex-1 p-3 bg-[#eeede9] overflow-hidden">
+          <div className="w-full h-full bg-white rounded-lg shadow-[0_0_0_1.5px_rgba(77,173,117,0.3)] overflow-hidden">
             {activeTab === 0 ? (
-              <div className="text-[12px] text-[#1a1a1a]/75 leading-[1.7] font-[var(--font-figtree)]">
-                {personalNotes.slice(0, typedLines).map((line, i) => (
+              <div
+                ref={editorRef}
+                contentEditable={animDone}
+                suppressContentEditableWarning
+                className="w-full h-full p-3.5 text-[12px] text-[#1a1a1a]/80 leading-[1.8] outline-none font-[var(--font-figtree)]"
+              >
+                <div className="font-medium text-[#1a1a1a]/90 mb-1">Daily tasks</div>
+                {taskNotes.slice(0, animDone ? taskNotes.length : typedCount).map((task, i) => (
                   <div
                     key={i}
-                    className="animate-[fadeIn_0.3s_ease-out]"
-                    style={{ minHeight: line === "" ? "0.8em" : undefined }}
+                    className="flex items-start gap-2 animate-[fadeSlide_0.3s_ease-out]"
                   >
-                    {line}
+                    <span className="mt-[2px] text-[10px]">
+                      {task.done ? "☑" : "☐"}
+                    </span>
+                    <span className={task.done ? "line-through text-[#1a1a1a]/30" : ""}>
+                      {task.text}
+                    </span>
                   </div>
                 ))}
-                {typedLines < personalNotes.length && typedLines > 0 && (
-                  <span className="inline-block w-[2px] h-[14px] bg-[#4DAD75]/60 animate-pulse ml-0.5 align-text-bottom" />
+                {!animDone && typedCount > 0 && (
+                  <span className="inline-block w-[2px] h-[13px] bg-[#4DAD75]/50 animate-pulse ml-0.5 align-text-bottom" />
                 )}
               </div>
             ) : (
               <div
-                ref={editorRef}
                 contentEditable
                 suppressContentEditableWarning
-                className="w-full h-full text-[12px] text-[#1a1a1a]/75 leading-[1.7] outline-none empty:before:content-[attr(data-placeholder)] empty:before:text-[#1a1a1a]/20"
-                data-placeholder={placeholders[activeTab]}
+                className="w-full h-full p-3.5 text-[12px] text-[#1a1a1a]/80 leading-[1.8] outline-none empty:before:content-[attr(data-placeholder)] empty:before:text-[#1a1a1a]/20"
+                data-placeholder={activeTab === 1 ? "Sprint planning notes..." : "Quick scratch pad..."}
                 spellCheck={false}
               />
             )}
@@ -243,21 +246,27 @@ export default function HeroSidePanel() {
         </div>
 
         {/* Status bar */}
-        <div className="px-3 py-1.5 bg-[#f0efed] border-t border-[#e5e5e3] flex items-center justify-end gap-3">
+        <div className="px-3.5 py-1.5 bg-[#eeede9] border-t border-[#e0dfdb] flex items-center justify-end gap-3">
           <div className="flex items-center gap-1.5">
             <div className="w-[5px] h-[5px] rounded-full bg-[#4DAD75]" />
             <span className="text-[9px] text-[#1a1a1a]/30">Saved</span>
           </div>
           <span className="text-[9px] text-[#1a1a1a]/20">
-            {activeTab === 0 ? `${personalNotes.filter(l => l).join(' ').split(' ').length} words` : "0 words"}
+            {activeTab === 0
+              ? `${taskNotes.map((t) => t.text).join(" ").split(" ").length} words`
+              : "0 words"}
           </span>
         </div>
       </div>
 
       <style jsx>{`
-        @keyframes fadeIn {
-          from { opacity: 0; transform: translateY(2px); }
+        @keyframes fadeSlide {
+          from { opacity: 0; transform: translateY(3px); }
           to { opacity: 1; transform: translateY(0); }
+        }
+        @keyframes fadeIn {
+          from { opacity: 0; }
+          to { opacity: 1; }
         }
       `}</style>
     </div>

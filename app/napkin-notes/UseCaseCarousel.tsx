@@ -3,18 +3,23 @@ import { useState, useRef, useEffect } from "react";
 
 const useCases = [
   {
+    title: "Capture ideas",
+    desc: "Jot down thoughts the moment they come to you. Sort them out later — or don't.",
+    screenshot: null,
+  },
+  {
     title: "Meeting notes",
-    desc: "Jot down action items while you're on a call. No tab switching.",
+    desc: "Action items, decisions, follow-ups — all captured while you're still on the call.",
     screenshot: null,
   },
   {
     title: "Research",
-    desc: "Collect snippets and links as you browse. Everything stays right there.",
+    desc: "Collect snippets and links as you browse. Everything stays right beside the page.",
     screenshot: null,
   },
   {
     title: "Quick drafts",
-    desc: "Start an email reply, sketch out a message, outline a doc before committing.",
+    desc: "Sketch out a reply, outline a doc, draft a message before committing to it.",
     screenshot: null,
   },
   {

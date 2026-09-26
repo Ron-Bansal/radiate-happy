@@ -186,115 +186,131 @@ export default function NapkinNotesPage() {
         <UseCaseCarousel />
       </section>
 
-      {/* Pro — redesigned */}
-      <section className="relative px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3]">
-        <div className="md:flex md:gap-20">
-          {/* Left — pitch and price */}
-          <div className="md:w-[380px] shrink-0 mb-12 md:mb-0">
-            <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#1a1a1a]/5 text-[#1a1a1a]/50 mb-4">
-              Pro
-            </div>
-            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
-              More space when you need it.
-            </h2>
-            <p className="text-[#1a1a1a]/50 text-[15px] leading-relaxed mb-8">
-              Free covers most people. Pro is for power users who need dedicated
-              notes for every context — or anyone who wants to support an indie
-              developer keeping this alive.
-            </p>
-            <div className="flex items-baseline gap-3 mb-8">
-              <span className="text-4xl font-semibold">$9.99</span>
-              <div className="text-sm text-[#1a1a1a]/35 leading-tight">
-                <div>one-time</div>
-                <div>not a subscription</div>
+      {/* Pro */}
+      <section className="border-t border-[#e5e5e3]">
+        {/* Dark hero block */}
+        <div className="bg-[#1a1a1a] relative overflow-hidden">
+          <div
+            className="absolute inset-0 opacity-[0.06]"
+            style={{
+              backgroundImage:
+                "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
+              backgroundSize: "40px 40px",
+            }}
+          />
+          <div className="relative z-10 px-6 md:px-12 py-20 max-w-6xl mx-auto">
+            <div className="max-w-lg">
+              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-white/10 text-white/60 mb-5">
+                Pro
+              </span>
+              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white leading-[1.15] mb-4">
+                More notes.
+                <br />
+                More context.
+              </h2>
+              <p className="text-white/45 text-[15px] leading-relaxed mb-8">
+                Free is perfect for most people. Pro unlocks 10 extra notes, smart
+                linking, and quick capture — for power users or anyone who wants to
+                support an indie developer.
+              </p>
+              <div className="flex items-center gap-6 mb-10">
+                <div className="flex items-baseline gap-2">
+                  <span className="text-4xl font-semibold text-white">$9.99</span>
+                  <span className="text-sm text-white/30">one-time</span>
+                </div>
+                <a
+                  href={CHROME_STORE_URL}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center px-5 py-2.5 rounded-lg bg-white text-[#1a1a1a] text-sm font-medium hover:bg-white/90 transition-colors"
+                >
+                  Get Pro
+                </a>
               </div>
             </div>
-            <a
-              href={CHROME_STORE_URL}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="inline-flex items-center px-5 py-2.5 rounded-lg bg-[#1a1a1a] text-white text-sm font-medium hover:bg-[#333] transition-colors"
-            >
-              Get Pro
-            </a>
-          </div>
 
-          {/* Right — visual feature showcase */}
-          <div className="flex-1">
-            {/* Notes fan */}
-            <div className="relative h-[220px] mb-10">
-              <div className="absolute inset-0 flex items-center justify-center">
+            {/* Visual — tab bar mockup showing many notes */}
+            <div className="rounded-xl bg-white/[0.05] border border-white/[0.08] p-4 md:p-5 backdrop-blur-sm">
+              <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-hide" style={{ scrollbarWidth: "none" }}>
                 {[
-                  { name: "Research", site: "scholar.google.com", x: -120, y: -20, r: -8 },
-                  { name: "Design", site: "figma.com", x: -55, y: -35, r: -3 },
-                  { name: "Work", site: "linear.app", x: 0, y: -40, r: 0 },
-                  { name: "Coursework", site: "canvas.edu", x: 55, y: -35, r: 3 },
-                  { name: "Side Project", site: "github.com", x: 120, y: -20, r: 7 },
-                  { name: "Reading List", x: -90, y: 35, r: -5, site: null },
-                  { name: "Recipes", x: -25, y: 40, r: -1, site: null },
-                  { name: "Travel", x: 40, y: 38, r: 2, site: null },
-                  { name: "Add note", x: 100, y: 30, r: 5, empty: true, site: null },
-                  { name: "Add note", x: 155, y: 20, r: 8, empty: true, site: null },
-                ].map((note, i) => (
+                  { num: 1, name: "Personal" },
+                  { num: 2, name: "Work", linked: "linear.app" },
+                  { num: 3, name: "Research", linked: "scholar.google.com" },
+                  { num: 4, name: "Design", linked: "figma.com" },
+                  { num: 5, name: "Side Project", linked: "github.com" },
+                  { num: 6, name: "Coursework" },
+                  { num: 7, name: "Reading List" },
+                  { num: 8, name: "Recipes" },
+                  { num: 9, name: null },
+                  { num: null, name: "+" },
+                ].map((tab, i) => (
                   <div
                     key={i}
-                    className={`absolute w-[110px] h-[68px] rounded-lg border flex flex-col justify-between p-2.5 transition-all duration-300 hover:scale-110 hover:z-10 hover:shadow-md ${
-                      note.empty
-                        ? "border-dashed border-[#d5d5d3] bg-[#fafaf9]/80"
-                        : "border-[#e5e5e3] bg-white shadow-sm"
+                    className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] flex items-center gap-1.5 transition-all ${
+                      i === 1
+                        ? "bg-white/15"
+                        : i === 9
+                          ? "text-[#4DAD75]/60"
+                          : "text-white/25 hover:text-white/40"
                     }`}
-                    style={{
-                      transform: `translate(${note.x}px, ${note.y}px) rotate(${note.r}deg)`,
-                    }}
                   >
-                    <span
-                      className={`text-[10px] font-medium leading-tight ${
-                        note.empty ? "text-[#1a1a1a]/20" : "text-[#1a1a1a]/75"
-                      }`}
-                    >
-                      {note.name}
-                    </span>
-                    {note.site && (
-                      <span className="text-[8px] text-[#4DAD75]/60 truncate">{note.site}</span>
+                    {tab.num && (
+                      <span className={i === 1 ? "font-semibold text-[#4DAD75]" : ""}>
+                        {tab.num}
+                      </span>
                     )}
-                    {note.empty && (
-                      <span className="text-[8px] text-[#1a1a1a]/15">+</span>
+                    {tab.name && tab.name !== "+" && (
+                      <span className={i === 1 ? "font-medium text-white/80" : ""}>
+                        {tab.name}
+                      </span>
                     )}
+                    {tab.name === "+" && <span>{tab.name}</span>}
                   </div>
                 ))}
+                <div className="shrink-0 ml-auto flex items-center gap-1 text-white/15 text-[10px]">
+                  <span>&lsaquo;</span>
+                  <span>&rsaquo;</span>
+                </div>
+              </div>
+              {/* Linked indicator */}
+              <div className="mt-3 flex items-center gap-2 text-[10px] text-white/25">
+                <span>Linked &middot;</span>
+                <span className="text-[#4DAD75]/50">linear.app</span>
               </div>
             </div>
+          </div>
+        </div>
 
-            {/* Feature descriptions */}
-            <div className="space-y-6 border-t border-[#e5e5e3] pt-8">
-              {[
-                {
-                  title: "10 extra notes",
-                  desc: "Dedicated spaces for work, research, side projects, coursework — named and organised your way.",
-                },
-                {
-                  title: "Link websites to notes",
-                  desc: "Open Napkin on linear.app and it jumps to your Work note. On github.com, Side Project. Automatic.",
-                },
-                {
-                  title: "Quick capture",
-                  desc: "Select text on any page, right-click, append to your note. Source URL saved automatically.",
-                },
-                {
-                  title: "All Notes + search",
-                  desc: "See everything at a glance. Search across all notes to surface that thing you saved weeks ago.",
-                },
-              ].map((f) => (
-                <div key={f.title} className="flex gap-4 items-start">
-                  <div className="w-1.5 h-1.5 rounded-full bg-[#4DAD75]/40 mt-2 shrink-0" />
-                  <div>
-                    <h3 className="font-semibold text-[14px]">{f.title}</h3>
-                    <p className="text-[13px] text-[#1a1a1a]/45 mt-0.5 leading-relaxed">
-                      {f.desc}
-                    </p>
-                  </div>
-                </div>
-              ))}
+        {/* Pro features — light bg below */}
+        <div className="px-6 md:px-12 py-16 max-w-6xl mx-auto">
+          <div className="grid md:grid-cols-2 gap-x-20 gap-y-10">
+            <div>
+              <h3 className="font-semibold text-[16px] mb-2">10 extra notes</h3>
+              <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
+                Dedicated spaces for every context — work, research, side projects,
+                coursework. Name them, reorder them, use as many or as few as you need.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-[16px] mb-2">Link websites to notes</h3>
+              <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
+                Open Napkin on linear.app and it jumps straight to your Work note.
+                On github.com, Side Project. The right context, automatically.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-[16px] mb-2">Quick capture</h3>
+              <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
+                Select any text on a page and send it to your note in one click.
+                The source URL is saved with it so you can always find where it came from.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-[16px] mb-2">All Notes &amp; search</h3>
+              <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
+                See every note at a glance. Search across all of them to surface
+                that snippet you saved three weeks ago.
+              </p>
             </div>
           </div>
         </div>

@@ -3,33 +3,33 @@ import { useState, useEffect, useCallback } from "react";
 
 const features = [
   {
-    label: "Fresh design",
-    desc: "Cleaner look, better spacing, smoother interactions. Everything you had, nothing lost.",
+    label: "Modern redesign",
+    desc: "Cleaner look, smoother interactions, and more customisation — font selection, text sizing, and theme options.",
     screenshot: null,
   },
   {
-    label: "Full-page & split view",
-    desc: "Open your notes in a dedicated tab. Split view shows up to three notes at once for the big picture.",
+    label: "A second scratch pad",
+    desc: "Every user gets two notes now. Keep things tidy without adding complexity.",
     screenshot: null,
   },
   {
-    label: "Rich text editor",
-    desc: "TipTap-powered formatting with markdown shortcuts. Bold, italic, lists, links, images — all inline.",
-    screenshot: null,
-  },
-  {
-    label: "Overlay mode",
-    desc: "Works on Arc, Brave, and any browser without native side panel support. No setup needed.",
+    label: "Full-page split view",
+    desc: "Open your notes in a dedicated tab. Split view shows up to three notes side by side.",
     screenshot: null,
   },
   {
     label: "Clickable web links",
-    desc: "URLs you paste or type are now live. Click to open, hover to preview.",
+    desc: "URLs are now live links. Click to open, hover to preview — no more copy-pasting.",
     screenshot: null,
   },
   {
-    label: "Second scratch pad",
-    desc: "Every user gets two notes now. Enough to stay organised without the clutter.",
+    label: "Rich text editing",
+    desc: "Bold, italic, lists, links, images — all inline with markdown shortcuts or the floating toolbar.",
+    screenshot: null,
+  },
+  {
+    label: "Overlay mode",
+    desc: "Napkin Notes now works on Arc, Brave, and other browsers that don't support native side panels.",
     screenshot: null,
   },
 ];

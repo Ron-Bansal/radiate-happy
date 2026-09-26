@@ -10,7 +10,7 @@ export default function LoaderWrapper({ children, forceShow = false }) {
   // /ascent is a standalone product landing page — people arrive there from the
   // App Store, not from the portfolio, so the site intro loader is skipped.
   const pathname = usePathname();
-  const skipLoader = pathname?.startsWith('/ascent') ?? false;
+  const skipLoader = (pathname?.startsWith('/ascent') || pathname?.startsWith('/napkin-notes')) ?? false;
 
   // Use useEffect to safely check session storage on client-side
   useEffect(() => {

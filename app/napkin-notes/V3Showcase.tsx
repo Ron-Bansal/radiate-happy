@@ -3,33 +3,33 @@ import { useState, useEffect, useCallback } from "react";
 
 const features = [
   {
+    label: "Fresh design",
+    desc: "Cleaner look, better spacing, smoother interactions. Everything you had, nothing lost.",
+    screenshot: null,
+  },
+  {
+    label: "Full-page & split view",
+    desc: "Open your notes in a dedicated tab. Split view shows up to three notes at once for the big picture.",
+    screenshot: null,
+  },
+  {
     label: "Rich text editor",
     desc: "TipTap-powered formatting with markdown shortcuts. Bold, italic, lists, links, images — all inline.",
     screenshot: null,
   },
   {
-    label: "Clickable web links",
-    desc: "URLs you paste or type are now live links. Click to open, hover to preview.",
-    screenshot: null,
-  },
-  {
     label: "Overlay mode",
-    desc: "Works on Arc, Brave, and any browser without native side panel support.",
+    desc: "Works on Arc, Brave, and any browser without native side panel support. No setup needed.",
     screenshot: null,
   },
   {
-    label: "Full-page review",
-    desc: "Open your notes in a dedicated tab. Split view shows up to three notes at once.",
+    label: "Clickable web links",
+    desc: "URLs you paste or type are now live. Click to open, hover to preview.",
     screenshot: null,
   },
   {
     label: "Second scratch pad",
     desc: "Every user gets two notes now. Enough to stay organised without the clutter.",
-    screenshot: null,
-  },
-  {
-    label: "Fresh design",
-    desc: "Cleaner look, better spacing, smoother interactions. Everything you had, nothing lost.",
     screenshot: null,
   },
 ];
@@ -71,47 +71,37 @@ export default function V3Showcase() {
   return (
     <div className="flex flex-col md:flex-row gap-0 rounded-xl overflow-hidden border border-[#2a2a2a]/20">
       {/* Feature list - left side */}
-      <div className="md:w-[340px] shrink-0 bg-[#fafaf9] p-6 md:p-8 space-y-1">
+      <div className="md:w-[340px] shrink-0 bg-[#fafaf9] p-5 md:p-6 space-y-0.5">
         {features.map((f, i) => (
           <button
             key={f.label}
             onClick={() => handleClick(i)}
             className={`w-full text-left px-4 py-3 rounded-lg transition-all duration-300 group ${
               active === i
-                ? "bg-white shadow-sm"
-                : "hover:bg-white/50"
+                ? "bg-white border border-[#4DAD75]/20 shadow-sm"
+                : "border border-transparent hover:bg-white/60"
             }`}
           >
-            <div className="flex items-center gap-3">
-              <div
-                className={`w-1 h-8 rounded-full transition-all duration-300 ${
-                  active === i ? "bg-[#4DAD75]" : "bg-transparent"
-                }`}
-              />
-              <div className="flex-1 min-w-0">
-                <div
-                  className={`text-[14px] font-medium transition-colors ${
-                    active === i
-                      ? "text-[#1a1a1a]"
-                      : "text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/60"
-                  }`}
-                >
-                  {f.label}
-                </div>
-                <div
-                  className={`text-[12px] leading-relaxed mt-0.5 transition-all duration-300 overflow-hidden ${
-                    active === i
-                      ? "text-[#1a1a1a]/50 max-h-20 opacity-100"
-                      : "max-h-0 opacity-0"
-                  }`}
-                >
-                  {f.desc}
-                </div>
-              </div>
+            <div
+              className={`text-[14px] font-medium transition-colors ${
+                active === i
+                  ? "text-[#1a1a1a]"
+                  : "text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/60"
+              }`}
+            >
+              {f.label}
             </div>
-            {/* Progress bar for active item */}
+            <div
+              className={`text-[12px] leading-relaxed mt-1 transition-all duration-300 overflow-hidden ${
+                active === i
+                  ? "text-[#1a1a1a]/50 max-h-20 opacity-100"
+                  : "max-h-0 opacity-0"
+              }`}
+            >
+              {f.desc}
+            </div>
             {active === i && (
-              <div className="mt-2 ml-4 h-[2px] bg-[#e5e5e3] rounded-full overflow-hidden">
+              <div className="mt-2 h-[2px] bg-[#e5e5e3] rounded-full overflow-hidden">
                 <div
                   className="h-full bg-[#4DAD75]/40 rounded-full transition-[width] duration-[50ms] linear"
                   style={{ width: `${progress}%` }}
@@ -124,7 +114,6 @@ export default function V3Showcase() {
 
       {/* Screenshot area - right side with dark grid */}
       <div className="flex-1 bg-[#1e1e1e] relative min-h-[360px] md:min-h-[480px]">
-        {/* Grid pattern */}
         <div
           className="absolute inset-0 opacity-[0.12]"
           style={{
@@ -133,7 +122,6 @@ export default function V3Showcase() {
             backgroundSize: "30px 30px",
           }}
         />
-        {/* Screenshot placeholder */}
         <div className="absolute inset-0 flex items-center justify-center p-8">
           <div className="relative w-full max-w-md">
             <div className="aspect-[4/3] rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center backdrop-blur-sm">

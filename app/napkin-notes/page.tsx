@@ -4,109 +4,74 @@ import Image from "next/image";
 import HeroSidePanel from "./HeroSidePanel";
 import V3Showcase from "./V3Showcase";
 import UseCaseCarousel from "./UseCaseCarousel";
+import FAQAccordion from "./FAQAccordion";
 
 export const metadata: Metadata = {
   title: "Napkin Notes — Side-panel notes for your browser",
   description:
-    "The fastest way to jot something down without leaving your browser. Rich text, multiple notes, autosaved. No accounts, no setup.",
+    "The fastest way to jot something down without leaving your browser. A Chrome side-panel notepad with rich text, multiple notes, autosave. Free, no accounts, no cloud. Works on Chrome, Arc, Edge, and Brave.",
+  keywords: [
+    "chrome extension notepad",
+    "browser side panel notes",
+    "quick notes chrome extension",
+    "side panel notepad",
+    "browser notepad",
+    "chrome notes extension",
+    "arc browser notes",
+    "napkin notes",
+    "scratch pad extension",
+    "note taking chrome extension",
+  ],
   openGraph: {
     title: "Napkin Notes — Side-panel notes for your browser",
     description:
-      "The fastest way to jot something down without leaving your browser.",
+      "A scratch pad that lives in your browser's side panel. Click the icon, start typing. Free, no accounts.",
     images: ["/assets/napkin-notes-golden.webp"],
+    type: "website",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "Napkin Notes — Side-panel notes for your browser",
+    description:
+      "A scratch pad that lives in your browser's side panel. Click the icon, start typing. Free, no accounts.",
+    images: ["/assets/napkin-notes-golden.webp"],
+  },
+  alternates: {
+    canonical: "https://raunaqbansal.com/napkin-notes",
   },
 };
 
 const CHROME_STORE_URL =
   "https://chromewebstore.google.com/detail/napkin-notes-%E2%80%A2-side-panel/dlhljjkacijknfelknklfcohibfdciki";
 
-const proNotes = [
-  { name: "Research", site: "scholar.google.com", rotation: -6 },
-  { name: "Design", site: "figma.com", rotation: -3 },
-  { name: "Work", site: "linear.app", rotation: 0 },
-  { name: "Coursework", site: "canvas.edu", rotation: 3 },
-  { name: "Side Project", site: "github.com", rotation: 5 },
-];
-
-const proNotesBottom = [
-  { name: "Reading List", site: null, rotation: -4 },
-  { name: "Recipes", site: null, rotation: -1 },
-  { name: "Travel", site: null, rotation: 2 },
-  { name: "Add note", site: null, rotation: 4, empty: true },
-  { name: "Add note", site: null, rotation: 6, empty: true },
-];
-
-const faqs = [
-  {
-    q: "Where are my notes stored?",
-    a: "Locally in your browser, using Chrome's built-in storage. Nothing is sent anywhere.",
-  },
-  {
-    q: "Can I export my notes?",
-    a: "Not yet — it's on the roadmap. For now you can copy and paste from the full-page view.",
-  },
-  {
-    q: "Does it work on Firefox or Safari?",
-    a: "Not currently. Napkin Notes is built for Chrome and Chromium browsers — Edge, Arc, Brave, and others.",
-  },
-  {
-    q: "Is my data safe?",
-    a: "Your notes never leave your machine. There's no backend, no cloud sync, and no accounts. See our privacy page for details.",
-  },
-  {
-    q: "What happens if I uninstall?",
-    a: "Your notes are removed with the extension. If you reinstall, you start fresh.",
-  },
-  {
-    q: "Can I use it on multiple devices?",
-    a: "Notes are local to each browser profile. There's no sync between devices right now.",
-  },
-];
-
-function NoteCard({
-  name,
-  site,
-  rotation,
-  empty,
-}: {
-  name: string;
-  site: string | null;
-  rotation: number;
-  empty?: boolean;
-}) {
-  return (
-    <div
-      className={`relative w-[130px] h-[82px] rounded-lg border flex flex-col justify-between p-3 shrink-0 transition-transform hover:scale-105 hover:z-10 ${
-        empty
-          ? "border-dashed border-[#d5d5d3] bg-[#fafaf9]"
-          : "border-[#e5e5e3] bg-white shadow-sm"
-      }`}
-      style={{ transform: `rotate(${rotation}deg)` }}
-    >
-      <span
-        className={`text-[11px] font-medium leading-tight ${
-          empty ? "text-[#1a1a1a]/25" : "text-[#1a1a1a]/80"
-        }`}
-      >
-        {name}
-      </span>
-      {site && (
-        <span className="text-[9px] text-[#4DAD75]/70 truncate">{site}</span>
-      )}
-      {empty && <span className="text-[9px] text-[#1a1a1a]/20">+</span>}
-      {!empty && !site && (
-        <div className="space-y-1">
-          <div className="h-[3px] bg-[#1a1a1a]/[0.04] rounded w-4/5" />
-          <div className="h-[3px] bg-[#1a1a1a]/[0.04] rounded w-3/5" />
-        </div>
-      )}
-    </div>
-  );
-}
-
 export default function NapkinNotesPage() {
+  const jsonLd = {
+    "@context": "https://schema.org",
+    "@type": "SoftwareApplication",
+    name: "Napkin Notes",
+    applicationCategory: "BrowserApplication",
+    operatingSystem: "Chrome, Edge, Arc, Brave",
+    offers: {
+      "@type": "Offer",
+      price: "0",
+      priceCurrency: "USD",
+    },
+    description:
+      "A Chrome side-panel notepad for quick notes without leaving your browser. Rich text, multiple notes, autosave.",
+    url: "https://raunaqbansal.com/napkin-notes",
+    author: {
+      "@type": "Person",
+      name: "Ron Bansal",
+    },
+  };
+
   return (
     <main className="min-h-screen bg-[#fafaf9] text-[#1a1a1a] font-[var(--font-figtree)]">
+      <script
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
+      />
+
       {/* Nav */}
       <nav className="flex items-center justify-between px-6 md:px-12 py-6 max-w-6xl mx-auto">
         <div className="flex items-center gap-3">
@@ -160,46 +125,34 @@ export default function NapkinNotesPage() {
         <HeroSidePanel />
       </section>
 
-      {/* What you get — simple inline list, not cards */}
+      {/* Core value — 3 essential points */}
       <section className="px-6 md:px-12 py-20 max-w-6xl mx-auto">
-        <h2 className="text-sm font-medium uppercase tracking-widest text-[#1a1a1a]/40 mb-10">
-          What you get
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-12">
+          Notes without the context switch.
         </h2>
-        <div className="grid md:grid-cols-3 gap-x-16 gap-y-6">
+        <div className="grid md:grid-cols-3 gap-12 md:gap-16">
           <div>
-            <h3 className="font-semibold text-[15px]">Side panel, always there</h3>
-            <p className="mt-1 text-sm text-[#1a1a1a]/50 leading-relaxed">
-              Opens alongside whatever you&apos;re reading. No new tab, no context switch.
+            <div className="text-[28px] mb-3 text-[#1a1a1a]/15">01</div>
+            <h3 className="font-semibold text-[17px] mb-2">Always beside your page</h3>
+            <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
+              Opens in the browser&apos;s side panel — right alongside whatever
+              you&apos;re reading. No new tab, no window juggling.
             </p>
           </div>
           <div>
-            <h3 className="font-semibold text-[15px]">Rich text that just works</h3>
-            <p className="mt-1 text-sm text-[#1a1a1a]/50 leading-relaxed">
-              Bold, lists, links, images — use markdown shortcuts or the toolbar.
+            <div className="text-[28px] mb-3 text-[#1a1a1a]/15">02</div>
+            <h3 className="font-semibold text-[17px] mb-2">Rich text, zero setup</h3>
+            <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
+              Bold, lists, links, images. Use markdown shortcuts or select and
+              format. No accounts, no configuration — install and start writing.
             </p>
           </div>
           <div>
-            <h3 className="font-semibold text-[15px]">Two scratch pads</h3>
-            <p className="mt-1 text-sm text-[#1a1a1a]/50 leading-relaxed">
-              Keep things tidy without adding complexity. Rename them however you like.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-[15px]">Works on Arc too</h3>
-            <p className="mt-1 text-sm text-[#1a1a1a]/50 leading-relaxed">
-              Iframe overlay mode for browsers that don&apos;t support native side panels.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-[15px]">Full-page &amp; split view</h3>
-            <p className="mt-1 text-sm text-[#1a1a1a]/50 leading-relaxed">
-              Open your notes in a new tab. See them side by side when you need the big picture.
-            </p>
-          </div>
-          <div>
-            <h3 className="font-semibold text-[15px]">No accounts, no cloud</h3>
-            <p className="mt-1 text-sm text-[#1a1a1a]/50 leading-relaxed">
-              Your notes stay in your browser. Nothing leaves your machine.
+            <div className="text-[28px] mb-3 text-[#1a1a1a]/15">03</div>
+            <h3 className="font-semibold text-[17px] mb-2">Local and private</h3>
+            <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
+              Your notes stay on your machine. No cloud, no server, no tracking.
+              Autosaved to Chrome&apos;s built-in storage.
             </p>
           </div>
         </div>
@@ -224,113 +177,150 @@ export default function NapkinNotesPage() {
 
       {/* Who it's for — carousel */}
       <section className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3]">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-3">
+        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-2">
           For anyone who thinks faster than they can context-switch.
         </h2>
         <p className="text-[#1a1a1a]/40 text-base mb-10 max-w-lg">
-          Napkin Notes is not a second brain, a knowledge base, or a project
-          manager. It&apos;s a scratch pad.
+          Not a second brain, not a knowledge base. A scratch pad.
         </p>
         <UseCaseCarousel />
       </section>
 
-      {/* Pro */}
-      <section className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3]">
-        <div className="md:flex md:items-start md:justify-between md:gap-16 mb-14">
-          <div className="md:max-w-md mb-8 md:mb-0">
-            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-3">
-              Napkin Pro
+      {/* Pro — redesigned */}
+      <section className="relative px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3]">
+        <div className="md:flex md:gap-20">
+          {/* Left — pitch and price */}
+          <div className="md:w-[380px] shrink-0 mb-12 md:mb-0">
+            <div className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#1a1a1a]/5 text-[#1a1a1a]/50 mb-4">
+              Pro
+            </div>
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
+              More space when you need it.
             </h2>
-            <p className="text-[#1a1a1a]/50 text-base mb-5">
-              Free is perfect for most people. Pro is for power users who need more
-              space — or anyone who wants to support development.
+            <p className="text-[#1a1a1a]/50 text-[15px] leading-relaxed mb-8">
+              Free covers most people. Pro is for power users who need dedicated
+              notes for every context — or anyone who wants to support an indie
+              developer keeping this alive.
             </p>
-            <div className="flex items-baseline gap-2">
-              <span className="text-3xl font-semibold">$9.99</span>
-              <span className="text-sm text-[#1a1a1a]/40">
-                USD &middot; one-time, not a subscription
-              </span>
+            <div className="flex items-baseline gap-3 mb-8">
+              <span className="text-4xl font-semibold">$9.99</span>
+              <div className="text-sm text-[#1a1a1a]/35 leading-tight">
+                <div>one-time</div>
+                <div>not a subscription</div>
+              </div>
             </div>
+            <a
+              href={CHROME_STORE_URL}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center px-5 py-2.5 rounded-lg bg-[#1a1a1a] text-white text-sm font-medium hover:bg-[#333] transition-colors"
+            >
+              Get Pro
+            </a>
           </div>
-          {/* Pro features as a clean list */}
-          <div className="md:flex-1 space-y-5">
-            <div className="flex gap-3">
-              <div className="w-1 rounded-full bg-[#4DAD75]/30 shrink-0" />
-              <div>
-                <h3 className="font-semibold text-[14px]">Up to 10 extra notes</h3>
-                <p className="text-[13px] text-[#1a1a1a]/45 mt-0.5">
-                  Dedicated spaces for work, research, side projects, coursework.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <div className="w-1 rounded-full bg-[#4DAD75]/30 shrink-0" />
-              <div>
-                <h3 className="font-semibold text-[14px]">Link websites to notes</h3>
-                <p className="text-[13px] text-[#1a1a1a]/45 mt-0.5">
-                  Open Napkin on Linear and it jumps to your Work note. Automatic context.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <div className="w-1 rounded-full bg-[#4DAD75]/30 shrink-0" />
-              <div>
-                <h3 className="font-semibold text-[14px]">Quick capture</h3>
-                <p className="text-[13px] text-[#1a1a1a]/45 mt-0.5">
-                  Select any text on a page and append it to your note — with the source saved.
-                </p>
-              </div>
-            </div>
-            <div className="flex gap-3">
-              <div className="w-1 rounded-full bg-[#4DAD75]/30 shrink-0" />
-              <div>
-                <h3 className="font-semibold text-[14px]">All Notes view + search</h3>
-                <p className="text-[13px] text-[#1a1a1a]/45 mt-0.5">
-                  See everything at a glance. Find that snippet from three weeks ago.
-                </p>
-              </div>
-            </div>
-          </div>
-        </div>
 
-        {/* Overlayed note cards */}
-        <div className="flex flex-col items-center gap-5 py-8">
-          <div className="flex items-end -space-x-3">
-            {proNotes.map((note) => (
-              <NoteCard key={note.name} {...note} />
-            ))}
-          </div>
-          <div className="flex items-start -space-x-3">
-            {proNotesBottom.map((note, i) => (
-              <NoteCard key={note.name + i} {...note} />
-            ))}
+          {/* Right — visual feature showcase */}
+          <div className="flex-1">
+            {/* Notes fan */}
+            <div className="relative h-[220px] mb-10">
+              <div className="absolute inset-0 flex items-center justify-center">
+                {[
+                  { name: "Research", site: "scholar.google.com", x: -120, y: -20, r: -8 },
+                  { name: "Design", site: "figma.com", x: -55, y: -35, r: -3 },
+                  { name: "Work", site: "linear.app", x: 0, y: -40, r: 0 },
+                  { name: "Coursework", site: "canvas.edu", x: 55, y: -35, r: 3 },
+                  { name: "Side Project", site: "github.com", x: 120, y: -20, r: 7 },
+                  { name: "Reading List", x: -90, y: 35, r: -5, site: null },
+                  { name: "Recipes", x: -25, y: 40, r: -1, site: null },
+                  { name: "Travel", x: 40, y: 38, r: 2, site: null },
+                  { name: "Add note", x: 100, y: 30, r: 5, empty: true, site: null },
+                  { name: "Add note", x: 155, y: 20, r: 8, empty: true, site: null },
+                ].map((note, i) => (
+                  <div
+                    key={i}
+                    className={`absolute w-[110px] h-[68px] rounded-lg border flex flex-col justify-between p-2.5 transition-all duration-300 hover:scale-110 hover:z-10 hover:shadow-md ${
+                      note.empty
+                        ? "border-dashed border-[#d5d5d3] bg-[#fafaf9]/80"
+                        : "border-[#e5e5e3] bg-white shadow-sm"
+                    }`}
+                    style={{
+                      transform: `translate(${note.x}px, ${note.y}px) rotate(${note.r}deg)`,
+                    }}
+                  >
+                    <span
+                      className={`text-[10px] font-medium leading-tight ${
+                        note.empty ? "text-[#1a1a1a]/20" : "text-[#1a1a1a]/75"
+                      }`}
+                    >
+                      {note.name}
+                    </span>
+                    {note.site && (
+                      <span className="text-[8px] text-[#4DAD75]/60 truncate">{note.site}</span>
+                    )}
+                    {note.empty && (
+                      <span className="text-[8px] text-[#1a1a1a]/15">+</span>
+                    )}
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Feature descriptions */}
+            <div className="space-y-6 border-t border-[#e5e5e3] pt-8">
+              {[
+                {
+                  title: "10 extra notes",
+                  desc: "Dedicated spaces for work, research, side projects, coursework — named and organised your way.",
+                },
+                {
+                  title: "Link websites to notes",
+                  desc: "Open Napkin on linear.app and it jumps to your Work note. On github.com, Side Project. Automatic.",
+                },
+                {
+                  title: "Quick capture",
+                  desc: "Select text on any page, right-click, append to your note. Source URL saved automatically.",
+                },
+                {
+                  title: "All Notes + search",
+                  desc: "See everything at a glance. Search across all notes to surface that thing you saved weeks ago.",
+                },
+              ].map((f) => (
+                <div key={f.title} className="flex gap-4 items-start">
+                  <div className="w-1.5 h-1.5 rounded-full bg-[#4DAD75]/40 mt-2 shrink-0" />
+                  <div>
+                    <h3 className="font-semibold text-[14px]">{f.title}</h3>
+                    <p className="text-[13px] text-[#1a1a1a]/45 mt-0.5 leading-relaxed">
+                      {f.desc}
+                    </p>
+                  </div>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
       </section>
 
       {/* FAQ */}
       <section className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3]">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-10">
-          Questions
-        </h2>
-        <div className="grid md:grid-cols-2 gap-x-16 gap-y-8 max-w-4xl">
-          {faqs.map((faq) => (
-            <div key={faq.q}>
-              <h3 className="font-semibold text-[15px] mb-1.5">{faq.q}</h3>
-              <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
-                {faq.a}
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="mt-10 text-sm text-[#1a1a1a]/40">
-          Something else?{" "}
-          <a
-            href="mailto:raunaqbansal@outlook.com"
-            className="underline underline-offset-2 hover:text-[#1a1a1a] transition-colors"
-          >
-            raunaqbansal@outlook.com
-          </a>
+        <div className="md:flex md:gap-20">
+          <div className="md:w-[280px] shrink-0 mb-8 md:mb-0">
+            <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
+              FAQs
+            </h2>
+            <p className="mt-3 text-sm text-[#1a1a1a]/40">
+              Something not covered here?
+              <br />
+              <a
+                href="mailto:hello@raunaqbansal.com"
+                className="underline underline-offset-2 hover:text-[#1a1a1a] transition-colors"
+              >
+                hello@raunaqbansal.com
+              </a>
+            </p>
+          </div>
+          <div className="flex-1">
+            <FAQAccordion />
+          </div>
         </div>
       </section>
 

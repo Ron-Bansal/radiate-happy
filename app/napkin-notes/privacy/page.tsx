@@ -81,10 +81,10 @@ export default function PrivacyPage() {
             <p>
               Questions about privacy? Reach out at{" "}
               <a
-                href="mailto:raunaqbansal@outlook.com"
+                href="mailto:hello@raunaqbansal.com"
                 className="underline underline-offset-2 text-[#1a1a1a] hover:text-[#4DAD75] transition-colors"
               >
-                raunaqbansal@outlook.com
+                hello@raunaqbansal.com
               </a>
             </p>
           </section>

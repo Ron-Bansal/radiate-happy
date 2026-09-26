@@ -3,7 +3,7 @@ import Link from "next/link";
 import Image from "next/image";
 
 export const metadata: Metadata = {
-  title: "Privacy — Napkin Notes",
+  title: "Privacy | Napkin Notes",
   description: "How Napkin Notes handles your data. Short version: it doesn't leave your browser.",
 };
 

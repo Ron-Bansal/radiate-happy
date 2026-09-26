@@ -7,7 +7,7 @@ import UseCaseCarousel from "./UseCaseCarousel";
 import FAQAccordion from "./FAQAccordion";
 
 export const metadata: Metadata = {
-  title: "Napkin Notes — Side-panel notes for your browser",
+  title: "Napkin Notes | Side-panel notes for your browser",
   description:
     "The fastest way to jot something down without leaving your browser. A Chrome side-panel notepad with rich text, multiple notes, autosave. Free, no accounts, no cloud. Works on Chrome, Arc, Edge, and Brave.",
   keywords: [
@@ -23,7 +23,7 @@ export const metadata: Metadata = {
     "note taking chrome extension",
   ],
   openGraph: {
-    title: "Napkin Notes — Side-panel notes for your browser",
+    title: "Napkin Notes | Side-panel notes for your browser",
     description:
       "A scratch pad that lives in your browser's side panel. Click the icon, start typing. Free, no accounts.",
     images: ["/assets/napkin-notes-golden.webp"],
@@ -31,7 +31,7 @@ export const metadata: Metadata = {
   },
   twitter: {
     card: "summary_large_image",
-    title: "Napkin Notes — Side-panel notes for your browser",
+    title: "Napkin Notes | Side-panel notes for your browser",
     description:
       "A scratch pad that lives in your browser's side panel. Click the icon, start typing. Free, no accounts.",
     images: ["/assets/napkin-notes-golden.webp"],
@@ -115,7 +115,7 @@ export default function NapkinNotesPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center px-5 py-2.5 rounded-lg bg-[#1a1a1a] text-white text-sm font-medium hover:bg-[#333] transition-colors"
             >
-              Add to Chrome — Free
+              Add to Chrome, Free
             </a>
             <span className="text-xs text-[#1a1a1a]/30">
               Works on Chrome, Edge, Arc, Brave
@@ -132,23 +132,20 @@ export default function NapkinNotesPage() {
         </h2>
         <div className="grid md:grid-cols-3 gap-12 md:gap-16">
           <div>
-            <div className="text-[28px] mb-3 text-[#1a1a1a]/15">01</div>
             <h3 className="font-semibold text-[17px] mb-2">Always beside your page</h3>
             <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
-              Opens in the browser&apos;s side panel — right alongside whatever
+              Opens in the browser&apos;s side panel, right alongside whatever
               you&apos;re reading. No new tab, no window juggling.
             </p>
           </div>
           <div>
-            <div className="text-[28px] mb-3 text-[#1a1a1a]/15">02</div>
             <h3 className="font-semibold text-[17px] mb-2">Rich text, zero setup</h3>
             <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
               Bold, lists, links, images. Use markdown shortcuts or select and
-              format. No accounts, no configuration — install and start writing.
+              format. No accounts, no configuration. Install and start writing.
             </p>
           </div>
           <div>
-            <div className="text-[28px] mb-3 text-[#1a1a1a]/15">03</div>
             <h3 className="font-semibold text-[17px] mb-2">Local and private</h3>
             <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
               Your notes stay on your machine. No cloud, no server, no tracking.
@@ -169,7 +166,7 @@ export default function NapkinNotesPage() {
           </h2>
         </div>
         <p className="text-[#1a1a1a]/50 text-base mb-10 max-w-lg">
-          Everything from before is still here. You don&apos;t lose a thing — you
+          Everything from before is still here. You don&apos;t lose a thing, you
           just get a lot more.
         </p>
         <V3Showcase />
@@ -186,130 +183,126 @@ export default function NapkinNotesPage() {
         <UseCaseCarousel />
       </section>
 
-      {/* Pro */}
-      <section className="border-t border-[#e5e5e3]">
-        {/* Dark hero block */}
-        <div className="bg-[#1a1a1a] relative overflow-hidden">
-          <div
-            className="absolute inset-0 opacity-[0.06]"
-            style={{
-              backgroundImage:
-                "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
-              backgroundSize: "40px 40px",
-            }}
-          />
-          <div className="relative z-10 px-6 md:px-12 py-20 max-w-6xl mx-auto">
-            <div className="max-w-lg">
-              <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-white/10 text-white/60 mb-5">
-                Pro
-              </span>
-              <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white leading-[1.15] mb-4">
-                More notes.
-                <br />
-                More context.
-              </h2>
-              <p className="text-white/45 text-[15px] leading-relaxed mb-8">
-                Free is perfect for most people. Pro unlocks 10 extra notes, smart
-                linking, and quick capture — for power users or anyone who wants to
-                support an indie developer.
-              </p>
-              <div className="flex items-center gap-6 mb-10">
-                <div className="flex items-baseline gap-2">
-                  <span className="text-4xl font-semibold text-white">$9.99</span>
-                  <span className="text-sm text-white/30">one-time</span>
-                </div>
-                <a
-                  href={CHROME_STORE_URL}
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  className="inline-flex items-center px-5 py-2.5 rounded-lg bg-white text-[#1a1a1a] text-sm font-medium hover:bg-white/90 transition-colors"
-                >
-                  Get Pro
-                </a>
-              </div>
-            </div>
-
-            {/* Visual — tab bar mockup showing many notes */}
-            <div className="rounded-xl bg-white/[0.05] border border-white/[0.08] p-4 md:p-5 backdrop-blur-sm">
-              <div className="flex items-center gap-1.5 overflow-x-auto pb-2 scrollbar-hide" style={{ scrollbarWidth: "none" }}>
-                {[
-                  { num: 1, name: "Personal" },
-                  { num: 2, name: "Work", linked: "linear.app" },
-                  { num: 3, name: "Research", linked: "scholar.google.com" },
-                  { num: 4, name: "Design", linked: "figma.com" },
-                  { num: 5, name: "Side Project", linked: "github.com" },
-                  { num: 6, name: "Coursework" },
-                  { num: 7, name: "Reading List" },
-                  { num: 8, name: "Recipes" },
-                  { num: 9, name: null },
-                  { num: null, name: "+" },
-                ].map((tab, i) => (
-                  <div
-                    key={i}
-                    className={`shrink-0 rounded-full px-3 py-1.5 text-[11px] flex items-center gap-1.5 transition-all ${
-                      i === 1
-                        ? "bg-white/15"
-                        : i === 9
-                          ? "text-[#4DAD75]/60"
-                          : "text-white/25 hover:text-white/40"
-                    }`}
-                  >
-                    {tab.num && (
-                      <span className={i === 1 ? "font-semibold text-[#4DAD75]" : ""}>
-                        {tab.num}
-                      </span>
-                    )}
-                    {tab.name && tab.name !== "+" && (
-                      <span className={i === 1 ? "font-medium text-white/80" : ""}>
-                        {tab.name}
-                      </span>
-                    )}
-                    {tab.name === "+" && <span>{tab.name}</span>}
-                  </div>
-                ))}
-                <div className="shrink-0 ml-auto flex items-center gap-1 text-white/15 text-[10px]">
-                  <span>&lsaquo;</span>
-                  <span>&rsaquo;</span>
-                </div>
-              </div>
-              {/* Linked indicator */}
-              <div className="mt-3 flex items-center gap-2 text-[10px] text-white/25">
-                <span>Linked &middot;</span>
-                <span className="text-[#4DAD75]/50">linear.app</span>
-              </div>
+      {/* Pro - entire section dark grid bg */}
+      <section className="border-t border-[#e5e5e3] bg-[#1a1a1a] relative overflow-hidden">
+        <div
+          className="absolute inset-0 opacity-[0.06]"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(255,255,255,0.4) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.4) 1px, transparent 1px)",
+            backgroundSize: "40px 40px",
+          }}
+        />
+        <div className="relative z-10 px-6 md:px-12 py-20 max-w-6xl mx-auto">
+          {/* Header + CTA */}
+          <div className="max-w-lg mb-16">
+            <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#4DAD75]/15 text-[#4DAD75] mb-5">
+              Pro
+            </span>
+            <h2 className="text-3xl md:text-4xl font-semibold tracking-tight text-white leading-[1.15] mb-4">
+              More notes.
+              <br />
+              More context.
+            </h2>
+            <p className="text-white/45 text-[15px] leading-relaxed mb-8">
+              Free is perfect for most people. Pro unlocks 10 extra notes, smart
+              linking, and quick capture. For power users or anyone who wants to
+              support an indie developer.
+            </p>
+            <div>
+              <a
+                href={CHROME_STORE_URL}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="inline-flex items-center px-4 py-2 rounded-lg bg-white text-[#1a1a1a] text-[13px] font-medium hover:bg-white/90 transition-colors"
+              >
+                Get Pro &ndash; $9.99 USD
+              </a>
+              <p className="text-[11px] text-white/30 mt-2">One-time payment. No subscription</p>
             </div>
           </div>
-        </div>
 
-        {/* Pro features — light bg below */}
-        <div className="px-6 md:px-12 py-16 max-w-6xl mx-auto">
+          {/* Visual: stacked note cards showing 10 Pro notes */}
+          <div className="relative h-[280px] md:h-[320px] mb-16">
+            {[
+              { num: 1, name: "Personal", heading: "This week", lines: 4 },
+              { num: 2, name: "COMP3901 Capstone", heading: "Week 9 deliverables (due Oct 4)", lines: 3 },
+              { num: 3, name: "Japan Trip", heading: "Tokyo sources", lines: 5 },
+              { num: 4, name: "Work / Linear", heading: "Sprint 14 standup", lines: 3 },
+              { num: 5, name: "Research Project", heading: "Literature review notes", lines: 4 },
+              { num: 6, name: "Brand Moodboard", heading: "Visual direction", lines: 2 },
+              { num: 7, name: "Q4 Goals", heading: "Revenue targets", lines: 3 },
+              { num: 8, name: "Side Project", heading: "Auth flow TODO", lines: 4 },
+              { num: 9, name: "Reading List", heading: null, lines: 3 },
+              { num: 10, name: "Inspo / UI Patterns", heading: null, lines: 2 },
+            ].map((note, i) => (
+              <div
+                key={i}
+                className="absolute rounded-xl bg-white/[0.04] border border-white/[0.08] backdrop-blur-sm overflow-hidden"
+                style={{
+                  width: `${180 + (i % 3) * 10}px`,
+                  height: `${160 + (i % 2) * 20}px`,
+                  left: `${(i % 5) * 19}%`,
+                  top: `${i < 5 ? 0 : 45}%`,
+                  transform: `rotate(${(i % 2 === 0 ? -1 : 1) * (1 + (i % 3))}deg)`,
+                  zIndex: 10 - i,
+                }}
+              >
+                <div className="px-3 pt-2.5 pb-1.5">
+                  <div className="flex items-center gap-1.5 mb-2">
+                    <span className="text-[10px] font-semibold text-[#4DAD75]">{note.num}</span>
+                    <span className="text-[10px] font-medium text-white/60 truncate">{note.name}</span>
+                  </div>
+                  {note.heading && (
+                    <div className="text-[9px] font-semibold text-white/40 mb-1.5 truncate">{note.heading}</div>
+                  )}
+                  <div className="space-y-1.5">
+                    {Array.from({ length: note.lines }).map((_, j) => (
+                      <div
+                        key={j}
+                        className="h-[4px] bg-white/[0.04] rounded"
+                        style={{ width: `${50 + ((j * 17 + i * 13) % 40)}%` }}
+                      />
+                    ))}
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Placeholder image */}
+          <div className="rounded-xl bg-white/[0.03] border border-white/[0.06] aspect-[21/9] mb-16 flex items-center justify-center">
+            <span className="text-sm text-white/15">Screenshot</span>
+          </div>
+
+          {/* Pro features grid */}
           <div className="grid md:grid-cols-2 gap-x-20 gap-y-10">
             <div>
-              <h3 className="font-semibold text-[16px] mb-2">10 extra notes</h3>
-              <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
-                Dedicated spaces for every context — work, research, side projects,
+              <h3 className="font-semibold text-[16px] mb-2 text-white">10 extra notes</h3>
+              <p className="text-sm text-white/40 leading-relaxed">
+                Dedicated spaces for every context: work, research, side projects,
                 coursework. Name them, reorder them, use as many or as few as you need.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-[16px] mb-2">Link websites to notes</h3>
-              <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
-                Open Napkin on linear.app and it jumps straight to your Work note.
-                On github.com, Side Project. The right context, automatically.
-              </p>
-            </div>
-            <div>
-              <h3 className="font-semibold text-[16px] mb-2">Quick capture</h3>
-              <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
+              <h3 className="font-semibold text-[16px] mb-2 text-white">Quick capture</h3>
+              <p className="text-sm text-white/40 leading-relaxed">
                 Select any text on a page and send it to your note in one click.
                 The source URL is saved with it so you can always find where it came from.
               </p>
             </div>
             <div>
-              <h3 className="font-semibold text-[16px] mb-2">All Notes &amp; search</h3>
-              <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
+              <h3 className="font-semibold text-[16px] mb-2 text-white">Search across all notes</h3>
+              <p className="text-sm text-white/40 leading-relaxed">
                 See every note at a glance. Search across all of them to surface
                 that snippet you saved three weeks ago.
+              </p>
+            </div>
+            <div>
+              <h3 className="font-semibold text-[16px] mb-2 text-white">Link websites to notes</h3>
+              <p className="text-sm text-white/40 leading-relaxed">
+                Open Napkin on linear.app and it jumps straight to your Work note.
+                On github.com, Side Project. The right context, automatically.
               </p>
             </div>
           </div>
@@ -340,23 +333,41 @@ export default function NapkinNotesPage() {
         </div>
       </section>
 
-      {/* Bottom CTA */}
-      <section className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3] text-center">
-        <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4">
-          Try it out
-        </h2>
-        <p className="text-[#1a1a1a]/50 text-base mb-8 max-w-md mx-auto">
-          Free to use, takes two seconds to install, and your notes never leave
-          your browser.
-        </p>
-        <a
-          href={CHROME_STORE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="inline-flex items-center px-6 py-3 rounded-lg bg-[#1a1a1a] text-white text-sm font-medium hover:bg-[#333] transition-colors"
-        >
-          Add to Chrome — Free
-        </a>
+      {/* Bottom CTA - dark green grid */}
+      <section className="border-t border-[#e5e5e3] relative overflow-hidden bg-[#1a3a28]">
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(77,173,117,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.12) 1px, transparent 1px)",
+            backgroundSize: "10px 10px",
+          }}
+        />
+        <div
+          className="absolute inset-0"
+          style={{
+            backgroundImage:
+              "linear-gradient(rgba(77,173,117,0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.22) 1px, transparent 1px)",
+            backgroundSize: "50px 50px",
+          }}
+        />
+        <div className="relative z-10 px-6 md:px-12 py-20 max-w-6xl mx-auto text-center">
+          <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4 text-white">
+            Try it out
+          </h2>
+          <p className="text-white/50 text-base mb-8 max-w-md mx-auto">
+            Free to use, takes two seconds to install, and your notes never leave
+            your browser
+          </p>
+          <a
+            href={CHROME_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="inline-flex items-center px-6 py-3 rounded-lg bg-white text-[#1a1a1a] text-sm font-medium hover:bg-white/90 transition-colors"
+          >
+            Add to Chrome, Free
+          </a>
+        </div>
       </section>
 
       {/* Footer */}

@@ -4,7 +4,7 @@ import { useState } from "react";
 const faqs = [
   {
     q: "Where are my notes stored?",
-    a: "Locally in your browser, using Chrome's built-in storage. Nothing is sent to any server — there is no backend.",
+    a: "Locally in your browser, using Chrome's built-in storage. Nothing is sent to any server. There is no backend.",
   },
   {
     q: "Is Napkin Notes free?",
@@ -16,7 +16,7 @@ const faqs = [
   },
   {
     q: "Can I export my notes?",
-    a: "Not yet — it's on the roadmap. For now you can copy and paste from the full-page view.",
+    a: "Not yet, it's on the roadmap. For now you can copy and paste from the full-page view.",
   },
   {
     q: "What happens if I uninstall the extension?",
@@ -24,7 +24,7 @@ const faqs = [
   },
   {
     q: "Does it work on Firefox or Safari?",
-    a: "Not currently. Napkin Notes is built on Chrome extension APIs and works with Chromium-based browsers.",
+    a: "Not currently. Napkin Notes is built on Chrome extension APIs and works with Chromium-based browsers only.",
   },
   {
     q: "Can I sync notes between devices?",
@@ -32,7 +32,7 @@ const faqs = [
   },
   {
     q: "How is this different from Google Keep or Notion?",
-    a: "Napkin Notes isn't a note-taking app — it's a scratch pad. No accounts, no folders, no databases. It opens in your browser's side panel so you never leave the page you're on. It's built for speed, not organisation.",
+    a: "Napkin Notes isn't a note-taking app, it's a scratch pad. No accounts, no folders, no databases. It opens in your browser's side panel so you never leave the page you're on. Built for speed, not organisation.",
   },
 ];
 

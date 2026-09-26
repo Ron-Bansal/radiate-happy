@@ -4,27 +4,27 @@ import { useState, useRef, useEffect } from "react";
 const useCases = [
   {
     title: "Capture ideas",
-    desc: "Jot down thoughts the moment they come to you. Sort them out later — or don't.",
+    desc: "Jot down thoughts the moment they come to you",
     screenshot: null,
   },
   {
     title: "Meeting notes",
-    desc: "Action items, decisions, follow-ups — all captured while you're still on the call.",
+    desc: "Action items, decisions, follow-ups while you're still on the call",
     screenshot: null,
   },
   {
     title: "Research",
-    desc: "Collect snippets and links as you browse. Everything stays right beside the page.",
+    desc: "Collect snippets and links as you browse, right beside the page",
     screenshot: null,
   },
   {
     title: "Quick drafts",
-    desc: "Sketch out a reply, outline a doc, draft a message before committing to it.",
+    desc: "Sketch out a reply, outline a doc, draft a message before committing to it",
     screenshot: null,
   },
   {
     title: "Study notes",
-    desc: "Take notes alongside lectures, docs, or textbooks without losing your place.",
+    desc: "Take notes alongside lectures, docs, or textbooks without losing your place",
     screenshot: null,
   },
 ];

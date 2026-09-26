@@ -4,32 +4,32 @@ import { useState, useEffect, useCallback } from "react";
 const features = [
   {
     label: "Modern redesign",
-    desc: "Cleaner look, smoother interactions, and more customisation — font selection, text sizing, and theme options.",
+    desc: "Cleaner look, smoother interactions, and more customisation. Font selection, text sizing, and theme options",
     screenshot: null,
   },
   {
     label: "A second scratch pad",
-    desc: "Every user gets two notes now. Keep things tidy without adding complexity.",
+    desc: "Every user gets two notes now. Keep things tidy without adding complexity",
     screenshot: null,
   },
   {
     label: "Full-page split view",
-    desc: "Open your notes in a dedicated tab. Split view shows up to three notes side by side.",
+    desc: "Open your notes in a dedicated tab. Split view shows up to three notes side by side",
     screenshot: null,
   },
   {
     label: "Clickable web links",
-    desc: "URLs are now live links. Click to open, hover to preview — no more copy-pasting.",
+    desc: "URLs are now live links. Click to open, hover to preview. No more copy-pasting",
     screenshot: null,
   },
   {
     label: "Rich text editing",
-    desc: "Bold, italic, lists, links, images — all inline with markdown shortcuts or the floating toolbar.",
+    desc: "Bold, italic, lists, links, images. All inline with markdown shortcuts or the floating toolbar",
     screenshot: null,
   },
   {
     label: "Overlay mode",
-    desc: "Napkin Notes now works on Arc, Brave, and other browsers that don't support native side panels.",
+    desc: "Napkin Notes now works on Arc, Brave, and other browsers that don't support native side panels",
     screenshot: null,
   },
 ];
@@ -83,12 +83,15 @@ export default function V3Showcase() {
             }`}
           >
             <div
-              className={`text-[14px] font-medium transition-colors ${
+              className={`text-[14px] font-medium transition-colors flex items-baseline gap-2.5 ${
                 active === i
                   ? "text-[#1a1a1a]"
                   : "text-[#1a1a1a]/40 group-hover:text-[#1a1a1a]/60"
               }`}
             >
+              <span className={`text-[11px] tabular-nums ${active === i ? "text-[#1a1a1a]/20" : "text-[#1a1a1a]/15"}`}>
+                {String(i + 1).padStart(2, "0")}
+              </span>
               {f.label}
             </div>
             <div

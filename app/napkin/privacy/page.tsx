@@ -14,13 +14,13 @@ export default function PrivacyPage() {
   return (
     <main className="min-h-screen bg-[#fafaf9] text-[#1a1a1a] font-[var(--font-figtree)]">
       <nav className="flex items-center justify-between px-6 md:px-12 py-6 max-w-3xl mx-auto">
-        <Link href="/napkin-notes" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
+        <Link href="/napkin" className="flex items-center gap-3 hover:opacity-80 transition-opacity">
           <Image
-            src="/assets/napkin-notes-square.webp"
+            src="/assets/napkin-logo.png"
             alt="Napkin Notes icon"
             width={32}
             height={32}
-            className="rounded-lg"
+            className=""
           />
           <span className="text-base font-semibold tracking-tight">Napkin Notes</span>
         </Link>
@@ -92,7 +92,7 @@ export default function PrivacyPage() {
       </article>
 
       <footer className="px-6 md:px-12 py-8 max-w-3xl mx-auto border-t border-[#e5e5e3] flex flex-wrap items-center justify-between gap-4 text-xs text-[#1a1a1a]/35">
-        <Link href="/napkin-notes" className="underline underline-offset-2 hover:text-[#1a1a1a]/60 transition-colors">
+        <Link href="/napkin" className="underline underline-offset-2 hover:text-[#1a1a1a]/60 transition-colors">
           &larr; Back to Napkin Notes
         </Link>
         <a href={CHROME_STORE_URL} target="_blank" rel="noopener noreferrer" className="hover:text-[#1a1a1a]/60 transition-colors">

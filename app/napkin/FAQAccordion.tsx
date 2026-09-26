@@ -11,8 +11,8 @@ const faqs = [
     a: "Yes. The free version includes two notes, rich text editing, split view, and works on Chrome, Arc, and other Chromium browsers. Pro adds more notes and power-user features for a one-time $9.99.",
   },
   {
-    q: "Does it work on Arc, Edge, or Brave?",
-    a: "Yes. Chrome and Edge support the native side panel. For Arc and other browsers, Napkin Notes uses an overlay mode that works the same way — no setup needed.",
+    q: "Does it work on Arc, Edge, Brave, or Opera?",
+    a: "Yes. Chrome, Edge, and Opera (including Opera GX) support the native side panel. For Arc and Brave, Napkin Notes uses an overlay mode that works the same way. If your browser is Chromium-based, it should work.",
   },
   {
     q: "Can I export my notes?",

@@ -1,5 +1,6 @@
 "use client";
 import { useEffect, useRef, useState } from "react";
+import Image from "next/image";
 
 const personalNotes = [
   { type: "heading", text: "This week" },
@@ -115,9 +116,7 @@ export default function HeroSidePanel() {
             onClick={() => setPanelOpen(!panelOpen)}
             className="flex items-center gap-1.5 px-2 py-1 rounded-md bg-white/10 border border-white/[0.08] hover:bg-white/15 transition-all"
           >
-            <div className="w-4 h-4 rounded bg-[#4DAD75]/20 flex items-center justify-center">
-              <span className="text-[7px] font-bold text-[#4DAD75]">N</span>
-            </div>
+            <Image src="/assets/napkin-logo.png" alt="Napkin Notes" width={16} height={16} className="" />
           </button>
         </div>
 
@@ -138,7 +137,7 @@ export default function HeroSidePanel() {
         <div
           className="absolute z-10 flex items-start gap-2 transition-all duration-700 ease-[cubic-bezier(0.16,1,0.3,1)]"
           style={{
-            top: `${TOOLBAR_H + 14}px`,
+            top: `${TOOLBAR_H + 28}px`,
             right: panelOpen ? "40%" : "20px",
             opacity: panelOpen ? 0 : 1,
             transform: panelOpen ? "translateY(-5px)" : "translateY(0)",
@@ -153,26 +152,33 @@ export default function HeroSidePanel() {
           </svg>
         </div>
 
-        {/* Shortcut hint - bottom left */}
-        {!panelOpen && (
-          <button
-            onClick={() => setPanelOpen(true)}
-            className="absolute bottom-5 left-5 z-30 flex items-center gap-2 animate-[fadeIn_0.5s_ease-out]"
-          >
-            <div className="flex items-center gap-1 px-2.5 py-1.5 rounded-md bg-[#4DAD75]/15 border border-[#4DAD75]/20 hover:bg-[#4DAD75]/25 transition-all">
-              <span className="text-[10px] text-[#4DAD75] font-medium">⌥X</span>
-            </div>
-            <span className="text-[10px] text-white/30">to open Napkin Notes</span>
-          </button>
-        )}
-        {panelOpen && (
-          <div className="absolute bottom-5 left-5 z-10 flex items-center gap-2">
-            <div className="flex items-center gap-1 px-2.5 py-1.5 rounded-md bg-white/[0.05] border border-white/[0.06]">
-              <span className="text-[10px] text-white/25 font-medium">⌥X</span>
-            </div>
-            <span className="text-[10px] text-white/20">to toggle panel</span>
+        {/* Shortcut hint - bottom left, always clickable */}
+        <button
+          onClick={() => setPanelOpen(!panelOpen)}
+          className={`absolute bottom-5 left-5 z-30 flex items-center gap-2 ${!panelOpen ? "animate-[fadeIn_0.5s_ease-out]" : ""}`}
+        >
+          <div className="flex items-center gap-1">
+            <span className={`inline-flex items-center px-1.5 py-1 rounded text-[10px] font-medium transition-all ${
+              panelOpen
+                ? "bg-white/[0.06] border border-white/[0.08] text-white/30"
+                : "bg-[#4DAD75]/15 border border-[#4DAD75]/20 text-[#4DAD75]"
+            }`}>
+              <span className="hidden md:inline">⌥</span>
+              <span className="md:hidden">Alt</span>
+            </span>
+            <span className={`text-[9px] ${panelOpen ? "text-white/20" : "text-white/30"}`}>+</span>
+            <span className={`inline-flex items-center px-1.5 py-1 rounded text-[10px] font-medium transition-all ${
+              panelOpen
+                ? "bg-white/[0.06] border border-white/[0.08] text-white/30"
+                : "bg-[#4DAD75]/15 border border-[#4DAD75]/20 text-[#4DAD75]"
+            }`}>
+              X
+            </span>
           </div>
-        )}
+          <span className={`text-[10px] ${panelOpen ? "text-white/20" : "text-white/30"}`}>
+            {panelOpen ? "to close panel" : "to open Napkin Notes"}
+          </span>
+        </button>
       </div>
 
       {/* Close tab - aligned to top of side panel, slides in with it */}
@@ -207,15 +213,13 @@ export default function HeroSidePanel() {
         {/* Header */}
         <div className="flex items-center justify-between px-3.5 py-2">
           <div className="flex items-center gap-2.5">
-            <div className="w-[22px] h-[22px] rounded-md bg-[#4DAD75]/15 flex items-center justify-center">
-              <span className="text-[9px] font-bold text-[#4DAD75]">N</span>
-            </div>
+            <Image src="/assets/napkin-logo.png" alt="Napkin Notes" width={22} height={22} className="" />
             <div>
               <div className="text-[12px] font-semibold text-[#1a1a1a] leading-tight">Napkin Notes</div>
               <div className="text-[8px] text-[#1a1a1a]/30 leading-tight">quickest canvas for thought</div>
             </div>
           </div>
-          <div className="w-7 h-7 rounded-full flex items-center justify-center text-[#1a1a1a]/25 hover:bg-[#1a1a1a]/5 transition-colors">
+          <div className="w-7 h-7 rounded-full flex items-center justify-center text-[#1a1a1a]/25 cursor-default">
             <svg width="12" height="12" viewBox="0 0 24 24" fill="currentColor">
               <circle cx="12" cy="5" r="1.5" />
               <circle cx="12" cy="12" r="1.5" />
@@ -247,16 +251,16 @@ export default function HeroSidePanel() {
                 )}
               </button>
             ))}
-            <button className="w-6 h-6 rounded-full bg-white shadow-sm flex items-center justify-center text-[11px] text-[#4DAD75] ml-0.5 hover:bg-white/90 transition-colors">
+            <div className="w-6 h-6 rounded-full bg-white shadow-sm flex items-center justify-center text-[11px] text-[#4DAD75] ml-0.5 cursor-default">
               +
-            </button>
+            </div>
             <div className="ml-auto flex items-center gap-0.5 pr-1">
-              <button className="w-5 h-5 flex items-center justify-center text-[#1a1a1a]/30 hover:text-[#1a1a1a]/50 transition-colors text-[12px]">
+              <div className="w-5 h-5 flex items-center justify-center text-[#1a1a1a]/30 text-[12px] cursor-default">
                 &lsaquo;
-              </button>
-              <button className="w-5 h-5 flex items-center justify-center text-[#1a1a1a]/30 hover:text-[#1a1a1a]/50 transition-colors text-[12px]">
+              </div>
+              <div className="w-5 h-5 flex items-center justify-center text-[#1a1a1a]/30 text-[12px] cursor-default">
                 &rsaquo;
-              </button>
+              </div>
             </div>
           </div>
         </div>
@@ -287,9 +291,15 @@ export default function HeroSidePanel() {
                 contentEditable
                 suppressContentEditableWarning
                 className="w-full h-full p-3.5 text-[12px] text-[#1a1a1a]/75 leading-[1.7] outline-none empty:before:content-[attr(data-placeholder)] empty:before:text-[#1a1a1a]/20"
-                data-placeholder={activeTab === 1 ? "Sprint planning notes..." : "Quick scratch pad..."}
+                data-placeholder={activeTab === 1 ? "Sprint planning notes..." : ""}
                 spellCheck={false}
-              />
+              >
+                {activeTab === 2 && (
+                  <span className="text-[#1a1a1a]/20 text-[11px] pointer-events-none">
+                    Free users get 2 notes with no limits. Pro users can add up to 10.
+                  </span>
+                )}
+              </div>
             )}
           </div>
         </div>

@@ -38,7 +38,7 @@ export const metadata: Metadata = {
     images: ["/assets/napkin-notes-golden.webp"],
   },
   alternates: {
-    canonical: "https://raunaqbansal.com/napkin-notes",
+    canonical: "https://raunaqbansal.com/napkin",
   },
 };
 
@@ -59,7 +59,7 @@ export default function NapkinNotesPage() {
     },
     description:
       "A Chrome side-panel notepad for quick notes without leaving your browser. Rich text, multiple notes, autosave.",
-    url: "https://raunaqbansal.com/napkin-notes",
+    url: "https://raunaqbansal.com/napkin",
     author: {
       "@type": "Person",
       name: "Ron Bansal",
@@ -74,27 +74,19 @@ export default function NapkinNotesPage() {
       />
 
       {/* Nav */}
-      <nav className="flex items-center justify-between px-6 md:px-12 py-6 max-w-6xl mx-auto">
+      <nav className="flex items-center px-6 md:px-12 py-6 max-w-6xl mx-auto">
         <div className="flex items-center gap-3">
           <Image
-            src="/assets/napkin-notes-square.webp"
+            src="/assets/napkin-logo.png"
             alt="Napkin Notes icon"
             width={36}
             height={36}
-            className="rounded-lg"
+            className=""
           />
           <span className="text-lg font-semibold tracking-tight">
             Napkin Notes
           </span>
         </div>
-        <a
-          href={CHROME_STORE_URL}
-          target="_blank"
-          rel="noopener noreferrer"
-          className="text-sm font-medium text-[#1a1a1a]/70 hover:text-[#1a1a1a] transition-colors"
-        >
-          Chrome Web Store &rarr;
-        </a>
       </nav>
 
       {/* Hero */}
@@ -109,7 +101,7 @@ export default function NapkinNotesPage() {
             A notepad that lives in your browser&apos;s side panel. Click the
             icon, start typing. Everything autosaves.
           </p>
-          <div className="mt-7 flex flex-wrap items-center gap-4">
+          <div className="mt-7">
             <a
               href={CHROME_STORE_URL}
               target="_blank"
@@ -118,9 +110,9 @@ export default function NapkinNotesPage() {
             >
               Add to Chrome, Free
             </a>
-            <span className="text-xs text-[#1a1a1a]/30">
-              Works on Chrome, Edge, Arc, Brave
-            </span>
+            <p className="text-xs text-[#1a1a1a]/30 mt-2.5">
+              Works on Chrome, Edge, Arc, Brave, Opera, and more
+            </p>
           </div>
         </div>
         <HeroSidePanel />
@@ -129,7 +121,7 @@ export default function NapkinNotesPage() {
       {/* Core value — 3 essential points */}
       <section className="px-6 md:px-12 py-20 max-w-6xl mx-auto">
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-12">
-          Notes without the context switch.
+          Never lose a fleeting idea again.
         </h2>
         <div className="grid md:grid-cols-3 gap-12 md:gap-16">
           <div>
@@ -327,7 +319,7 @@ export default function NapkinNotesPage() {
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(77,173,117,0.12) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.12) 1px, transparent 1px)",
+              "linear-gradient(rgba(77,173,117,0.07) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.07) 1px, transparent 1px)",
             backgroundSize: "10px 10px",
           }}
         />
@@ -335,18 +327,17 @@ export default function NapkinNotesPage() {
           className="absolute inset-0"
           style={{
             backgroundImage:
-              "linear-gradient(rgba(77,173,117,0.22) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.22) 1px, transparent 1px)",
+              "linear-gradient(rgba(77,173,117,0.14) 1px, transparent 1px), linear-gradient(90deg, rgba(77,173,117,0.14) 1px, transparent 1px)",
             backgroundSize: "100px 100px",
           }}
         />
         <div className="relative z-10 px-6 md:px-12 pt-20 pb-10 max-w-6xl mx-auto">
           <div className="text-center mb-20">
             <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-4 text-white">
-              Try it out
+              Get the new Napkin Notes today
             </h2>
             <p className="text-white/50 text-base mb-8 max-w-md mx-auto">
-              Free to use, takes two seconds to install, and your notes never leave
-              your browser
+              Free to use, takes two seconds to install. Always have a place for your fleeting ideas
             </p>
             <a
               href={CHROME_STORE_URL}
@@ -360,11 +351,11 @@ export default function NapkinNotesPage() {
           <div className="flex flex-col md:flex-row items-center justify-between gap-6">
             <div className="flex items-center gap-3">
               <Image
-                src="/assets/napkin-notes-square.webp"
+                src="/assets/napkin-logo.png"
                 alt="Napkin Notes icon"
                 width={24}
                 height={24}
-                className="rounded-md opacity-50"
+                className=""
               />
               <span className="text-xs text-white/50">
                 Made by{" "}
@@ -372,13 +363,13 @@ export default function NapkinNotesPage() {
                   href="/"
                   className="underline underline-offset-2 hover:text-white/80 transition-colors"
                 >
-                  Ron
+                  Raunaq B
                 </Link>
               </span>
             </div>
             <div className="flex items-center gap-6 text-xs text-white/50">
               <Link
-                href="/napkin-notes/privacy"
+                href="/napkin/privacy"
                 className="hover:text-white/80 transition-colors"
               >
                 Privacy

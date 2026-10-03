@@ -6,6 +6,13 @@ import V3Showcase from "./V3Showcase";
 import UseCaseCarousel from "./UseCaseCarousel";
 import FAQAccordion from "./FAQAccordion";
 import ProNoteCards from "./ProNoteCards";
+import SidePanelIllustration from "./illustrations/SidePanelIllustration";
+import RichTextIllustration from "./illustrations/RichTextIllustration";
+import LocalPrivateIllustration from "./illustrations/LocalPrivateIllustration";
+import QuickCaptureIllustration from "./illustrations/QuickCaptureIllustration";
+import SearchIllustration from "./illustrations/SearchIllustration";
+import LinkWebsitesIllustration from "./illustrations/LinkWebsitesIllustration";
+import ToggleBlocksIllustration from "./illustrations/ToggleBlocksIllustration";
 
 export const metadata: Metadata = {
   title: "Napkin Notes | Side-panel notes for your browser",
@@ -125,8 +132,8 @@ export default function NapkinNotesPage() {
         </h2>
         <div className="grid md:grid-cols-3 gap-12 md:gap-16">
           <div>
-            <div className="aspect-[4/3] rounded-lg bg-[#f0f0ee] mb-5 flex items-center justify-center">
-              <span className="text-xs text-[#1a1a1a]/15">Image</span>
+            <div className="mb-5">
+              <SidePanelIllustration />
             </div>
             <h3 className="font-semibold text-[17px] mb-2">Always beside your page</h3>
             <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
@@ -135,8 +142,8 @@ export default function NapkinNotesPage() {
             </p>
           </div>
           <div>
-            <div className="aspect-[4/3] rounded-lg bg-[#f0f0ee] mb-5 flex items-center justify-center">
-              <span className="text-xs text-[#1a1a1a]/15">Image</span>
+            <div className="mb-5">
+              <RichTextIllustration />
             </div>
             <h3 className="font-semibold text-[17px] mb-2">Rich text, zero setup</h3>
             <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
@@ -145,8 +152,8 @@ export default function NapkinNotesPage() {
             </p>
           </div>
           <div>
-            <div className="aspect-[4/3] rounded-lg bg-[#f0f0ee] mb-5 flex items-center justify-center">
-              <span className="text-xs text-[#1a1a1a]/15">Image</span>
+            <div className="mb-5">
+              <LocalPrivateIllustration />
             </div>
             <h3 className="font-semibold text-[17px] mb-2">Local and private</h3>
             <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
@@ -216,7 +223,7 @@ export default function NapkinNotesPage() {
             </h2>
             <p className="text-white/45 text-[15px] leading-relaxed mb-8">
               Free is perfect for most people. Pro adds extra notes, smart
-              linking, quick capture, and a direct line to shape what gets built next.
+              linking, quick capture, and tools to keep longer notes tidy.
             </p>
             <div>
               <a
@@ -246,8 +253,8 @@ export default function NapkinNotesPage() {
           {/* 4 additional Pro features */}
           <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
             <div>
-              <div className="aspect-[16/9] rounded-lg bg-[#222] border border-white/[0.06] mb-4 flex items-center justify-center">
-                <span className="text-xs text-white/15">Image / Video</span>
+              <div className="mb-4">
+                <QuickCaptureIllustration />
               </div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Quick capture</h3>
               <p className="text-sm text-white/40 leading-relaxed">
@@ -256,8 +263,8 @@ export default function NapkinNotesPage() {
               </p>
             </div>
             <div>
-              <div className="aspect-[16/9] rounded-lg bg-[#222] border border-white/[0.06] mb-4 flex items-center justify-center">
-                <span className="text-xs text-white/15">Image / Video</span>
+              <div className="mb-4">
+                <SearchIllustration />
               </div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Search across all notes</h3>
               <p className="text-sm text-white/40 leading-relaxed">
@@ -266,8 +273,8 @@ export default function NapkinNotesPage() {
               </p>
             </div>
             <div>
-              <div className="aspect-[16/9] rounded-lg bg-[#222] border border-white/[0.06] mb-4 flex items-center justify-center">
-                <span className="text-xs text-white/15">Image / Video</span>
+              <div className="mb-4">
+                <LinkWebsitesIllustration />
               </div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Link websites to notes</h3>
               <p className="text-sm text-white/40 leading-relaxed">
@@ -276,13 +283,13 @@ export default function NapkinNotesPage() {
               </p>
             </div>
             <div>
-              <div className="aspect-[16/9] rounded-lg bg-[#222] border border-white/[0.06] mb-4 flex items-center justify-center">
-                <span className="text-xs text-white/15">Image / Video</span>
+              <div className="mb-4">
+                <ToggleBlocksIllustration />
               </div>
-              <h3 className="font-semibold text-[16px] mb-2 text-white">Priority feedback on the roadmap</h3>
+              <h3 className="font-semibold text-[16px] mb-2 text-white">Collapsible toggle blocks</h3>
               <p className="text-sm text-white/40 leading-relaxed">
-                Pro users get a direct channel to suggest features and vote on
-                what gets built next. Your input shapes where Napkin Notes goes.
+                Tuck away content you don&apos;t need right now. Toggle blocks keep
+                long notes tidy without losing anything.
               </p>
             </div>
           </div>

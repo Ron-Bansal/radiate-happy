@@ -3,11 +3,8 @@
 export default function LocalPrivateIllustration() {
   return (
     <div className="aspect-[4/3] rounded-lg bg-[#f0f0ee] overflow-hidden relative flex items-center justify-center">
-      {/* Device outline */}
       <div className="relative">
-        {/* Laptop body */}
         <div className="w-[140px] h-[90px] bg-white rounded-lg border border-[#1a1a1a]/[0.08] shadow-sm overflow-hidden">
-          {/* Screen content */}
           <div className="p-2.5 space-y-1.5">
             <div className="flex items-center gap-1 mb-2">
               <div className="w-2.5 h-2.5 rounded bg-[#4DAD75]/15 flex items-center justify-center">
@@ -23,10 +20,9 @@ export default function LocalPrivateIllustration() {
             <div className="h-[3px] bg-[#1a1a1a]/[0.06] rounded w-2/3" />
           </div>
         </div>
-        {/* Laptop base */}
         <div className="w-[160px] h-[6px] bg-[#e8e8e6] rounded-b-lg mx-auto -mt-px border-t border-[#1a1a1a]/[0.04]" />
 
-        {/* Shield / lock badge */}
+        {/* Shield */}
         <div className="absolute -top-2 -right-3 w-8 h-9">
           <svg viewBox="0 0 32 36" fill="none" className="w-full h-full">
             <path d="M16 2 L28 8 V18 C28 26 22 32 16 34 C10 32 4 26 4 18 V8 L16 2Z" fill="#4DAD75" fillOpacity="0.12" stroke="#4DAD75" strokeWidth="1.2" strokeOpacity="0.4" />
@@ -36,19 +32,12 @@ export default function LocalPrivateIllustration() {
           </svg>
         </div>
 
-        {/* Crossed-out cloud */}
+        {/* No cloud */}
         <div className="absolute -bottom-1 -left-4 w-10 h-10 flex items-center justify-center">
           <svg viewBox="0 0 32 32" fill="none" className="w-7 h-7">
             <path d="M8 22 C4 22 2 19.5 2 17 C2 14.5 4 12.5 6.5 12 C6.5 8 9.5 5 13 5 C15.5 5 17.5 6.5 18.5 8.5 C19 8.2 19.5 8 20.5 8 C23 8 25 10 25 12.5 C27 13 28.5 15 28.5 17.5 C28.5 20 26.5 22 24 22" stroke="#1a1a1a" strokeWidth="1.2" strokeOpacity="0.12" strokeLinecap="round" />
             <line x1="5" y1="5" x2="27" y2="27" stroke="#e74c3c" strokeWidth="1.5" strokeOpacity="0.35" strokeLinecap="round" />
           </svg>
-        </div>
-
-        {/* "chrome.storage.local" label */}
-        <div className="mt-3 flex justify-center">
-          <div className="bg-white/80 border border-[#1a1a1a]/[0.06] rounded px-2 py-0.5">
-            <span className="text-[6px] font-mono text-[#1a1a1a]/30">chrome.storage.local</span>
-          </div>
         </div>
       </div>
     </div>

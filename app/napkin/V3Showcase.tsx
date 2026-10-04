@@ -6,10 +6,11 @@ import V3ClickableLinks from "./illustrations/V3ClickableLinks";
 import V3RichText from "./illustrations/V3RichText";
 import V3HotKeys from "./illustrations/V3HotKeys";
 import V3Overlay from "./illustrations/V3Overlay";
+import V3Customise from "./illustrations/V3Customise";
 
 const features = [
   {
-    label: "A second scratch pad",
+    label: "A second note page",
     desc: "Every user gets two notes now. Keep things tidy without adding complexity",
     component: V3ScratchPad,
   },
@@ -34,9 +35,14 @@ const features = [
     component: V3HotKeys,
   },
   {
-    label: "Overlay mode",
-    desc: "Napkin Notes now works on Arc, Brave, and other browsers that don't support native side panels",
+    label: "Overlay and Window mode",
+    desc: "Napkin Notes now works on Arc, Brave, Dia, and other browsers that don't support native side panels",
     component: V3Overlay,
+  },
+  {
+    label: "Dark mode & customisation",
+    desc: "Switch between light and dark themes, choose your font style and text size. Make it yours",
+    component: V3Customise,
   },
 ];
 
@@ -139,8 +145,8 @@ export default function V3Showcase() {
             backgroundSize: "100px 100px",
           }}
         />
-        <div className="absolute inset-0 flex items-center justify-center p-6 md:p-8">
-          <div className="relative w-full max-w-md">
+        <div className="absolute inset-0 flex items-center justify-center p-4 md:p-5">
+          <div className="relative w-full max-w-lg">
             {(() => {
               const Comp = features[active].component;
               return <Comp />;

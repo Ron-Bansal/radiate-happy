@@ -93,13 +93,13 @@ export default function UseCaseCarousel() {
           return (
             <div
               key={uc.title}
-              className="snap-start shrink-0 w-[300px] md:w-[380px]"
+              className="snap-start shrink-0 w-[280px] md:w-[340px]"
             >
-              <div className="aspect-[16/10] rounded-xl bg-[#1e1e1e] mb-4 relative overflow-hidden p-3 md:p-4">
+              <div className="aspect-[16/10] rounded-xl bg-[#f0f0ee] mb-4 relative overflow-hidden p-3 md:p-4">
                 <Comp />
               </div>
-              <h3 className="font-semibold text-[15px] mb-1">{uc.title}</h3>
-              <p className="text-[13px] text-[#1a1a1a]/45 leading-relaxed">
+              <h3 className="font-semibold text-[17px] mb-1">{uc.title}</h3>
+              <p className="text-[14px] text-[#1a1a1a]/45 leading-relaxed">
                 {uc.desc}
               </p>
             </div>

@@ -21,6 +21,8 @@ const pages: Array<{
   { path: "/tracksuit", changeFrequency: "monthly", priority: 0.6 },
   { path: "/blog/25circle", changeFrequency: "yearly", priority: 0.5 },
   { path: "/blog/25fails", changeFrequency: "yearly", priority: 0.5 },
+  { path: "/napkin", changeFrequency: "weekly", priority: 0.9 },
+  { path: "/napkin/privacy", changeFrequency: "yearly", priority: 0.3 },
 ];
 
 export default function sitemap(): MetadataRoute.Sitemap {

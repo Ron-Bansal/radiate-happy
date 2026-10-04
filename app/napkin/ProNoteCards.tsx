@@ -5,11 +5,12 @@ type Item = { h?: string; lines?: number; divider?: boolean; img?: [number, numb
 
 const notes: { num: number; name: string; linked: string | null; offset: number; items: Item[] }[] = [
   { num: 1, name: "Personal", linked: null, offset: 0, items: [
-    { h: "This week" }, { lines: 2 },
-    { lines: 1 }, { h: "Ideas" }, { lines: 3 },
-    { divider: true }, { lines: 2 },
-    { h: "Links" }, { lines: 1 }, { lines: 2 },
-    { divider: true }, { h: "Later" }, { lines: 4 },
+    { h: "This week" }, { lines: 3 },
+    { lines: 2 }, { h: "Ideas" }, { lines: 4 },
+    { divider: true }, { lines: 3 },
+    { h: "Links" }, { lines: 2 }, { lines: 2 },
+    { divider: true }, { h: "Later" }, { lines: 5 },
+    { lines: 2 },
   ] },
   { num: 2, name: "COMP3901 Capstone", linked: null, offset: 12, items: [
     { h: "Week 9 deliverables (due Oct 4)" }, { lines: 3 },
@@ -128,15 +129,16 @@ export default function ProNoteCards() {
               className="rounded-t-lg border border-b-0 transition-all duration-300"
               style={{
                 width: "185px",
-                backgroundColor: hovered === i ? "#2c2c2c" : "#252525",
-                borderColor: hovered === i ? "rgba(77,173,117,0.3)" : "rgba(255,255,255,0.08)",
+                backgroundColor: hovered === i ? "#ffffff" : "#fafafa",
+                borderColor: hovered === i ? "rgba(77,173,117,0.3)" : "rgba(0,0,0,0.06)",
                 transform: hovered === i ? "translateY(-6px)" : "translateY(0)",
+                boxShadow: hovered === i ? "0 2px 8px rgba(0,0,0,0.06)" : "0 1px 3px rgba(0,0,0,0.03)",
               }}
             >
               <div className="px-3 pt-3">
                 <div className="flex items-center gap-1.5 mb-1">
                   <span className="text-[10px] font-semibold text-[#4DAD75]">{note.num}</span>
-                  <span className="text-[10px] font-medium text-white/50 truncate">{note.name}</span>
+                  <span className="text-[10px] font-medium text-[#1a1a1a]/50 truncate">{note.name}</span>
                 </div>
                 {note.linked && (
                   <div className="mb-2">
@@ -148,26 +150,26 @@ export default function ProNoteCards() {
                 {!note.linked && <div className="h-1.5" />}
 
                 {note.items.map((item, si) => {
-                  if (item.divider) return <div key={si} className="h-px bg-white/[0.06] my-2" />;
+                  if (item.divider) return <div key={si} className="h-px bg-[#1a1a1a]/[0.06] my-2" />;
                   if (item.h) return (
-                    <div key={si} className="text-[8px] font-semibold text-white/25 mb-1 truncate">{item.h}</div>
+                    <div key={si} className="text-[8px] font-semibold text-[#1a1a1a]/25 mb-1 truncate">{item.h}</div>
                   );
                   if (item.img) return (
                     <div key={si} className="mb-2 mt-1">
-                      <div className="rounded bg-white/[0.04]" style={{ width: `${item.img[0]}%`, height: `${item.img[1]}px` }} />
+                      <div className="rounded bg-[#1a1a1a]/[0.04]" style={{ width: `${item.img[0]}%`, height: `${item.img[1]}px` }} />
                     </div>
                   );
                   if (item.imgs) return (
                     <div key={si} className="flex gap-1.5 flex-wrap mb-2 mt-1">
                       {item.imgs.map((sz, j) => (
-                        <div key={j} className="rounded bg-white/[0.04]" style={{ width: `${sz[0]}px`, height: `${sz[1]}px` }} />
+                        <div key={j} className="rounded bg-[#1a1a1a]/[0.04]" style={{ width: `${sz[0]}px`, height: `${sz[1]}px` }} />
                       ))}
                     </div>
                   );
                   if (item.lines) return (
                     <div key={si} className="space-y-[5px] mb-1.5">
                       {Array.from({ length: item.lines }).map((_, j) => (
-                        <div key={j} className="h-[3px] bg-white/[0.06] rounded" style={{ width: `${25 + ((j * 23 + i * 11 + si * 13) % 65)}%` }} />
+                        <div key={j} className="h-[3px] bg-[#1a1a1a]/[0.06] rounded" style={{ width: `${25 + ((j * 23 + i * 11 + si * 13) % 65)}%` }} />
                       ))}
                     </div>
                   );

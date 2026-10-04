@@ -17,7 +17,7 @@ import ToggleBlocksIllustration from "./illustrations/ToggleBlocksIllustration";
 export const metadata: Metadata = {
   title: "Napkin Notes | Side-panel notes for your browser",
   description:
-    "The fastest way to jot something down without leaving your browser. A Chrome side-panel notepad with rich text, multiple notes, autosave. Free, no accounts, no cloud. Works on Chrome, Arc, Edge, and Brave.",
+    "The fastest way to jot something down without leaving your browser. A Chrome side-panel notepad with rich text, multiple notes, autosave. Free, no accounts, no cloud. Works on Chrome, Arc, Edge, Brave, and Dia.",
   keywords: [
     "chrome extension notepad",
     "browser side panel notes",
@@ -58,7 +58,7 @@ export default function NapkinNotesPage() {
     "@type": "SoftwareApplication",
     name: "Napkin Notes",
     applicationCategory: "BrowserApplication",
-    operatingSystem: "Chrome, Edge, Arc, Brave",
+    operatingSystem: "Chrome, Edge, Arc, Brave, Dia",
     offers: {
       "@type": "Offer",
       price: "0",
@@ -74,7 +74,7 @@ export default function NapkinNotesPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#fafaf9] text-[#1a1a1a] font-[var(--font-figtree)]">
+    <main className="min-h-screen bg-[#fafaf9] text-[#1a1a1a] font-[var(--font-figtree)] scroll-smooth">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
@@ -127,12 +127,13 @@ export default function NapkinNotesPage() {
               href={CHROME_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-5 py-2.5 rounded-lg bg-[#1a1a1a] text-white text-sm font-medium hover:bg-[#333] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#1a1a1a] text-white text-sm font-medium hover:bg-[#333] transition-colors"
             >
+              <svg width="16" height="16" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="white" fillOpacity="0.15"/><circle cx="24" cy="24" r="8" fill="white"/><path d="M24 16h18.4a20 20 0 0 0-17.2-12L20 12.6" fill="white" fillOpacity="0.8"/><path d="M15.6 28L6.4 12.1A20 20 0 0 0 15 43l5.2-8.9" fill="white" fillOpacity="0.6"/><path d="M32.4 28l-9.2 16a20 20 0 0 0 18.4-31L36.8 20" fill="white" fillOpacity="0.4"/></svg>
               Add to Chrome, Free
             </a>
             <p className="text-xs text-[#1a1a1a]/30 mt-2.5">
-              Works on Chrome, Edge, Arc, Brave, Opera, and more
+              Works on Chrome, Edge, Arc, Brave, Dia, Opera, and more
             </p>
           </div>
         </div>
@@ -190,7 +191,7 @@ export default function NapkinNotesPage() {
         </div>
         <p className="text-[#1a1a1a]/50 text-base mb-10 max-w-lg">
           Everything from before is still here. You don&apos;t lose a thing, you
-          just get a lot more.
+          just get a lot more. Free forever.
         </p>
         <V3Showcase />
       </section>
@@ -358,14 +359,15 @@ export default function NapkinNotesPage() {
               Get the new Napkin Notes today
             </h2>
             <p className="text-white/50 text-base mb-8 max-w-md mx-auto">
-              Free to use, takes two seconds to install. Always have a place for your fleeting ideas
+              Free to use, takes two seconds to start taking notes. Always have a place for your fleeting ideas
             </p>
             <a
               href={CHROME_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 rounded-lg bg-white text-[#1a1a1a] text-sm font-medium hover:bg-white/90 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-[#1a1a1a] text-sm font-medium hover:bg-white/90 transition-colors"
             >
+              <svg width="16" height="16" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="#1a1a1a" fillOpacity="0.1"/><circle cx="24" cy="24" r="8" fill="#1a1a1a"/><path d="M24 16h18.4a20 20 0 0 0-17.2-12L20 12.6" fill="#1a1a1a" fillOpacity="0.7"/><path d="M15.6 28L6.4 12.1A20 20 0 0 0 15 43l5.2-8.9" fill="#1a1a1a" fillOpacity="0.5"/><path d="M32.4 28l-9.2 16a20 20 0 0 0 18.4-31L36.8 20" fill="#1a1a1a" fillOpacity="0.3"/></svg>
               Add to Chrome, Free
             </a>
           </div>

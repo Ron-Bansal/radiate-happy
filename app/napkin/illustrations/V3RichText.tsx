@@ -21,7 +21,7 @@ export default function V3RichText() {
   const btns = ["B", "I", "H", "link", "list"];
 
   return (
-    <div className="rounded-lg bg-white/[0.04] border border-white/[0.06] overflow-hidden flex items-center justify-center p-2 backdrop-blur-sm">
+    <div className="rounded-lg bg-white/[0.04] border border-white/[0.06] overflow-visible flex items-center justify-center p-2 pt-8 backdrop-blur-sm">
       <div className="relative w-full bg-white rounded-lg border border-[#1a1a1a]/[0.06] shadow-sm overflow-visible">
         {/* Toolbar */}
         <div className={`absolute -top-7 left-1/2 -translate-x-1/2 z-10 transition-all duration-300 ${showToolbar ? "opacity-100 translate-y-0" : "opacity-0 translate-y-1"}`}>

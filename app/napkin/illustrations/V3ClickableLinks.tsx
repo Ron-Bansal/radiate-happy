@@ -29,10 +29,10 @@ export default function V3ClickableLinks() {
                 docs.google.com/d/1xR4kQ
               </span>
             </div>
-            {/* Cursor pointer */}
-            <div className={`absolute top-[-2px] left-[55%] transition-all duration-500 ${hovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
-              <svg width="12" height="15" viewBox="0 0 12 16" fill="none" className="drop-shadow-sm">
-                <path d="M1 1v11l3.5-3.5L7 14l2-1-2.5-5.5H11L1 1z" fill="#1a1a1a" stroke="white" strokeWidth="1" />
+            {/* Cursor pointer (pointing hand) */}
+            <div className={`absolute top-[2px] left-[40%] transition-all duration-500 ${hovered ? "opacity-100 translate-y-0" : "opacity-0 translate-y-2"}`}>
+              <svg width="14" height="16" viewBox="0 0 16 18" fill="none" className="drop-shadow-sm">
+                <path d="M5.5 8V3.5a1.5 1.5 0 0 1 3 0V8M8.5 7V5a1.5 1.5 0 0 1 3 0v3M11.5 7.5V6.5a1.5 1.5 0 0 1 3 0v5a6 6 0 0 1-6 6h-1a6 6 0 0 1-5.28-3.14L1.26 12.3a1.5 1.5 0 0 1 2.24-1.94L5.5 13V3.5" fill="#1a1a1a" stroke="white" strokeWidth="1" strokeLinecap="round" strokeLinejoin="round" />
               </svg>
             </div>
             {/* Preview tooltip */}

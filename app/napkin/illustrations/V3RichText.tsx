@@ -60,7 +60,15 @@ export default function V3RichText() {
           </div>
           <div className="h-1" />
           <div className="h-[3px] bg-[#4DAD75]/15 rounded w-[50%]" />
-          <div className="h-[3px] bg-[#1a1a1a]/[0.06] rounded w-[60%]" />
+          {/* Image skeleton */}
+          <div className="w-[60%] h-[14px] rounded bg-[#1a1a1a]/[0.04] border border-[#1a1a1a]/[0.04] mt-0.5 flex items-center justify-center">
+            <svg width="6" height="6" viewBox="0 0 24 24" fill="none" className="text-[#1a1a1a]/[0.08]">
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
+              <path d="M21 15l-5-5L5 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
+          <div className="h-[3px] bg-[#1a1a1a]/[0.06] rounded w-[60%] mt-0.5" />
         </div>
       </div>
     </div>

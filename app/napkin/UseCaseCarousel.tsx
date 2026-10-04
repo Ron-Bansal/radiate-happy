@@ -1,31 +1,44 @@
 "use client";
-import { useState, useRef, useEffect } from "react";
+import { useState, useRef, useEffect, type ComponentType } from "react";
+import {
+  CaptureIdeasNote,
+  MeetingNotesNote,
+  ResearchNote,
+  QuickDraftsNote,
+  StudyNotesNote,
+  DailyTasksNote,
+} from "./illustrations/UseCaseNote";
 
-const useCases = [
+const useCases: { title: string; desc: string; component: ComponentType }[] = [
   {
     title: "Capture ideas",
     desc: "Jot down thoughts the moment they come to you",
-    screenshot: null,
+    component: CaptureIdeasNote,
   },
   {
     title: "Meeting notes",
     desc: "Action items, decisions, follow-ups while you're still on the call",
-    screenshot: null,
+    component: MeetingNotesNote,
   },
   {
     title: "Research",
     desc: "Collect snippets and links as you browse, right beside the page",
-    screenshot: null,
+    component: ResearchNote,
   },
   {
     title: "Quick drafts",
     desc: "Sketch out a reply, outline a doc, draft a message before committing to it",
-    screenshot: null,
+    component: QuickDraftsNote,
   },
   {
     title: "Study notes",
     desc: "Take notes alongside lectures, docs, or textbooks without losing your place",
-    screenshot: null,
+    component: StudyNotesNote,
+  },
+  {
+    title: "Manage daily tasks",
+    desc: "Structure your day with priorities. A simple list beats a complex system",
+    component: DailyTasksNote,
   },
 ];
 
@@ -75,31 +88,23 @@ export default function UseCaseCarousel() {
         className="flex gap-6 overflow-x-auto snap-x snap-mandatory pb-4 scrollbar-hide"
         style={{ scrollbarWidth: "none", msOverflowStyle: "none" }}
       >
-        {useCases.map((uc, i) => (
-          <div
-            key={uc.title}
-            className="snap-start shrink-0 w-[300px] md:w-[380px]"
-          >
-            {/* Screenshot placeholder */}
-            <div className="aspect-[16/10] rounded-xl bg-[#1e1e1e] mb-4 relative overflow-hidden">
-              <div
-                className="absolute inset-0 opacity-[0.08]"
-                style={{
-                  backgroundImage:
-                    "linear-gradient(rgba(255,255,255,0.3) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.3) 1px, transparent 1px)",
-                  backgroundSize: "30px 30px",
-                }}
-              />
-              <div className="absolute inset-0 flex items-center justify-center">
-                <span className="text-sm text-white/20">{uc.title}</span>
+        {useCases.map((uc) => {
+          const Comp = uc.component;
+          return (
+            <div
+              key={uc.title}
+              className="snap-start shrink-0 w-[300px] md:w-[380px]"
+            >
+              <div className="aspect-[16/10] rounded-xl bg-[#1e1e1e] mb-4 relative overflow-hidden p-3 md:p-4">
+                <Comp />
               </div>
+              <h3 className="font-semibold text-[15px] mb-1">{uc.title}</h3>
+              <p className="text-[13px] text-[#1a1a1a]/45 leading-relaxed">
+                {uc.desc}
+              </p>
             </div>
-            <h3 className="font-semibold text-[15px] mb-1">{uc.title}</h3>
-            <p className="text-[13px] text-[#1a1a1a]/45 leading-relaxed">
-              {uc.desc}
-            </p>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       {/* Dots */}

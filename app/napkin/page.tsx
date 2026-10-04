@@ -81,18 +81,32 @@ export default function NapkinNotesPage() {
       />
 
       {/* Nav */}
-      <nav className="flex items-center px-6 md:px-12 py-6 max-w-6xl mx-auto">
+      <nav className="flex items-center justify-between px-6 md:px-12 py-5 max-w-6xl mx-auto">
         <div className="flex items-center gap-3">
           <Image
             src="/assets/napkin-logo.png"
             alt="Napkin Notes icon"
-            width={36}
-            height={36}
+            width={32}
+            height={32}
             className=""
           />
           <span className="text-lg font-semibold tracking-tight">
             Napkin Notes
           </span>
+        </div>
+        <div className="hidden md:flex items-center gap-7 text-[13px] text-[#1a1a1a]/45">
+          <a href="#features" className="hover:text-[#1a1a1a]/80 transition-colors">Features</a>
+          <a href="#use-cases" className="hover:text-[#1a1a1a]/80 transition-colors">Use cases</a>
+          <a href="#pro" className="hover:text-[#1a1a1a]/80 transition-colors">Pro</a>
+          <a href="#faq" className="hover:text-[#1a1a1a]/80 transition-colors">FAQs</a>
+          <a
+            href={CHROME_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3.5 py-1.5 rounded-md bg-[#1a1a1a] text-white text-[13px] font-medium hover:bg-[#333] transition-colors"
+          >
+            Download
+          </a>
         </div>
       </nav>
 
@@ -165,7 +179,7 @@ export default function NapkinNotesPage() {
       </section>
 
       {/* v3 — tabbed showcase */}
-      <section className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3]">
+      <section id="features" className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3] scroll-mt-16">
         <div className="flex items-center gap-3 mb-3">
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#4DAD75]/10 text-[#4DAD75]">
             v3
@@ -182,7 +196,7 @@ export default function NapkinNotesPage() {
       </section>
 
       {/* Who it's for — carousel */}
-      <section className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3]">
+      <section id="use-cases" className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3] scroll-mt-16">
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-2">
           For anyone who thinks faster than they can context-switch.
         </h2>
@@ -193,7 +207,7 @@ export default function NapkinNotesPage() {
       </section>
 
       {/* Pro - entire section dark grid bg */}
-      <section className="border-t border-[#e5e5e3] bg-[#1a1a1a] relative overflow-hidden">
+      <section id="pro" className="border-t border-[#e5e5e3] bg-[#1a1a1a] relative overflow-hidden scroll-mt-16">
         <div
           className="absolute inset-0"
           style={{
@@ -297,7 +311,7 @@ export default function NapkinNotesPage() {
       </section>
 
       {/* FAQ */}
-      <section className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3]">
+      <section id="faq" className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3] scroll-mt-16">
         <div className="md:flex md:gap-20">
           <div className="md:w-[280px] shrink-0 mb-8 md:mb-0">
             <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">

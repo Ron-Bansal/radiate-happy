@@ -85,8 +85,16 @@ export default function RichTextIllustration() {
           <div className="h-1.5" />
           {/* Link line */}
           <div className="h-[3.5px] bg-[#4DAD75]/15 rounded w-[55%]" />
+          {/* Image skeleton */}
+          <div className="w-[65%] h-[16px] rounded bg-[#1a1a1a]/[0.04] border border-[#1a1a1a]/[0.04] mt-1 flex items-center justify-center">
+            <svg width="8" height="8" viewBox="0 0 24 24" fill="none" className="text-[#1a1a1a]/[0.08]">
+              <rect x="3" y="3" width="18" height="18" rx="2" stroke="currentColor" strokeWidth="2" />
+              <circle cx="8.5" cy="8.5" r="1.5" fill="currentColor" />
+              <path d="M21 15l-5-5L5 21" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+            </svg>
+          </div>
           {/* More text */}
-          <div className="h-[3.5px] bg-[#1a1a1a]/[0.06] rounded w-[65%]" />
+          <div className="h-[3.5px] bg-[#1a1a1a]/[0.06] rounded w-[65%] mt-1" />
           <div className="h-[3.5px] bg-[#1a1a1a]/[0.06] rounded w-[40%]" />
         </div>
       </div>

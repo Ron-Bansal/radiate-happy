@@ -82,8 +82,8 @@ export default function QuickCaptureIllustration() {
             </div>
             <span className="text-[5px] font-semibold text-[#1a1a1a]/70">Napkin Notes</span>
           </div>
-          <div className="flex-1 mx-1.5 mb-1.5 bg-white rounded p-1.5 flex flex-col" style={{ boxShadow: "0 0 0 1px rgba(77,173,117,0.2)" }}>
-            {/* Existing note content at top */}
+          <div className="flex-1 mx-1.5 mb-1.5 bg-white rounded p-1.5" style={{ boxShadow: "0 0 0 1px rgba(77,173,117,0.2)" }}>
+            {/* Existing note content */}
             <div className="space-y-[3px]">
               <div className="h-[2.5px] bg-[#1a1a1a]/[0.06] rounded w-4/5" />
               <div className="h-[2.5px] bg-[#1a1a1a]/[0.06] rounded w-3/5" />
@@ -92,10 +92,8 @@ export default function QuickCaptureIllustration() {
               <div className="h-[2.5px] bg-[#1a1a1a]/[0.06] rounded w-3/4" />
               <div className="h-[2.5px] bg-[#1a1a1a]/[0.06] rounded w-1/2" />
             </div>
-            {/* Spacer pushes captured content to bottom */}
-            <div className="flex-1" />
-            {/* Captured block — appears at end */}
-            <div className={`transition-all duration-500 overflow-hidden ${step >= 3 ? "max-h-16 opacity-100" : "max-h-0 opacity-0"}`}>
+            {/* Captured block — appears right after existing text */}
+            <div className={`transition-all duration-500 overflow-hidden ${step >= 3 ? "max-h-16 opacity-100 mt-[5px]" : "max-h-0 opacity-0"}`}>
               <div className="border-l-[1.5px] border-[#4DAD75]/40 pl-1 py-0.5 space-y-[2px]">
                 <div className="h-[2.5px] bg-[#4DAD75]/15 rounded w-full" />
                 <div className="h-[2.5px] bg-[#4DAD75]/15 rounded w-4/5" />

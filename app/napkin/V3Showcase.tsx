@@ -1,36 +1,48 @@
 "use client";
 import { useState, useEffect, useCallback } from "react";
+import V3ScratchPad from "./illustrations/V3ScratchPad";
+import V3SplitView from "./illustrations/V3SplitView";
+import V3ClickableLinks from "./illustrations/V3ClickableLinks";
+import V3RichText from "./illustrations/V3RichText";
+import V3HotKeys from "./illustrations/V3HotKeys";
+import V3Overlay from "./illustrations/V3Overlay";
+import V3Customise from "./illustrations/V3Customise";
 
 const features = [
   {
-    label: "Modern redesign",
-    desc: "Cleaner look, smoother interactions, and more customisation. Font selection, text sizing, and theme options",
-    screenshot: null,
-  },
-  {
-    label: "A second scratch pad",
+    label: "A second note page",
     desc: "Every user gets two notes now. Keep things tidy without adding complexity",
-    screenshot: null,
+    component: V3ScratchPad,
   },
   {
     label: "Full-page split view",
     desc: "Open your notes in a dedicated tab. Split view shows up to three notes side by side",
-    screenshot: null,
+    component: V3SplitView,
   },
   {
     label: "Clickable web links",
     desc: "URLs are now live links. Click to open, hover to preview. No more copy-pasting",
-    screenshot: null,
+    component: V3ClickableLinks,
   },
   {
     label: "Rich text editing",
     desc: "Bold, italic, lists, links, images. All inline with markdown shortcuts or the floating toolbar",
-    screenshot: null,
+    component: V3RichText,
   },
   {
-    label: "Overlay mode",
-    desc: "Napkin Notes now works on Arc, Brave, and other browsers that don't support native side panels",
-    screenshot: null,
+    label: "Powerful hot keys",
+    desc: "Alt + X to open, arrow keys to switch notes, and quick formatting shortcuts. Stay in your flow",
+    component: V3HotKeys,
+  },
+  {
+    label: "Overlay and Window mode",
+    desc: "Napkin Notes now works on Arc, Brave, Dia, and other browsers that don't support native side panels",
+    component: V3Overlay,
+  },
+  {
+    label: "Dark mode & customisation",
+    desc: "Switch between light and dark themes, choose your font style and text size. Make it yours",
+    component: V3Customise,
   },
 ];
 
@@ -133,13 +145,12 @@ export default function V3Showcase() {
             backgroundSize: "100px 100px",
           }}
         />
-        <div className="absolute inset-0 flex items-center justify-center p-8">
-          <div className="relative w-full max-w-md">
-            <div className="aspect-[4/3] rounded-lg bg-white/[0.04] border border-white/[0.06] flex items-center justify-center backdrop-blur-sm">
-              <span className="text-sm text-white/20">
-                {features[active].label}
-              </span>
-            </div>
+        <div className="absolute inset-0 flex items-center justify-center p-4 md:p-5">
+          <div className="relative w-full max-w-lg">
+            {(() => {
+              const Comp = features[active].component;
+              return <Comp />;
+            })()}
           </div>
         </div>
       </div>

@@ -6,11 +6,18 @@ import V3Showcase from "./V3Showcase";
 import UseCaseCarousel from "./UseCaseCarousel";
 import FAQAccordion from "./FAQAccordion";
 import ProNoteCards from "./ProNoteCards";
+import SidePanelIllustration from "./illustrations/SidePanelIllustration";
+import RichTextIllustration from "./illustrations/RichTextIllustration";
+import LocalPrivateIllustration from "./illustrations/LocalPrivateIllustration";
+import QuickCaptureIllustration from "./illustrations/QuickCaptureIllustration";
+import SearchIllustration from "./illustrations/SearchIllustration";
+import LinkWebsitesIllustration from "./illustrations/LinkWebsitesIllustration";
+import ToggleBlocksIllustration from "./illustrations/ToggleBlocksIllustration";
 
 export const metadata: Metadata = {
   title: "Napkin Notes | Side-panel notes for your browser",
   description:
-    "The fastest way to jot something down without leaving your browser. A Chrome side-panel notepad with rich text, multiple notes, autosave. Free, no accounts, no cloud. Works on Chrome, Arc, Edge, and Brave.",
+    "The fastest way to jot something down without leaving your browser. A Chrome side-panel notepad with rich text, multiple notes, autosave. Free, no accounts, no cloud. Works on Chrome, Arc, Edge, Brave, and Dia.",
   keywords: [
     "chrome extension notepad",
     "browser side panel notes",
@@ -51,7 +58,7 @@ export default function NapkinNotesPage() {
     "@type": "SoftwareApplication",
     name: "Napkin Notes",
     applicationCategory: "BrowserApplication",
-    operatingSystem: "Chrome, Edge, Arc, Brave",
+    operatingSystem: "Chrome, Edge, Arc, Brave, Dia",
     offers: {
       "@type": "Offer",
       price: "0",
@@ -67,25 +74,39 @@ export default function NapkinNotesPage() {
   };
 
   return (
-    <main className="min-h-screen bg-[#fafaf9] text-[#1a1a1a] font-[var(--font-figtree)]">
+    <main className="min-h-screen bg-[#fafaf9] text-[#1a1a1a] font-[var(--font-figtree)] scroll-smooth">
       <script
         type="application/ld+json"
         dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }}
       />
 
       {/* Nav */}
-      <nav className="flex items-center px-6 md:px-12 py-6 max-w-6xl mx-auto">
+      <nav className="flex items-center justify-between px-6 md:px-12 py-5 max-w-6xl mx-auto">
         <div className="flex items-center gap-3">
           <Image
             src="/assets/napkin-logo.png"
             alt="Napkin Notes icon"
-            width={36}
-            height={36}
+            width={32}
+            height={32}
             className=""
           />
           <span className="text-lg font-semibold tracking-tight">
             Napkin Notes
           </span>
+        </div>
+        <div className="hidden md:flex items-center gap-7 text-[13px] text-[#1a1a1a]/45">
+          <a href="#features" className="hover:text-[#1a1a1a]/80 transition-colors">Features</a>
+          <a href="#use-cases" className="hover:text-[#1a1a1a]/80 transition-colors">Use cases</a>
+          <a href="#pro" className="hover:text-[#1a1a1a]/80 transition-colors">Pro</a>
+          <a href="#faq" className="hover:text-[#1a1a1a]/80 transition-colors">FAQs</a>
+          <a
+            href={CHROME_STORE_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="px-3.5 py-1.5 rounded-md bg-[#1a1a1a] text-white text-[13px] font-medium hover:bg-[#333] transition-colors"
+          >
+            Download
+          </a>
         </div>
       </nav>
 
@@ -106,12 +127,13 @@ export default function NapkinNotesPage() {
               href={CHROME_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-5 py-2.5 rounded-lg bg-[#1a1a1a] text-white text-sm font-medium hover:bg-[#333] transition-colors"
+              className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#1a1a1a] text-white text-sm font-medium hover:bg-[#333] transition-colors"
             >
+              <Image src="/assets/chrome-logo.png" alt="" width={16} height={16} className="invert brightness-0 invert" style={{ filter: "invert(1)" }} />
               Add to Chrome, Free
             </a>
             <p className="text-xs text-[#1a1a1a]/30 mt-2.5">
-              Works on Chrome, Edge, Arc, Brave, Opera, and more
+              Works on Chrome, Edge, Arc, Brave, Dia, Opera, and more
             </p>
           </div>
         </div>
@@ -125,8 +147,8 @@ export default function NapkinNotesPage() {
         </h2>
         <div className="grid md:grid-cols-3 gap-12 md:gap-16">
           <div>
-            <div className="aspect-[4/3] rounded-lg bg-[#f0f0ee] mb-5 flex items-center justify-center">
-              <span className="text-xs text-[#1a1a1a]/15">Image</span>
+            <div className="mb-5">
+              <SidePanelIllustration />
             </div>
             <h3 className="font-semibold text-[17px] mb-2">Always beside your page</h3>
             <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
@@ -135,8 +157,8 @@ export default function NapkinNotesPage() {
             </p>
           </div>
           <div>
-            <div className="aspect-[4/3] rounded-lg bg-[#f0f0ee] mb-5 flex items-center justify-center">
-              <span className="text-xs text-[#1a1a1a]/15">Image</span>
+            <div className="mb-5">
+              <RichTextIllustration />
             </div>
             <h3 className="font-semibold text-[17px] mb-2">Rich text, zero setup</h3>
             <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
@@ -145,8 +167,8 @@ export default function NapkinNotesPage() {
             </p>
           </div>
           <div>
-            <div className="aspect-[4/3] rounded-lg bg-[#f0f0ee] mb-5 flex items-center justify-center">
-              <span className="text-xs text-[#1a1a1a]/15">Image</span>
+            <div className="mb-5">
+              <LocalPrivateIllustration />
             </div>
             <h3 className="font-semibold text-[17px] mb-2">Local and private</h3>
             <p className="text-sm text-[#1a1a1a]/50 leading-relaxed">
@@ -158,7 +180,7 @@ export default function NapkinNotesPage() {
       </section>
 
       {/* v3 — tabbed showcase */}
-      <section className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3]">
+      <section id="features" className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3] scroll-mt-16">
         <div className="flex items-center gap-3 mb-3">
           <span className="inline-flex items-center px-2.5 py-0.5 rounded-full text-[11px] font-medium bg-[#4DAD75]/10 text-[#4DAD75]">
             v3
@@ -169,24 +191,24 @@ export default function NapkinNotesPage() {
         </div>
         <p className="text-[#1a1a1a]/50 text-base mb-10 max-w-lg">
           Everything from before is still here. You don&apos;t lose a thing, you
-          just get a lot more.
+          just get a lot more. Free forever.
         </p>
         <V3Showcase />
       </section>
 
       {/* Who it's for — carousel */}
-      <section className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3]">
+      <section id="use-cases" className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3] scroll-mt-16">
         <h2 className="text-2xl md:text-3xl font-semibold tracking-tight mb-2">
           For anyone who thinks faster than they can context-switch.
         </h2>
         <p className="text-[#1a1a1a]/40 text-base mb-10 max-w-lg">
-          Not a second brain, not a knowledge base. A scratch pad.
+          Not a second brain, not a knowledge base. A note pad that&apos;s always a click away.
         </p>
         <UseCaseCarousel />
       </section>
 
       {/* Pro - entire section dark grid bg */}
-      <section className="border-t border-[#e5e5e3] bg-[#1a1a1a] relative overflow-hidden">
+      <section id="pro" className="border-t border-[#e5e5e3] bg-[#1a1a1a] relative overflow-hidden scroll-mt-16">
         <div
           className="absolute inset-0"
           style={{
@@ -216,7 +238,7 @@ export default function NapkinNotesPage() {
             </h2>
             <p className="text-white/45 text-[15px] leading-relaxed mb-8">
               Free is perfect for most people. Pro adds extra notes, smart
-              linking, quick capture, and a direct line to shape what gets built next.
+              linking, quick capture, and tools to keep longer notes tidy.
             </p>
             <div>
               <a
@@ -246,8 +268,8 @@ export default function NapkinNotesPage() {
           {/* 4 additional Pro features */}
           <div className="grid md:grid-cols-2 gap-x-12 gap-y-14">
             <div>
-              <div className="aspect-[16/9] rounded-lg bg-[#222] border border-white/[0.06] mb-4 flex items-center justify-center">
-                <span className="text-xs text-white/15">Image / Video</span>
+              <div className="mb-4">
+                <QuickCaptureIllustration />
               </div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Quick capture</h3>
               <p className="text-sm text-white/40 leading-relaxed">
@@ -256,8 +278,8 @@ export default function NapkinNotesPage() {
               </p>
             </div>
             <div>
-              <div className="aspect-[16/9] rounded-lg bg-[#222] border border-white/[0.06] mb-4 flex items-center justify-center">
-                <span className="text-xs text-white/15">Image / Video</span>
+              <div className="mb-4">
+                <SearchIllustration />
               </div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Search across all notes</h3>
               <p className="text-sm text-white/40 leading-relaxed">
@@ -266,8 +288,8 @@ export default function NapkinNotesPage() {
               </p>
             </div>
             <div>
-              <div className="aspect-[16/9] rounded-lg bg-[#222] border border-white/[0.06] mb-4 flex items-center justify-center">
-                <span className="text-xs text-white/15">Image / Video</span>
+              <div className="mb-4">
+                <LinkWebsitesIllustration />
               </div>
               <h3 className="font-semibold text-[16px] mb-2 text-white">Link websites to notes</h3>
               <p className="text-sm text-white/40 leading-relaxed">
@@ -276,13 +298,13 @@ export default function NapkinNotesPage() {
               </p>
             </div>
             <div>
-              <div className="aspect-[16/9] rounded-lg bg-[#222] border border-white/[0.06] mb-4 flex items-center justify-center">
-                <span className="text-xs text-white/15">Image / Video</span>
+              <div className="mb-4">
+                <ToggleBlocksIllustration />
               </div>
-              <h3 className="font-semibold text-[16px] mb-2 text-white">Priority feedback on the roadmap</h3>
+              <h3 className="font-semibold text-[16px] mb-2 text-white">Collapsible toggle blocks</h3>
               <p className="text-sm text-white/40 leading-relaxed">
-                Pro users get a direct channel to suggest features and vote on
-                what gets built next. Your input shapes where Napkin Notes goes.
+                Tuck away content you don&apos;t need right now. Toggle blocks keep
+                long notes tidy without losing anything.
               </p>
             </div>
           </div>
@@ -290,7 +312,7 @@ export default function NapkinNotesPage() {
       </section>
 
       {/* FAQ */}
-      <section className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3]">
+      <section id="faq" className="px-6 md:px-12 py-20 max-w-6xl mx-auto border-t border-[#e5e5e3] scroll-mt-16">
         <div className="md:flex md:gap-20">
           <div className="md:w-[280px] shrink-0 mb-8 md:mb-0">
             <h2 className="text-2xl md:text-3xl font-semibold tracking-tight">
@@ -337,14 +359,15 @@ export default function NapkinNotesPage() {
               Get the new Napkin Notes today
             </h2>
             <p className="text-white/50 text-base mb-8 max-w-md mx-auto">
-              Free to use, takes two seconds to install. Always have a place for your fleeting ideas
+              Free to use, takes two seconds to start taking notes. Always have a place for your fleeting ideas
             </p>
             <a
               href={CHROME_STORE_URL}
               target="_blank"
               rel="noopener noreferrer"
-              className="inline-flex items-center px-6 py-3 rounded-lg bg-white text-[#1a1a1a] text-sm font-medium hover:bg-white/90 transition-colors"
+              className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-[#1a1a1a] text-sm font-medium hover:bg-white/90 transition-colors"
             >
+              <Image src="/assets/chrome-logo.png" alt="" width={16} height={16} />
               Add to Chrome, Free
             </a>
           </div>

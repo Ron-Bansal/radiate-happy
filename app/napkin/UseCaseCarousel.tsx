@@ -11,9 +11,9 @@ import {
 
 const useCases: { title: string; desc: string; component: ComponentType }[] = [
   {
-    title: "Capture ideas",
-    desc: "Jot down thoughts the moment they come to you",
-    component: CaptureIdeasNote,
+    title: "Quick drafts",
+    desc: "Sketch out a reply, outline a doc, draft a message before committing to it",
+    component: QuickDraftsNote,
   },
   {
     title: "Meeting notes",
@@ -21,19 +21,19 @@ const useCases: { title: string; desc: string; component: ComponentType }[] = [
     component: MeetingNotesNote,
   },
   {
-    title: "Research",
-    desc: "Collect snippets and links as you browse, right beside the page",
-    component: ResearchNote,
-  },
-  {
-    title: "Quick drafts",
-    desc: "Sketch out a reply, outline a doc, draft a message before committing to it",
-    component: QuickDraftsNote,
-  },
-  {
     title: "Study notes",
     desc: "Take notes alongside lectures, docs, or textbooks without losing your place",
     component: StudyNotesNote,
+  },
+  {
+    title: "Capture ideas",
+    desc: "Jot down thoughts the moment they come to you",
+    component: CaptureIdeasNote,
+  },
+  {
+    title: "Research",
+    desc: "Collect snippets and links as you browse, right beside the page",
+    component: ResearchNote,
   },
   {
     title: "Manage daily tasks",
@@ -98,8 +98,8 @@ export default function UseCaseCarousel() {
               <div className="aspect-[16/10] rounded-xl bg-[#f0f0ee] mb-4 relative overflow-hidden p-3 md:p-4">
                 <Comp />
               </div>
-              <h3 className="font-semibold text-[17px] mb-1">{uc.title}</h3>
-              <p className="text-[14px] text-[#1a1a1a]/45 leading-relaxed">
+              <h3 className="font-semibold text-[18px] mb-1">{uc.title}</h3>
+              <p className="text-[15px] text-[#1a1a1a]/45 leading-relaxed">
                 {uc.desc}
               </p>
             </div>

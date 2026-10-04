@@ -129,7 +129,7 @@ export default function NapkinNotesPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-5 py-2.5 rounded-lg bg-[#1a1a1a] text-white text-sm font-medium hover:bg-[#333] transition-colors"
             >
-              <svg width="16" height="16" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="white" fillOpacity="0.15"/><circle cx="24" cy="24" r="8" fill="white"/><path d="M24 16h18.4a20 20 0 0 0-17.2-12L20 12.6" fill="white" fillOpacity="0.8"/><path d="M15.6 28L6.4 12.1A20 20 0 0 0 15 43l5.2-8.9" fill="white" fillOpacity="0.6"/><path d="M32.4 28l-9.2 16a20 20 0 0 0 18.4-31L36.8 20" fill="white" fillOpacity="0.4"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="white" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.819 7.533l-3.954 6.848A12.012 12.012 0 0 0 24 12c0-1.56-.3-3.05-.847-4.417zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg>
               Add to Chrome, Free
             </a>
             <p className="text-xs text-[#1a1a1a]/30 mt-2.5">
@@ -202,7 +202,7 @@ export default function NapkinNotesPage() {
           For anyone who thinks faster than they can context-switch.
         </h2>
         <p className="text-[#1a1a1a]/40 text-base mb-10 max-w-lg">
-          Not a second brain, not a knowledge base. A scratch pad.
+          Not a second brain, not a knowledge base. A note pad that&apos;s always a click away.
         </p>
         <UseCaseCarousel />
       </section>
@@ -367,7 +367,7 @@ export default function NapkinNotesPage() {
               rel="noopener noreferrer"
               className="inline-flex items-center gap-2 px-6 py-3 rounded-lg bg-white text-[#1a1a1a] text-sm font-medium hover:bg-white/90 transition-colors"
             >
-              <svg width="16" height="16" viewBox="0 0 48 48" fill="none"><circle cx="24" cy="24" r="20" fill="#1a1a1a" fillOpacity="0.1"/><circle cx="24" cy="24" r="8" fill="#1a1a1a"/><path d="M24 16h18.4a20 20 0 0 0-17.2-12L20 12.6" fill="#1a1a1a" fillOpacity="0.7"/><path d="M15.6 28L6.4 12.1A20 20 0 0 0 15 43l5.2-8.9" fill="#1a1a1a" fillOpacity="0.5"/><path d="M32.4 28l-9.2 16a20 20 0 0 0 18.4-31L36.8 20" fill="#1a1a1a" fillOpacity="0.3"/></svg>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="#1a1a1a" xmlns="http://www.w3.org/2000/svg"><path d="M12 0C8.21 0 4.831 1.757 2.632 4.501l3.953 6.848A5.454 5.454 0 0 1 12 6.545h10.691A12 12 0 0 0 12 0zM1.931 5.47A11.943 11.943 0 0 0 0 12c0 6.012 4.42 10.991 10.189 11.864l3.953-6.847a5.45 5.45 0 0 1-6.865-2.29zm13.342 2.166a5.446 5.446 0 0 1 1.819 7.533l-3.954 6.848A12.012 12.012 0 0 0 24 12c0-1.56-.3-3.05-.847-4.417zM12 8.5a3.5 3.5 0 1 0 0 7 3.5 3.5 0 0 0 0-7z"/></svg>
               Add to Chrome, Free
             </a>
           </div>

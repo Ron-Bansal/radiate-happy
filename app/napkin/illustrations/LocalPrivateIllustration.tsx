@@ -26,9 +26,9 @@ export default function LocalPrivateIllustration() {
         <div className="absolute -top-2 -right-3 w-8 h-9">
           <svg viewBox="0 0 32 36" fill="none" className="w-full h-full">
             <path d="M16 2 L28 8 V18 C28 26 22 32 16 34 C10 32 4 26 4 18 V8 L16 2Z" fill="#4DAD75" fillOpacity="0.12" stroke="#4DAD75" strokeWidth="1.2" strokeOpacity="0.4" />
-            <rect x="12" y="13" width="8" height="6" rx="1" fill="none" stroke="#4DAD75" strokeWidth="1.2" strokeOpacity="0.5" />
-            <path d="M13.5 13 V11 C13.5 9.5 14.5 8.5 16 8.5 C17.5 8.5 18.5 9.5 18.5 11 V13" fill="none" stroke="#4DAD75" strokeWidth="1.2" strokeOpacity="0.5" strokeLinecap="round" />
-            <circle cx="16" cy="16.5" r="1" fill="#4DAD75" fillOpacity="0.5" />
+            <rect x="12" y="15" width="8" height="6" rx="1" fill="none" stroke="#4DAD75" strokeWidth="1.2" strokeOpacity="0.5" />
+            <path d="M13.5 15 V13 C13.5 11.5 14.5 10.5 16 10.5 C17.5 10.5 18.5 11.5 18.5 13 V15" fill="none" stroke="#4DAD75" strokeWidth="1.2" strokeOpacity="0.5" strokeLinecap="round" />
+            <circle cx="16" cy="18.5" r="1" fill="#4DAD75" fillOpacity="0.5" />
           </svg>
         </div>
 
